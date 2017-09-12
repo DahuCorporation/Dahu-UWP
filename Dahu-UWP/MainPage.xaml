@@ -7,10 +7,32 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <!-- Lien avec un ressourceDictionary
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourceDictionary/DahuDictionary.xaml"/> 
+            </ResourceDictionary.MergedDictionaries>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <DesktopDahuComponent:Dahu_InputText HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Margin="650,332,0,0"/>
-        <DesktopDahuComponent:Dahu_Button></DesktopDahuComponent:Dahu_Button>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="293,196,0,0" VerticalAlignment="Top"/>
+
+        </ResourceDictionary>
+    </Page.Resources>
+    -->
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/Background/montagne Dahu1.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid Margin="0,80" Background="#F22F2F2F" Width="1000">
+            <StackPanel >
+                <DesktopDahuComponent:Dahu_InputText HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Margin="0"/>
+                <DesktopDahuComponent:Dahu_Button  HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Margin="0"/>
+                <Grid>
+                    <DesktopDahuComponent:Dahu_Button x:Name="ConnectButton"></DesktopDahuComponent:Dahu_Button>
+                </Grid>
+                
+            </StackPanel>
+        </Grid>
+
+
     </Grid>
 </Page>

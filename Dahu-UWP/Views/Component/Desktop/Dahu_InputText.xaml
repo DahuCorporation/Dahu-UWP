@@ -10,7 +10,7 @@
     d:DesignWidth="510">
 
 
-    <Grid x:Name="Dahu_InputText" Width="510" Height="95">
+    <Grid x:Name="DahuInputTextGrid" Width="510" Height="95">
         <Rectangle Fill="#FF3F4140" RadiusX="10" RadiusY="10"/>
     </Grid>
 </UserControl>
