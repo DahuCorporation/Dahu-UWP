@@ -1,0 +1,16 @@
+﻿<UserControl
+    x:Class="Dahu_UWP.Views.Component.Desktop.DahuButton1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dahu_UWP.Views.Component.Desktop"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="67"
+    d:DesignWidth="402">
+
+    <Grid x:Name="DahuButton1_Grid" Width="402" Height="67">
+        <Rectangle x:Name="DahuButton1_Rectangle" Fill="#72aa87" RadiusX="10" RadiusY="10"/>
+        <TextBlock x:Name="DahuButton1_TextBlock" Text="Text for button"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+    </Grid>
+</UserControl>

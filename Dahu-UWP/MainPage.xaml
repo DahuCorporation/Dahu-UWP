@@ -8,6 +8,25 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Page.Resources>
+        <!--
+            Tuto à voir:
+            http://docs.uwpcommunitytoolkit.com/en/master/
+        
+            Template:
+            https://www.tutorialspoint.com/xaml/xaml_templates.htm
+        
+            Resize userControl avec les data de la page:
+            https://www.youtube.com/watch?v=ksliZGMMj8k
+        
+            Changer un composant suivant son state du genre mouve hover:
+            https://docs.microsoft.com/en-us/windows/uwp/controls-and-patterns/control-templates
+        -->
+        <!--Style pour les TextBlock d'inscription-->
+        <!--Tuto: http://www.wpf-tutorial.com/styles/using-styles/-->
+        <Style x:Key="TitleTextBoxStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FFC7CBCF" />
+            <Setter Property="FontSize" Value="19" />
+        </Style>
         <Style x:Key="PivotStyle1" TargetType="Pivot">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="0"/>
@@ -170,7 +189,10 @@
                                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotPreviousButtonBorderBrushPointerOver}"/>
                                                             </ObjectAnimationUsingKeyFrames>
                                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Arrow">
-                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotPreviousButtonForegroundPointerOver}"/>
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="s"/>
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Arrow">
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="s"/>
                                                             </ObjectAnimationUsingKeyFrames>
                                                         </Storyboard>
                                                     </VisualState>
@@ -262,40 +284,268 @@
     </Page.Resources>
     -->
     <Grid>
-        <Grid Margin="0,80" Background="#F22F2F2F" Width="1000" CornerRadius="8">
+        <Grid Margin="8,80" Background="#F22F2F2F" MaxWidth="1000" MinWidth="500" CornerRadius="8">
             <StackPanel>
+                <TextBlock x:Name="ceze" Text="coucou" Style="{StaticResource CaptionTextBlockStyle}"/>
                 <Grid x:Name="LogoImage" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,36,0,0">
                     <Grid.Background>
                         <ImageBrush ImageSource="Assets/Logo/Dahu-logo-color.png" Stretch="UniformToFill"/>
                     </Grid.Background>
                 </Grid>
                 <Pivot x:Name="PivotViews" Foreground="AliceBlue" Style="{StaticResource PivotStyle1}" Margin="0,20,0,0">
+                    <Pivot.Resources>
+                        <Style TargetType="PivotHeaderItem">
+                            <Setter Property="FontSize" Value="{ThemeResource PivotHeaderItemFontSize}" />
+                            <Setter Property="FontFamily" Value="{ThemeResource PivotHeaderItemFontFamily}" />
+                            <Setter Property="FontWeight" Value="{ThemeResource PivotHeaderItemThemeFontWeight}" />
+                            <Setter Property="CharacterSpacing" Value="{ThemeResource PivotHeaderItemCharacterSpacing}" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                            <Setter Property="Padding" Value="{ThemeResource PivotHeaderItemMargin}" />
+                            <Setter Property="Height" Value="Auto" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                            <Setter Property="IsTabStop" Value="False" />
+                            <Setter Property="RequestedTheme" Value="Dark" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="PivotHeaderItem">
+                                        <Grid 
+                        x:Name="Grid"
+                        Background="{TemplateBinding Background}">
+                                            <Grid.Resources>
+                                                <Style x:Key="BaseContentPresenterStyle" TargetType="ContentPresenter">
+                                                    <Setter Property="FontFamily" Value="Segoe UI"/>
+                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                    <Setter Property="FontSize" Value="15"/>
+                                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                                    <Setter Property="LineStackingStrategy" Value="MaxHeight"/>
+                                                    <Setter Property="TextLineBounds" Value="Full"/>
+                                                    <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings"/>
+                                                </Style>
+                                                <Style x:Key="BodyContentPresenterStyle" TargetType="ContentPresenter" BasedOn="{StaticResource BaseContentPresenterStyle}">
+                                                    <Setter Property="FontFamily" Value="{ThemeResource PivotHeaderItemFontFamily}" />
+                                                    <Setter Property="FontWeight" Value="{ThemeResource PivotHeaderItemThemeFontWeight}"/>
+                                                    <Setter Property="FontSize" Value="{ThemeResource PivotHeaderItemFontSize}"/>
+                                                </Style>
+                                            </Grid.Resources>
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="SelectionStates">
+                                                    <VisualStateGroup.Transitions>
+                                                        <VisualTransition From="Unselected" To="UnselectedLocked" GeneratedDuration="0:0:0.33" />
+                                                        <VisualTransition From="UnselectedLocked" To="Unselected" GeneratedDuration="0:0:0.33" />
+                                                    </VisualStateGroup.Transitions>
+                                                    <VisualState x:Name="Disabled"/>
+                                                    <VisualState x:Name="Unselected">
+                                                        <Storyboard>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                       Storyboard.TargetProperty="Foreground" >
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#949494" />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="UnselectedLocked"/>
+                                                    <VisualState x:Name="Selected">
+                                                        <Storyboard>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
+                                                                       Storyboard.TargetProperty="Background" >
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FF42424C" />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                       Storyboard.TargetProperty="Foreground" >
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#ffffff" />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="UnselectedPointerOver">
+                                                        <Storyboard>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                       Storyboard.TargetProperty="Foreground" >
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumHighBrush}" />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
+                                                                       Storyboard.TargetProperty="Background" >
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="SelectedPointerOver">
+                                                        <Storyboard>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                        Storyboard.TargetProperty="Foreground" >
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Red" />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
+                                                                       Storyboard.TargetProperty="Background" >
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="UnselectedPressed">
+                                                        <Storyboard>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                       Storyboard.TargetProperty="Foreground" >
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumHighBrush}" />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
+                                                                       Storyboard.TargetProperty="Background" >
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="SelectedPressed">
+                                                        <Storyboard>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                       Storyboard.TargetProperty="Foreground" >
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumHighBrush}" />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
+                                                                       Storyboard.TargetProperty="Background" >
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
+                                            <ContentPresenter
+                            x:Name="ContentPresenter"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Margin="{TemplateBinding Padding}"
+                            FontSize="{TemplateBinding FontSize}"
+                            FontFamily="{TemplateBinding FontFamily}"
+                            FontWeight="{TemplateBinding FontWeight}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                                <ContentPresenter.RenderTransform>
+                                                    <TranslateTransform x:Name="ContentPresenterTranslateTransform" />
+                                                </ContentPresenter.RenderTransform>
+                                            </ContentPresenter>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Pivot.Resources>
                     <PivotItem >
                         <PivotItem.Header>
-                            <TextBlock x:Name="PivotConnectionTitle" x:Uid="ConnectionTextBlock" Text="Connection" Foreground="White" FontSize="30" FontWeight="SemiBold"></TextBlock>
+                            <TextBlock x:Name="PivotConnectionTitle"  x:Uid="ConnectionTextBlock" Text="Connection" Foreground="White" FontSize="30" FontWeight="SemiBold" PointerEntered="PivotConnectionTitle_PointerEntered">
+                            </TextBlock>
                         </PivotItem.Header>
-                        <ScrollViewer>
-                            <TextBlock Text="coucou1"/>
+                        <ScrollViewer MaxWidth="400" MinWidth="200">
+                            <Grid RenderTransformOrigin="0.504,0.484" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Column="0" Grid.Row="0" Padding="0" Margin="0,10,0,0">
+                                    <StackPanel>
+                                        <TextBlock x:Name="MailAdressLoginTitle" x:Uid="MailAdress" Text="Mail adress" Style="{StaticResource TitleTextBoxStyle}"/>
+                                        <TextBox x:Name="MailAdressTextBoxLogin" Style="{StaticResource DahuInputTextStyle1}" />
+                                        <!--<DesktopDahuComponent:Dahu_InputText x:Name="MailAdressTextBoxLogin" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Grid.Column="0" Grid.Row="0" />-->
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="1" Padding="0" Margin="0,10,0,0" >
+                                    <StackPanel>
+                                        <TextBlock x:Name="PasswordLoginTitle" x:Uid="Password" Text="Password" Style="{StaticResource TitleTextBoxStyle}"/>
+                                        <TextBox x:Name="PasswordTextBoxLogin" Style="{StaticResource DahuInputTextStyle1}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="2" Padding="0" Margin="0,40,0,0" >
+                                    <DesktopDahuComponent:DahuButton1 x:Name="RegisterButton"  x:Uid="DahuButton1_Connection" Tapped="ConnectButton_Tapped" BgColor="#FFC0722C"/>
+                                </Grid>
+                                <!--<Rectangle Fill="Red" Grid.Column="0" Grid.Row="0"/>
+                                <Rectangle Fill="Blue" Grid.Column="0" Grid.Row="1"/>
+                                <Rectangle Fill="Green" Grid.Column="1"/>
+                                <Rectangle Fill="Yellow" Grid.Row="1" Grid.Column="1"/>-->
+                            </Grid>
                         </ScrollViewer>
                     </PivotItem>
                     <PivotItem>
                         <PivotItem.Header>
-                            <TextBlock x:Name="PivotRegistrationTitle" x:Uid="RegistrationTextBlock" Text="Registration" Foreground="White" FontSize="30" FontWeight="SemiBold"></TextBlock>
+                            <TextBlock x:Name="PivotRegistrationTitle" x:Uid="RegistrationTextBlock" Text="Registration" ></TextBlock>
                         </PivotItem.Header>
                         <ScrollViewer >
-                            <StackPanel >
+                            <Grid Margin="100,10,100,0" RenderTransformOrigin="0.504,0.484">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Column="0" Grid.Row="0" Padding="0,0,10,0" Margin="0,10,0,0">
+                                    <StackPanel>
+                                        <TextBlock x:Name="FirstNameTitle" x:Uid="FirstName" Text="FirstName" Style="{StaticResource TitleTextBoxStyle}"/>
+                                        <TextBox x:Name="FirstNameTextBoxRegister" Style="{StaticResource DahuInputTextStyle1}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="0" Padding="10,0,0,0" Margin="0,10,0,0" >
+                                    <StackPanel>
+                                        <TextBlock x:Name="NameTitle" x:Uid="Name" Text="Name" Style="{StaticResource TitleTextBoxStyle}"/>
+                                        <TextBox x:Name="NameTextBoxRegister" Style="{StaticResource DahuInputTextStyle1}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.ColumnSpan="2" Grid.Row="1" Margin="0,10,0,0" >
+                                    <StackPanel>
+                                        <TextBlock x:Name="MailAdressTitle" x:Uid="MailAdress" Text="Mail adress" Style="{StaticResource TitleTextBoxStyle}"/>
+                                        <TextBox x:Name="MailAdressTextBoxRegister" Style="{StaticResource DahuInputTextStyle1}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="2" Padding="0,0,10,0" Margin="0,10,0,0">
+                                    <StackPanel>
+                                        <TextBlock x:Name="BirthDateTitle" x:Uid="BirthDate" Text="Birth Date" Style="{StaticResource TitleTextBoxStyle}"/>
+                                        <TextBox x:Name="BirthDateTextBoxRegister" Style="{StaticResource DahuInputTextStyle1}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="2" Padding="10,0,0,0" Margin="0,10,0,0">
+                                    <StackPanel>
+                                        <TextBlock x:Name="SexTitle" x:Uid="Sex" Text="Sex" Style="{StaticResource TitleTextBoxStyle}"/>
+                                        <TextBox x:Name="SexTextBoxRegister" Style="{StaticResource DahuInputTextStyle1}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="3" Padding="0,0,10,0" Margin="0,10,0,0">
+                                    <StackPanel>
+                                        <TextBlock x:Name="PasswordTitle" x:Uid="Password" Text="Password" Style="{StaticResource TitleTextBoxStyle}"/>
+                                        <TextBox x:Name="PasswordTextBoxRegister" Style="{StaticResource DahuInputTextStyle1}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="3" Padding="10,0,0,0" Margin="0,10,0,0">
+                                    <StackPanel>
+                                        <TextBlock x:Name="PasswordConfirmTitle" x:Uid="PasswordConfirm" Text="Password Confirm" Style="{StaticResource TitleTextBoxStyle}"/>
+                                        <TextBox x:Name="PasswordConfirmTextBoxRegister" Style="{StaticResource DahuInputTextStyle1}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid  Grid.ColumnSpan="2" Grid.Row="4"  Margin="0,50,0,0">
+                                    <DesktopDahuComponent:DahuButton1 x:Name="ConnectButton"  x:Uid="DahuButton1_Registration" Tapped="ConnectButton_Tapped" BgColor="#FF72AA87"/>
+                                </Grid>
+
+                                <!--<Rectangle Fill="Red" Grid.Column="0" Grid.Row="0"/>
+                                <Rectangle Fill="Blue" Grid.Column="0" Grid.Row="1"/>
+                                <Rectangle Fill="Green" Grid.Column="1"/>
+                                <Rectangle Fill="Yellow" Grid.Row="1" Grid.Column="1"/>-->
+                            </Grid>
+                            <!--<StackPanel >
                                 <DesktopDahuComponent:Dahu_InputText HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Margin="0"/>
                                 <DesktopDahuComponent:Dahu_Button  HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Margin="0"/>
                                 <Grid>
                                     <DesktopDahuComponent:Dahu_Button x:Name="ConnectButton"></DesktopDahuComponent:Dahu_Button>
                                 </Grid>
-                            </StackPanel>
+                            </StackPanel>-->
                         </ScrollViewer>
                     </PivotItem>
                 </Pivot>
             </StackPanel>
-            
-            
+
+
         </Grid>
         <Grid.Background>
             <ImageBrush ImageSource="Assets/Background/montagne Dahu1.jpg" Stretch="UniformToFill"/>

@@ -6,11 +6,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="95"
-    d:DesignWidth="510">
-
-
-    <Grid x:Name="DahuInputTextGrid" Width="510" Height="95">
-        <Rectangle Fill="#FF3F4140" RadiusX="10" RadiusY="10"/>
+    d:DesignHeight="57"
+    d:DesignWidth="502">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../ResourceDictionary/DahuCustomComp.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="DahuInputTextGrid" Width="Auto" Height="57">
+        <!--<Rectangle Fill="#FF3F4140" RadiusX="10" RadiusY="10"/>-->
+        <Border Margin="0" Padding="2.5" BorderThickness="1" BorderBrush="#3f4140"  Background="#3f4140" CornerRadius="5">
+            <TextBox x:Name="DahuInputText1" Style="{StaticResource DahuInputText1_Style}" />
+        </Border>
     </Grid>
 </UserControl>

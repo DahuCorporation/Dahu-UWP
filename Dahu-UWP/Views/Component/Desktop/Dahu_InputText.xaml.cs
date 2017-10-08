@@ -23,5 +23,10 @@ namespace Dahu_UWP.Views.Component.Desktop
         {
             this.InitializeComponent();
         }
+
+        public String GetDahuInputTextText()
+        {
+            return DahuInputText1.Text;
+        }
     }
 }

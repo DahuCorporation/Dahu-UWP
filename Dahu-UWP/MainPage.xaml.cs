@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,6 +26,16 @@ namespace Dahu_UWP
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private void ConnectButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            //Debug.WriteLine("TestBox:" + titi + "SexBox:" + tata);
+        }
+
+        private void PivotConnectionTitle_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            
         }
     }
 }
