@@ -456,7 +456,8 @@
                                     </StackPanel>
                                 </Grid>
                                 <Grid Grid.Column="0" Grid.Row="2" Padding="0" Margin="0,40,0,0" >
-                                    <DesktopDahuComponent:DahuButton1 x:Name="RegisterButton"  x:Uid="DahuButton1_Connection" Tapped="ConnectButton_Tapped" BgColor="#FFC0722C"/>
+                                    <DesktopDahuComponent:DahuButton1 x:Name="RegisterButton"  x:Uid="DahuButton1_Connection" Tapped="ConnectButton_Tapped" />
+                                    <!--BgColor="#FFC0722C"-->
                                 </Grid>
                                 <!--<Rectangle Fill="Red" Grid.Column="0" Grid.Row="0"/>
                                 <Rectangle Fill="Blue" Grid.Column="0" Grid.Row="1"/>
