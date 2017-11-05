@@ -1,0 +1,15 @@
+﻿<Page
+    x:Class="Dahu_UWP.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dahu_UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/   2006"
+    xmlns:DesktopDahuComponent="using:Dahu_UWP.Views.Component.Desktop"
+    DataContext="{Binding HomePageVM, Source={StaticResource Locator}}">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock Text="{Binding Prenom}"/>
+        <DesktopDahuComponent:DahuButton1 x:Name="RegisterButton"  x:Uid="DahuButton1_Connection" Tapped="ConnectButton_Tapped"  />
+    </Grid>
+</Page>

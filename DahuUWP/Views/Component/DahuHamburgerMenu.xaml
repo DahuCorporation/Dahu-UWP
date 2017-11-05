@@ -1,0 +1,42 @@
+﻿<UserControl
+    x:Class="DahuUWP.Views.Component.DahuHamburgerMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DahuUWP.Views.Component"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:UWPToolkit="using:Microsoft.Toolkit.Uwp.UI.Controls">
+
+    <UserControl.Resources>
+        <DataTemplate x:Name="HamburDefaultTemplate">
+            <Grid Width="240" Height="48">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <SymbolIcon Grid.Column="0" Symbol="{Binding Icon}" Foreground="White" />
+                <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="16" VerticalAlignment="Center" Foreground="White" />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Background="Transparent">
+        <UWPToolkit:HamburgerMenu x:Name="hamburgerMenuControl" PaneBackground="Black" DisplayMode="Overlay" Foreground="White" ItemClick="OnMenuItemClick" ItemTemplate="{StaticResource HamburDefaultTemplate}" OptionsItemClick="OnMenuItemClick">
+            <Grid x:Name="ContentGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0"
+                        Background="Gray">
+                    <TextBlock x:Name="Header"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="24"
+                               Foreground="White"
+                               Text="zefzef" />
+                </Border>
+            </Grid>
+        </UWPToolkit:HamburgerMenu>
+    </Grid>
+</UserControl>
