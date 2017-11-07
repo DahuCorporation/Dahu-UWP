@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="DahuUWP.Views.Connection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DahuUWP.Views"
+    xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="#FFEFEFEF" >
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,20">
+                <TextBlock x:Name="PageTitle" x:Uid="ConnectionTitle" Text="Connection" Style="{StaticResource PageTitleStyle}"/>
+                <Inputs:DahuInputText1 x:Name="DahuInput1_Mail" x:Uid="DahuInput1_Mail" InputWidth="500" InputPlaceholder="Mail"  Margin="0,20,0,0" InputScope="EmailSmtpAddress"/>
+                <Inputs:DahuInputText1 x:Name="DahuInput1_Password" x:Uid="DahuInput1_Password" InputWidth="500" InputPlaceholder="Password" />
+                <TextBlock x:Name="ForgetPassword" x:Uid="ForgetPassword" Text="Forgot password ?" Style="{StaticResource MiniLinkStyle}"/>
+                <Inputs:DahuButton3 x:Name="DahuButton3_Connection"  x:Uid="DahuButton3_Connection" Value="Connection" ButtonBackground="#FFD0691C" Width="250" HorizontalAlignment="Left" Margin="0,8,0,0" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

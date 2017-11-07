@@ -10,5 +10,15 @@
     mc:Ignorable="d">
     <Application.Resources>
         <local:ViewModelLocator x:Key="Locator" d:IsDataSource="true" />
+        <Style x:Key="PageTitleStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#3D3D3D" />
+            <Setter Property="FontSize" Value="40" />
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style x:Key="MiniLinkStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#004471" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        
     </Application.Resources>
 </Application>

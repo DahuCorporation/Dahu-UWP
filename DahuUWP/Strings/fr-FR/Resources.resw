@@ -117,7 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConnectionTitle.Text" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="DahuButton3_Connection.Value" xml:space="preserve">
+    <value>Se connecter</value>
+  </data>
+  <data name="DahuInput1_Mail.InputPlaceholder" xml:space="preserve">
+    <value>Adresse mail</value>
+  </data>
+  <data name="DahuInput1_Password.InputPlaceholder" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="ForgetPassword.Text" xml:space="preserve">
+    <value>Mot de passe oublié ?</value>
+  </data>
   <data name="MailAdress.Text" xml:space="preserve">
     <value>Adresse mail</value>
+  </data>
+  <data name="RegisterButton.Value" xml:space="preserve">
+    <value>Inscription</value>
+  </data>
+  <data name="RegisterButtonDone.Value" xml:space="preserve">
+    <value>S'inscrire</value>
+  </data>
+  <data name="RegisterTitle.Text" xml:space="preserve">
+    <value>Inscription</value>
+  </data>
+  <data name="SignInButton.Value" xml:space="preserve">
+    <value>Se connecter</value>
+  </data>
+  <data name="UserFirstName.InputPlaceholder" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="UserName.InputPlaceholder" xml:space="preserve">
+    <value>Nom</value>
   </data>
 </root>

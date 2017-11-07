@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,7 +27,63 @@ namespace DahuUWP.Views
         public HomePage()
         {
             this.InitializeComponent();
+            DahuFrame = DahuBurgerFrame;
+            DahuBurgerMenu.ItemsSource = MenuItem.GetMainItems();
+            DahuBurgerMenu.OptionsItemsSource = MenuItem.GetOptionsItems();
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+        }
 
+        private void OnMenuItemClick(object sender, ItemClickEventArgs e)
+        {
+            var menuItem = e.ClickedItem as MenuItem;
+            //this.Frame.Navigate(menuItem.PageType);
+            DahuBurgerFrame.Navigate(menuItem.PageType);
+            DahuBurgerMenu.IsPaneOpen = false;
+        }
+
+        private void DahuBurgerFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                DahuBurgerFrame.CanGoBack ?
+                AppViewBackButtonVisibility.Visible :
+                AppViewBackButtonVisibility.Collapsed;
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (DahuBurgerFrame.CanGoBack)
+            {
+                e.Handled = true;
+                DahuBurgerFrame.GoBack();
+            }
+        }
+
+        public static Frame DahuFrame { get; set; }
+    }
+
+
+
+    public class MenuItem
+    {
+        public Symbol Icon { get; set; }
+        public string Name { get; set; }
+        public Type PageType { get; set; }
+
+        public static List<MenuItem> GetMainItems()
+        {
+            var items = new List<MenuItem>();
+            items.Add(new MenuItem() { Icon = Symbol.Accept, Name = "Découvrir", PageType = typeof(Discover) });
+            items.Add(new MenuItem() { Icon = Symbol.Send, Name = "Mes projet", PageType = typeof(CreateNewProject) });
+            items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "Creer un nouveau projet", PageType = typeof(CreateNewProject) });
+            items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "Paramètre", PageType = typeof(CreateNewProject) });
+            return items;
+        }
+
+        public static List<MenuItem> GetOptionsItems()
+        {
+            var items = new List<MenuItem>();
+            items.Add(new MenuItem() { Icon = Symbol.Setting, Name = "OptionItem1", PageType = typeof(CreateNewProject) });
+            return items;
         }
 
     }

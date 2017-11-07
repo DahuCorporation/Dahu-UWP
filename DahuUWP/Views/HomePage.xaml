@@ -9,20 +9,37 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     DataContext="{Binding HomePageVM, Source={StaticResource Locator}}">
+    <Page.Resources>
+        <DataTemplate x:Key="DefaultTemplate" x:DataType="local:MenuItem">
+            <Grid Width="240" Height="48">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <SymbolIcon Grid.Column="0" Symbol="{x:Bind Icon, Mode=OneWay}" Foreground="#1D1D1D" />
+                <TextBlock Grid.Column="1" Text="{x:Bind Name, Mode=OneWay}" FontSize="16" VerticalAlignment="Center" Foreground="#1D1D1D" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid Background="#EFEFEF">
 
-    <Grid Background="Gray">
-        <Component:TopBar x:Name="TopBar">
-            </Component:TopBar>
-            <RelativePanel>
-                <TextBlock Text="{Binding Prenom}"/>
-            </RelativePanel>
-
-
-
-
-
-
-
-
+        <controls:HamburgerMenu x:Name="DahuBurgerMenu"
+                                PaneBackground="#FAFAFA"
+                                Foreground="#1D1D1D"
+                                DisplayMode="Overlay"
+                                ItemClick="OnMenuItemClick"
+                                OptionsItemClick="OnMenuItemClick"
+                                ItemTemplate="{StaticResource DefaultTemplate}"
+                                OptionsItemTemplate="{StaticResource DefaultTemplate}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Component:TopBar x:Name="TopBar" Grid.Row="0" />
+                <Frame x:Name="DahuBurgerFrame" Navigated="DahuBurgerFrame_Navigated" Grid.Row="1" Background="#EFEFEF">
+                </Frame>
+            </Grid>
+        </controls:HamburgerMenu>
     </Grid>
 </Page>

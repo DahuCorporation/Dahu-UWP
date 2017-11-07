@@ -106,14 +106,35 @@
     <Compile Include="Utils\Converter\ColorConverter.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
-    <Compile Include="Views\Component\DahuHamburgerMenu.xaml.cs">
-      <DependentUpon>DahuHamburgerMenu.xaml</DependentUpon>
+    <Compile Include="Views\Components\Inputs\DahuButton1.xaml.cs">
+      <DependentUpon>DahuButton1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Component\TopBar.xaml.cs">
+    <Compile Include="Views\Components\Inputs\DahuButton2.xaml.cs">
+      <DependentUpon>DahuButton2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Inputs\DahuButton3.xaml.cs">
+      <DependentUpon>DahuButton3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Inputs\DahuInputText1.xaml.cs">
+      <DependentUpon>DahuInputText1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\TopBar.xaml.cs">
       <DependentUpon>TopBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Connection.xaml.cs">
+      <DependentUpon>Connection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateNewProject.xaml.cs">
+      <DependentUpon>CreateNewProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Discover.xaml.cs">
+      <DependentUpon>Discover.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +147,7 @@
     <PRIResource Include="Strings\de-DE\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Dahu-Icon\dahu1.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -140,15 +162,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\Component\DahuHamburgerMenu.xaml">
+    <Page Include="Views\Components\Inputs\DahuButton1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Component\TopBar.xaml">
+    <Page Include="Views\Components\Inputs\DahuButton2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Inputs\DahuButton3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Inputs\DahuInputText1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\TopBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Connection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateNewProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Discover.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Register.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
