@@ -106,6 +106,9 @@
     <Compile Include="Utils\Converter\ColorConverter.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
+    <Compile Include="Views\Components\DahuSpecMenu.xaml.cs">
+      <DependentUpon>DahuSpecMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Components\Inputs\DahuButton1.xaml.cs">
       <DependentUpon>DahuButton1.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,7 @@
     <PRIResource Include="Strings\de-DE\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Background\DahuSpecMenuBG.jpg" />
     <Content Include="Assets\Dahu-Icon\dahu1.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -162,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\Components\DahuSpecMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Components\Inputs\DahuButton1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

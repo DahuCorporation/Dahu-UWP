@@ -5,11 +5,19 @@
     xmlns:local="using:DahuUWP.Views.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    mc:Ignorable="d">
 
-    <Grid>
-
+    <Grid Height="400">
+        <Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/Background/DahuSpecMenuBG.jpg" Stretch="None"/>
+        </Grid.Background>
+        <Rectangle Height="400" Fill="Black" Opacity="0.6"></Rectangle>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <TextBlock x:Name="DiscoverLink" x:Uid="DiscoverLinkDahuSpecMenu" Text="Discover" Foreground="White" Style="{StaticResource DahuSpecMenuLink}"/>
+                <TextBlock x:Name="ProjectLink" x:Uid="ProjectLinkDahuSpecMenu" Text="My project" Foreground="White"  Style="{StaticResource DahuSpecMenuLink}"/>
+                <TextBlock x:Name="CreateProjectLink" x:Uid="CreateProjectLinkDahuSpecMenu" Text="Create project" Foreground="White"  Style="{StaticResource DahuSpecMenuLink}"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

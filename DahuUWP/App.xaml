@@ -19,6 +19,12 @@
             <Setter Property="Foreground" Value="#004471" />
             <Setter Property="FontSize" Value="14" />
         </Style>
+        <Style x:Key="DahuSpecMenuLink" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="30,0,0,0"/>
+        </Style>
         
     </Application.Resources>
 </Application>
