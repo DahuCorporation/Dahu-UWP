@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="DahuUWP.Views.Profil.Private.PrivateProfil"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DahuUWP.Views.Profil.Private"
+ xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:DahuSpecSplitMenu="using:DahuUWP.Views.Components.DahuSpecialSplitMenu"
+    mc:Ignorable="d">
+
+    <Grid Background="#FFEFEFEF">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="8*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <!--https://channel9.msdn.com/Shows/Inside-Windows-Platform/UWP-Layout-using-SplitView-and-RelativePanel-in-C-with-XAML-->
+        <!--PEEK ??-->
+
+        <SplitView IsPaneOpen="True"
+                   DisplayMode="Inline"
+                   OpenPaneLength="324"
+                   PaneBackground="Transparent"
+                   Margin="0,40,0,40"
+                   Grid.Column="1">
+            <SplitView.Pane>
+                <ScrollViewer>
+                    <!-- TODO: Creer ce menu en code, un peu comme le burger menu -->
+                    <StackPanel>
+                        <DahuSpecSplitMenu:MenuButton Value="Information principal" Active="True"  Margin="0,0,0,10"/>
+                        <DahuSpecSplitMenu:MenuButton Value="Compétences" Active="False" Margin="0,0,0,10"/>
+                        <DahuSpecSplitMenu:MenuButton Value="Paramètres" Active="False"  Margin="0,0,0,10"/>
+                    </StackPanel>
+                </ScrollViewer>
+
+            </SplitView.Pane>
+            <Frame x:Name="ProfilSpecMenuFrame" Navigated="ProfilSpecMenuFrame_Navigated" Padding="15,0,0,0" >
+            </Frame>
+        </SplitView>
+    </Grid>
+</Page>

@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="DahuUWP.Views.Profil.Private.PrivateProfilMainInformation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DahuUWP.Views.Profil.Private"
+    xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
+    xmlns:Titles="using:DahuUWP.Views.Components.Titles"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <Grid  VerticalAlignment="Top" Background="#FFFFFF">
+            <Rectangle Height="8" Fill="#FF3D3D3D" VerticalAlignment="Top" />
+            <StackPanel>
+                <Titles:TitleBlock x:Name="TitleBlockMainInformation" x:Uid="TitleBlockMainInformation"/>
+                <Grid Padding="30,0,30,50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" VerticalAlignment="Top" Padding="0,0,10,0" >
+                        <Inputs:DahuInputText3 x:Name="UserName"
+                                           x:Uid="UserNameInputText3"
+                                           InputPlaceholder="Name"
+                                           />
+                        <Inputs:DahuInputText3 x:Name="MailAdress"
+                                           x:Uid="DahuInput3_Mail"
+                                           InputPlaceholder="MailAdress"/>
+                        <!--<Inputs:DahuInputText1 x:Name="Birthdate" x:Uid="Birthdate" InputWidth="500" InputPlaceholder="Birthdate" />-->
+
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Top" Padding="10,0,0,0">
+                        <Inputs:DahuInputText3 x:Name="UserFirstName" x:Uid="UserFirstNameInputText3"  InputPlaceholder="FirstName" />
+                        <DatePicker Header="Select Date"/>
+                        <!--<ListBox x:Name="FontsList" Height="44" Width="500"  ItemsSource="{x:Bind fonts}" DisplayMemberPath="Source"/>-->
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

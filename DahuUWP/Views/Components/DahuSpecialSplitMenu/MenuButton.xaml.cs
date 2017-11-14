@@ -16,39 +16,39 @@ using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace DahuUWP.Views.Components.Inputs
+namespace DahuUWP.Views.Components.DahuSpecialSplitMenu
 {
-    public sealed partial class DahuInputText1 : UserControl
+    public sealed partial class MenuButton : UserControl
     {
-        public DahuInputText1()
+        public MenuButton()
         {
             DataContext = this;
             this.InitializeComponent();
         }
 
-        public int InputWidth { get; set; }
 
-        public string InputPlaceholder { get; set; }
+        public string Value { get; set; }
 
-        public string InputScope { get; set; }
+        private bool _active;
 
-        
-
-
-        private bool _IsReadOnly;
-        public bool IsReadOnly
+        public bool Active
         {
             get
             {
-                return _IsReadOnly;
+                return _active;
             }
 
             set
             {
-                _IsReadOnly = value;
-                InputText.IsReadOnly = IsReadOnly;
-                //InputText.IsEnabled = false;
-                InputText.Background = (IsReadOnly) ? ColorConverter.GetSolidColorBrush("#FFFAFAFA") : ColorConverter.GetSolidColorBrush("#FFFEFEFE");
+                _active = value;
+                if (_active)
+                {
+                    RectangleActive.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    RectangleActive.Visibility = Visibility.Collapsed;
+                }
             }
         }
     }

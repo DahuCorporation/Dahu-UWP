@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DahuUWP.Models
+namespace DahuUWP.Services
 {
-    class Account
+    class DesignDataService
     {
     }
-
 }

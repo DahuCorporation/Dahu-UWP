@@ -9,22 +9,67 @@
     
     mc:Ignorable="d">
     <Application.Resources>
-        <local:ViewModelLocator x:Key="Locator" d:IsDataSource="true" />
-        <Style x:Key="PageTitleStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#3D3D3D" />
-            <Setter Property="FontSize" Value="40" />
-            <Setter Property="FontWeight" Value="SemiBold"/>
-        </Style>
-        <Style x:Key="MiniLinkStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#004471" />
-            <Setter Property="FontSize" Value="14" />
-        </Style>
-        <Style x:Key="DahuSpecMenuLink" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#FFFFFF" />
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Margin" Value="30,0,0,0"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourceDictionary/InputsResource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <local:ViewModelLocator x:Key="Locator" d:IsDataSource="true" />
+            <Style x:Key="PageTitleStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#3D3D3D" />
+                <Setter Property="FontSize" Value="40" />
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+            <Style x:Key="MiniLinkStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#004471" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+            <Style x:Key="DahuSpecMenuLink" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Margin" Value="30,0,0,0"/>
+            </Style>
+            <Style x:Key="DahuH1" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="FontSize" Value="50" />
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+            <Style x:Key="DahuH2" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="FontSize" Value="44" />
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+            <Style x:Key="DahuH3" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="FontSize" Value="38" />
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+            <Style x:Key="DahuH4" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+            <Style x:Key="DahuH5" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+            <Style x:Key="DahuText" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+            <Style x:Key="InputText3Title" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#3D3D3D" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Margin" Value="0,0,0,5"/>
+            </Style>
+            <Style x:Key="TitleBlock" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#2F2F2F" />
+                <Setter Property="FontSize" Value="26" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+            </Style>
+        </ResourceDictionary>
         
     </Application.Resources>
 </Application>

@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Controls;
+﻿using DahuUWP.Views.Profil.Private;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -75,7 +76,7 @@ namespace DahuUWP.Views
             items.Add(new MenuItem() { Icon = Symbol.Accept, Name = "Découvrir", PageType = typeof(Discover) });
             items.Add(new MenuItem() { Icon = Symbol.Send, Name = "Mes projet", PageType = typeof(CreateNewProject) });
             items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "Creer un nouveau projet", PageType = typeof(CreateNewProject) });
-            items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "Paramètre", PageType = typeof(CreateNewProject) });
+            items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "Paramètre", PageType = typeof(PrivateProfil) });
             return items;
         }
 

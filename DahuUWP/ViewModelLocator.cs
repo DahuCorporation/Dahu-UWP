@@ -18,16 +18,29 @@ namespace DahuUWP
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             if (ViewModelBase.IsInDesignModeStatic)
+            {
                 SimpleIoc.Default.Register<IServiceClient, DesignServiceClient>();
+                //SimpleIoc.Default.Register<IServiceConnection, DesignServiceClient>();
+            }
             else
+            {
                 SimpleIoc.Default.Register<IServiceClient, ServiceClient>();
+                //SimpleIoc.Default.Register<IServiceConnection, ServiceClient>();
+            }
+
 
             SimpleIoc.Default.Register<HomePageViewModel>();
+            SimpleIoc.Default.Register<ConnectionViewModel>();
         }
 
         public HomePageViewModel HomePageVM
         {
             get { return ServiceLocator.Current.GetInstance<HomePageViewModel>(); }
+        }
+
+        public ConnectionViewModel ConnectionVM
+        {
+            get { return ServiceLocator.Current.GetInstance<ConnectionViewModel>(); }
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DahuUWP.ViewModels
 {
-    public class HomePageViewModel : ViewModelBase
+    public class ConnectionViewModel : ViewModelBase
     {
         private readonly IServiceClient serviceClient;
 
@@ -37,7 +37,7 @@ namespace DahuUWP.ViewModels
             return true;
         }
 
-        public HomePageViewModel(IServiceClient service)
+        public ConnectionViewModel(IServiceClient service)
         {
             serviceClient = service;
             Project client = serviceClient.Charger();

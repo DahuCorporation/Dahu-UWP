@@ -22,15 +22,17 @@ namespace DahuUWP.Models
     {
         public Project Charger()
         {
-            return new Project { Prenom = "Nico", Age = 30, EstBonClient = true };
+
+            return new Project { Prenom = "Nicodu33!", Age = 30, EstBonClient = true };
         }
+
     }
 
     public class DesignServiceClient : IServiceClient
     {
         public Project Charger()
         {
-            return new Project { Prenom = "Nico2", Age = 30, EstBonClient = true };
+            return new Project { Prenom = "Mode Design", Age = 30, EstBonClient = true };
         }
     }
 

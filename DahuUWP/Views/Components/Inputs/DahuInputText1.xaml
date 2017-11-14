@@ -7,15 +7,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
     <Grid Margin="0,8,0,0">
         <Border CornerRadius="5" Background="#FEFEFE" Width="{Binding Path=InputWidth, FallbackValue='300'}" Height="44" BorderThickness="0,0,0,1" BorderBrush="#FFCBCBCB" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <TextBox PlaceholderText="{Binding Path=InputPlaceholder, FallbackValue='Value'}"
-                     Background="#FEFEFE" 
-                     BorderThickness="0,0,0,0"
-                     Padding="11"
-                     InputScope="{Binding Path=InputScope, FallbackValue='Default'}"
-                     IsTextPredictionEnabled="False" IsSpellCheckEnabled="False">
+            <TextBox x:Name="InputText" PlaceholderText="{Binding Path=InputPlaceholder, FallbackValue='Value'}"
+                         Background="{Binding Path=TextBoxBackground, FallbackValue='#FEFEFE'}" 
+                         BorderThickness="0,0,0,0"
+                         Padding="11"
+                         InputScope="{Binding Path=InputScope, FallbackValue='Default'}"
+                         IsTextPredictionEnabled="False"
+                         IsSpellCheckEnabled="False">
             </TextBox>
         </Border>
     </Grid>

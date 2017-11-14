@@ -1,5 +1,4 @@
-﻿using DahuUWP.Utils.Converter;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,12 +17,28 @@ using Windows.UI.Xaml.Navigation;
 
 namespace DahuUWP.Views.Components.Inputs
 {
-    public sealed partial class DahuInputText1 : UserControl
+    public sealed partial class DahuInputText3 : UserControl
     {
-        public DahuInputText1()
+        public DahuInputText3()
         {
             DataContext = this;
             this.InitializeComponent();
+        }
+
+        private string _inputHeader;
+
+        public string InputHeader
+        {
+            get
+            {
+                return _inputHeader;
+            }
+
+            set
+            {
+                _inputHeader = value;
+                TextBlockInputHeader.Visibility = Visibility.Visible;
+            }
         }
 
         public int InputWidth { get; set; }
@@ -32,24 +47,6 @@ namespace DahuUWP.Views.Components.Inputs
 
         public string InputScope { get; set; }
 
-        
-
-
-        private bool _IsReadOnly;
-        public bool IsReadOnly
-        {
-            get
-            {
-                return _IsReadOnly;
-            }
-
-            set
-            {
-                _IsReadOnly = value;
-                InputText.IsReadOnly = IsReadOnly;
-                //InputText.IsEnabled = false;
-                InputText.Background = (IsReadOnly) ? ColorConverter.GetSolidColorBrush("#FFFAFAFA") : ColorConverter.GetSolidColorBrush("#FFFEFEFE");
-            }
-        }
+        public string InputText { get; set; }
     }
 }

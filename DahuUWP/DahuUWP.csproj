@@ -96,16 +96,22 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\ModelManager\IModelManager.cs" />
-    <Compile Include="Models\ModelManager\ProjectManager.cs" />
-    <Compile Include="Models\ModelManager\UserManager.cs" />
+    <Compile Include="Services\DesignDataService.cs" />
+    <Compile Include="Services\ModelManager\IModelManager.cs" />
+    <Compile Include="Services\ModelManager\ProjectManager.cs" />
+    <Compile Include="Services\ModelManager\UserManager.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\APIService.cs" />
+    <Compile Include="Services\DataService.cs" />
     <Compile Include="Utils\Converter\ColorConverter.cs" />
     <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="ViewModels\ConnectionViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
+    <Compile Include="Views\Components\DahuSpecialSplitMenu\MenuButton.xaml.cs">
+      <DependentUpon>MenuButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Components\DahuSpecMenu.xaml.cs">
       <DependentUpon>DahuSpecMenu.xaml</DependentUpon>
     </Compile>
@@ -121,6 +127,15 @@
     <Compile Include="Views\Components\Inputs\DahuInputText1.xaml.cs">
       <DependentUpon>DahuInputText1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Components\Inputs\DahuInputText2.xaml.cs">
+      <DependentUpon>DahuInputText2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Inputs\DahuInputText3.xaml.cs">
+      <DependentUpon>DahuInputText3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Titles\TitleBlock.xaml.cs">
+      <DependentUpon>TitleBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Components\TopBar.xaml.cs">
       <DependentUpon>TopBar.xaml</DependentUpon>
     </Compile>
@@ -135,6 +150,15 @@
     </Compile>
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Profil\Private\PrivateProfil.xaml.cs">
+      <DependentUpon>PrivateProfil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Profil\Private\PrivateProfilMainInformation.xaml.cs">
+      <DependentUpon>PrivateProfilMainInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Profil\Public\PublicProfil.xaml.cs">
+      <DependentUpon>PublicProfil.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
@@ -166,6 +190,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ResourceDictionary\InputsResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\Components\DahuSpecialSplitMenu\MenuButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Components\DahuSpecMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -186,6 +219,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Components\Inputs\DahuInputText2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Inputs\DahuInputText3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Titles\TitleBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Components\TopBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -203,6 +248,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Profil\Private\PrivateProfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Profil\Private\PrivateProfilMainInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Profil\Public\PublicProfil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

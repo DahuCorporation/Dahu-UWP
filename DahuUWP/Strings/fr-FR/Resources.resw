@@ -126,11 +126,17 @@
   <data name="DahuButton3_Connection.Value" xml:space="preserve">
     <value>Se connecter</value>
   </data>
+  <data name="DahuButton3_Search.Value" xml:space="preserve">
+    <value>Rerchercher</value>
+  </data>
   <data name="DahuInput1_Mail.InputPlaceholder" xml:space="preserve">
     <value>Adresse mail</value>
   </data>
   <data name="DahuInput1_Password.InputPlaceholder" xml:space="preserve">
     <value>Mot de passe</value>
+  </data>
+  <data name="DahuInput3_Mail.InputHeader" xml:space="preserve">
+    <value>Adresse mail</value>
   </data>
   <data name="DiscoverLinkDahuSpecMenu.Text" xml:space="preserve">
     <value>Découvrir</value>
@@ -156,10 +162,25 @@
   <data name="SignInButton.Value" xml:space="preserve">
     <value>Se connecter</value>
   </data>
-  <data name="UserFirstName.InputPlaceholder" xml:space="preserve">
+  <data name="TitleBlockMainInformation.Title" xml:space="preserve">
+    <value>Vos informations principales</value>
+  </data>
+  <data name="TitleFindProject.Text" xml:space="preserve">
+    <value>Trouver un projet</value>
+  </data>
+  <data name="TitleInnovationIsHere.Text" xml:space="preserve">
+    <value>L'inovation commence ici, trouver un projet et faites en partie</value>
+  </data>
+  <data name="UserFirstNameInputText3.InputHeader" xml:space="preserve">
     <value>Prénom</value>
   </data>
-  <data name="UserName.InputPlaceholder" xml:space="preserve">
+  <data name="UserFirstNameInputText3.InputPlaceholder" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="UserNameInputText3.InputHeader" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="UserNameInputText3.InputPlaceholder" xml:space="preserve">
     <value>Nom</value>
   </data>
 </root>
