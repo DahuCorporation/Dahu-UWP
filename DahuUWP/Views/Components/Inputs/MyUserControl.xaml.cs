@@ -33,8 +33,11 @@ namespace DahuUWP.Views.Components.Inputs
             set { SetValue(CellValueProperty, value); }
         }
 
+        // NOTE: essayer de faire avec Inotify pour que les changements soit fait directement et pas 
+
         public static readonly DependencyProperty CellValueProperty =
             DependencyProperty.Register("CellValue", typeof(string), typeof(MyUserControl), new PropertyMetadata(false));
+
 
         //public string Text
         //{
