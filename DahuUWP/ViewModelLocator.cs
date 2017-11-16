@@ -1,4 +1,5 @@
 ﻿using DahuUWP.Models;
+using DahuUWP.Services;
 using DahuUWP.ViewModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -19,12 +20,12 @@ namespace DahuUWP
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                SimpleIoc.Default.Register<IServiceClient, DesignServiceClient>();
+                SimpleIoc.Default.Register<IDataService, DesignDataService>();
                 //SimpleIoc.Default.Register<IServiceConnection, DesignServiceClient>();
             }
             else
             {
-                SimpleIoc.Default.Register<IServiceClient, ServiceClient>();
+                SimpleIoc.Default.Register<IDataService, DataService>();
                 //SimpleIoc.Default.Register<IServiceConnection, ServiceClient>();
             }
 

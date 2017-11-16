@@ -1,6 +1,7 @@
 ﻿using DahuUWP.Utils.Converter;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -16,6 +17,8 @@ using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
+//TODO : super site pour binding -> http://blog.jerrynixon.com/2013/07/solved-two-way-binding-inside-user.html ---> lien probleme: https://stackoverflow.com/questions/37026023/wpf-usercontrol-databinding-with-mvvm-viewmodel
+
 namespace DahuUWP.Views.Components.Inputs
 {
     public sealed partial class DahuInputText1 : UserControl
@@ -24,6 +27,7 @@ namespace DahuUWP.Views.Components.Inputs
         {
             DataContext = this;
             this.InitializeComponent();
+            //(this.Content as FrameworkElement).DataContext = this;
         }
 
         public int InputWidth { get; set; }
@@ -51,5 +55,9 @@ namespace DahuUWP.Views.Components.Inputs
                 InputText.Background = (IsReadOnly) ? ColorConverter.GetSolidColorBrush("#FFFAFAFA") : ColorConverter.GetSolidColorBrush("#FFFEFEFE");
             }
         }
+
+
+
+
     }
 }

@@ -36,6 +36,8 @@
                     <RowDefinition Height="48" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+
+                <!--<TextBlock Text="{Binding Path=Prenom}"/>-->
                 <Component:TopBar x:Name="TopBar" Grid.Row="0" />
                 <Frame x:Name="DahuBurgerFrame" Navigated="DahuBurgerFrame_Navigated" Grid.Row="1" Background="#EFEFEF">
                 </Frame>

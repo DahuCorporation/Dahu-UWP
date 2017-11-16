@@ -7,8 +7,28 @@ using System.Threading.Tasks;
 
 namespace DahuUWP.Services
 {
-    class DataService
+    public interface IDataService
     {
-        public UserManager UserManager = new UserManager();
+        object GetUserManager();
+        object GetProjectManager();
+    }
+
+    class DataService : IDataService
+    {
+        private UserManager UserManager = new UserManager();
+        private ProjectManager ProjectManager = new ProjectManager();
+
+        public object GetUserManager() { return UserManager; }
+        public object GetProjectManager() { return ProjectManager; }
+
+    }
+
+    class DesignDataService : IDataService
+    {
+        private DesignUserManager DesignUserManager = new DesignUserManager();
+        private DesignProjectManager DesignProjectManager = new DesignProjectManager();
+
+        public object GetUserManager() { return DesignUserManager; }
+        public object GetProjectManager() { return DesignProjectManager; }
     }
 }

@@ -96,7 +96,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
-    <Compile Include="Services\DesignDataService.cs" />
     <Compile Include="Services\ModelManager\IModelManager.cs" />
     <Compile Include="Services\ModelManager\ProjectManager.cs" />
     <Compile Include="Services\ModelManager\UserManager.cs" />

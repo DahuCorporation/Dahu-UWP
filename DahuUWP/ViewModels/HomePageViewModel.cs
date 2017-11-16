@@ -1,4 +1,6 @@
 ﻿using DahuUWP.Models;
+using DahuUWP.Models.ModelManager;
+using DahuUWP.Services;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,7 @@ namespace DahuUWP.ViewModels
 {
     public class HomePageViewModel : ViewModelBase
     {
-        private readonly IServiceClient serviceClient;
+        private readonly IDataService serviceClient;
 
         private string prenom;
         public string Prenom
@@ -37,12 +39,23 @@ namespace DahuUWP.ViewModels
             return true;
         }
 
-        public HomePageViewModel(IServiceClient service)
+        
+
+        public HomePageViewModel(IDataService service)
         {
-            serviceClient = service;
-            Project client = serviceClient.Charger();
-            Prenom = client.Prenom;
-            Age = client.Age;
+            IModelManager projectManager = (IModelManager)service.GetProjectManager();
+            bool val = projectManager.Delete(10);
+            if (val)
+            {
+                Prenom = "mode design frrrr";
+            } else
+            {
+                Prenom = "mode pas design fr";
+            }
+            //serviceClient = service;
+            //Project client = serviceClient.Charger();
+            //Prenom = client.Prenom;
+            //Age = client.Age;
         }
     }
 }

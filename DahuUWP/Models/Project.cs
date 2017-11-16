@@ -22,7 +22,6 @@ namespace DahuUWP.Models
     {
         public Project Charger()
         {
-
             return new Project { Prenom = "Nicodu33!", Age = 30, EstBonClient = true };
         }
 
