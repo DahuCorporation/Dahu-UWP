@@ -38,6 +38,7 @@ namespace DahuUWP.ViewModels
 
         public ConnectionViewModel(IDataService service)
         {
+            WelcomeTitle = "gros";
             dataService = service;
             IModelManager projectManager = (IModelManager)dataService.GetProjectManager();
             listeClients = projectManager.Charge().Select(s => (Project)s).ToList();
@@ -49,10 +50,11 @@ namespace DahuUWP.ViewModels
             //Age = client.Age;
         }
 
+        public string WelcomeTitle { get; set; }
 
         private void QuiSuisJe(Project client)
         {
-            string titi = "Je suis ";
+            string titi = "Je suis " + WelcomeTitle;
             string tata = "Je suis " + client.Prenom;
         }
     }

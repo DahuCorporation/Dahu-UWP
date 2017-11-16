@@ -132,6 +132,9 @@
     <Compile Include="Views\Components\Inputs\DahuInputText3.xaml.cs">
       <DependentUpon>DahuInputText3.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Components\Inputs\MyUserControl.xaml.cs">
+      <DependentUpon>MyUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Components\Titles\TitleBlock.xaml.cs">
       <DependentUpon>TitleBlock.xaml</DependentUpon>
     </Compile>
@@ -223,6 +226,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\Inputs\DahuInputText3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Inputs\MyUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

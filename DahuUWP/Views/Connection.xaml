@@ -25,6 +25,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
+                <Inputs:MyUserControl CellValue="{Binding WelcomeTitle, Mode=TwoWay}"/>
                 <TextBlock x:Name="PageTitle" x:Uid="ConnectionTitle" Text="Connection" Style="{StaticResource PageTitleStyle}"/>
                 <Inputs:DahuInputText1 x:Name="DahuInput1_Mail" x:Uid="DahuInput1_Mail" InputWidth="500" InputPlaceholder="Mail"  Margin="0,20,0,0" InputScope="EmailSmtpAddress" />
                 <Inputs:DahuInputText1 x:Name="DahuInput1_Password" x:Uid="DahuInput1_Password" InputWidth="500" InputPlaceholder="Password" />
