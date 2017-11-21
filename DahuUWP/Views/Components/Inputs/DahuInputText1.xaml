@@ -8,15 +8,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Grid Margin="0,8,0,0">
-        <Border CornerRadius="5" Background="#FEFEFE" Width="{Binding Path=InputWidth, FallbackValue='300'}" Height="44" BorderThickness="0,0,0,1" BorderBrush="#FFCBCBCB" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <!--<Border CornerRadius="5" Background="#FEFEFE" Width="{Binding Path=InputWidth, FallbackValue='300'}" Height="44" BorderThickness="0,0,0,1" BorderBrush="#FFCBCBCB" HorizontalAlignment="Left" VerticalAlignment="Top">
             <TextBox x:Name="InputText" PlaceholderText="{Binding Path=InputPlaceholder, FallbackValue='Value'}"
                          Background="{Binding Path=TextBoxBackground, FallbackValue='#FEFEFE'}" 
                          BorderThickness="0,0,0,0"
                          Padding="11"
                          InputScope="{Binding Path=InputScope, FallbackValue='Default'}"
                          IsTextPredictionEnabled="False"
-                         IsSpellCheckEnabled="False">
+                         IsSpellCheckEnabled="False"
+                     Text="{Binding Path=CellValue, Mode=TwoWay}">
+            </TextBox>
+        </Border>-->
+
+        <Border CornerRadius="5" Background="#FEFEFE" Width="{Binding Path=InputWidth,  Mode=TwoWay, FallbackValue='300'}" Height="44" BorderThickness="0,0,0,1" BorderBrush="#FFCBCBCB" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBox x:Name="InputText" PlaceholderText="{Binding Path=InputPlaceholder, FallbackValue='Value'}"
+                         Background="{Binding Path=TextBoxBackground, FallbackValue='#FEFEFE'}" 
+                         BorderThickness="0,0,0,0"
+                         Padding="11"
+                         InputScope="{Binding Path=InputScope, FallbackValue='Default'}"
+                         IsTextPredictionEnabled="False"
+                         IsSpellCheckEnabled="False"
+                     Text="{Binding Path=TextValue, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
         </Border>
+        <!--<StackPanel>
+            <TextBox x:Name="MyTextBox" Text="{Binding Path=CellValue, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock x:Name="MyTextBlock" Text="{Binding Path=CellValue}"/>
+        </StackPanel>-->
     </Grid>
 </UserControl>

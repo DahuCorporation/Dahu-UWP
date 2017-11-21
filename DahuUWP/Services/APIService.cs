@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,45 +11,34 @@ namespace DahuUWP.Services
 {
     class APIService
     {
+        //https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
+
         private String route = "http://fncs.eu/api/forward/";
         private HttpClient httpClient = new HttpClient();
-        private String jsonBody;
 
-        /// <summary>
-        /// Add a route extension to the API route
-        /// </summary>
-        /// <param name="routeExtension">String extension you want to add</param>
-        /// <returns></returns>
-        public Boolean AddToRoute(string routeExtension)
+        public APIService()
         {
-            if (!String.IsNullOrWhiteSpace(routeExtension))
-            {
-                route = String.Concat(routeExtension);
-                return true;
-            }
-            return false;
+            httpClient.BaseAddress = new Uri(route);
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        /// <summary>
-        /// Fill the body in a json string with the obj sended
-        /// </summary>
-        /// <param name="obj">Object you want to be in the body</param>
-        /// <returns></returns>
-        public Boolean JsonBodyContent(Object obj)
-        {
-            if (obj != null)
-            {
-                jsonBody = "{\"data\":{" + JsonConvert.SerializeObject(obj) + "}}";
-                return true;
-            }
-            return false;
-        }
 
-        public async Task<bool> PostAsync()
+        /// <summary>
+        /// Post to API
+        /// </summary>
+        /// <param name="obj">Object in body</param>
+        /// <param name="requestUri">Path of api</param>
+        /// <returns></returns>
+        public HttpResponseMessage Post(object obj, string requestUri)
         {
-            httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage wcfResponse = await httpClient.PostAsync(route, new StringContent(jsonBody, Encoding.UTF8, "application/json"));
-            return true;
+            var content = "{\"data\":" + JsonConvert.SerializeObject(obj) + "}";
+            var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpResponseMessage result = httpClient.PostAsync(requestUri, byteContent).Result;
+            result.EnsureSuccessStatusCode();
+            return result;
         }
 
         public Boolean Get()

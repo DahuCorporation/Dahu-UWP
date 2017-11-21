@@ -7,6 +7,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+
     DataContext="{Binding ConnectionVM, Source={StaticResource Locator}}">
 
     <Grid Background="#FFEFEFEF">
@@ -25,12 +28,72 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
-                <Inputs:MyUserControl CellValue="{Binding WelcomeTitle, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
+                <!--<Inputs:MyUserControl CellValue="{Binding Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
                 <TextBlock x:Name="PageTitle" x:Uid="ConnectionTitle" Text="Connection" Style="{StaticResource PageTitleStyle}"/>
-                <Inputs:DahuInputText1 x:Name="DahuInput1_Mail" x:Uid="DahuInput1_Mail" InputWidth="500" InputPlaceholder="Mail"  Margin="0,20,0,0" InputScope="EmailSmtpAddress" />
-                <Inputs:DahuInputText1 x:Name="DahuInput1_Password" x:Uid="DahuInput1_Password" InputWidth="500" InputPlaceholder="Password" />
+                <Inputs:DahuInputText1 x:Name="DahuInput1_Mail"
+                                       x:Uid="DahuInput1_Mail" InputWidth="500"
+                                       InputPlaceholder="Mail"
+                                       Margin="0,20,0,0"
+                                       InputScope="EmailSmtpAddress"
+                                       TextValue="{Binding UserAccount.Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Inputs:DahuInputText1 x:Name="DahuInput1_Password"
+                                       x:Uid="DahuInput1_Password"
+                                       InputWidth="500"
+                                       InputPlaceholder="Password"
+                                       TextValue="{Binding UserAccount.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <!--<TextBox Text="{Binding UserAccount.Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+                <!--<TextBlock Text="{Binding Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+                <TextBlock Text="{Binding UserAccount.Mail, Mode=TwoWay}"/>
+                <TextBlock Text="{Binding UserAccount.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock x:Name="ForgetPassword" x:Uid="ForgetPassword" Text="Forgot password ?" Style="{StaticResource MiniLinkStyle}"/>
-                <Inputs:DahuButton3 x:Name="DahuButton3_Connection"  x:Uid="DahuButton3_Connection" Value="Connection" ButtonBackground="#FFD0691C" Width="250" HorizontalAlignment="Left" Margin="0,8,0,0" />
+                <Grid Width="50" Height="50" Background="Red"/>
+                <Grid Width="50" Height="50" Background="Black">
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Tapped">
+                            <Core:InvokeCommandAction Command="{Binding ConnectionCommand}"/>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                </Grid>
+                <!--<Slider x:Name="Sl_VolumeSilder">
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Tapped">
+                            <Core:InvokeCommandAction Command="{Binding ConnectionCommand}"/>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                </Slider>-->
+                
+                <!--<Rectangle Fill="Red"
+                       Stroke="Black"
+                       Margin="10"
+                       Grid.Column="1"
+                       Grid.Row="2"
+                       Style="{StaticResource RectangleStyle}"
+                       ToolTipService.ToolTip="MouseOver to activate command">
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Tapped">
+                            <Core:InvokeCommandAction Command="{Binding ConnectionCommand}" />
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                    
+                    
+                    --><!--<i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseEnter">
+                            <cmd:EventToCommand Command="{Binding ParameterCommand1}"
+                                            CommandParameter="{Binding Text, ElementName=ParameterTextBox}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseLeave">
+                            <cmd:EventToCommand Command="{Binding ResetCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>--><!--
+                </Rectangle>-->
+                
+                <Inputs:DahuButton3 x:Name="DahuButton3_Connection"
+                                    x:Uid="DahuButton3_Connection"
+                                    Value="Connection"
+                                    ButtonBackground="#FFD0691C"
+                                    Width="250"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,8,0,0" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

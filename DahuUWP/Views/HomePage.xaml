@@ -9,6 +9,7 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     DataContext="{Binding HomePageVM, Source={StaticResource Locator}}">
+    <!--WinRT-->
     <Page.Resources>
         <DataTemplate x:Key="DefaultTemplate" x:DataType="local:MenuItem">
             <Grid Width="240" Height="48">

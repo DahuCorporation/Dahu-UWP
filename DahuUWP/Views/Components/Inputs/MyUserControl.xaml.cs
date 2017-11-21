@@ -27,6 +27,21 @@ namespace DahuUWP.Views.Components.Inputs
             (this.Content as FrameworkElement).DataContext = this;
         }
 
+        public int InputWidth { get; set; }
+
+        public string InputPlaceholder { get; set; }
+
+        public string InputScope
+        {
+            get { return (string)GetValue(InputScopeProperty); }
+            set { SetValue(InputScopeProperty, value); }
+        }
+
+        // NOTE: essayer de faire avec Inotify pour que les changements soit fait directement et pas 
+
+        public static readonly DependencyProperty InputScopeProperty =
+            DependencyProperty.Register("InputScope", typeof(string), typeof(MyUserControl), new PropertyMetadata(null));
+
         public string CellValue
         {
             get { return (string)GetValue(CellValueProperty); }
@@ -36,7 +51,7 @@ namespace DahuUWP.Views.Components.Inputs
         // NOTE: essayer de faire avec Inotify pour que les changements soit fait directement et pas 
 
         public static readonly DependencyProperty CellValueProperty =
-            DependencyProperty.Register("CellValue", typeof(string), typeof(MyUserControl), new PropertyMetadata(false));
+            DependencyProperty.Register("CellValue", typeof(string), typeof(MyUserControl), new PropertyMetadata(null));
 
 
         //public string Text

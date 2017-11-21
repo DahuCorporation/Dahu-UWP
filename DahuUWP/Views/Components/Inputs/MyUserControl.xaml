@@ -12,7 +12,7 @@
 
     <Grid Background="Gray">
         <StackPanel>
-            <TextBox x:Name="MyTextBox" Text="{Binding Path=CellValue, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="MyTextBox" Text="{Binding Path=CellValue, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Placeholder"/>
             <TextBlock x:Name="MyTextBlock" Text="{Binding Path=CellValue}"/>
         </StackPanel>
         

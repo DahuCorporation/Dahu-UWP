@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,9 @@ namespace DahuUWP.Models
 {
     public class Project
     {
+        [JsonProperty(PropertyName = "prenom")]
         public string Prenom { get; set; }
+        public string titi { get; set; }
         public int Age { get; set; }
         public bool EstBonClient { get; set; }
     }
@@ -31,6 +34,10 @@ namespace DahuUWP.Models
     {
         public Project Charger()
         {
+            Project tit = new Project();
+
+            tit.Prenom = "efe";
+            
             return new Project { Prenom = "Mode Design", Age = 30, EstBonClient = true };
         }
     }
