@@ -5,9 +5,13 @@
     xmlns:local="using:DahuUWP.Views.Profil.Public"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <StackPanel>
+            <Inputs:GraylouButton Icon="settings-2" Value="Settings" Width="200"/>
+            <Inputs:GraylouButton Icon="alarm-clock" Value="Time"  Width="200"/>
+        </StackPanel>
     </Grid>
 </Page>
