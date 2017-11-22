@@ -118,6 +118,9 @@
     <Compile Include="Views\Components\DahuSpecMenu.xaml.cs">
       <DependentUpon>DahuSpecMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Components\Inputs\ContentiButton.xaml.cs">
+      <DependentUpon>ContentiButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Components\Inputs\DahuButton1.xaml.cs">
       <DependentUpon>DahuButton1.xaml</DependentUpon>
     </Compile>
@@ -318,6 +321,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\DahuSpecMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Inputs\ContentiButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

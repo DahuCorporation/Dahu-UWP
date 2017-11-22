@@ -141,6 +141,9 @@
   <data name="DiscoverLinkDahuSpecMenu.Text" xml:space="preserve">
     <value>Découvrir</value>
   </data>
+  <data name="ExperienceTextBlock.Text" xml:space="preserve">
+    <value>Expérience</value>
+  </data>
   <data name="ForgetPassword.Text" xml:space="preserve">
     <value>Mot de passe oublié ?</value>
   </data>
