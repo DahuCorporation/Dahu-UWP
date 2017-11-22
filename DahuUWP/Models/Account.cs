@@ -76,26 +76,6 @@ namespace DahuUWP.Models
         {
             try
             {
-
-                //HttpClient client = new HttpClient();
-
-                //client.BaseAddress = new Uri("http://fncs.eu/api/forward/auth");
-                //client.DefaultRequestHeaders.Accept.Clear();
-                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //object connection = new
-                //{
-                //    mail = (string)AppStaticInfo.Account.GetType().GetProperty("Mail").GetValue(AppStaticInfo.Account),
-                //    password = (string)AppStaticInfo.Account.GetType().GetProperty("Password").GetValue(AppStaticInfo.Account)
-                //};
-
-                //var myContent = "{\"data\":" + JsonConvert.SerializeObject(connection) + "}";
-                //var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
-                //var byteContent = new ByteArrayContent(buffer);
-                //byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                //HttpResponseMessage result = client.PostAsync("", byteContent).Result;
-                //result.EnsureSuccessStatusCode();
-                //return true;
                 APIService service = new APIService();
 
                 object connection = new

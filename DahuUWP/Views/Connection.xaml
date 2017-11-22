@@ -46,14 +46,17 @@ xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
                 <TextBlock Text="{Binding UserAccount.Mail, Mode=TwoWay}"/>
                 <TextBlock Text="{Binding UserAccount.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock x:Name="ForgetPassword" x:Uid="ForgetPassword" Text="Forgot password ?" Style="{StaticResource MiniLinkStyle}"/>
-                <Grid Width="50" Height="50" Background="Red"/>
+                <!--<Grid Width="50" Height="50" Background="Red"/>
                 <Grid Width="50" Height="50" Background="Black">
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
                             <Core:InvokeCommandAction Command="{Binding ConnectionCommand}"/>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
-                </Grid>
+                </Grid>-->
+                
+                
+                
                 <!--<Slider x:Name="Sl_VolumeSilder">
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
@@ -86,14 +89,23 @@ xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
                         </i:EventTrigger>
                     </i:Interaction.Triggers>--><!--
                 </Rectangle>-->
-                
-                <Inputs:DahuButton3 x:Name="DahuButton3_Connection"
+                <Grid>
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Tapped">
+                            <Core:InvokeCommandAction Command="{Binding ConnectionCommand}"/>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                    <Inputs:DahuButton3 x:Name="DahuButton3_Connection"
                                     x:Uid="DahuButton3_Connection"
                                     Value="Connection"
                                     ButtonBackground="#FFD0691C"
                                     Width="250"
                                     HorizontalAlignment="Left"
-                                    Margin="0,8,0,0" />
+                                    Margin="0,8,0,0" >
+                        
+                    </Inputs:DahuButton3>
+                </Grid>
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>

@@ -1,0 +1,21 @@
+﻿<UserControl
+    x:Class="DahuUWP.Views.Components.Inputs.GraylouButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DahuUWP.Views.Components.Inputs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Height="48">
+        <Border CornerRadius="24,24,24,24" BorderThickness="0,0,0,0">
+            <Grid Padding="24,0,24,0" Background="#DFDFDF">
+                <StackPanel Orientation="Horizontal">
+                    <Grid Height="21" Width="21" VerticalAlignment="Center" HorizontalAlignment="Left"></Grid>
+                    <TextBlock Text="{Binding Path=Value, FallbackValue='Button1'}" Foreground="#3D3D3D" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="12,0,0,0"/>
+                </StackPanel>
+                
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
