@@ -14,6 +14,7 @@
             <Inputs:GraylouButton Icon="alarm-clock" Value="Time"  Width="200"/>
             <Inputs:ContentiButton Title="Developpement web" ContentValue="Depuis mon plus jeune age je m'interresse"/>
             <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>
+            <Inputs:StarRating/>
         </StackPanel>
     </Grid>
 </Page>

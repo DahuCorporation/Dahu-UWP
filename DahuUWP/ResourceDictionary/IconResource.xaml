@@ -4,4 +4,6 @@
     xmlns:local="using:DahuUWP.ResourceDictionary">
     <x:String x:Key="alarm-clock">ms-appx:///Assets/Dahu-Icon/alarm-clock.png</x:String>
     <x:String x:Key="settings-2">ms-appx:///Assets/Dahu-Icon/settings-2.png</x:String>
+    <x:String x:Key="star-empty">ms-appx:///Assets/Dahu-Icon/star-empty.png</x:String>
+    <x:String x:Key="star-full">ms-appx:///Assets/Dahu-Icon/star-full.png</x:String>
 </ResourceDictionary>

@@ -112,6 +112,9 @@
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\ConnectionViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
+    <Compile Include="Views\Components\Container\FamorContainer.xaml.cs">
+      <DependentUpon>FamorContainer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Components\DahuSpecialSplitMenu\MenuButton.xaml.cs">
       <DependentUpon>MenuButton.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,9 @@
     </Compile>
     <Compile Include="Views\Components\Inputs\MyUserControl.xaml.cs">
       <DependentUpon>MyUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Inputs\StarRating.xaml.cs">
+      <DependentUpon>StarRating.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Titles\TitleBlock.xaml.cs">
       <DependentUpon>TitleBlock.xaml</DependentUpon>
@@ -278,6 +284,8 @@
     <Content Include="Assets\Dahu-Icon\smartphone.png" />
     <Content Include="Assets\Dahu-Icon\speaker.png" />
     <Content Include="Assets\Dahu-Icon\speakers.png" />
+    <Content Include="Assets\Dahu-Icon\star-empty.png" />
+    <Content Include="Assets\Dahu-Icon\star-full.png" />
     <Content Include="Assets\Dahu-Icon\trash.png" />
     <Content Include="Assets\Dahu-Icon\trash_w.png" />
     <Content Include="Assets\Dahu-Icon\trophy.png" />
@@ -315,6 +323,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\Components\Container\FamorContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\DahuSpecialSplitMenu\MenuButton.xaml">
       <SubType>Designer</SubType>
@@ -357,6 +369,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\Inputs\MyUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Inputs\StarRating.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
