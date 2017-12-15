@@ -108,12 +108,16 @@
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Utils\Converter\ColorConverter.cs" />
     <Compile Include="Utils\Converter\IconConverter.cs" />
-    <Compile Include="Utils\Verif\FieldsVerif.cs" />
+    <Compile Include="Utils\Enum\UserInterfaceStatus.cs" />
+    <Compile Include="Utils\FieldsVerif\Connection.cs" />
+    <Compile Include="Utils\StoringData\TemporaryAppData.cs" />
+    <Compile Include="Utils\StringUtils.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\ConnectionViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
-    <Compile Include="Views\Components\Container\FamorContainer.xaml.cs">
-      <DependentUpon>FamorContainer.xaml</DependentUpon>
+    <Compile Include="ViewModels\Profil\Private\PrivateProfilMainInformationViewModel.cs" />
+    <Compile Include="Views\Components\Container\ProjectCarousel .xaml.cs">
+      <DependentUpon>ProjectCarousel .xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\DahuSpecialSplitMenu\MenuButton.xaml.cs">
       <DependentUpon>MenuButton.xaml</DependentUpon>
@@ -187,7 +191,9 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="DahuUWP_TemporaryKey.pfx" />
-    <PRIResource Include="Strings\fr-FR\Resources.resw" />
+    <PRIResource Include="Strings\fr-FR\Resources.resw">
+      <SubType>Designer</SubType>
+    </PRIResource>
     <PRIResource Include="Strings\en-US\Resources.resw" />
     <PRIResource Include="Strings\de-DE\Resources.resw" />
   </ItemGroup>
@@ -308,6 +314,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Strings\fr-FR\UserInterfaceStatusResource.txt" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -324,7 +331,7 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\Components\Container\FamorContainer.xaml">
+    <Page Include="Views\Components\Container\ProjectCarousel .xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -435,7 +442,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Utils\Model\" />
+    <Folder Include="ViewModels\Profil\Public\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

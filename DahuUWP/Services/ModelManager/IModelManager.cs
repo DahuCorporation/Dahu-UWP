@@ -8,9 +8,31 @@ namespace DahuUWP.Models.ModelManager
 {
     interface IModelManager
     {
+        /// <summary>
+        /// Post method
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         Boolean Create(Object obj);
+
+        /// <summary>
+        /// Put method
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         Boolean Edit(Object obj);
+
+        /// <summary>
+        /// Delete method
+        /// </summary>
+        /// <param name="objId"></param>
+        /// <returns></returns>
         Boolean Delete(int objId);
-        List<Object> Charge();
+
+        /// <summary>
+        /// Get methode
+        /// </summary>
+        /// <returns></returns>
+        List<Object> Charge(Dictionary<string, object> routeParams);
     }
 }

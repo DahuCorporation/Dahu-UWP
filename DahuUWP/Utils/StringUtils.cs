@@ -5,9 +5,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace DahuUWP.Utils.Verif
+namespace DahuUWP.Utils
 {
-    static public class FieldsVerif
+    static public class StringUtils
     {
         static public bool EmailIsValid(string email)
         {

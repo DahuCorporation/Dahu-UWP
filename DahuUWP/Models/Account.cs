@@ -78,21 +78,26 @@ namespace DahuUWP.Models
     {
         public bool Connect()
         {
+            object connection = new
+            {
+                mail = (string)AppStaticInfo.Account.Mail,
+                password = (string)AppStaticInfo.Account.Password
+            };
+            return Connect(connection);
+        }
+
+        public bool Connect(object connection)
+        {
             try
             {
                 APIService service = new APIService();
 
-                object connection = new
-                {
-                    mail = (string)AppStaticInfo.Account.Mail,
-                    password = (string)AppStaticInfo.Account.Password
-                };
                 HttpResponseMessage result = service.Post(connection, "auth");
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
-                
-                AppStaticInfo.Account.Uuid = (string) resp["data"]["uuid"];
-                AppStaticInfo.Account.Token = (string) resp["data"]["_token"]; //r.GetType().GetProperty("_token").GetValue(resp);
+
+                AppStaticInfo.Account.Uuid = (string)resp["data"]["uuid"];
+                AppStaticInfo.Account.Token = (string)resp["data"]["_token"]; //r.GetType().GetProperty("_token").GetValue(resp);
                 return true;
             }
             catch (Exception ex) //Task<bool> task = Task.Run<bool>(async () => await service.PostAsync());

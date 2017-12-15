@@ -1,0 +1,14 @@
+﻿#All user interface status for France language
+#https://msdn.microsoft.com/fr-fr/library/xbx3z216(v=vs.110).aspx
+
+
+# Connection
+InvalidEmail=L’e-mail entré ne correspond à aucun compte.
+InvalidPassword=Le mot de passe entré est incorrect.
+InvalidEmailAndPassword=L'e-mail et le mot de passe entré sont incorrect.
+InvalidEmailOrPassword=L'e-mail ou le mot de passe entré sont incorrect.
+EmptyEmail=Le champ e-mail est vide.
+EmptyPassword=Le champ mot de passe est vide.
+EmptyEmailAndPasword=Le champ e-mail et mot de passe sont vides.
+
+# Register

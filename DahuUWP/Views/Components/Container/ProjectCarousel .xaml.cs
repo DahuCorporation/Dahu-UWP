@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace DahuUWP.Views.Components.Container
 {
-    public sealed partial class FamorContainer : UserControl
+    public sealed partial class ProjectCarousel : UserControl
     {
-        public FamorContainer()
+        public ProjectCarousel()
         {
             this.InitializeComponent();
         }

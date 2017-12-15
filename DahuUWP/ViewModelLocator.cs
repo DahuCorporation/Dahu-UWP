@@ -1,6 +1,8 @@
 ﻿using DahuUWP.Models;
 using DahuUWP.Services;
 using DahuUWP.ViewModels;
+using DahuUWP.ViewModels.Profil;
+using DahuUWP.ViewModels.Profil.Private;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -32,6 +34,7 @@ namespace DahuUWP
 
             SimpleIoc.Default.Register<HomePageViewModel>();
             SimpleIoc.Default.Register<ConnectionViewModel>();
+            SimpleIoc.Default.Register<PrivateProfilMainInformationViewModel>();
         }
 
         public HomePageViewModel HomePageVM
@@ -42,6 +45,11 @@ namespace DahuUWP
         public ConnectionViewModel ConnectionVM
         {
             get { return ServiceLocator.Current.GetInstance<ConnectionViewModel>(); }
+        }
+
+        public PrivateProfilMainInformationViewModel PrivateProfilMainInformationVM
+        {
+            get { return ServiceLocator.Current.GetInstance<PrivateProfilMainInformationViewModel>(); }
         }
     }
 }

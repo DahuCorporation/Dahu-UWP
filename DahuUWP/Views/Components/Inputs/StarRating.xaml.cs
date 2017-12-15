@@ -1,4 +1,5 @@
 ﻿using DahuUWP.Utils.Converter;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,28 +23,25 @@ namespace DahuUWP.Views.Components.Inputs
     public sealed partial class StarRating : UserControl
     {
         private int NbStars = 5;
+        private int Score = 0;
+
+        /// <summary>
+        /// This var is used to know if the star as been clicked before exiting
+        /// When pointer exit without clicking the stars are reaff at the first score
+        /// So this var avoid the fact to reaff if one star as been cliked
+        /// </summary>
+        private bool Clicked = false;
         
 
         public StarRating()
         {
-            Stars = new ObservableCollection<object>();
+            Stars = new ObservableCollection<StarsRat>();
             DataContext = this;
             this.InitializeComponent();
             CreateStars(3);
-            //List<TodoItem> items = new List<TodoItem>();
-            //items.Add(new TodoItem() { StarIcon = "star-full" });
-            //items.Add(new TodoItem() { StarIcon = "star-full" });
-            //items.Add(new TodoItem() { StarIcon = "star-full" });
-
-            //starList.ItemsSource = items;
-            //ColumnDefinition column = new ColumnDefinition();
-            //colum
-            //StarRatingGrid.ColumnDefinitions.Add();
         }
 
-        //public List<object> Stars { get; set; }
-
-        public ObservableCollection<object> Stars
+        public ObservableCollection<StarsRat> Stars
         {
             get;
             set;
@@ -51,14 +49,16 @@ namespace DahuUWP.Views.Components.Inputs
 
         public void CreateStars(int score)
         {
+            Score = score - 1;
             int it = 0;
 
             //feeling full stars
-            while (it < score && it < NbStars)
+            while (it <= score && it < NbStars)
             {
-                object star = new
+                StarsRat star = new StarsRat()
                 {
-                    StarIcon = IconConverter.IconToImageBrush("star-full")
+                    StarIcon = IconConverter.IconToImageBrush("star-full"),
+                    FullStar = true
                 };
                 Stars.Add(star);
                 it++;
@@ -66,9 +66,10 @@ namespace DahuUWP.Views.Components.Inputs
             //feeling empty stars
             while (it < NbStars)
             {
-                object star = new
+                StarsRat star = new StarsRat()
                 {
-                    StarIcon = IconConverter.IconToImageBrush("star-empty")
+                    StarIcon = IconConverter.IconToImageBrush("star-empty"),
+                    FullStar = false
                 };
                 Stars.Add(star);
                 it++;
@@ -80,62 +81,74 @@ namespace DahuUWP.Views.Components.Inputs
         {
             int it = 0;
 
-            while (it < index && it < NbStars)
+            while (it <= index && it < NbStars)
             {
-                object star = new
-                {
-                    StarIcon = IconConverter.IconToImageBrush("star-full")
-                };
-                Stars[it] = star;
-                //StarList.Items.Insert(it + 1, star);
+                if ((((StarsRat)Stars[it]).FullStar == false)) {
+                    ((StarsRat)Stars[it]).StarIcon = IconConverter.IconToImageBrush("star-full");
+                    ((StarsRat)Stars[it]).FullStar = true;
+                }
                 it++;
-            }
+            }   
             while (it < NbStars)
             {
-                object star = new
+                if ((((StarsRat)Stars[it]).FullStar == true))
                 {
-                    StarIcon = IconConverter.IconToImageBrush("star-empty")
-                };
-                Stars[it] = star;
-                //StarList.Items.Insert(it, star);
+                    ((StarsRat)Stars[it]).StarIcon = IconConverter.IconToImageBrush("star-empty");
+                    ((StarsRat)Stars[it]).FullStar = false;
+                }
                 it++;
             }
-        }
-
-
-
-        public class TodoItem
-        {
-            public string StarIcon { get; set; }
         }
 
         private void Grid_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            
+            Clicked = true;
+            var item = (sender as FrameworkElement).DataContext;
+            int index = StarList.Items.IndexOf(item);
+
+            Score = index;
         }
 
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            //object star = new
-            //{
-            //    StarIcon = IconConverter.IconToImageBrush("star-empty")
-            //};
-            //Stars.Add(star);
-            //List<object> stars = new List<object>();
-
-
+            Clicked = false;
+            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 1);
             var item = (sender as FrameworkElement).DataContext;
             int index = StarList.Items.IndexOf(item);
 
-            //var star = new Grid()
-            //{
-            //    Background = IconConverter.IconToImageBrush("star-empty")
-            //};
-            //Stars.Remove(0);
-            //StarList.ItemsSource = Stars;
-            //stars.Add(star);
-            //StarList.ItemsSource = stars;
             ColorStarBeforEndIndex(index);
+        }
+
+        private void Grid_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 2);
+
+            if (!Clicked)
+            {
+                ColorStarBeforEndIndex(Score);
+            }
+            Clicked = false;
+        }
+    }
+
+    public class StarsRat : ObservableObject
+    {
+        //public ImageBrush StarIcon { get; set; }
+        public bool FullStar { get; set; }
+
+        private ImageBrush starIcon;
+        
+        public ImageBrush StarIcon
+        {
+            get { return starIcon; }
+            set
+            {
+                if (value != starIcon)
+                {
+                    starIcon = value;
+                    RaisePropertyChanged("StarIcon");
+                }
+            }
         }
     }
 }

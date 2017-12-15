@@ -41,9 +41,11 @@ namespace DahuUWP.Services
             return result;
         }
 
-        public Boolean Get()
+        public HttpResponseMessage Get(string requestUri)
         {
-            return true;
+            
+            HttpResponseMessage result = httpClient.GetAsync(requestUri).Result;
+            return result;
         }
 
         public Boolean Delete()

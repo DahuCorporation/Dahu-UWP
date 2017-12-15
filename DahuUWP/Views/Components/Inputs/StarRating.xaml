@@ -11,7 +11,7 @@
             <Setter Property="Height" Value="17"/>
             <Setter Property="Width" Value="17"/>
             <Setter Property="Background" Value="Wheat"/>
-            <Setter Property="Margin" Value="0,0,7,0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -23,7 +23,15 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid Style="{StaticResource OneStarRatingStyle}" Background="{Binding StarIcon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PointerPressed="Grid_PointerPressed" PointerEntered="Grid_PointerEntered" >
+                    <Grid Height="17"
+                          Width="23"
+                          PointerPressed="Grid_PointerPressed"
+                          PointerEntered="Grid_PointerEntered"
+                          PointerExited="Grid_PointerExited"
+                          Background="Transparent">
+                        <Grid Style="{StaticResource OneStarRatingStyle}"
+                              Background="{Binding StarIcon}">
+                        </Grid>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

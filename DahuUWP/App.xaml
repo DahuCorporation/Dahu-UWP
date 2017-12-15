@@ -69,6 +69,10 @@
                 <Setter Property="FontSize" Value="26" />
                 <Setter Property="FontWeight" Value="SemiBold" />
             </Style>
+            <Style x:Key="TinyText" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#95989A" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
         </ResourceDictionary>
         
     </Application.Resources>

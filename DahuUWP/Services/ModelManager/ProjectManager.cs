@@ -8,7 +8,7 @@ namespace DahuUWP.Models.ModelManager
 {
     public class ProjectManager : IModelManager
     {
-        public List<object> Charge()
+        public List<object> Charge(Dictionary<string, object> routeParams)
         {
             return new List<object>
             {
@@ -36,7 +36,7 @@ namespace DahuUWP.Models.ModelManager
 
     public class DesignProjectManager : IModelManager
     {
-        public List<object> Charge()
+        public List<object> Charge(Dictionary<string, object> routeParams)
         {
             return new List<object>
             {

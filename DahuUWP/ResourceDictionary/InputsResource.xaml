@@ -28,26 +28,7 @@
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
-                            
-                            <!--<VisualStateGroup x:Name="FocusStates">
-                                <VisualState x:Name="Focused">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="MainBorder">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBackgroundBrush}"/>
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="MainBorder">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBorderBrush}"/>
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Unfocused"/>
-                            </VisualStateGroup>-->
                         </VisualStateManager.VisualStateGroups>
-                        <!--<Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="{StaticResource PhoneTouchTargetOverhang}"/>-->
-                        <!--<Border x:Name="ReadonlyBorder" BorderBrush="{StaticResource PhoneDisabledBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" Margin="{StaticResource PhoneTouchTargetOverhang}" Visibility="Collapsed"/>-->
-                        <!--<Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" Margin="{StaticResource PhoneTouchTargetOverhang}">
-                            <ContentControl x:Name="ContentElement" BorderThickness="0" HorizontalContentAlignment="Stretch" Margin="{StaticResource PhoneTextBoxInnerMargin}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="Stretch"/>
-                        </Border>-->
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -66,39 +47,6 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        
-        <!--<Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
-                    <VisualState x:Name="ReadOnly">
-                        <VisualState.Setters>
-                            <Setter Property="Foreground" Value="Black"/>
-                        </VisualState.Setters>
-                    </VisualState>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>-->
-
-        <!--<Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
-                    <Border Name="Border"
-        CornerRadius="2"
-        Padding="2"
-        BorderThickness="0" Background="{TemplateBinding Background}">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Disabled">
-                                </VisualState>
-                                <VisualState x:Name="ReadOnly">
-                                </VisualState>
-                                <VisualState x:Name="MouseOver" />
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>-->
     </Style>
+    
 </ResourceDictionary>
