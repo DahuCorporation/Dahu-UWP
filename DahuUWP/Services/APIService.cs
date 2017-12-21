@@ -37,7 +37,7 @@ namespace DahuUWP.Services
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             HttpResponseMessage result = httpClient.PostAsync(requestUri, byteContent).Result;
-            result.EnsureSuccessStatusCode();
+            //result.EnsureSuccessStatusCode();
             return result;
         }
 

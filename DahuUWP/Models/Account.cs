@@ -1,4 +1,6 @@
-﻿using DahuUWP.Services;
+﻿using DahuUWP.DahuTech;
+using DahuUWP.Services;
+using DahuUWP.Utils;
 using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -76,6 +78,10 @@ namespace DahuUWP.Models
 
     public class AccountDataService
     {
+        /// <summary>
+        /// True if ok, false if error
+        /// </summary>
+        /// <returns></returns>
         public bool Connect()
         {
             object connection = new
@@ -91,18 +97,36 @@ namespace DahuUWP.Models
             try
             {
                 APIService service = new APIService();
+                //AppStaticInfo.Account = new Account();
 
                 HttpResponseMessage result = service.Post(connection, "auth");
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
-
-                AppStaticInfo.Account.Uuid = (string)resp["data"]["uuid"];
-                AppStaticInfo.Account.Token = (string)resp["data"]["_token"]; //r.GetType().GetProperty("_token").GetValue(resp);
-                return true;
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppStaticInfo.Account.Uuid = (string)resp["data"]["uuid"];
+                        AppStaticInfo.Account.Token = (string)resp["data"]["_token"];
+                        return true;
+                    case 400:
+                        List<string> LocalApiToUserMsg = new List<string>
+                        {
+                            (string)resp["message"]
+                        };
+                        AppGeneral.ApiToUserMsg = LocalApiToUserMsg;
+                        return false;
+                }
+                
+                return false;
             }
-            catch (Exception ex) //Task<bool> task = Task.Run<bool>(async () => await service.PostAsync());
+            catch (Exception ex)
             {
                 System.Diagnostics.Debug.Fail(ex.ToString());
+                List<string> LocalApiToUserMsg = new List<string>
+                {
+                    "An error occured."
+                };
+                AppGeneral.ApiToUserMsg = LocalApiToUserMsg;
                 return false;
             }
         }

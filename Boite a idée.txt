@@ -1,0 +1,1 @@
+Systeme de notification avec listener, du genre ajouter une notif a une liste qui va s'occuper de l'afficher sur la vue active

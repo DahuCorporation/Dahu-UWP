@@ -1,4 +1,6 @@
-﻿using DahuUWP.Models;
+﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.ViewNotification;
+using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using DahuUWP.Utils;
@@ -6,41 +8,52 @@ using DahuUWP.Utils.StoringData;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Practices.ServiceLocation;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml;
+using System.Xml.Linq;
+using Windows.ApplicationModel;
+using Windows.UI.Xaml;
 
 namespace DahuUWP.ViewModels
 {
-    public class ConnectionViewModel : ViewModelBase
+    public class ConnectionViewModel : DahuViewModelBase
     {
         private string resourceName = "DahuUWP";
         private readonly IDataService dataService;
 
-        private List<Project> listeClients;
+        private List<Project> _listeClients;
         public List<Project> ListeClients
         {
-            get { return listeClients; }
-            set { NotifyPropertyChanged(ref listeClients, value); }
+            get { return _listeClients; }
+            set { NotifyPropertyChanged(ref _listeClients, value); }
         }
 
         public Account UserAccount { get; set; }
 
-        private string mail;
+        private string _mail;
         public string Mail
         {
-            get { return mail; }
-            set { NotifyPropertyChanged(ref mail, value); }
+            get { return _mail; }
+            set {
+                NotifyPropertyChanged(ref _mail, value);
+            }
         }
+
+
 
         private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
         {
@@ -51,21 +64,78 @@ namespace DahuUWP.ViewModels
             return true;
         }
 
+        private bool NotifyPropertyChanged2(ref string variable, string valeur, string nomPropriete)
+        {
+            if (object.Equals(variable, valeur)) return false;
 
+            variable = valeur;
+            RaisePropertyChanged(nomPropriete);
+            return true;
+        }
 
         public ICommand QuiSuisJeCommand { get; set; }
 
         public ICommand ConnectionCommand { get; set; }
 
+
+
+
+
+
+
+        //http://www.java2s.com/Tutorials/CSharp/System.Reflection/FieldInfo/C_FieldInfo_GetValue.htm
         public ConnectionViewModel(IDataService service)
         {
+
+
+
+            //Type thisType = this.GetType();
+            //MethodInfo theMethod = thisType.GetMethod("Error", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            //object titi = "efeo";
+            //object[] tata = new object[1];
+
+            //tata[0] = titi;
+
+            //theMethod.Invoke(this, tata);
+
+
+
+            //fonctionnel!!!!!!!!!!!!!!!
+            //FieldInfo field_info = this.GetType().GetField("_error",
+            //BindingFlags.Instance |
+            //BindingFlags.NonPublic |
+            //BindingFlags.Public);
+            //object obj = "Je test le gros test";
+            //field_info.SetValue(this, obj);
+            Dictionary<string, Notification> notifications = new Dictionary<string, Notification>();
+            Notification blu = new Notification
+            {
+                Value = "coucou"
+            };
+            notifications.Add("key1", blu);
+            DisplayToastNotification(notifications);
+            //   FieldInfo field_info = this.GetType().GetField("_error",
+            //BindingFlags.Instance |
+            //BindingFlags.NonPublic |
+            //BindingFlags.Public);
+            //   object obj = "Je test le gros test";
+            //   object test = this;
+            //   field_info.SetValue(test, obj);
+            //   string toto = _error;
+
+
+
+
+
+
+
             dataService = service;
             IModelManager projectManager = (IModelManager)dataService.GetProjectManager();
-            listeClients = projectManager.Charge(null).Select(s => (Project)s).ToList();
+            _listeClients = projectManager.Charge(null).Select(s => (Project)s).ToList();
             QuiSuisJeCommand = new RelayCommand<Project>(QuiSuisJe);
             ConnectionCommand = new RelayCommand(Connection);
             UserAccount = new Account();
-            ConnectKeepConnectionUser();
+            RecoveringLastUser();
             //TemporaryAppData tempAppData = new TemporaryAppData();
             //string userData = tempAppData.Read("UserData").Result;
 
@@ -81,7 +151,7 @@ namespace DahuUWP.ViewModels
         /// <summary>
         /// Connect the user how wanted to keep connection after closing app
         /// </summary>
-        private void ConnectKeepConnectionUser()
+        private void RecoveringLastUser()
         {
             var loginCredential = GetCredentialFromLocker();
 
@@ -103,13 +173,19 @@ namespace DahuUWP.ViewModels
 
         private void Connection()
         {
+            FieldInfo field_info = this.GetType().GetField("_error",
+            BindingFlags.Instance |
+            BindingFlags.NonPublic |
+            BindingFlags.Public);
+            object obj = "Je test le gros test !!!!!!!!";
+            field_info.SetValue(this, obj);
             if (StringUtils.EmailIsValid(UserAccount.Mail)
                 && !String.IsNullOrEmpty(UserAccount.Password))
             {
                 AccountDataService accounDataService = new AccountDataService();
 
                 AppStaticInfo.Account = UserAccount;
-                if (accounDataService.Connect() == true)
+                if (accounDataService.Connect())
                 {
                     // TODO garder la connexion après fermeture est activé par default il faudra le changer
                     var vault = new Windows.Security.Credentials.PasswordVault();
@@ -117,6 +193,32 @@ namespace DahuUWP.ViewModels
                         resourceName, UserAccount.Mail, UserAccount.Password));
                     // Reset to empty for the security
                     UserAccount.Password = "";
+                }
+                else
+                {
+                    try
+                    {
+                        List<string> apiToUserMsgList = AppGeneral.ApiToUserMsg;
+
+                        foreach (string msg in apiToUserMsgList)
+                        {
+                            //UserInterfaceStatus uis = AppGeneral.UserInterfaceStatusDico[msg];
+                            //FieldInfo field_info = this.GetType().GetField(uis.VarName,
+                            //    BindingFlags.Instance |
+                            //    BindingFlags.NonPublic |
+                            //    BindingFlags.Public);
+                            //object obj = uis.Value;
+                            //field_info.SetValue(this, obj);
+                            //string titi = Error;
+                        }
+                    } catch (Exception ex)
+                    {
+                        // erreur si jamais il n'est pas présent dans le dico
+                        System.Diagnostics.Debug.Fail("[Key could be not present in dico]" + ex.ToString());
+                    }
+                    
+
+                    //ici lier les bons messages d'erreur avec le composant de la vue
                 }
 
             }
@@ -142,12 +244,13 @@ namespace DahuUWP.ViewModels
                 }
 
                 return credential;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 System.Diagnostics.Debug.Fail(ex.ToString());
                 return null;
             }
-            
+
         }
 
         private void QuiSuisJe(Project client)

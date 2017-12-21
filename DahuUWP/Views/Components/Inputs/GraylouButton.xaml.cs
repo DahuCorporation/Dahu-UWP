@@ -25,6 +25,7 @@ namespace DahuUWP.Views.Components.Inputs
         {
             DataContext = this;
             this.InitializeComponent();
+            
         }
 
         public string Value { get; set; }
