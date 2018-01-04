@@ -42,10 +42,14 @@
                                        InputWidth="500"
                                        InputPlaceholder="Password"
                                        TextValue="{Binding UserAccount.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock x:Name="PasswordError" Text="{Binding MailBase}"/>
+                <TextBlock x:Name="PasswordError" Text="{Binding Mail}"/>
                 <TextBlock Text="{Binding UserAccount.Mail, Mode=TwoWay}"/>
                 <TextBlock Text="{Binding UserAccount.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Popups:Toasts InputText="{Binding MailBase}" />
+                <TextBox Text="{Binding Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="Notification valeur:"/>
+                <TextBlock Text="{Binding Notification.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <Popups:Toasts PersonName="{Binding Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock x:Name="ForgetPassword" x:Uid="ForgetPassword" Text="Forgot password ?" Style="{StaticResource MiniLinkStyle}"/>
 
                 <Grid>

@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DahuTech\Inputs\DahuButtonOptions.cs" />
     <Compile Include="DahuTech\ViewNotification\Notification.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AppStaticInfo.cs" />
@@ -139,6 +140,9 @@
     </Compile>
     <Compile Include="Views\Components\Inputs\DahuButton3.xaml.cs">
       <DependentUpon>DahuButton3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Inputs\DahuButtonOption.xaml.cs">
+      <DependentUpon>DahuButtonOption.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Inputs\DahuInputText1.xaml.cs">
       <DependentUpon>DahuInputText1.xaml</DependentUpon>
@@ -282,6 +286,7 @@
     <Content Include="Assets\Dahu-Icon\play-button.png" />
     <Content Include="Assets\Dahu-Icon\power-button.png" />
     <Content Include="Assets\Dahu-Icon\presentation.png" />
+    <Content Include="Assets\Dahu-Icon\presentation_white.png" />
     <Content Include="Assets\Dahu-Icon\printer.png" />
     <Content Include="Assets\Dahu-Icon\reload.png" />
     <Content Include="Assets\Dahu-Icon\return.png" />
@@ -367,6 +372,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Components\Inputs\DahuButtonOption.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Components\Inputs\DahuInputText1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -442,6 +451,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Animations">
+      <Version>2.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
       <Version>2.0.0</Version>

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DahuUWP.ViewModels
 {
-    public class HomePageViewModel : ViewModelBase
+    public class HomePageViewModel : DahuViewModelBase
     {
         private readonly IDataService serviceClient;
 

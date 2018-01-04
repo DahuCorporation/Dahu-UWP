@@ -1,4 +1,5 @@
 ﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.ViewNotification;
 using DahuUWP.Services;
 using DahuUWP.Utils;
 using GalaSoft.MvvmLight;
@@ -109,11 +110,12 @@ namespace DahuUWP.Models
                         AppStaticInfo.Account.Token = (string)resp["data"]["_token"];
                         return true;
                     case 400:
-                        List<string> LocalApiToUserMsg = new List<string>
-                        {
-                            (string)resp["message"]
-                        };
-                        AppGeneral.ApiToUserMsg = LocalApiToUserMsg;
+                        AppGeneral.UserInterfaceStatusDico[(string)resp["message"]].Display();
+                        //List<string> LocalApiToUserMsg = new List<string>
+                        //{
+                        //    (string)resp["message"]
+                        //};
+                        //AppGeneral.ApiToUserMsg = LocalApiToUserMsg;
                         return false;
                 }
                 

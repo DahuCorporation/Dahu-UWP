@@ -10,7 +10,7 @@
     <Grid Height="40">
         <Border CornerRadius="5">
             <Grid Height="40" Padding="40,0,40,0">
-                <TextBlock Text="{Binding Path=Value, FallbackValue='Button1'}" Foreground="#141414" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock x:Name="Button2" Text="{Binding Path=Value, FallbackValue='Button1'}" Foreground="#141414" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </Border>
     </Grid>

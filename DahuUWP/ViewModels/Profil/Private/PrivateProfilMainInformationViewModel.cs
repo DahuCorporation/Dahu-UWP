@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DahuUWP.ViewModels.Profil.Private
 {
-    public class PrivateProfilMainInformationViewModel : ViewModelBase
+    public class PrivateProfilMainInformationViewModel : DahuViewModelBase
     {
         private readonly IDataService dataService;
 

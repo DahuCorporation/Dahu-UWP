@@ -1,32 +1,13 @@
-﻿using DahuUWP.DahuTech;
-using DahuUWP.DahuTech.ViewNotification;
-using DahuUWP.Models;
+﻿using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using DahuUWP.Utils;
-using DahuUWP.Utils.StoringData;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Xml;
-using System.Xml.Linq;
-using Windows.ApplicationModel;
-using Windows.UI.Xaml;
 
 namespace DahuUWP.ViewModels
 {
@@ -87,8 +68,7 @@ namespace DahuUWP.ViewModels
         public ConnectionViewModel(IDataService service)
         {
 
-
-
+            Mail = "titi@gmail.fr";
             //Type thisType = this.GetType();
             //MethodInfo theMethod = thisType.GetMethod("Error", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
             //object titi = "efeo";
@@ -107,13 +87,7 @@ namespace DahuUWP.ViewModels
             //BindingFlags.Public);
             //object obj = "Je test le gros test";
             //field_info.SetValue(this, obj);
-            Dictionary<string, Notification> notifications = new Dictionary<string, Notification>();
-            Notification blu = new Notification
-            {
-                Value = "coucou"
-            };
-            notifications.Add("key1", blu);
-            DisplayToastNotification(notifications);
+
             //   FieldInfo field_info = this.GetType().GetField("_error",
             //BindingFlags.Instance |
             //BindingFlags.NonPublic |
@@ -173,12 +147,20 @@ namespace DahuUWP.ViewModels
 
         private void Connection()
         {
-            FieldInfo field_info = this.GetType().GetField("_error",
-            BindingFlags.Instance |
-            BindingFlags.NonPublic |
-            BindingFlags.Public);
-            object obj = "Je test le gros test !!!!!!!!";
-            field_info.SetValue(this, obj);
+            Mail = "titi@gmail.fr2";
+            //Type thisType = this.GetType();
+            //object toto = ServiceLocator.Current.GetInstance(thisType);
+
+
+            //Type thisType = ServiceLocator.Current.GetType();
+            //object toto = ServiceLocator.Current.GetInstance(thisType);
+
+
+
+
+
+
+
             if (StringUtils.EmailIsValid(UserAccount.Mail)
                 && !String.IsNullOrEmpty(UserAccount.Password))
             {
@@ -188,6 +170,7 @@ namespace DahuUWP.ViewModels
                 if (accounDataService.Connect())
                 {
                     // TODO garder la connexion après fermeture est activé par default il faudra le changer
+                    // TODO mettre le fait de resté connecté dans accountDataService et pareil pour vérifier si l'user était déjà connecté
                     var vault = new Windows.Security.Credentials.PasswordVault();
                     vault.Add(new Windows.Security.Credentials.PasswordCredential(
                         resourceName, UserAccount.Mail, UserAccount.Password));
@@ -196,29 +179,7 @@ namespace DahuUWP.ViewModels
                 }
                 else
                 {
-                    try
-                    {
-                        List<string> apiToUserMsgList = AppGeneral.ApiToUserMsg;
-
-                        foreach (string msg in apiToUserMsgList)
-                        {
-                            //UserInterfaceStatus uis = AppGeneral.UserInterfaceStatusDico[msg];
-                            //FieldInfo field_info = this.GetType().GetField(uis.VarName,
-                            //    BindingFlags.Instance |
-                            //    BindingFlags.NonPublic |
-                            //    BindingFlags.Public);
-                            //object obj = uis.Value;
-                            //field_info.SetValue(this, obj);
-                            //string titi = Error;
-                        }
-                    } catch (Exception ex)
-                    {
-                        // erreur si jamais il n'est pas présent dans le dico
-                        System.Diagnostics.Debug.Fail("[Key could be not present in dico]" + ex.ToString());
-                    }
                     
-
-                    //ici lier les bons messages d'erreur avec le composant de la vue
                 }
 
             }

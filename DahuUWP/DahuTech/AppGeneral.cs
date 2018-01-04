@@ -44,19 +44,19 @@ namespace DahuUWP.DahuTech
             }
         }
 
-        public static Dictionary<string, Notification> UserInterfaceStatusDico { get; set; }
+        public static Dictionary<string, DahuNotification> UserInterfaceStatusDico { get; set; }
 
         //TODO detecter le language pour pouvoir charger le bon xml celon la langue
         // XML tuto: http://www.c-sharpcorner.com/article/read-xml-file-in-windows-10-universal-app/
         static private void InitUserInterfaceStatusDico()
         {
-            UserInterfaceStatusDico = new Dictionary<string, Notification>();
+            UserInterfaceStatusDico = new Dictionary<string, DahuNotification>();
             string pathToXml = Path.Combine(Package.Current.InstalledLocation.Path, "Strings\\" + Languages.French.Value + "\\UserInterfaceStatus.xml");
             XDocument UserInterfaceStatusXML = XDocument.Load(pathToXml);
 
             foreach (XElement elem in UserInterfaceStatusXML.Descendants("status"))
             {
-                Notification notif = new Notification
+                DahuNotification notif = new DahuNotification
                 {
                     Value = elem.Attribute("value").Value,
                     PropertyName = elem.Attribute("varName").Value

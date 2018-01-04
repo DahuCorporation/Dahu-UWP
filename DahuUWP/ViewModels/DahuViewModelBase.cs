@@ -13,25 +13,14 @@ namespace DahuUWP.ViewModels
     public abstract class DahuViewModelBase : ViewModelBase
     {
 
-
-        private string _mail;
-        public string MailBase
+        private DahuNotification _notification;
+        public DahuNotification Notification
         {
-            get { return _mail; }
-            set
-            {
-                NotifyPropertyChanged(ref _mail, value);
-            }
-        }
-
-        public Dictionary<string, Notification> _notifications;
-        public Dictionary<string, Notification> Notifications
-        {
-            get { return _notifications; }
+            get { return _notification; }
 
             set
             {
-                NotifyPropertyChanged(ref _notifications, value);
+                NotifyPropertyChanged(ref _notification, value);
             }
         }
 
@@ -47,10 +36,9 @@ namespace DahuUWP.ViewModels
         /// <summary>
         /// Display a toast notification on the active view
         /// </summary>
-        public void DisplayToastNotification(Dictionary<string, Notification> notifications)
+        public void DisplayToastNotification(Dictionary<string, DahuNotification> notifications)
         {
-            Notifications = notifications;
-            MailBase = "gros caca";
         }
     }
+
 }

@@ -16,8 +16,11 @@ namespace DahuUWP
 {
     public class ViewModelLocator
     {
+        static public DahuViewModelBase CurrentViewModel { get; set; }
+
         static ViewModelLocator()
         {
+            
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             if (ViewModelBase.IsInDesignModeStatic)
@@ -30,8 +33,7 @@ namespace DahuUWP
                 SimpleIoc.Default.Register<IDataService, DataService>();
                 //SimpleIoc.Default.Register<IServiceConnection, ServiceClient>();
             }
-
-
+            
             SimpleIoc.Default.Register<HomePageViewModel>();
             SimpleIoc.Default.Register<ConnectionViewModel>();
             SimpleIoc.Default.Register<PrivateProfilMainInformationViewModel>();
@@ -39,17 +41,17 @@ namespace DahuUWP
 
         public HomePageViewModel HomePageVM
         {
-            get { return ServiceLocator.Current.GetInstance<HomePageViewModel>(); }
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<HomePageViewModel>(); return (HomePageViewModel)CurrentViewModel; }
         }
 
         public ConnectionViewModel ConnectionVM
         {
-            get { return ServiceLocator.Current.GetInstance<ConnectionViewModel>(); }
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<ConnectionViewModel>();  return (ConnectionViewModel)CurrentViewModel; }
         }
 
         public PrivateProfilMainInformationViewModel PrivateProfilMainInformationVM
         {
-            get { return ServiceLocator.Current.GetInstance<PrivateProfilMainInformationViewModel>(); }
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<PrivateProfilMainInformationViewModel>(); return (PrivateProfilMainInformationViewModel)CurrentViewModel; }
         }
     }
 }

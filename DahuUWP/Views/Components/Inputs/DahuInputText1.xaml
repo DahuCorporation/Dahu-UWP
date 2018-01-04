@@ -19,7 +19,6 @@
                      Text="{Binding Path=CellValue, Mode=TwoWay}">
             </TextBox>
         </Border>-->
-
         <Border CornerRadius="5" Background="#FEFEFE" Width="{Binding Path=InputWidth,  Mode=TwoWay, FallbackValue='300'}" Height="44" BorderThickness="0,0,0,1" BorderBrush="#FFCBCBCB" HorizontalAlignment="Left" VerticalAlignment="Top">
             <TextBox x:Name="InputText" PlaceholderText="{Binding Path=InputPlaceholder, FallbackValue='Value'}"
                          Background="#FEFEFE" 

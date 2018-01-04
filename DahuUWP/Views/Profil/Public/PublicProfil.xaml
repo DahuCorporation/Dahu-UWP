@@ -15,6 +15,7 @@
             <Inputs:ContentiButton Title="Developpement web" ContentValue="Depuis mon plus jeune age je m'interresse"/>
             <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>
             <Inputs:StarRating/>
+            <Inputs:DahuButtonOption ButtonBackground="#FFE98755"/>
         </StackPanel>
     </Grid>
 </Page>
