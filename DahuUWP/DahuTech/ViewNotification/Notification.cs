@@ -9,10 +9,10 @@ namespace DahuUWP.DahuTech.ViewNotification
 {
     public enum NotificationType
     {
-        Positive,
-        Negative,
-        Info,
-        Warning
+            Positive,
+            Negative,
+            Info,
+            Warning
     };
 
     public class DahuNotification

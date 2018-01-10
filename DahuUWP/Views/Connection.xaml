@@ -15,61 +15,59 @@
 
     <Grid Background="#FFEFEFEF">
         <ScrollViewer>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,20">
-                <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-                    <ListBox ItemsSource="{Binding ListeClients}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Path=Age}"/>
-                                    <TextBox Text="{Binding Path=Prenom}"/>
-                                    <Button Content="Qui suis-je ?" Command="{Binding Source={StaticResource Locator}, Path=ConnectionVM.QuiSuisJeCommand}" CommandParameter="{Binding}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Grid>
-                <!--<Inputs:MyUserControl CellValue="{Binding Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
-                <TextBlock x:Name="PageTitle" x:Uid="ConnectionTitle" Text="Connection" Style="{StaticResource PageTitleStyle}"/>
-                <Inputs:DahuInputText1 x:Name="DahuInput1_Mail"
+            <Grid>
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,20">
+
+                    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                        <ListBox ItemsSource="{Binding ListeClients}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Path=Age}"/>
+                                        <TextBox Text="{Binding Path=Prenom}"/>
+                                        <Button Content="Qui suis-je ?" Command="{Binding Source={StaticResource Locator}, Path=ConnectionVM.QuiSuisJeCommand}" CommandParameter="{Binding}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                    <!--<Inputs:MyUserControl CellValue="{Binding Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+                    <TextBlock x:Name="PageTitle" x:Uid="ConnectionTitle" Text="Connection" Style="{StaticResource PageTitleStyle}"/>
+                    <Inputs:DahuInputText1 x:Name="DahuInput1_Mail"
                                        x:Uid="DahuInput1_Mail" InputWidth="500"
                                        InputPlaceholder="Mail"
                                        Margin="0,20,0,0"
                                        InputScope="EmailSmtpAddress"
                                        TextValue="{Binding UserAccount.Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Inputs:DahuInputText1 x:Name="DahuInput1_Password"
+                    <Inputs:DahuInputText1 x:Name="DahuInput1_Password"
                                        x:Uid="DahuInput1_Password"
                                        InputWidth="500"
                                        InputPlaceholder="Password"
                                        TextValue="{Binding UserAccount.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock x:Name="PasswordError" Text="{Binding Mail}"/>
-                <TextBlock Text="{Binding UserAccount.Mail, Mode=TwoWay}"/>
-                <TextBlock Text="{Binding UserAccount.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox Text="{Binding Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Text="Notification valeur:"/>
-                <TextBlock Text="{Binding Notification.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock x:Name="ForgetPassword" x:Uid="ForgetPassword" Text="Forgot password ?" Style="{StaticResource MiniLinkStyle}"/>
 
-                <Popups:Toasts PersonName="{Binding Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock x:Name="ForgetPassword" x:Uid="ForgetPassword" Text="Forgot password ?" Style="{StaticResource MiniLinkStyle}"/>
-
-                <Grid>
-                    <Interactivity:Interaction.Behaviors>
-                        <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding ConnectionCommand}"/>
-                        </Core:EventTriggerBehavior>
-                    </Interactivity:Interaction.Behaviors>
-                    <Inputs:DahuButton3 x:Name="DahuButton3_Connection"
+                    <Grid>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Tapped">
+                                <Core:InvokeCommandAction Command="{Binding ConnectionCommand}"/>
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                        <Inputs:DahuButton3 x:Name="DahuButton3_Connection"
                                     x:Uid="DahuButton3_Connection"
                                     Value="Connection"
                                     ButtonBackground="#FFD0691C"
                                     Width="250"
                                     HorizontalAlignment="Left"
                                     Margin="0,8,0,0" >
-                        
-                    </Inputs:DahuButton3>
-                </Grid>
-                
-            </StackPanel>
+
+                        </Inputs:DahuButton3>
+                    </Grid>
+
+                </StackPanel>
+                <Popups:Toasts DahuNotification="{Binding Notification, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" />
+
+            </Grid>
         </ScrollViewer>
     </Grid>
 </Page>

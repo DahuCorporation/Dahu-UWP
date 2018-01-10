@@ -56,10 +56,28 @@ namespace DahuUWP.DahuTech
 
             foreach (XElement elem in UserInterfaceStatusXML.Descendants("status"))
             {
+                NotificationType elemType = new NotificationType();
+
+                switch (elem.Attribute("type").Value)
+                {
+                    case "Positive":
+                        elemType = NotificationType.Positive;
+                        break;
+                    case "Negative":
+                        elemType = NotificationType.Negative;
+                        break;
+                    case "Info":
+                        elemType = NotificationType.Info;
+                        break;
+                    case "Warning":
+                        elemType = NotificationType.Warning;
+                        break;
+                }
                 DahuNotification notif = new DahuNotification
                 {
                     Value = elem.Attribute("value").Value,
-                    PropertyName = elem.Attribute("varName").Value
+                    PropertyName = elem.Attribute("varName").Value,
+                    Type = elemType
                 };  
                 UserInterfaceStatusDico.Add(elem.Attribute("key").Value, notif);
             }

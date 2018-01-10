@@ -9,33 +9,46 @@
     
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+
         xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     mc:Ignorable="d">
 
-    <Grid Background="White" >
-        <StackPanel>
-            <TextBlock Text="{Binding ToastNotif.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="0,12,32,12" Grid.Column="1" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="18"  TextWrapping="Wrap"/>
+    <Grid Background="Transparent" >
 
-            <TextBox x:Name="MyTextBox" Text="{Binding PersonName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock Text="{Binding PersonName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <StackPanel>
+            <TextBlock x:Name="DahuNotificationTextBox"
+                       Visibility="Visible"
+                       Text="{Binding DahuNotification.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black"/>
             <ItemsControl Name="DahuNotificationsList">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid x:Name="ToastElem" Width="392" MinHeight="64" Background="#F13C4F" VerticalAlignment="Top" HorizontalAlignment="Left" CornerRadius="3,3,3,3"  extensions:VisualEx.CenterPoint="50,50,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="10*" />
-                            </Grid.ColumnDefinitions>
-
-                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" Foreground="White" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Margin="8"/>
-                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE783;" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
-                            <TextBlock Text="{Binding Value}" Padding="0,12,32,12" Grid.Column="1" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="18"  TextWrapping="Wrap"/>
-                        </Grid>
+                        <!--Le tag binding permet de lier l'item actuel avec l'event tapped-->
+                        <controls:DropShadowPanel BlurRadius="6"
+                                  ShadowOpacity="0.1"
+                                  OffsetX="0"
+                                  OffsetY="2"
+                                  OffsetZ="2"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+                            <Grid  x:Name="ToastElem" Width="392" MinHeight="64" Background="{Binding BackgroundColor}" VerticalAlignment="Top" HorizontalAlignment="Left" CornerRadius="3,3,3,3"  extensions:VisualEx.CenterPoint="50,50,0" Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="10*" />
+                                </Grid.ColumnDefinitions>
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE783;" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" />
+                                <TextBlock Text="{Binding Value}" Padding="0,12,32,12" Grid.Column="1" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="18"  TextWrapping="Wrap"/>
+                                <FontIcon Tag="{Binding}"  x:Name="CloseToastElem" Grid.Column="1" FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" Foreground="White" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top"  Margin="8" Tapped="CloseToastElem_Tapped" PointerEntered="CloseToastElem_PointerEntered" PointerExited="CloseToastElem_PointerExited" />
+                            </Grid>
+                        </controls:DropShadowPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
+        <!--
+        Animation
         <Button Click="zef"/>
         <Canvas>
             <Border x:Name="Element"
@@ -68,37 +81,6 @@
                 </animations:Implicit.Animations>
 
             </Border>
-        </Canvas>
-
-        <!--<StackPanel>
-            <Button Click="zef"/>
-            <Grid Width="392" MinHeight="64" Background="#F13C4F" VerticalAlignment="Top" HorizontalAlignment="Left" CornerRadius="3,3,3,3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="10*" />
-                </Grid.ColumnDefinitions>
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" Foreground="White" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Margin="8"/>
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE783;" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
-                <TextBlock Text="Le mot de passe entré est incorrect. " Padding="0,12,32,12" Grid.Column="1" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="18"  TextWrapping="Wrap"/>
-            </Grid>
-            <Grid Width="392" MinHeight="64" Background="#fbbe50" VerticalAlignment="Top" HorizontalAlignment="Left" CornerRadius="3,3,3,3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="10*" />
-                </Grid.ColumnDefinitions>
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" Foreground="White" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Margin="8"/>
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE783;" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
-                <TextBlock Text="Le mot de passe entré est incorrect. " Padding="0,12,32,12" Grid.Column="1" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="18"  TextWrapping="Wrap"/>
-            </Grid>
-            <Grid Width="392" MinHeight="64" Background="#00ba54" VerticalAlignment="Top" HorizontalAlignment="Left" CornerRadius="3,3,3,3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="10*" />
-                </Grid.ColumnDefinitions>
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" Foreground="White" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Margin="8"/>
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE783;" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
-                <TextBlock Text="Le mot de passe entré est incorrect. " Padding="0,12,32,12" Grid.Column="1" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="18"  TextWrapping="Wrap"/>
-            </Grid>
-        </StackPanel>-->
+        </Canvas>-->
     </Grid>
 </Page>

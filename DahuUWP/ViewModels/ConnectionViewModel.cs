@@ -1,4 +1,5 @@
-﻿using DahuUWP.Models;
+﻿using DahuUWP.DahuTech;
+using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using DahuUWP.Utils;
@@ -145,42 +146,53 @@ namespace DahuUWP.ViewModels
             //Stay on connection page
         }
 
+        /// <summary>
+        /// Connection fields verification
+        /// </summary>
+        /// <returns></returns>
+        private bool ConnectionFieldsVerif()
+        {
+            if (String.IsNullOrEmpty(UserAccount.Mail) && String.IsNullOrEmpty(UserAccount.Password))
+            {
+                AppGeneral.UserInterfaceStatusDico["Empty mail and password."].Display();
+                return false;
+            }
+            if (String.IsNullOrEmpty(UserAccount.Mail))
+            {
+                AppGeneral.UserInterfaceStatusDico["Empty mail."].Display();
+                return false;
+            }
+            if (String.IsNullOrEmpty(UserAccount.Password))
+            {
+                AppGeneral.UserInterfaceStatusDico["Empty password."].Display();
+                return false;
+            }
+            if (!StringUtils.EmailIsValid(UserAccount.Mail)) {
+                AppGeneral.UserInterfaceStatusDico["Invalid mail."].Display();
+                return false;
+            }
+            return true;
+        }
+
         private void Connection()
         {
-            Mail = "titi@gmail.fr2";
-            //Type thisType = this.GetType();
-            //object toto = ServiceLocator.Current.GetInstance(thisType);
+            if (!ConnectionFieldsVerif())
+                return;
+            AccountDataService accounDataService = new AccountDataService();
 
-
-            //Type thisType = ServiceLocator.Current.GetType();
-            //object toto = ServiceLocator.Current.GetInstance(thisType);
-
-
-
-
-
-
-
-            if (StringUtils.EmailIsValid(UserAccount.Mail)
-                && !String.IsNullOrEmpty(UserAccount.Password))
+            AppStaticInfo.Account = UserAccount;
+            if (accounDataService.Connect())
             {
-                AccountDataService accounDataService = new AccountDataService();
-
-                AppStaticInfo.Account = UserAccount;
-                if (accounDataService.Connect())
-                {
-                    // TODO garder la connexion après fermeture est activé par default il faudra le changer
-                    // TODO mettre le fait de resté connecté dans accountDataService et pareil pour vérifier si l'user était déjà connecté
-                    var vault = new Windows.Security.Credentials.PasswordVault();
-                    vault.Add(new Windows.Security.Credentials.PasswordCredential(
-                        resourceName, UserAccount.Mail, UserAccount.Password));
-                    // Reset to empty for the security
-                    UserAccount.Password = "";
-                }
-                else
-                {
-                    
-                }
+                // TODO garder la connexion après fermeture est activé par default il faudra le changer
+                // TODO mettre le fait de resté connecté dans accountDataService et pareil pour vérifier si l'user était déjà connecté
+                var vault = new Windows.Security.Credentials.PasswordVault();
+                vault.Add(new Windows.Security.Credentials.PasswordCredential(
+                    resourceName, UserAccount.Mail, UserAccount.Password));
+                // Reset to empty for the security
+                UserAccount.Password = "";
+            }
+            else
+            {
 
             }
         }
