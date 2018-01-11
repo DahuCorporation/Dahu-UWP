@@ -8,7 +8,7 @@ using static DahuUWP.Utils.Converter.ColorConverter;
 
 namespace DahuUWP.Models
 {
-    class User
+    public class User
     {
         /// <summary>
         /// A la serialisation pour l'envoie à l'API ne prendre que l'id de l'account
@@ -17,7 +17,8 @@ namespace DahuUWP.Models
         public Account Account { get; set; }
 
         [JsonProperty(PropertyName = "gender")]
-        public UserUtility.Gender Gender;
+        public string Gender { get; set; }
+        //public UserUtility.Gender Gender { get; set; }
 
         [JsonProperty(PropertyName = "first_name")]
         public string FirstName { get; set; }

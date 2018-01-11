@@ -18,9 +18,10 @@ namespace DahuUWP
     {
         static public DahuViewModelBase CurrentViewModel { get; set; }
 
+        static public DahuViewModelBase HomePageViewModel { get; set; }
+
         static ViewModelLocator()
         {
-            
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             if (ViewModelBase.IsInDesignModeStatic)

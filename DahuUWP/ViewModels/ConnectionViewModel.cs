@@ -3,6 +3,7 @@ using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using DahuUWP.Utils;
+using DahuUWP.Views;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace DahuUWP.ViewModels
     public class ConnectionViewModel : DahuViewModelBase
     {
         private string resourceName = "DahuUWP";
-        private readonly IDataService dataService;
+        
 
         private List<Project> _listeClients;
         public List<Project> ListeClients
@@ -190,6 +191,8 @@ namespace DahuUWP.ViewModels
                     resourceName, UserAccount.Mail, UserAccount.Password));
                 // Reset to empty for the security
                 UserAccount.Password = "";
+                HomePage.DahuFrame.Navigate(typeof(Discover));
+                
             }
             else
             {

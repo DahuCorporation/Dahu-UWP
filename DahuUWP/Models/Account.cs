@@ -1,5 +1,6 @@
 ﻿using DahuUWP.DahuTech;
 using DahuUWP.DahuTech.ViewNotification;
+using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using DahuUWP.Utils;
 using GalaSoft.MvvmLight;
@@ -105,9 +106,20 @@ namespace DahuUWP.Models
                 var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
+                    //success
                     case 200:
+                        UserManager userManager = (UserManager)ViewModelLocator.CurrentViewModel.dataService.GetUserManager();
                         AppStaticInfo.Account.Uuid = (string)resp["data"]["uuid"];
                         AppStaticInfo.Account.Token = (string)resp["data"]["_token"];
+
+                        Dictionary<string, object> userDicoCharge = new Dictionary<string, object>
+                        {
+                            { "_token", AppStaticInfo.Account.Token }
+                        };
+                        User user = userManager.Charge(userDicoCharge);
+                        if (user == null)
+                            return false;
+                        AppGeneral.UserInterfaceStatusDico["Connection success."].Display(user.FirstName);
                         return true;
                     case 400:
                         AppGeneral.UserInterfaceStatusDico[(string)resp["message"]].Display();
@@ -118,17 +130,12 @@ namespace DahuUWP.Models
                         //AppGeneral.ApiToUserMsg = LocalApiToUserMsg;
                         return false;
                 }
-                
                 return false;
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.Fail(ex.ToString());
-                List<string> LocalApiToUserMsg = new List<string>
-                {
-                    "An error occured."
-                };
-                AppGeneral.ApiToUserMsg = LocalApiToUserMsg;
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
                 return false;
             }
         }

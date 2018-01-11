@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Component="using:DahuUWP.Views.Component"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:Popups="using:DahuUWP.Views.Components.Popups"
     mc:Ignorable="d"
     DataContext="{Binding HomePageVM, Source={StaticResource Locator}}">
     <!--WinRT-->
@@ -44,5 +45,7 @@
                 </Frame>
             </Grid>
         </controls:HamburgerMenu>
+        <Popups:Toasts DahuNotification="{Binding Notification, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,40,20,20" />
+
     </Grid>
 </Page>

@@ -43,6 +43,7 @@ namespace DahuUWP.ViewModels
 
         public HomePageViewModel(IDataService service)
         {
+            ViewModelLocator.HomePageViewModel = this;
             IModelManager projectManager = (IModelManager)service.GetProjectManager();
             bool val = projectManager.Delete(10);
             if (val)

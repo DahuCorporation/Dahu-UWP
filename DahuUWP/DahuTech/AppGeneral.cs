@@ -29,20 +29,6 @@ namespace DahuUWP.DahuTech
 
     public static class AppGeneral
     {
-        /// <summary>
-        /// List the last messages that API has send for the user interface
-        /// </summary>
-        private static List<string> _ApiToUserMsg;
-        public static List<string> ApiToUserMsg
-        {
-            get { return _ApiToUserMsg; }
-
-            set
-            {
-                //_ApiToUserMsg = ListUtils.EmptyList(_ApiToUserMsg);
-                _ApiToUserMsg = value;
-            }
-        }
 
         public static Dictionary<string, DahuNotification> UserInterfaceStatusDico { get; set; }
 

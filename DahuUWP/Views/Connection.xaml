@@ -65,7 +65,6 @@
                     </Grid>
 
                 </StackPanel>
-                <Popups:Toasts DahuNotification="{Binding Notification, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" />
 
             </Grid>
         </ScrollViewer>

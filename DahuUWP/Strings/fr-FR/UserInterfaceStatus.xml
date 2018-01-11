@@ -1,49 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <interfaceStatus>
+  <!---->
+  <!--General-->
+  <!---->
+  <status key="An error occured." value="Une erreur est survenue." varName="_error" type="Negative"/>
 
   <!---->
   <!--Connection-->
   <!---->
-  <!--<status>
-    <key>Incorrect mail address.</key>
-    <value>L’e-mail entré ne correspond à aucun compte.</value>
-    <compName></compName>
-  </status>
-  <status>
-    <key>Incorrect password.</key>
-    <value>Le mot de passe entré est incorrect.</value>
-  </status>
-  <status>
-    <key>Incorrect mail and password.</key>
-    <value>L'e-mail et le mot de passe entré sont incorrect.</value>
-    <compName></compName>
-  </status>
-  <status>
-    <key>Incorrect mail or password.</key>
-    <value>L'e-mail ou le mot de passe entré sont incorrect.</value>
-    <compName></compName>
-  </status>
-  <status>
-    <key>Empty mail.</key>
-    <value>Le champ e-mail est vide.</value>
-    <compName></compName>
-  </status>
-  <status>
-    <key>Empty password.</key>
-    <value>Le champ mot de passe est vide.</value>
-    <compName></compName>
-  </status>
-  <status>
-    <key>Empty mail and password.</key>
-    <value>Le champ e-mail et mot de passe sont vides.</value>
-    <compName></compName>
-  </status>-->
-  <!--
-          Positive,
-        Negative,
-        Info,
-        Warning
-        -->
   <status key="Incorrect mail address." value="L’e-mail entré ne correspond à aucun compte." varName="_error" type="Negative"/>
   <status key="Incorrect password." value="Le mot de passe entré est incorrect." varName="_error" type="Negative"/>
   <status key="Incorrect mail and password."  value="L'e-mail et le mot de passe entré sont incorrect." varName="_error" type="Negative"/>
@@ -52,6 +16,9 @@
   <status key="Empty password."  value="Le champ mot de passe est vide." varName="_error" type="Warning"/>
   <status key="Empty mail and password."  value="Le champ e-mail et mot de passe sont vides." varName="_error" type="Warning"/>
   <status key="Invalid mail."  value="Le champ e-mail n'est pas valide." varName="_error" type="Warning"/>
+  <status key="Connection success."  value="Bienvenue {0}" varName="" type="Positive"/>
+
+
   <!---->
   <!--Registration-->
   <!---->

@@ -1,4 +1,5 @@
 ﻿using DahuUWP.DahuTech.ViewNotification;
+using DahuUWP.Services;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace DahuUWP.ViewModels
 {
     public abstract class DahuViewModelBase : ViewModelBase
     {
+        public IDataService dataService;
 
         private DahuNotification _notification;
         public DahuNotification Notification
