@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,5 +35,18 @@ namespace DahuUWP.Models.ModelManager
         /// </summary>
         /// <returns></returns>
         List<Object> Charge(Dictionary<string, object> routeParams);
+
+        /// <summary>
+        /// Serialize a object
+        /// </summary>
+        /// <returns></returns>
+        JObject Serialize();
+
+        /// <summary>
+        /// Deserialize a object
+        /// </summary>
+        /// <param name="jObject"></param>
+        /// <returns></returns>
+        object DeSerialize(JObject jObject);
     }
 }

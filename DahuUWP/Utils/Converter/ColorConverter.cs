@@ -24,14 +24,5 @@ namespace DahuUWP.Utils.Converter
             SolidColorBrush myBrush = new SolidColorBrush(Windows.UI.Color.FromArgb(a, r, g, b));
             return myBrush;
         }
-
-        public static class UserUtility
-        {
-            public enum Gender
-            {
-                Sir,
-                Miss
-            };
-        }
     }
 }

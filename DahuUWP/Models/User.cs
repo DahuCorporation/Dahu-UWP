@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using DahuUWP.Utils.Enum;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +18,10 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "account_id")]
         public Account Account { get; set; }
 
-        [JsonProperty(PropertyName = "gender")]
-        public string Gender { get; set; }
-        //public UserUtility.Gender Gender { get; set; }
+
+        //[JsonProperty(PropertyName = "gender")]
+        [JsonIgnore]
+        public Gender Gender { get; set; }
 
         [JsonProperty(PropertyName = "first_name")]
         public string FirstName { get; set; }

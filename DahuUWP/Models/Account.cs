@@ -103,7 +103,7 @@ namespace DahuUWP.Models
 
                 HttpResponseMessage result = service.Post(connection, "auth");
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     //success

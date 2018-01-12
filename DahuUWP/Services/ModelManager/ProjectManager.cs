@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace DahuUWP.Models.ModelManager
 {
@@ -28,7 +29,17 @@ namespace DahuUWP.Models.ModelManager
             return false;
         }
 
+        public object DeSerialize(JObject jObject)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Edit(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public JObject Serialize()
         {
             throw new NotImplementedException();
         }
@@ -56,7 +67,17 @@ namespace DahuUWP.Models.ModelManager
             return true;
         }
 
+        public object DeSerialize(JObject jObject)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Edit(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public JObject Serialize()
         {
             throw new NotImplementedException();
         }

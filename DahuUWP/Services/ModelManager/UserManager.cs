@@ -1,6 +1,8 @@
 ﻿using DahuUWP.DahuTech;
 using DahuUWP.Services;
+using DahuUWP.Utils.Enum;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,11 +57,12 @@ namespace DahuUWP.Models.ModelManager
                 requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
                 HttpResponseMessage result = apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        return resp["data"].ToObject<User>();
+                        return (User)DeSerialize((JObject)resp["data"]);
+                        //return resp["data"].ToObject<User>();
                 }
                 return null;
             }
@@ -91,6 +94,21 @@ namespace DahuUWP.Models.ModelManager
         {
             throw new NotImplementedException();
         }
+
+        public JObject Serialize()
+        {
+            JObject jUser = new JObject();
+            return jUser;
+        }
+
+        public object DeSerialize(JObject jUser)
+        {
+            User user = new User();
+
+            user = jUser.ToObject<User>();
+            user.Gender = GenderUtility.StringToGender((string)jUser["gender"]);
+            return user;
+        }
     }
 
     public class DesignUserManager : IModelManager
@@ -110,7 +128,17 @@ namespace DahuUWP.Models.ModelManager
             throw new NotImplementedException();
         }
 
+        public object DeSerialize(JObject jObject)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Edit(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public JObject Serialize()
         {
             throw new NotImplementedException();
         }

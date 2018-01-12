@@ -111,6 +111,7 @@
     <Compile Include="DahuTech\AppGeneral.cs" />
     <Compile Include="Utils\Converter\ColorConverter.cs" />
     <Compile Include="Utils\Converter\IconConverter.cs" />
+    <Compile Include="Utils\Enum\Gender.cs" />
     <Compile Include="Utils\ListUtils.cs" />
     <Compile Include="Utils\ReflectionUtils.cs" />
     <Compile Include="Utils\StoringData\TemporaryAppData.cs" />
