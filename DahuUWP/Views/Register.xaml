@@ -6,26 +6,59 @@
     xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    mc:Ignorable="d"
+    DataContext="{Binding RegisterVM, Source={StaticResource Locator}}">
 
     <Grid Background="#FFEFEFEF" >
         <ScrollViewer>
-            <!--<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,20">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,20">
                 <TextBlock x:Name="PageTitle" x:Uid="RegisterTitle" Text="Register" Style="{StaticResource PageTitleStyle}"/>
-                <Inputs:DahuInputText1 x:Name="UserName" x:Uid="UserName" InputWidth="500" InputPlaceholder="Name"  Margin="0,20,0,0"/>
-                <Inputs:DahuInputText1 x:Name="UserFirstName" x:Uid="UserFirstName" InputWidth="500" InputPlaceholder="FirstName" />
-                
-                <Inputs:DahuInputText1 x:Name="MailAdress" x:Uid="DahuInput1_Mail" InputWidth="500" InputPlaceholder="MailAdress" />
-                --><!--<Inputs:DahuInputText1 x:Name="Birthdate" x:Uid="Birthdate" InputWidth="500" InputPlaceholder="Birthdate" />--><!--
+                <Inputs:DahuInputText1 x:Name="UserName"
+                                       x:Uid="UserName"
+                                       InputWidth="500"
+                                       InputPlaceholder="Name"
+                                       Margin="0,20,0,0"
+                                       TextValue="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Inputs:DahuInputText1 x:Name="UserFirstName"
+                                       x:Uid="UserFirstName"
+                                       InputWidth="500"
+                                       InputPlaceholder="FirstName"
+                                       TextValue="{Binding UserFirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Inputs:DahuInputText1 x:Name="MailAdress"
+                                       x:Uid="DahuInput1_Mail"
+                                       InputWidth="500"
+                                       InputPlaceholder="MailAdress"
+                                       TextValue="{Binding UserMailAdress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Inputs:DahuInputText1 x:Name="Birthdate"
+                                       x:Uid="Birthdate"
+                                       InputWidth="500"
+                                       InputPlaceholder="Birthdate"
+                                       TextValue="{Binding UserBirthdate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DatePicker Header="Select Date"/>
                 <ListBox x:Name="FontsList" Height="44" Width="500"  ItemsSource="{x:Bind fonts}" DisplayMemberPath="Source"/>
-                <PasswordBox x:Name="PasswordBox" Width="500" Header="Password" PlaceholderText="Enter your password"/>
-                <PasswordBox x:Name="confirmPasswordBox" Width="500" Header="Confirm password" PlaceholderText="Enter your password"/>
-
-                --><!--<Inputs:DahuInputText1 x:Name="UserName" x:Uid="UserName" InputWidth="500" InputPlaceholder="Name" />
-                <Inputs:DahuInputText1 x:Name="UserFirstName" x:Uid="UserFirstName" InputWidth="500" InputPlaceholder="FirstName" />--><!--
-                <Inputs:DahuButton3 x:Name="RegisterButton"  x:Uid="RegisterButtonDone" Value="Register" ButtonBackground="#FF5595E9" Width="250" HorizontalAlignment="Left"/>
-            </StackPanel>-->
+                <Inputs:DahuInputText1 x:Name="UserPassword"
+                                       x:Uid="UserPassword"
+                                       InputWidth="500"
+                                       InputPlaceholder="Birthdate"
+                                       TextValue="{Binding UserPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Inputs:DahuInputText1 x:Name="UserRepeatedPassword"
+                                       x:Uid="UserRepeatedPassword"
+                                       InputWidth="500"
+                                       InputPlaceholder="Birthdate"
+                                       TextValue="{Binding UserRepeatedPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <!--<PasswordBox x:Name="PasswordBox" Width="500" Header="Password" PlaceholderText="Enter your password"/>
+                <PasswordBox x:Name="confirmPasswordBox" Width="500" Header="Confirm password" PlaceholderText="Enter your password"/>-->
+                <Grid>
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Tapped">
+                            <Core:InvokeCommandAction Command="{Binding RegisterUserCommand}"/>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                    <Inputs:DahuButton3 x:Name="RegisterButton"  x:Uid="RegisterButtonDone" Value="Register" ButtonBackground="#FF5595E9" Width="250" HorizontalAlignment="Left"/>
+                </Grid>
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </Page>

@@ -20,7 +20,7 @@
                 <TextBlock x:Name="CreateProjectLink" x:Uid="CreateProjectLinkDahuSpecMenu" Text="Create project" Foreground="White"  Style="{StaticResource DahuSpecMenuLink}"/>
             </StackPanel>
             <TextBlock x:Name="TitleFindProject" x:Uid="TitleFindProject" Text="Find a project" Style="{StaticResource DahuH2}" HorizontalAlignment="Center" Margin="20,40,20,10"/>
-            <TextBlock x:Name="TitleInnovationIsHere" x:Uid="TitleInnovationIsHere" Text="L'inovation commence ici, trouver un projet et faites en partie   " Style="{StaticResource DahuText}" HorizontalAlignment="Center" FontWeight="SemiBold" Margin="0,0,0,18"/>
+            <TextBlock x:Name="TitleInnovationIsHere" x:Uid="TitleInnovationIsHere" Text="L'inovation commence ici, trouver un projet et faites en partie" Style="{StaticResource DahuTextWhite}" HorizontalAlignment="Center" FontWeight="SemiBold" Margin="0,0,0,18"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Inputs:DahuInputText2 x:Name="DahuInput1_Mail" InputWidth="300" InputPlaceholder="Votre recherche" Margin="0,0,12,0"/>
                 <Inputs:DahuButton3 x:Name="DahuButton3_Connection"  x:Uid="DahuButton3_Search" Value="Research" ButtonBackground="#FFD0691C"/>

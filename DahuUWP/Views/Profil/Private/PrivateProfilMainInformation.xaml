@@ -7,9 +7,10 @@
     xmlns:Titles="using:DahuUWP.Views.Components.Titles"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     DataContext="{Binding PrivateProfilMainInformationVM, Source={StaticResource Locator}}">
-
     <ScrollViewer>
         <Grid  VerticalAlignment="Top" Background="#FFFFFF">
             <Rectangle Height="8" Fill="#FF3D3D3D" VerticalAlignment="Top" />
@@ -22,17 +23,43 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" VerticalAlignment="Top" Padding="0,0,10,0" >
                         <Inputs:DahuInputText3 x:Name="UserName"
-                                           x:Uid="UserNameInputText3"
-                                           InputPlaceholder="Name"
-                                           />
+                                               x:Uid="UserNameInputText3"
+                                               InputPlaceholder="Name"
+                                               TextValue="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                               InputHeader="UserName"/>
                         <Inputs:DahuInputText3 x:Name="MailAdress"
-                                           x:Uid="DahuInput3_Mail"
-                                           InputPlaceholder="MailAdress"/>
-                        <!--<Inputs:DahuInputText1 x:Name="Birthdate" x:Uid="Birthdate" InputWidth="500" InputPlaceholder="Birthdate" />-->
-
+                                               x:Uid="DahuInput3_Mail"
+                                               InputPlaceholder="MailAdress"
+                                               TextValue="{Binding UserMailAdress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                               InputHeader="MailAdress"/>
+                        <Inputs:DahuInputText3 x:Name="Biography"
+                                               x:Uid="DahuInput3_UserBiography"
+                                               InputPlaceholder="Biography"
+                                               TextValue="{Binding UserBiography, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                               InputHeader="Biography"/>
+                        <Grid>
+                            <Interactivity:Interaction.Behaviors>
+                                <Core:EventTriggerBehavior EventName="Tapped">
+                                    <Core:InvokeCommandAction Command="{Binding SaveMainInformationCommand}"/>
+                                </Core:EventTriggerBehavior>
+                            </Interactivity:Interaction.Behaviors>
+                            <Inputs:DahuButton3 x:Name="DahuButton3_SaveMainInformation"
+                                            x:Uid="DahuButton3_SaveMainInformation"
+                                            Style="{StaticResource EditButton}"/>
+                        </Grid>
                     </StackPanel>
                     <StackPanel Grid.Column="1" VerticalAlignment="Top" Padding="10,0,0,0">
-                        <Inputs:DahuInputText3 x:Name="UserFirstName" x:Uid="UserFirstNameInputText3"  InputPlaceholder="FirstName" />
+                        <Inputs:DahuInputText3 x:Name="UserFirstName"
+                                               x:Uid="UserFirstNameInputText3"
+                                               InputPlaceholder="FirstName"
+                                               TextValue="{Binding UserFirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                               InputHeader="UserFirstName"/>
+
+                        <Inputs:DahuInputText3 x:Name="UserAddress"
+                                               x:Uid="DahuInput3_UserAddress"
+                                               InputPlaceholder="Address"
+                                               TextValue="{Binding UserAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                               InputHeader="Address"/>
                         <DatePicker Header="Select Date"/>
                         <!--<ListBox x:Name="FontsList" Height="44" Width="500"  ItemsSource="{x:Bind fonts}" DisplayMemberPath="Source"/>-->
                     </StackPanel>

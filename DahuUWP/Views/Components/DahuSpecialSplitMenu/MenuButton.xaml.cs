@@ -51,5 +51,15 @@ namespace DahuUWP.Views.Components.DahuSpecialSplitMenu
                 }
             }
         }
+
+        private void ButtonGrid_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 1);
+        }
+
+        private void ButtonGrid_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 2);
+        }
     }
 }

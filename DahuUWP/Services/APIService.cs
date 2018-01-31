@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,12 @@ namespace DahuUWP.Services
         }
 
 
+        public HttpResponseMessage Post(string jsonObj, string requestUri)
+        {
+            string content = "{\"data\":" + jsonObj + "}";
+            return CommonPost(content, requestUri);
+        }
+
         /// <summary>
         /// Post to API
         /// </summary>
@@ -32,7 +39,12 @@ namespace DahuUWP.Services
         /// <returns></returns>
         public HttpResponseMessage Post(object obj, string requestUri)
         {
-            var content = "{\"data\":" + JsonConvert.SerializeObject(obj) + "}";
+            string content = "{\"data\":" + JsonConvert.SerializeObject(obj) + "}";
+            return CommonPost(content, requestUri);
+        }
+
+        private HttpResponseMessage CommonPost(string content, string requestUri)
+        {
             var buffer = System.Text.Encoding.UTF8.GetBytes(content);
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -45,6 +57,43 @@ namespace DahuUWP.Services
         {
             
             HttpResponseMessage result = httpClient.GetAsync(requestUri).Result;
+            return result;
+        }
+
+
+        /// <summary>
+        /// Json object
+        /// </summary>
+        /// <param name="jsonObj"></param>
+        /// <param name="requestUri"></param>
+        /// <returns></returns>
+        public HttpResponseMessage Put(string jsonObj, string requestUri)
+        {
+            var content = "{\"data\":" + jsonObj + "}";
+            var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpResponseMessage result = httpClient.PutAsync(requestUri, byteContent).Result;
+            //result.EnsureSuccessStatusCode();
+            return result;
+        }
+
+        /// <summary>
+        /// Object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="requestUri"></param>
+        /// <returns></returns>
+        public HttpResponseMessage Put(object obj, string requestUri)
+        {
+            JObject jObject = JObject.FromObject(obj);
+            string jsonObject = jObject.ToString(Formatting.None);//JsonConvert.SerializeObject(obj)
+            var content = "{\"data\":" + jsonObject + "}";
+            var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpResponseMessage result = httpClient.PutAsync(requestUri, byteContent).Result;
+            //result.EnsureSuccessStatusCode();
             return result;
         }
 

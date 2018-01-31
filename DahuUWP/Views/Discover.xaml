@@ -6,12 +6,33 @@
     xmlns:Components="using:DahuUWP.Views.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:container="using:DahuUWP.Views.Components.Container"
+    mc:Ignorable="d"
+        DataContext="{Binding DiscoverVM, Source={StaticResource Locator}}">
 
     <Grid Background="#FFEFEFEF">
         <ScrollViewer>
             <StackPanel>
                 <Components:DahuSpecMenu x:Name="DahuSpecMenu"/>
+                <Grid Margin="0,18,0,0">
+                    <Grid.ColumnDefinitions>
+                    </Grid.ColumnDefinitions>
+                
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="0">
+                        <ItemsControl Name="ProjectCarousel" ItemsSource="{Binding Projects}" >
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <container:MediumProjectContainer ProjectName="{Binding Name}" Description="{Binding Description}" Margin="18,0,0,0"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
             </StackPanel>
         </ScrollViewer>
     </Grid>

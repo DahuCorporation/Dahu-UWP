@@ -11,15 +11,15 @@
 
     <Grid  Background="White" >
         <Grid>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Grid Width="38" Height="38" Margin="0,0,15,0" >
-                        <Grid.Background>
-                            <ImageBrush ImageSource="ms-appx:///Assets/Dahu-Icon/dahu1.png" Stretch="UniformToFill"/>
-                        </Grid.Background>
-                    </Grid>
-                    <TextBlock x:Name="PageTitle" Text="DAHU" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid Width="38" Height="38" Margin="0,0,15,0" >
+                    <Grid.Background>
+                        <ImageBrush ImageSource="ms-appx:///Assets/Dahu-Icon/dahu1.png" Stretch="UniformToFill"/>
+                    </Grid.Background>
+                </Grid>
+                <TextBlock x:Name="PageTitle" Text="DAHU" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
@@ -29,10 +29,19 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" >
-                <local:DahuButton2 x:Name="SignInButton" x:Uid="SignInButton" Value="Sign In" Tapped="SignInButton_Tapped"/>
-                <local:DahuButton1 x:Name="RegisterButton" x:Uid="RegisterButton" Value="Register" Tapped="RegisterButton_Tapped" />
+                <Grid CornerRadius="90,90,90,90" Width="38" Height="38" Visibility="{Binding ModulConnected, FallbackValue=Collapsed}" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" Tapped="Grid_Tapped">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="ms-appx:///Assets/Tmp/profil-pic.jpg" Stretch="UniformToFill"/>
+                    </Grid.Background>
+                </Grid>
+                <StackPanel Orientation="Horizontal" Visibility="{Binding ModulNonConnected}">
+                    <local:DahuButton2 x:Name="SignInButton" x:Uid="SignInButton" Value="Sign In" Tapped="SignInButton_Tapped"/>
+                    <local:DahuButton1 x:Name="RegisterButton" x:Uid="RegisterButton" Value="Register" Tapped="RegisterButton_Tapped" />
+                </StackPanel>
+
+
             </StackPanel>
         </Grid>
     </Grid>
-    
+
 </UserControl>

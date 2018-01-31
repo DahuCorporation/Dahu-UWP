@@ -1,0 +1,32 @@
+﻿<Page
+    x:Class="DahuUWP.Views.Search.MainResearch"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DahuUWP.Views.Search"
+    xmlns:inputs="using:DahuUWP.Views.Components.Inputs"
+    xmlns:container="using:DahuUWP.Views.Components.Container"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="Resultat:" FontSize="30"/>
+            <TextBlock Text="Projets:" FontSize="30"/>
+            <StackPanel Orientation="Horizontal">
+                <container:MediumProjectContainer/>
+                <container:MediumProjectContainer/>
+                <container:MediumProjectContainer/>
+            </StackPanel>
+            <TextBlock Text="Utilisateurs:" FontSize="30"/>
+            <container:UserInfoBox Height="200"/>
+            <container:UserInfoBox Height="200"/>
+            <container:UserInfoBox Height="200"/>
+        </StackPanel>
+    </Grid>
+</Page>

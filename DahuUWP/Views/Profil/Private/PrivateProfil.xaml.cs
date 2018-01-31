@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DahuUWP.Views.Components.DahuSpecialSplitMenu;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,15 +23,46 @@ namespace DahuUWP.Views.Profil.Private
     /// </summary>
     public sealed partial class PrivateProfil : Page
     {
+        private MenuButton activeMenuButton = new MenuButton();
+
         public PrivateProfil()
         {
             this.InitializeComponent();
             ProfilSpecMenuFrame.Navigate(typeof(PrivateProfilMainInformation));
+            activeMenuButton = DahuSpecSplitMenu_PrincipalInformation;
         }
 
         private void ProfilSpecMenuFrame_Navigated(object sender, NavigationEventArgs e)
         {
 
+        }
+
+        private void ActiveButton(object sender)
+        {
+            if (((MenuButton)sender) != activeMenuButton)
+            {
+                ((MenuButton)sender).Active = true;
+                activeMenuButton.Active = false;
+                activeMenuButton = ((MenuButton)sender);
+            }
+        }
+
+        private void DahuSpecSplitMenu_PrincipalInformation_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ProfilSpecMenuFrame.Navigate(typeof(PrivateProfilMainInformation));
+            ActiveButton(sender);
+        }
+
+        private void DahuSpecSplitMenu_Skill_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ProfilSpecMenuFrame.Navigate(typeof(PrivateProfilSkills));
+            ActiveButton(sender);
+        }
+
+        private void DahuSpecSplitMenu_Parameters_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ProfilSpecMenuFrame.Navigate(typeof(PrivateProfilMainInformation));
+            ActiveButton(sender);
         }
     }
 }

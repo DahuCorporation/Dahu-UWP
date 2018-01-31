@@ -3,6 +3,7 @@ using DahuUWP.Services;
 using DahuUWP.ViewModels;
 using DahuUWP.ViewModels.Profil;
 using DahuUWP.ViewModels.Profil.Private;
+using DahuUWP.ViewModels.Profil.Public;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -37,7 +38,11 @@ namespace DahuUWP
             
             SimpleIoc.Default.Register<HomePageViewModel>();
             SimpleIoc.Default.Register<ConnectionViewModel>();
+            SimpleIoc.Default.Register<RegisterViewModel>();
             SimpleIoc.Default.Register<PrivateProfilMainInformationViewModel>();
+            SimpleIoc.Default.Register<PrivateProfilSkillsViewModel>();
+            SimpleIoc.Default.Register<DiscoverViewModel>();
+            SimpleIoc.Default.Register<PublicProfilViewModel>();
         }
 
         public HomePageViewModel HomePageVM
@@ -50,9 +55,29 @@ namespace DahuUWP
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<ConnectionViewModel>();  return (ConnectionViewModel)CurrentViewModel; }
         }
 
+        public RegisterViewModel RegisterVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<RegisterViewModel>(); return (RegisterViewModel)CurrentViewModel; }
+        }
+
         public PrivateProfilMainInformationViewModel PrivateProfilMainInformationVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<PrivateProfilMainInformationViewModel>(); return (PrivateProfilMainInformationViewModel)CurrentViewModel; }
+        }
+
+        public PrivateProfilSkillsViewModel PrivateProfilSkillsVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<PrivateProfilSkillsViewModel>(); return (PrivateProfilSkillsViewModel)CurrentViewModel; }
+        }
+
+        public DiscoverViewModel DiscoverVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<DiscoverViewModel>(); return (DiscoverViewModel)CurrentViewModel; }
+        }
+
+        public PublicProfilViewModel PublicProfilVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<PublicProfilViewModel>(); return (PublicProfilViewModel)CurrentViewModel; }
         }
     }
 }

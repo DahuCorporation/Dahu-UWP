@@ -27,6 +27,7 @@ namespace DahuUWP.Views.Components.Popups
     public sealed partial class Toasts : Page, INotifyPropertyChanged
     {
         private List<ToastNotification> items = new List<ToastNotification>();
+        private DependencyPropertyWatcher<DahuNotification> watcher;
 
         public Toasts()
         {
@@ -91,8 +92,6 @@ namespace DahuUWP.Views.Components.Popups
                 DahuNotificationsList.ItemsSource = items;
             }
         }
-
-        private DependencyPropertyWatcher<DahuNotification> watcher;
 
         private void CloseToastElem_Tapped(object sender, TappedRoutedEventArgs e)
         {

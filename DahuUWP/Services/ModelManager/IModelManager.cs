@@ -40,7 +40,7 @@ namespace DahuUWP.Models.ModelManager
         /// Serialize a object
         /// </summary>
         /// <returns></returns>
-        JObject Serialize();
+        JObject Serialize(object serializeObject);
 
         /// <summary>
         /// Deserialize a object

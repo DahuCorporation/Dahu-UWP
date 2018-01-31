@@ -22,5 +22,10 @@
   <!---->
   <!--Registration-->
   <!---->
-
+  <status key="User created but not activated."  value="Félicitation votre compte est bien crée, vous avez reçu un mail pour activer votre compte." varName="" type="Positive"/>
+  
+  <!---->
+  <!--Private profil-->
+  <status key="Informations modified."  value="Vos informations on bien été mise à jour." varName="" type="Positive"/>
+  <!---->
 </interfaceStatus>

@@ -3,6 +3,7 @@ using DahuUWP.DahuTech.ViewNotification;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using DahuUWP.Utils;
+using DahuUWP.ViewModels;
 using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

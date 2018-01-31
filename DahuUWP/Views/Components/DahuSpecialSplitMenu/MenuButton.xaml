@@ -9,7 +9,7 @@
     d:DesignHeight="72"
     d:DesignWidth="324">
 
-    <Grid x:Name="ButtonGrid" Height="72" Width="324" Background="White" CornerRadius="2" BorderThickness="0,0,0,1" BorderBrush="#FFC8C8C8" >
+    <Grid x:Name="ButtonGrid" Height="72" Width="324" Background="White" CornerRadius="2" BorderThickness="0,0,0,1" BorderBrush="#FFC8C8C8" PointerEntered="ButtonGrid_PointerEntered" PointerExited="ButtonGrid_PointerExited" >
         <Rectangle x:Name="RectangleActive"  Height="56" Width="8" Margin="8,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#FFD0691C"/>
         <TextBlock x:Name="ButtonValue"  Text="{Binding Path=Value, FallbackValue='Button value'}" Foreground="#3D3D3D" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
     </Grid>

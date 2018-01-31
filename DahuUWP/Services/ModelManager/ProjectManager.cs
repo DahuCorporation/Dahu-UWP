@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using DahuUWP.Services;
+using System.Net.Http;
+using Newtonsoft.Json;
+using DahuUWP.DahuTech;
 
 namespace DahuUWP.Models.ModelManager
 {
@@ -11,12 +15,33 @@ namespace DahuUWP.Models.ModelManager
     {
         public List<object> Charge(Dictionary<string, object> routeParams)
         {
-            return new List<object>
+            try
             {
-                new Project { Age = 30, EstBonClient = true, Prenom = "Nico"},
-                new Project { Age = 20, EstBonClient = false, Prenom = "Jérémie"},
-                new Project { Age = 30, EstBonClient = true, Prenom = "Delphine"}
-            };
+                List<object> projectList = new List<object>();
+                APIService apiService = new APIService();
+                string requestUri = "projects/";
+                if (routeParams != null)
+                    requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                HttpResponseMessage result = apiService.Get(requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        for (int i = 0; resp["data"][i] != resp["data"].Last; i++)
+                        {
+                            projectList.Add(resp["data"][i].ToObject<Project>());
+                        }
+                        return projectList;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
         }
 
         public bool Create(object obj)
@@ -39,7 +64,7 @@ namespace DahuUWP.Models.ModelManager
             throw new NotImplementedException();
         }
 
-        public JObject Serialize()
+        public JObject Serialize(object serializeObject)
         {
             throw new NotImplementedException();
         }
@@ -49,12 +74,7 @@ namespace DahuUWP.Models.ModelManager
     {
         public List<object> Charge(Dictionary<string, object> routeParams)
         {
-            return new List<object>
-            {
-                new Project { Age = 26, EstBonClient = true, Prenom = "Nico Mode design"},
-                new Project { Age = 18, EstBonClient = false, Prenom = "Jérémie Mode design"},
-                new Project { Age = 24, EstBonClient = true, Prenom = "Delphine Mode design"}
-            };
+            return null;
         }
 
         public bool Create(object obj)
@@ -77,7 +97,7 @@ namespace DahuUWP.Models.ModelManager
             throw new NotImplementedException();
         }
 
-        public JObject Serialize()
+        public JObject Serialize(object serializeObject)
         {
             throw new NotImplementedException();
         }

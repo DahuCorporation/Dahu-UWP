@@ -26,13 +26,23 @@ namespace DahuUWP.Views.Components.Inputs
             this.InitializeComponent();
         }
 
+        //ButtonBackground est en DependencyProperty pour que DahuButton puisse être appelé en tant que style dans un fichier Resources
+        public static readonly DependencyProperty ButtonBackgroundProperty =
+            DependencyProperty.Register(
+                "ButtonBackground", typeof(string),
+                typeof(DahuButton3), null
+            );
+
         public string ButtonBackground
         {
             get
-            { return ButtonBackground; }
-
+            {
+                return (string)GetValue(ButtonBackgroundProperty);
+            }
             set
-            { ButtonGrid.Background = ColorConverter.GetSolidColorBrush(value); }
+            {
+                SetValue(ButtonBackgroundProperty, value);
+            }
         }
 
         public string Value { get; set; }

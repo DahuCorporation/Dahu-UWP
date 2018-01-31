@@ -77,7 +77,36 @@ namespace DahuUWP.Models.ModelManager
 
         public bool Create(object obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "users";
+
+                JObject jObject = Serialize(obj);
+                jObject.Add("password", ((User)obj).Account.Password);
+                jObject.Add("type", ((User)obj).Account.Type);
+                string jsonObject = jObject.ToString(Formatting.None);
+                HttpResponseMessage result = apiService.Post("{\"informations\" :" + jsonObject + "}", requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["User created but not activated."].Display();
+                        return true;
+                    case 400:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                    default:
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
         }
 
         public bool Delete(int objId)
@@ -87,7 +116,36 @@ namespace DahuUWP.Models.ModelManager
 
         public bool Edit(object obj)
         {
-            throw new NotImplementedException();
+              try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "users";
+                requestUri += "?_token=" + AppStaticInfo.Account.Token;
+
+                JObject jObject = Serialize(obj);
+                jObject.Remove("mail");
+                string jsonObject = jObject.ToString(Formatting.None);
+                HttpResponseMessage result = apiService.Put(jsonObject, requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["Informations modified."].Display();
+                        return true;
+                    case 400:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                    default:
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
         }
 
         List<object> IModelManager.Charge(Dictionary<string, object> routeParams)
@@ -95,9 +153,10 @@ namespace DahuUWP.Models.ModelManager
             throw new NotImplementedException();
         }
 
-        public JObject Serialize()
+        public JObject Serialize(object userToSerialize)
         {
-            JObject jUser = new JObject();
+            JObject jUser = (JObject)JToken.FromObject(userToSerialize);
+            jUser.Add("gender", GenderUtility.GenderToString(((User)userToSerialize).Gender));
             return jUser;
         }
 
@@ -138,7 +197,7 @@ namespace DahuUWP.Models.ModelManager
             throw new NotImplementedException();
         }
 
-        public JObject Serialize()
+        public JObject Serialize(object serializeObject)
         {
             throw new NotImplementedException();
         }

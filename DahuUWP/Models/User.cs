@@ -15,9 +15,9 @@ namespace DahuUWP.Models
         /// <summary>
         /// A la serialisation pour l'envoie à l'API ne prendre que l'id de l'account
         /// </summary>
-        [JsonProperty(PropertyName = "account_id")]
+        //[JsonProperty(PropertyName = "account_id")]
+        [JsonIgnore]
         public Account Account { get; set; }
-
 
         //[JsonProperty(PropertyName = "gender")]
         [JsonIgnore]
@@ -35,8 +35,8 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "biography")]
         public string Biography { get; set; }
 
-        [JsonProperty(PropertyName = "adress")]
-        public string Adress { get; set; }
+        [JsonProperty(PropertyName = "address")]
+        public string Address { get; set; }
 
         [JsonProperty(PropertyName = "postal_code")]
         public string PostalCode { get; set; }
@@ -49,5 +49,8 @@ namespace DahuUWP.Models
 
         [JsonProperty(PropertyName = "phone")]
         public string Phone { get; set; }
+
+        [JsonProperty(PropertyName = "mail")]
+        public string Mail { get; set; }
     }
 }

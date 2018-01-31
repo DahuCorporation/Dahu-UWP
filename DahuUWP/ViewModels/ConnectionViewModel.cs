@@ -16,60 +16,12 @@ namespace DahuUWP.ViewModels
     public class ConnectionViewModel : DahuViewModelBase
     {
         private string resourceName = "DahuUWP";
-        
-
-        private List<Project> _listeClients;
-        public List<Project> ListeClients
-        {
-            get { return _listeClients; }
-            set { NotifyPropertyChanged(ref _listeClients, value); }
-        }
-
-        public Account UserAccount { get; set; }
-
-        private string _mail;
-        public string Mail
-        {
-            get { return _mail; }
-            set {
-                NotifyPropertyChanged(ref _mail, value);
-            }
-        }
-
-
-
-        private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
-        {
-            if (object.Equals(variable, valeur)) return false;
-
-            variable = valeur;
-            RaisePropertyChanged(nomPropriete);
-            return true;
-        }
-
-        private bool NotifyPropertyChanged2(ref string variable, string valeur, string nomPropriete)
-        {
-            if (object.Equals(variable, valeur)) return false;
-
-            variable = valeur;
-            RaisePropertyChanged(nomPropriete);
-            return true;
-        }
-
-        public ICommand QuiSuisJeCommand { get; set; }
 
         public ICommand ConnectionCommand { get; set; }
-
-
-
-
-
-
 
         //http://www.java2s.com/Tutorials/CSharp/System.Reflection/FieldInfo/C_FieldInfo_GetValue.htm
         public ConnectionViewModel(IDataService service)
         {
-
             Mail = "titi@gmail.fr";
             //Type thisType = this.GetType();
             //MethodInfo theMethod = thisType.GetMethod("Error", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
@@ -107,8 +59,6 @@ namespace DahuUWP.ViewModels
 
             dataService = service;
             IModelManager projectManager = (IModelManager)dataService.GetProjectManager();
-            _listeClients = projectManager.Charge(null).Select(s => (Project)s).ToList();
-            QuiSuisJeCommand = new RelayCommand<Project>(QuiSuisJe);
             ConnectionCommand = new RelayCommand(Connection);
             UserAccount = new Account();
             RecoveringLastUser();
@@ -123,6 +73,38 @@ namespace DahuUWP.ViewModels
             //tempAppData.Write("UserData", "thomasoi@hotmail.fr");
 
         }
+
+        public Account UserAccount { get; set; }
+
+        private string _mail;
+        public string Mail
+        {
+            get { return _mail; }
+            set {
+                NotifyPropertyChanged(ref _mail, value);
+            }
+        }
+
+
+
+        private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
+        {
+            if (object.Equals(variable, valeur)) return false;
+
+            variable = valeur;
+            RaisePropertyChanged(nomPropriete);
+            return true;
+        }
+
+        private bool NotifyPropertyChanged2(ref string variable, string valeur, string nomPropriete)
+        {
+            if (object.Equals(variable, valeur)) return false;
+
+            variable = valeur;
+            RaisePropertyChanged(nomPropriete);
+            return true;
+        }
+        
 
         /// <summary>
         /// Connect the user how wanted to keep connection after closing app
@@ -192,7 +174,8 @@ namespace DahuUWP.ViewModels
                 // Reset to empty for the security
                 UserAccount.Password = "";
                 HomePage.DahuFrame.Navigate(typeof(Discover));
-                
+                // Permet de changer la top bar en tant que connecté
+                ((HomePageViewModel)ViewModelLocator.HomePageViewModel).Connected(true);
             }
             else
             {
@@ -227,12 +210,6 @@ namespace DahuUWP.ViewModels
                 return null;
             }
 
-        }
-
-        private void QuiSuisJe(Project client)
-        {
-            string titi = "Je suis " + UserAccount.Mail;
-            string tata = "Je suis " + client.Prenom;
         }
     }
 }

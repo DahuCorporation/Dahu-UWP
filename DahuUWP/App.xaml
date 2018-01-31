@@ -14,6 +14,17 @@
                 <ResourceDictionary Source="ResourceDictionary/InputsResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <local:ViewModelLocator x:Key="Locator" d:IsDataSource="true" />
+
+            <Style x:Key="BodyGrid" TargetType="Grid">
+                <Setter Property="Background" Value="#FFEFEFEF" />
+                <Setter Property="Padding" Value="0,32,0,32" />
+            </Style>
+
+            <Style x:Key="WhiteContentGrid" TargetType="Grid">
+                <Setter Property="Background" Value="#FFFFFFFF" />
+                <Setter Property="Padding" Value="30,15" />
+            </Style>
+
             <Style x:Key="PageTitleStyle" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#3D3D3D" />
                 <Setter Property="FontSize" Value="40" />
@@ -46,7 +57,12 @@
             </Style>
             <Style x:Key="DahuH4" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#FFFFFF" />
-                <Setter Property="FontSize" Value="30" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+            <Style x:Key="DahuH4Dark" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#3D3D3D" />
+                <Setter Property="FontSize" Value="24" />
                 <Setter Property="FontWeight" Value="SemiBold"/>
             </Style>
             <Style x:Key="DahuH5" TargetType="TextBlock">
@@ -54,9 +70,13 @@
                 <Setter Property="FontSize" Value="20" />
                 <Setter Property="FontWeight" Value="SemiBold"/>
             </Style>
-            <Style x:Key="DahuText" TargetType="TextBlock">
+            <Style x:Key="DahuTextWhite" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#FFFFFF" />
-                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontSize" Value="17" />
+            </Style>
+            <Style x:Key="DahuTextDark" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#3D3D3D" />
+                <Setter Property="FontSize" Value="17" />
             </Style>
             <Style x:Key="InputText3Title" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#3D3D3D" />

@@ -21,32 +21,47 @@ namespace DahuUWP.Views.Components.Inputs
     {
         public DahuInputText3()
         {
-            DataContext = this;
             this.InitializeComponent();
+            (this.Content as FrameworkElement).DataContext = this;
         }
-
-        private string _inputHeader;
 
         public string InputHeader
         {
-            get
-            {
-                return _inputHeader;
-            }
-
-            set
-            {
-                _inputHeader = value;
-                TextBlockInputHeader.Visibility = Visibility.Visible;
-            }
+            get { return (string)GetValue(InputHeaderProperty); }
+            set { TextBlockInputHeader.Visibility = Visibility.Visible; SetValue(InputHeaderProperty, value); }
         }
+
+        public static readonly DependencyProperty InputHeaderProperty =
+            DependencyProperty.Register("InputHeader", typeof(string), typeof(DahuInputText3), new PropertyMetadata(null));
+
+
 
         public int InputWidth { get; set; }
 
-        public string InputPlaceholder { get; set; }
+        /// <summary>
+        /// InputPlaceholder
+        /// </summary>
+        public string InputPlaceholder
+        {
+            get { return (string)GetValue(InputPlaceholderProperty); }
+            set { SetValue(InputPlaceholderProperty, value); }
+        }
+
+        public static readonly DependencyProperty InputPlaceholderProperty =
+            DependencyProperty.Register("InputPlaceholder", typeof(string), typeof(DahuInputText3), new PropertyMetadata(null));
 
         public string InputScope { get; set; }
 
-        public string InputText { get; set; }
+        /// <summary>
+        /// TextInput
+        /// </summary>
+        public string TextValue
+        {
+            get { return (string)GetValue(TextValueProperty); }
+            set { SetValue(TextValueProperty, value); }
+        }
+
+        public static readonly DependencyProperty TextValueProperty =
+            DependencyProperty.Register("TextValue", typeof(string), typeof(DahuInputText3), new PropertyMetadata(null));
     }
 }

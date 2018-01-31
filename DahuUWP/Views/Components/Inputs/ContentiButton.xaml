@@ -24,7 +24,7 @@
             <Grid x:Name="ContentGridName" Visibility="Collapsed" Padding="24,3,24,0" >
                 <StackPanel>
                     <TextBlock x:Name="TitleName" x:Uid="ExperienceTextBlock" Foreground="#3D3D3D" FontSize="17" FontWeight="SemiBold"/>
-                    <TextBlock x:Name="ContentName" Text="{Binding Path=ContentValue, FallbackValue='Content'}" Foreground="#3D3D3D" FontSize="17"/>
+                    <TextBlock x:Name="ContentName" Text="{Binding Path=ContentValue, FallbackValue='Content'}" Style="{StaticResource DahuTextDark}"/>
                 </StackPanel>
             </Grid>
         </StackPanel>

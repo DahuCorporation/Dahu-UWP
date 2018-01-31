@@ -123,8 +123,14 @@
   <data name="CreateProjectLinkDahuSpecMenu.Text" xml:space="preserve">
     <value>Creer un projet</value>
   </data>
+  <data name="DahuButton3_AddSkill.Value" xml:space="preserve">
+    <value>Ajouter une compétence</value>
+  </data>
   <data name="DahuButton3_Connection.Value" xml:space="preserve">
     <value>Se connecter</value>
+  </data>
+  <data name="DahuButton3_SaveMainInformation.Value" xml:space="preserve">
+    <value>Sauvegarder les modifications</value>
   </data>
   <data name="DahuButton3_Search.Value" xml:space="preserve">
     <value>Rerchercher</value>
@@ -138,6 +144,27 @@
   <data name="DahuInput3_Mail.InputHeader" xml:space="preserve">
     <value>Adresse mail</value>
   </data>
+  <data name="DahuInput3_UserAddress.InputHeader" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="DahuInput3_UserAddress.InputPlaceholder" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="DahuInput3_UserBiography.InputHeader" xml:space="preserve">
+    <value>Biographie</value>
+  </data>
+  <data name="DahuInput3_UserBiography.InputPlaceholder" xml:space="preserve">
+    <value>Biographie</value>
+  </data>
+  <data name="DahuSpecSplitMenu_Parameters.Value" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="DahuSpecSplitMenu_PrincipalInformation.Value" xml:space="preserve">
+    <value>Information principal</value>
+  </data>
+  <data name="DahuSpecSplitMenu_Skill.Value" xml:space="preserve">
+    <value>Compétences</value>
+  </data>
   <data name="DiscoverLinkDahuSpecMenu.Text" xml:space="preserve">
     <value>Découvrir</value>
   </data>
@@ -146,6 +173,9 @@
   </data>
   <data name="ForgetPassword.Text" xml:space="preserve">
     <value>Mot de passe oublié ?</value>
+  </data>
+  <data name="GraylouButton_ProfilSettings.Value" xml:space="preserve">
+    <value>Editer le profil</value>
   </data>
   <data name="MailAdress.Text" xml:space="preserve">
     <value>Adresse mail</value>
@@ -165,8 +195,20 @@
   <data name="SignInButton.Value" xml:space="preserve">
     <value>Se connecter</value>
   </data>
+  <data name="TitleBlockAddSkills.Title" xml:space="preserve">
+    <value>Ajout d'une compétence</value>
+  </data>
   <data name="TitleBlockMainInformation.Title" xml:space="preserve">
     <value>Vos informations principales</value>
+  </data>
+  <data name="TitleBlockSkills.Title" xml:space="preserve">
+    <value>Vos compétences</value>
+  </data>
+  <data name="TitleBlock_Projects.Title" xml:space="preserve">
+    <value>Projets</value>
+  </data>
+  <data name="TitleBlock_Skills.Title" xml:space="preserve">
+    <value>Compétences</value>
   </data>
   <data name="TitleFindProject.Text" xml:space="preserve">
     <value>Trouver un projet</value>
@@ -185,5 +227,11 @@
   </data>
   <data name="UserNameInputText3.InputPlaceholder" xml:space="preserve">
     <value>Nom</value>
+  </data>
+  <data name="UserPassword.InputPlaceholder" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="UserRepeatedPassword.InputPlaceholder" xml:space="preserve">
+    <value>Répéter mot de passe</value>
   </data>
 </root>

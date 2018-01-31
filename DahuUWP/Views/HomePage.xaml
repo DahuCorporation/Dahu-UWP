@@ -40,7 +40,8 @@
                 </Grid.RowDefinitions>
 
                 <!--<TextBlock Text="{Binding Path=Prenom}"/>-->
-                <Component:TopBar x:Name="TopBar" Grid.Row="0" />
+                <!--Connected="{Binding Connected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
+                <Component:TopBar x:Name="TopBar" Grid.Row="0"  DataContext="{Binding HomePageVM, Source={StaticResource Locator}}"/>
                 <Frame x:Name="DahuBurgerFrame" Navigated="DahuBurgerFrame_Navigated" Grid.Row="1" Background="#EFEFEF">
                 </Frame>
             </Grid>

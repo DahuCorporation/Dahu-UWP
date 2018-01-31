@@ -6,16 +6,61 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
-    mc:Ignorable="d">
+    xmlns:Titles="using:DahuUWP.Views.Components.Titles"
+    xmlns:container="using:DahuUWP.Views.Components.Container"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    mc:Ignorable="d"
+     DataContext="{Binding PublicProfilVM, Source={StaticResource Locator}}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel>
-            <Inputs:GraylouButton Icon="settings-2" Value="Settings" Width="200"/>
-            <Inputs:GraylouButton Icon="alarm-clock" Value="Time"  Width="200"/>
-            <Inputs:ContentiButton Title="Developpement web" ContentValue="Depuis mon plus jeune age je m'interresse"/>
-            <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>
-            <Inputs:StarRating/>
-            <Inputs:DahuButtonOption ButtonBackground="#FFE98755"/>
-        </StackPanel>
-    </Grid>
+    <ScrollViewer>
+        <Grid Style="{StaticResource BodyGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1">
+                <Grid>
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Tapped">
+                            <Core:InvokeCommandAction Command="{Binding ProfilSettingsLinkCommand}"/>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                    <Inputs:GraylouButton x:Uid="GraylouButton_ProfilSettings"
+                                  Icon="settings-2"
+                                  Value="Profil settings"/>
+                </Grid>
+                <Grid Height="32"/>
+                <container:UserInfoBox UserFullName="{Binding UserFullName, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" UserBiography="{Binding UserBiography, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" Height="200"/>
+                <Grid Height="32"/>
+                <Grid Style="{StaticResource WhiteContentGrid}">
+                    <StackPanel>
+                        <Titles:TitleBlock x:Name="TitleBlock_Skills" x:Uid="TitleBlock_Skills" />
+                        <Grid Padding="0,15">
+                            <StackPanel VerticalAlignment="Top" Padding="0,0,10,0">
+                                <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>
+                                <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>
+                                <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+
+                </Grid>
+                <Grid Height="32"/>
+                <Grid Style="{StaticResource WhiteContentGrid}">
+                    <StackPanel>
+                        <Titles:TitleBlock x:Name="TitleBlock_Projects" x:Uid="TitleBlock_Projects" />
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="0" Padding="0,15">
+                            <StackPanel Orientation="Horizontal">
+                                <container:MediumProjectContainer ProjectName="Project Name" Description="Description" Margin="18,0,0,0"/>
+                                <container:MediumProjectContainer ProjectName="Project Name" Description="Description" Margin="18,0,0,0"/>
+                                <container:MediumProjectContainer ProjectName="Project Name" Description="Description" Margin="18,0,0,0"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>

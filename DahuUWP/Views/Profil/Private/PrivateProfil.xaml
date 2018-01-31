@@ -27,9 +27,25 @@
                 <ScrollViewer>
                     <!-- TODO: Creer ce menu en code, un peu comme le burger menu -->
                     <StackPanel>
-                        <DahuSpecSplitMenu:MenuButton Value="Information principal" Active="True"  Margin="0,0,0,10"/>
-                        <DahuSpecSplitMenu:MenuButton Value="Compétences" Active="False" Margin="0,0,0,10"/>
-                        <DahuSpecSplitMenu:MenuButton Value="Paramètres" Active="False"  Margin="0,0,0,10"/>
+                        <DahuSpecSplitMenu:MenuButton x:Name="DahuSpecSplitMenu_PrincipalInformation"
+                                                      x:Uid="DahuSpecSplitMenu_PrincipalInformation"
+                                                      Value="Principal information"
+                                                      Active="True" 
+                                                      Margin="0,0,0,10"
+                                                      Tapped="DahuSpecSplitMenu_PrincipalInformation_Tapped"
+                                                      />
+                        <DahuSpecSplitMenu:MenuButton x:Name="DahuSpecSplitMenu_Skill"
+                                                      x:Uid="DahuSpecSplitMenu_Skill"
+                                                      Value="Competence"
+                                                      Active="False"
+                                                      Margin="0,0,0,10"
+                                                      Tapped="DahuSpecSplitMenu_Skill_Tapped"/>
+                        <DahuSpecSplitMenu:MenuButton x:Name="DahuSpecSplitMenu_Parameters"
+                                                      x:Uid="DahuSpecSplitMenu_Parameters"
+                                                      Value="Parameters"
+                                                      Active="False"
+                                                      Margin="0,0,0,10"
+                                                      Tapped="DahuSpecSplitMenu_Parameters_Tapped"/>
                     </StackPanel>
                 </ScrollViewer>
 
