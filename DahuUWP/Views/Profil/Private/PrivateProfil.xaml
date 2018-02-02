@@ -3,8 +3,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DahuUWP.Views.Profil.Private"
- xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:Titles="using:DahuUWP.Views.Components.Titles"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
     xmlns:DahuSpecSplitMenu="using:DahuUWP.Views.Components.DahuSpecialSplitMenu"
     mc:Ignorable="d">
 
@@ -27,6 +29,9 @@
                 <ScrollViewer>
                     <!-- TODO: Creer ce menu en code, un peu comme le burger menu -->
                     <StackPanel>
+                        <Inputs:GraylouButton x:Uid="GraylouButton_BackToPublicProfil" Value="Back to public profil" HorizontalAlignment="Stretch" Tapped="GraylouButton_Tapped" Margin="0,0,0,16" Icon="return" />
+                        <TextBlock x:Name="TextBlock_Profil" x:Uid="TextBlock_Profil" Text="Profil" Style="{StaticResource PageTitle}" Margin="0,0,0,10"/>
+
                         <DahuSpecSplitMenu:MenuButton x:Name="DahuSpecSplitMenu_PrincipalInformation"
                                                       x:Uid="DahuSpecSplitMenu_PrincipalInformation"
                                                       Value="Principal information"

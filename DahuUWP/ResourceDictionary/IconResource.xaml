@@ -5,5 +5,6 @@
     <x:String x:Key="settings-2">ms-appx:///Assets/Dahu-Icon/settings-2.png</x:String>
     <x:String x:Key="star-empty">ms-appx:///Assets/Dahu-Icon/star-empty.png</x:String>
     <x:String x:Key="star-full">ms-appx:///Assets/Dahu-Icon/star-full.png</x:String>
-    <x:String x:Key="Incorrect mail address.">L’e-mail entré ne correspond à aucun compte.</x:String>
+    <x:String x:Key="return">ms-appx:///Assets/Dahu-Icon/return.png</x:String>
+    <!--<x:String x:Key="Incorrect mail address.">L’e-mail entré ne correspond à aucun compte.</x:String>-->
 </ResourceDictionary>

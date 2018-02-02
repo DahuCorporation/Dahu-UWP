@@ -1,4 +1,5 @@
-﻿using DahuUWP.Views.Profil.Private;
+﻿using DahuUWP.Models;
+using DahuUWP.Views.Profil.Private;
 using DahuUWP.Views.Profil.Public;
 using DahuUWP.Views.Search;
 using Microsoft.Toolkit.Uwp.UI.Controls;
@@ -30,6 +31,7 @@ namespace DahuUWP.Views
         public HomePage()
         {
             this.InitializeComponent();
+            AppStaticInfo.Account = new Account();
             DahuFrame = DahuBurgerFrame;
             DahuBurgerMenu.ItemsSource = MenuItem.GetMainItems();
             DahuBurgerMenu.OptionsItemsSource = MenuItem.GetOptionsItems();

@@ -174,6 +174,9 @@
   <data name="ForgetPassword.Text" xml:space="preserve">
     <value>Mot de passe oublié ?</value>
   </data>
+  <data name="GraylouButton_BackToPublicProfil.Value" xml:space="preserve">
+    <value>Retour au profil public</value>
+  </data>
   <data name="GraylouButton_ProfilSettings.Value" xml:space="preserve">
     <value>Editer le profil</value>
   </data>
@@ -194,6 +197,9 @@
   </data>
   <data name="SignInButton.Value" xml:space="preserve">
     <value>Se connecter</value>
+  </data>
+  <data name="TextBlock_Profil.Text" xml:space="preserve">
+    <value>Profil</value>
   </data>
   <data name="TitleBlockAddSkills.Title" xml:space="preserve">
     <value>Ajout d'une compétence</value>

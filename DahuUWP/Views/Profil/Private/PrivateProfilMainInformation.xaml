@@ -12,11 +12,10 @@
     mc:Ignorable="d"
     DataContext="{Binding PrivateProfilMainInformationVM, Source={StaticResource Locator}}">
     <ScrollViewer>
-        <Grid  VerticalAlignment="Top" Background="#FFFFFF">
-            <Rectangle Height="8" Fill="#FF3D3D3D" VerticalAlignment="Top" />
+        <Grid  VerticalAlignment="Top" Background="#FFFFFF" Style="{StaticResource WhiteContentGrid}">
             <StackPanel>
                 <Titles:TitleBlock x:Name="TitleBlockMainInformation" x:Uid="TitleBlockMainInformation"/>
-                <Grid Padding="30,0,30,50">
+                <Grid Padding="30,15">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*" />

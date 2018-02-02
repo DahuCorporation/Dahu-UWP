@@ -8,15 +8,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
 
     DataContext="{Binding ConnectionVM, Source={StaticResource Locator}}">
-
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:EventTriggerBehavior.Actions>
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedCommand}" />
+            </Core:EventTriggerBehavior.Actions>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
     <Grid Background="#FFEFEFEF">
         <ScrollViewer>
             <Grid>
-
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,20">
 
                     <!--<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">

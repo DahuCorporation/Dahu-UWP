@@ -109,7 +109,7 @@ namespace DahuUWP.Models
                 {
                     //success
                     case 200:
-                        UserManager userManager = (UserManager)ViewModelLocator.CurrentViewModel.dataService.GetUserManager();
+                        UserManager userManager = new UserManager();
                         AppStaticInfo.Account.Uuid = (string)resp["data"]["uuid"];
                         AppStaticInfo.Account.Token = (string)resp["data"]["_token"];
 
@@ -124,11 +124,6 @@ namespace DahuUWP.Models
                         return true;
                     case 400:
                         AppGeneral.UserInterfaceStatusDico[(string)resp["message"]].Display();
-                        //List<string> LocalApiToUserMsg = new List<string>
-                        //{
-                        //    (string)resp["message"]
-                        //};
-                        //AppGeneral.ApiToUserMsg = LocalApiToUserMsg;
                         return false;
                 }
                 return false;

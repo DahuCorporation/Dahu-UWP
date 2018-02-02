@@ -24,7 +24,7 @@
         </Grid>
         <Grid Grid.Column="1" Padding="30,15">
             <StackPanel VerticalAlignment="Top">
-                <TextBlock Text="{Binding Path=UserFullName, FallbackValue='Name'}" Foreground="#3D3D3D" FontSize="28" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Path=UserFullName, FallbackValue='Name'}" Foreground="#3D3D3D" FontSize="28" FontWeight="SemiBold" />
                 <TextBlock  Text="{Binding Path=UserBiography, FallbackValue='Bio'}"
                             TextWrapping="Wrap" Foreground="#3D3D3D" FontSize="16" FontWeight="Normal"/>
             </StackPanel>

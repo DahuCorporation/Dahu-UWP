@@ -28,7 +28,7 @@ namespace DahuUWP.ViewModels.Profil.Public
                 { "_token", AppStaticInfo.Account.Token }
             };
             User user = userManager.Charge(userDicoCharge);
-            UserFullName = user.FirstName + user.LastName;
+            UserFullName = user.FirstName + " " + user.LastName;
             UserBiography = user.Biography;
         }
 

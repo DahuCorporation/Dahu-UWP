@@ -14,12 +14,11 @@
 
     <ScrollViewer>
         <StackPanel>
-            <Grid  VerticalAlignment="Top" Background="#FFFFFF">
-                <Rectangle Height="8" Fill="#FF3D3D3D" VerticalAlignment="Top" />
+            <Grid  VerticalAlignment="Top" Background="#FFFFFF" Style="{StaticResource WhiteContentGrid}">
                 <StackPanel>
                     <Titles:TitleBlock x:Name="TitleBlockAddSkills" x:Uid="TitleBlockAddSkills"/>
 
-                    <Grid Padding="30,0,30,50">
+                    <Grid Padding="30,15">
                         <StackPanel VerticalAlignment="Top" Padding="0,0,10,0">
                             <Inputs:DahuInputText3 x:Name="DahuInput3_SkillName"
                                                x:Uid="DahuInput3_SkillName"
@@ -45,10 +44,10 @@
                     </Grid>
                 </StackPanel>
             </Grid>
-            <Grid VerticalAlignment="Top" Background="#FFFFFF" Margin="0,16,0,0">
+            <Grid VerticalAlignment="Top" Background="#FFFFFF" Margin="0,16,0,0" Style="{StaticResource WhiteContentGrid}">
                 <StackPanel>
                     <Titles:TitleBlock x:Name="TitleBlockSkills" x:Uid="TitleBlockSkills"/>
-                    <Grid Padding="30,0,30,50">
+                    <Grid Padding="30,15">
                         <StackPanel VerticalAlignment="Top" Padding="0,0,10,0">
                             <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>
                             <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>

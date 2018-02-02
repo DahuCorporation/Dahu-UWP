@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Windows.UI.Xaml.Controls;
 
 namespace DahuUWP.ViewModels
 {
@@ -19,59 +20,21 @@ namespace DahuUWP.ViewModels
 
         public ICommand ConnectionCommand { get; set; }
 
+        public ICommand OnPageLoadedCommand { get; private set; }
+
         //http://www.java2s.com/Tutorials/CSharp/System.Reflection/FieldInfo/C_FieldInfo_GetValue.htm
         public ConnectionViewModel(IDataService service)
         {
-            Mail = "titi@gmail.fr";
-            //Type thisType = this.GetType();
-            //MethodInfo theMethod = thisType.GetMethod("Error", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-            //object titi = "efeo";
-            //object[] tata = new object[1];
-
-            //tata[0] = titi;
-
-            //theMethod.Invoke(this, tata);
-
-
-
-            //fonctionnel!!!!!!!!!!!!!!!
-            //FieldInfo field_info = this.GetType().GetField("_error",
-            //BindingFlags.Instance |
-            //BindingFlags.NonPublic |
-            //BindingFlags.Public);
-            //object obj = "Je test le gros test";
-            //field_info.SetValue(this, obj);
-
-            //   FieldInfo field_info = this.GetType().GetField("_error",
-            //BindingFlags.Instance |
-            //BindingFlags.NonPublic |
-            //BindingFlags.Public);
-            //   object obj = "Je test le gros test";
-            //   object test = this;
-            //   field_info.SetValue(test, obj);
-            //   string toto = _error;
-
-
-
-
-
-
-
             dataService = service;
             IModelManager projectManager = (IModelManager)dataService.GetProjectManager();
             ConnectionCommand = new RelayCommand(Connection);
+            OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
             UserAccount = new Account();
+        }
+
+        private async void OnPageLoaded()
+        {
             RecoveringLastUser();
-            //TemporaryAppData tempAppData = new TemporaryAppData();
-            //string userData = tempAppData.Read("UserData").Result;
-
-            //// if user already connected with a email
-            //if (!String.IsNullOrEmpty(userData))
-            //{
-            //    userData = "gros kk";
-            //}
-            //tempAppData.Write("UserData", "thomasoi@hotmail.fr");
-
         }
 
         public Account UserAccount { get; set; }
@@ -124,7 +87,7 @@ namespace DahuUWP.ViewModels
                     password = loginCredential.Password
                 };
                 accounDataService.Connect(connectionInfo);
-                // TODO rediriger vers la page d'accueil
+                ConnectionSuccessful();
             }
             //Stay on connection page
         }
@@ -171,16 +134,21 @@ namespace DahuUWP.ViewModels
                 var vault = new Windows.Security.Credentials.PasswordVault();
                 vault.Add(new Windows.Security.Credentials.PasswordCredential(
                     resourceName, UserAccount.Mail, UserAccount.Password));
-                // Reset to empty for the security
-                UserAccount.Password = "";
-                HomePage.DahuFrame.Navigate(typeof(Discover));
-                // Permet de changer la top bar en tant que connecté
-                ((HomePageViewModel)ViewModelLocator.HomePageViewModel).Connected(true);
+                ConnectionSuccessful();
             }
             else
             {
 
             }
+        }
+
+        private void ConnectionSuccessful()
+        {
+            // Reset to empty for the security
+            UserAccount.Password = "";
+            HomePage.DahuFrame.Navigate(typeof(Discover));
+            // Permet de changer la top bar en tant que connecté
+            ((HomePageViewModel)ViewModelLocator.HomePageViewModel).Connected(true);
         }
 
         /// <summary>

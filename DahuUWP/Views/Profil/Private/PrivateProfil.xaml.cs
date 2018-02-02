@@ -1,4 +1,5 @@
 ﻿using DahuUWP.Views.Components.DahuSpecialSplitMenu;
+using DahuUWP.Views.Profil.Public;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -63,6 +64,11 @@ namespace DahuUWP.Views.Profil.Private
         {
             ProfilSpecMenuFrame.Navigate(typeof(PrivateProfilMainInformation));
             ActiveButton(sender);
+        }
+
+        private void GraylouButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            HomePage.DahuFrame.Navigate(typeof(PublicProfil));
         }
     }
 }

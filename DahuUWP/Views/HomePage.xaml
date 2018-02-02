@@ -46,7 +46,7 @@
                 </Frame>
             </Grid>
         </controls:HamburgerMenu>
-        <Popups:Toasts DahuNotification="{Binding Notification, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,40,20,20" />
+        <Popups:Toasts DahuNotification="{Binding Notification, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,60,20,20" />
 
     </Grid>
 </Page>
