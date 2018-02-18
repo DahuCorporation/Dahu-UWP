@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="DahuUWP.Views.Project.Managing.ManageProject"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DahuUWP.Views.Project.Managing"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:inputs="using:DahuUWP.Views.Components.Inputs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <Grid Style="{StaticResource BodyGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1">
+                <Grid>
+
+                    <inputs:GraylouButton x:Uid="GraylouButton_EditProject"
+                                          Icon="settings-2"
+                                          Value="Project settings" Tapped="GraylouButton_Tapped"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

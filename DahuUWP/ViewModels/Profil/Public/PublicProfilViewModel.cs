@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,12 +18,18 @@ namespace DahuUWP.ViewModels.Profil.Public
     {
         public ICommand ProfilSettingsLinkCommand { get; set; }
 
+        public ICommand OnPageLoadedCommand { get; private set; }
+
         public PublicProfilViewModel(IDataService service)
         {
             dataService = service;
             ProfilSettingsLinkCommand = new RelayCommand(ProfilSettingsLink);
-            UserManager userManager = (UserManager)dataService.GetUserManager();
+            OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
+        }
 
+        private async void OnPageLoaded()
+        {
+            UserManager userManager = (UserManager)dataService.GetUserManager();
             Dictionary<string, object> userDicoCharge = new Dictionary<string, object>
             {
                 { "_token", AppStaticInfo.Account.Token }
@@ -32,9 +39,34 @@ namespace DahuUWP.ViewModels.Profil.Public
             UserBiography = user.Biography;
         }
 
-        public string UserFullName { get; set; }
+        private string _userFullName;
+        public string UserFullName
+        {
+            get { return _userFullName; }
+            set
+            {
+                NotifyPropertyChanged(ref _userFullName, value);
+            }
+        }
 
-        public string UserBiography { get; set; }
+        private string _userBiography;
+        public string UserBiography
+        {
+            get { return _userBiography; }
+            set
+            {
+                NotifyPropertyChanged(ref _userBiography, value);
+            }
+        }
+
+        private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
+        {
+            if (object.Equals(variable, valeur)) return false;
+
+            variable = valeur;
+            RaisePropertyChanged(nomPropriete);
+            return true;
+        }
 
         private void ProfilSettingsLink()
         {

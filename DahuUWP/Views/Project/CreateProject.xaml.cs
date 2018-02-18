@@ -15,14 +15,14 @@ using Windows.UI.Xaml.Navigation;
 
 // Pour plus d'informations sur le modèle d'élément Page vierge, consultez la page https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace DahuUWP.Views
+namespace DahuUWP.Views.Project
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class CreateNewProject : Page
+    public sealed partial class CreateProject : Page
     {
-        public CreateNewProject()
+        public CreateProject()
         {
             this.InitializeComponent();
         }

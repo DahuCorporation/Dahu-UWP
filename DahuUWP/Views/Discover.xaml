@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DahuUWP.Views"
     xmlns:Components="using:DahuUWP.Views.Components"
+    xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
+    xmlns:popups="using:DahuUWP.Views.Components.Popups"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:container="using:DahuUWP.Views.Components.Container"
@@ -12,28 +14,43 @@
 
     <Grid Background="#FFEFEFEF">
         <ScrollViewer>
-            <StackPanel>
-                <Components:DahuSpecMenu x:Name="DahuSpecMenu"/>
-                <Grid Margin="0,18,0,0">
-                    <Grid.ColumnDefinitions>
-                    </Grid.ColumnDefinitions>
-                
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="0">
-                        <ItemsControl Name="ProjectCarousel" ItemsSource="{Binding Projects}" >
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <container:MediumProjectContainer ProjectName="{Binding Name}" Description="{Binding Description}" Margin="18,0,0,0"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
-                </Grid>
-            </StackPanel>
+            <Grid>
+                <StackPanel>
+
+
+                    <Components:DahuSpecMenu x:Name="DahuSpecMenu"/>
+                    <Grid Margin="0,18,0,0">
+                        <Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions>
+
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="0">
+                            <ItemsControl Name="ProjectCarousel" ItemsSource="{Binding Projects}" >
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <container:MediumProjectContainer ProjectName="{Binding Name}" Description="{Binding Description}" Margin="18,0,0,0"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                    <Inputs:DahuInputText3 OnAction="{Binding Tet.OnAction, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  OnActionObj="{Binding OnActionString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock >
+                        <TextBlock.Inlines>
+                            <Run FontWeight="Bold" FontSize="14" Text="This is WPF TextBlock Example. " />
+                            <Run FontStyle="Italic" Foreground="Red" Text="This is red text. " />
+                        </TextBlock.Inlines>
+                    </TextBlock>
+                    <TextBlock>
+      Hello <Bold>my</Bold> faithful <Underline>computer</Underline>.<Italic>You rock!</Italic>
+                    </TextBlock>
+                </StackPanel>
+
+            </Grid>
         </ScrollViewer>
     </Grid>
 </Page>

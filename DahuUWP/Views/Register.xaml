@@ -36,8 +36,8 @@
                                        InputWidth="500"
                                        InputPlaceholder="Birthdate"
                                        TextValue="{Binding UserBirthdate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DatePicker Header="Select Date"/>
-                <ListBox x:Name="FontsList" Height="44" Width="500"  ItemsSource="{x:Bind fonts}" DisplayMemberPath="Source"/>
+                <!--<DatePicker Header="Select Date"/>-->
+                <!--<ListBox x:Name="FontsList" Height="44" Width="500"  ItemsSource="{x:Bind fonts}" DisplayMemberPath="Source"/>-->
                 <Inputs:DahuInputText1 x:Name="UserPassword"
                                        x:Uid="UserPassword"
                                        InputWidth="500"

@@ -4,14 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DahuUWP.Views"
     xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
-    xmlns:Popups="using:DahuUWP.Views.Components.Popups"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:popups="using:DahuUWP.Views.Components.Popups"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-
     DataContext="{Binding ConnectionVM, Source={StaticResource Locator}}">
     <Interactivity:Interaction.Behaviors>
         <Core:EventTriggerBehavior EventName="Loaded">
@@ -68,10 +68,17 @@
 
                         </Inputs:DahuButton3>
                     </Grid>
-
                 </StackPanel>
-
+                <popups:Dialog OnAction="{Binding DialogRecoverUser.OnAction}" Visibility="{Binding DialogRecoverUser.Visibility}"/>
             </Grid>
         </ScrollViewer>
+        <controls:Loading x:Name="LoadingControl" IsLoading="{Binding IsBusy}" Background="Black" Opacity="0.5">
+            <StackPanel Orientation="Horizontal" Padding="12">
+                <Grid Margin="0,0,8,0">
+                    <ProgressRing IsActive="True" Foreground="Blue" />
+                </Grid>
+                <TextBlock Text="It's ok, we are working on it :)" Foreground="White" VerticalAlignment="Center" />
+            </StackPanel>
+        </controls:Loading>
     </Grid>
 </Page>

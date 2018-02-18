@@ -25,6 +25,32 @@ namespace DahuUWP.Views.Components.Inputs
             (this.Content as FrameworkElement).DataContext = this;
         }
 
+        public object OnActionObj
+        {
+            get { return (object)GetValue(OnActionObjProperty); }
+            set { SetValue(OnActionObjProperty, value); }
+        }
+
+        public static readonly DependencyProperty OnActionObjProperty =
+            DependencyProperty.Register("OnActionObj", typeof(object), typeof(DahuInputText3), new PropertyMetadata(null));
+
+        //https://stackoverflow.com/questions/7367152/dynamically-assign-method-method-as-variable
+        public Action<bool> OnAction
+        {
+            get { return (Action<bool>)GetValue(OnActionProperty); }
+            set { SetValue(OnActionProperty, value); }
+        }
+
+        public static readonly DependencyProperty OnActionProperty =
+            DependencyProperty.Register("OnAction", typeof(Action<bool>), typeof(DahuInputText3), new PropertyMetadata(null));
+
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            string titi = "qfefza";
+            object tita = OnActionObj;
+            OnAction(false);
+        }
+
         public string InputHeader
         {
             get { return (string)GetValue(InputHeaderProperty); }
@@ -63,5 +89,6 @@ namespace DahuUWP.Views.Components.Inputs
 
         public static readonly DependencyProperty TextValueProperty =
             DependencyProperty.Register("TextValue", typeof(string), typeof(DahuInputText3), new PropertyMetadata(null));
+
     }
 }

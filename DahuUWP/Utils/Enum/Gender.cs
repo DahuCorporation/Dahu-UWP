@@ -36,11 +36,11 @@ namespace DahuUWP.Utils.Enum
             switch (gender)
             {
                 case Gender.Sir:
-                    return "Mr";
+                    return "mr";
                 case Gender.Miss:
-                    return "Mme";
+                    return "mme";
                 default:
-                    return "Mr";
+                    return "mr";
             }
         }
     }

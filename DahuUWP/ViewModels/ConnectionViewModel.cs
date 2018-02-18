@@ -4,6 +4,7 @@ using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using DahuUWP.Utils;
 using DahuUWP.Views;
+using DahuUWP.Views.Components.Popups;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -25,16 +26,33 @@ namespace DahuUWP.ViewModels
         //http://www.java2s.com/Tutorials/CSharp/System.Reflection/FieldInfo/C_FieldInfo_GetValue.htm
         public ConnectionViewModel(IDataService service)
         {
+            IsBusy = false;
             dataService = service;
             IModelManager projectManager = (IModelManager)dataService.GetProjectManager();
             ConnectionCommand = new RelayCommand(Connection);
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
             UserAccount = new Account();
+            DialogRecoverUser = new Dialog
+            {
+                OnAction = ActionDialogRecoverUser,
+                Visibility = Windows.UI.Xaml.Visibility.Visible
+            };
         }
 
         private async void OnPageLoaded()
         {
             RecoveringLastUser();
+            
+        }
+
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                NotifyPropertyChanged(ref _isBusy, value);
+            }
         }
 
         public Account UserAccount { get; set; }
@@ -48,6 +66,15 @@ namespace DahuUWP.ViewModels
             }
         }
 
+        private Dialog _dialogRecoverUser;
+        public Dialog DialogRecoverUser
+        {
+            get { return _dialogRecoverUser; }
+            set
+            {
+                NotifyPropertyChanged(ref _dialogRecoverUser, value);
+            }
+        }
 
 
         private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
@@ -58,16 +85,18 @@ namespace DahuUWP.ViewModels
             RaisePropertyChanged(nomPropriete);
             return true;
         }
-
-        private bool NotifyPropertyChanged2(ref string variable, string valeur, string nomPropriete)
-        {
-            if (object.Equals(variable, valeur)) return false;
-
-            variable = valeur;
-            RaisePropertyChanged(nomPropriete);
-            return true;
-        }
         
+        /// <summary>
+        /// Is the result of the shown dialog that ask user if he wants to be connected with last user
+        /// res => true means yes, res => false means no
+        /// </summary>
+        /// <param name="res"></param>
+        public void ActionDialogRecoverUser(bool res)
+        {
+            DialogRecoverUser.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            if (res)
+                RecoveringLastUser();
+        }
 
         /// <summary>
         /// Connect the user how wanted to keep connection after closing app
@@ -86,8 +115,8 @@ namespace DahuUWP.ViewModels
                     mail = loginCredential.UserName,
                     password = loginCredential.Password
                 };
-                accounDataService.Connect(connectionInfo);
-                ConnectionSuccessful();
+                if (accounDataService.Connect(connectionInfo))
+                    ConnectionSuccessful();
             }
             //Stay on connection page
         }
@@ -124,6 +153,7 @@ namespace DahuUWP.ViewModels
         {
             if (!ConnectionFieldsVerif())
                 return;
+            IsBusy = true;
             AccountDataService accounDataService = new AccountDataService();
 
             AppStaticInfo.Account = UserAccount;
@@ -146,6 +176,7 @@ namespace DahuUWP.ViewModels
         {
             // Reset to empty for the security
             UserAccount.Password = "";
+            IsBusy = false;
             HomePage.DahuFrame.Navigate(typeof(Discover));
             // Permet de changer la top bar en tant que connecté
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).Connected(true);

@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Grid HorizontalAlignment="Stretch" Margin="0,0,0,15"   >
+    <Grid HorizontalAlignment="Stretch" Margin="0,0,0,15" Tapped="Grid_Tapped"   >
         <StackPanel>
             <TextBlock x:Name="TextBlockInputHeader"  Text="{Binding Path=InputHeader}" Visibility="Collapsed" Style="{StaticResource InputText3Title}" Foreground="Black" />
             <Border CornerRadius="5"

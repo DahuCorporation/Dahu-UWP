@@ -1,6 +1,8 @@
 ﻿using DahuUWP.Models;
 using DahuUWP.Views.Profil.Private;
 using DahuUWP.Views.Profil.Public;
+using DahuUWP.Views.Project;
+using DahuUWP.Views.Project.Managing;
 using DahuUWP.Views.Search;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;
@@ -78,8 +80,8 @@ namespace DahuUWP.Views
         {
             var items = new List<MenuItem>();
             items.Add(new MenuItem() { Icon = Symbol.Accept, Name = "Découvrir", PageType = typeof(Discover) });
-            items.Add(new MenuItem() { Icon = Symbol.Send, Name = "Mes projet", PageType = typeof(MainResearch) });
-            items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "Creer un nouveau projet", PageType = typeof(PublicProfil) });
+            items.Add(new MenuItem() { Icon = Symbol.Send, Name = "Mes projet", PageType = typeof(ManageProject) });
+            items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "Creer un nouveau projet", PageType = typeof(CreateProject) });
             items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "Paramètre", PageType = typeof(PrivateProfil) });
             return items;
         }
@@ -87,7 +89,7 @@ namespace DahuUWP.Views
         public static List<MenuItem> GetOptionsItems()
         {
             var items = new List<MenuItem>();
-            items.Add(new MenuItem() { Icon = Symbol.Setting, Name = "OptionItem1", PageType = typeof(CreateNewProject) });
+            items.Add(new MenuItem() { Icon = Symbol.Setting, Name = "OptionItem1", PageType = typeof(CreateProject) });
             return items;
         }
 

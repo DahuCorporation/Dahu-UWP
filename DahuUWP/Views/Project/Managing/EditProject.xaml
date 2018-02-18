@@ -1,13 +1,13 @@
 ﻿<Page
-    x:Class="DahuUWP.Views.Profil.Private.PrivateProfil"
+    x:Class="DahuUWP.Views.Project.Managing.EditProject"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:DahuUWP.Views.Profil.Private"
+    xmlns:local="using:DahuUWP.Views.Project.Managing"
+    xmlns:inputs="using:DahuUWP.Views.Components.Inputs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:Titles="using:DahuUWP.Views.Components.Titles"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
     xmlns:DahuSpecSplitMenu="using:DahuUWP.Views.Components.DahuSpecialSplitMenu"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
     <Grid Style="{StaticResource BodyGrid}">
@@ -29,33 +29,33 @@
                 <ScrollViewer>
                     <!-- TODO: Creer ce menu en code, un peu comme le burger menu -->
                     <StackPanel>
-                        <Inputs:GraylouButton x:Uid="GraylouButton_BackToPublicProfil" Value="Back to public profil" HorizontalAlignment="Stretch" Tapped="GraylouButton_Tapped" Margin="0,0,0,16" Icon="return" />
-                        <TextBlock x:Name="TextBlock_Profil" x:Uid="TextBlock_Profil" Text="Profil" Style="{StaticResource PageTitle}" Margin="0,0,0,10"/>
+                        <Inputs:GraylouButton x:Uid="GraylouButton_BackToManageProject" Value="Back to project" HorizontalAlignment="Stretch" Tapped="GraylouButton_BackToManageProject_Tapped" Margin="0,0,0,16" Icon="return" />
+                        <TextBlock x:Name="TextBlock_EditProject" x:Uid="TextBlock_EditProject" Text="Project Management" Style="{StaticResource PageTitle}" Margin="0,0,0,10"/>
 
-                        <DahuSpecSplitMenu:MenuButton x:Name="DahuSpecSplitMenu_PrincipalInformation"
-                                                      x:Uid="DahuSpecSplitMenu_PrincipalInformation"
+                        <DahuSpecSplitMenu:MenuButton x:Name="DahuSpecSplitMenu_EditProjectPrincipalInformation"
+                                                      x:Uid="DahuSpecSplitMenu_EditProjectPrincipalInformation"
                                                       Value="Principal information"
                                                       Active="True" 
                                                       Margin="0,0,0,10"
-                                                      Tapped="DahuSpecSplitMenu_PrincipalInformation_Tapped"
+                                                      Tapped="DahuSpecSplitMenu_EditProjectPrincipalInformation_tapped"
                                                       />
-                        <DahuSpecSplitMenu:MenuButton x:Name="DahuSpecSplitMenu_Skill"
-                                                      x:Uid="DahuSpecSplitMenu_Skill"
-                                                      Value="Competence"
+                        <DahuSpecSplitMenu:MenuButton x:Name="DahuSpecSplitMenu_EditProjectMembers"
+                                                      x:Uid="DahuSpecSplitMenu_EditProjectMembers"
+                                                      Value="Members"
                                                       Active="False"
                                                       Margin="0,0,0,10"
-                                                      Tapped="DahuSpecSplitMenu_Skill_Tapped"/>
-                        <DahuSpecSplitMenu:MenuButton x:Name="DahuSpecSplitMenu_Parameters"
-                                                      x:Uid="DahuSpecSplitMenu_Parameters"
+                                                      Tapped="DahuSpecSplitMenu_EditProjectMembers_Tapped"/>
+                        <DahuSpecSplitMenu:MenuButton x:Name="DahuSpecSplitMenu_EditProjectParameters"
+                                                      x:Uid="DahuSpecSplitMenu_EditProjectParameters"
                                                       Value="Parameters"
                                                       Active="False"
                                                       Margin="0,0,0,10"
-                                                      Tapped="DahuSpecSplitMenu_Parameters_Tapped"/>
+                                                      Tapped="DahuSpecSplitMenu_EditProjectParameters_Tapped"/>
                     </StackPanel>
                 </ScrollViewer>
 
             </SplitView.Pane>
-            <Frame x:Name="ProfilSpecMenuFrame" Navigated="ProfilSpecMenuFrame_Navigated" Padding="15,0,0,0" >
+            <Frame x:Name="ProfilSpecMenuFrame"  Padding="15,0,0,0" >
             </Frame>
         </SplitView>
     </Grid>

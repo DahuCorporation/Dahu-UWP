@@ -5,14 +5,26 @@
     xmlns:local="using:DahuUWP.Views.Components.Inputs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     d:DesignHeight="40">
 
-    <Grid Height="40">
-        <Border CornerRadius="5">
-            <Grid Height="40" Padding="40,0,40,0" Background="#5595E9">
-                <TextBlock Text="{Binding Path=Value, FallbackValue='Button1'}" Foreground="#ffffff" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Grid>
-        </Border>
+    <Grid>
+        <!--<controls:DropShadowPanel BlurRadius="5"
+                                      ShadowOpacity="0.8"
+                                      Color="Black">
+
+        </controls:DropShadowPanel>-->
+        <Grid Height="40" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" >
+
+            <Border CornerRadius="5">
+                <Grid Height="40" Padding="40,0,40,0" Background="{Binding Path=BgColor, FallbackValue='#5595E9'}">
+                    <TextBlock Text="{Binding Path=Value, FallbackValue='Button1'}" Foreground="#ffffff" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+        </Grid>
     </Grid>
 </UserControl>

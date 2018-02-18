@@ -123,11 +123,20 @@
   <data name="CreateProjectLinkDahuSpecMenu.Text" xml:space="preserve">
     <value>Creer un projet</value>
   </data>
+  <data name="CreateProjectTitle.Text" xml:space="preserve">
+    <value>Creation de projet</value>
+  </data>
+  <data name="DahuButton3_AddMember.Value" xml:space="preserve">
+    <value>Envoyer l'invitaion</value>
+  </data>
   <data name="DahuButton3_AddSkill.Value" xml:space="preserve">
     <value>Ajouter une compétence</value>
   </data>
   <data name="DahuButton3_Connection.Value" xml:space="preserve">
     <value>Se connecter</value>
+  </data>
+  <data name="DahuButton3_CreateProject.Value" xml:space="preserve">
+    <value>Creer votre projet</value>
   </data>
   <data name="DahuButton3_SaveMainInformation.Value" xml:space="preserve">
     <value>Sauvegarder les modifications</value>
@@ -141,8 +150,20 @@
   <data name="DahuInput1_Password.InputPlaceholder" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
+  <data name="DahuInput3_InvitationMessage.InputHeader" xml:space="preserve">
+    <value>Message de l'invitation</value>
+  </data>
+  <data name="DahuInput3_InvitationMessage.InputPlaceholder" xml:space="preserve">
+    <value>Message de l'invitation</value>
+  </data>
   <data name="DahuInput3_Mail.InputHeader" xml:space="preserve">
     <value>Adresse mail</value>
+  </data>
+  <data name="DahuInput3_MemberName.InputHeader" xml:space="preserve">
+    <value>Nom du membre</value>
+  </data>
+  <data name="DahuInput3_MemberName.InputPlaceholder" xml:space="preserve">
+    <value>Nom du membre</value>
   </data>
   <data name="DahuInput3_UserAddress.InputHeader" xml:space="preserve">
     <value>Adresse</value>
@@ -155,6 +176,12 @@
   </data>
   <data name="DahuInput3_UserBiography.InputPlaceholder" xml:space="preserve">
     <value>Biographie</value>
+  </data>
+  <data name="DahuSpecSplitMenu_EditProjectMembers.Value" xml:space="preserve">
+    <value>Membres</value>
+  </data>
+  <data name="DahuSpecSplitMenu_EditProjectParameters.Value" xml:space="preserve">
+    <value>Paramètres</value>
   </data>
   <data name="DahuSpecSplitMenu_Parameters.Value" xml:space="preserve">
     <value>Paramètres</value>
@@ -174,11 +201,20 @@
   <data name="ForgetPassword.Text" xml:space="preserve">
     <value>Mot de passe oublié ?</value>
   </data>
+  <data name="GraylouButton_BackToManageProject.Value" xml:space="preserve">
+    <value>Retour au projet</value>
+  </data>
   <data name="GraylouButton_BackToPublicProfil.Value" xml:space="preserve">
     <value>Retour au profil public</value>
   </data>
+  <data name="GraylouButton_EditProject.Value" xml:space="preserve">
+    <value>Editer le projet</value>
+  </data>
   <data name="GraylouButton_ProfilSettings.Value" xml:space="preserve">
     <value>Editer le profil</value>
+  </data>
+  <data name="GraylouButton_ReturnManageProject.Value" xml:space="preserve">
+    <value>Retour à la gestion du projet</value>
   </data>
   <data name="MailAdress.Text" xml:space="preserve">
     <value>Adresse mail</value>
@@ -198,6 +234,9 @@
   <data name="SignInButton.Value" xml:space="preserve">
     <value>Se connecter</value>
   </data>
+  <data name="TextBlock_EditProject.Text" xml:space="preserve">
+    <value>Gestion projet</value>
+  </data>
   <data name="TextBlock_Profil.Text" xml:space="preserve">
     <value>Profil</value>
   </data>
@@ -209,6 +248,12 @@
   </data>
   <data name="TitleBlockSkills.Title" xml:space="preserve">
     <value>Vos compétences</value>
+  </data>
+  <data name="TitleBlock_AddMember.Title" xml:space="preserve">
+    <value>Ajouter un membre</value>
+  </data>
+  <data name="TitleBlock_Members.Title" xml:space="preserve">
+    <value>Vos membres</value>
   </data>
   <data name="TitleBlock_Projects.Title" xml:space="preserve">
     <value>Projets</value>

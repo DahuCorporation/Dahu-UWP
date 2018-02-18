@@ -36,7 +36,7 @@
                 </Grid>
                 <StackPanel Orientation="Horizontal" Visibility="{Binding ModulNonConnected}">
                     <local:DahuButton2 x:Name="SignInButton" x:Uid="SignInButton" Value="Sign In" Tapped="SignInButton_Tapped"/>
-                    <local:DahuButton1 x:Name="RegisterButton" x:Uid="RegisterButton" Value="Register" Tapped="RegisterButton_Tapped" />
+                    <local:DahuButton1 x:Name="RegisterButton" x:Uid="RegisterButton" Value="Register" Tapped="RegisterButton_Tapped" BgColor="#FF5595E9"/>
                 </StackPanel>
 
 

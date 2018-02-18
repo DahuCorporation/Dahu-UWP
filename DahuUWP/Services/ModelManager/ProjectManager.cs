@@ -28,9 +28,11 @@ namespace DahuUWP.Models.ModelManager
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        for (int i = 0; resp["data"][i] != resp["data"].Last; i++)
+                        JToken jProj = resp["data"].First;
+                        for (int i = 0; jProj != null; i++)
                         {
-                            projectList.Add(resp["data"][i].ToObject<Project>());
+                            projectList.Add(jProj.ToObject<Project>());
+                            jProj = jProj.Next;
                         }
                         return projectList;
                 }

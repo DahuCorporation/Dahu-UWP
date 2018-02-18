@@ -126,12 +126,20 @@
     <Compile Include="ViewModels\Profil\Private\PrivateProfilMainInformationViewModel.cs" />
     <Compile Include="ViewModels\Profil\Private\PrivateProfilSkillsViewModel.cs" />
     <Compile Include="ViewModels\Profil\Public\PublicProfilViewModel.cs" />
+    <Compile Include="ViewModels\Project\CreateProjectViewModel.cs" />
+    <Compile Include="ViewModels\Project\Managing\EditProjectMembersViewModel.cs" />
+    <Compile Include="ViewModels\Project\Managing\EditProjectParametersViewModel.cs" />
+    <Compile Include="ViewModels\Project\Managing\EditProjectPrincipalInformationViewModel.cs" />
+    <Compile Include="ViewModels\Project\Managing\ManageProjectViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="Views\Components\Container\MediumProjectContainer .xaml.cs">
       <DependentUpon>MediumProjectContainer .xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Container\UserInfoBox.xaml.cs">
       <DependentUpon>UserInfoBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Container\UserLabel.xaml.cs">
+      <DependentUpon>UserLabel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\DahuSpecialSplitMenu\MenuButton.xaml.cs">
       <DependentUpon>MenuButton.xaml</DependentUpon>
@@ -172,6 +180,9 @@
     <Compile Include="Views\Components\Inputs\StarRating.xaml.cs">
       <DependentUpon>StarRating.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Components\Popups\Dialog.xaml.cs">
+      <DependentUpon>Dialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Components\Popups\Toasts.xaml.cs">
       <DependentUpon>Toasts.xaml</DependentUpon>
     </Compile>
@@ -183,9 +194,6 @@
     </Compile>
     <Compile Include="Views\Connection.xaml.cs">
       <DependentUpon>Connection.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CreateNewProject.xaml.cs">
-      <DependentUpon>CreateNewProject.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Discover.xaml.cs">
       <DependentUpon>Discover.xaml</DependentUpon>
@@ -204,6 +212,24 @@
     </Compile>
     <Compile Include="Views\Profil\Public\PublicProfil.xaml.cs">
       <DependentUpon>PublicProfil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\CreateProject.xaml.cs">
+      <DependentUpon>CreateProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\Managing\EditProject.xaml.cs">
+      <DependentUpon>EditProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\Managing\EditProjectMembers.xaml.cs">
+      <DependentUpon>EditProjectMembers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\Managing\EditProjectParameters.xaml.cs">
+      <DependentUpon>EditProjectParameters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\Managing\EditProjectPrincipalInformation.xaml.cs">
+      <DependentUpon>EditProjectPrincipalInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\Managing\ManageProject.xaml.cs">
+      <DependentUpon>ManageProject.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
@@ -369,6 +395,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Components\Container\UserLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Components\DahuSpecialSplitMenu\MenuButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -421,6 +451,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Components\Popups\Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Components\Popups\Toasts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -434,10 +468,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Connection.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CreateNewProject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -462,6 +492,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Profil\Public\PublicProfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\CreateProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\Managing\EditProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\Managing\EditProjectMembers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\Managing\EditProjectParameters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\Managing\EditProjectPrincipalInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\Managing\ManageProject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

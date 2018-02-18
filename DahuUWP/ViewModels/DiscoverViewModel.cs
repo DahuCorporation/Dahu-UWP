@@ -1,6 +1,7 @@
 ﻿using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
+using DahuUWP.Views.Components.Inputs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,8 +16,34 @@ namespace DahuUWP.ViewModels
     {
         //private List<Project> Projects = new List<Project>();
 
-        public ObservableCollection<Project> Projects { get; set; }
+        public ObservableCollection<DahuUWP.Models.Project> Projects { get; set; }
 
+
+        public void ActionMethod(bool res)
+        {
+            string toto = "zfezfe";
+        }
+
+
+        private Action<bool> _onAction;
+        public Action<bool> OnAction
+        {
+            get { return _onAction; }
+            set
+            {
+                NotifyPropertyChanged(ref _onAction, value);
+            }
+        }
+
+        private string _onActionString;
+        public string OnActionString
+        {
+            get { return _onActionString; }
+            set
+            {
+                NotifyPropertyChanged(ref _onActionString, value);
+            }
+        }
 
         private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
         {
@@ -27,21 +54,30 @@ namespace DahuUWP.ViewModels
             return true;
         }
 
+
+        private DahuInputText3 _tet;
+        public DahuInputText3 Tet
+        {
+            get { return _tet; }
+            set
+            {
+                NotifyPropertyChanged(ref _tet, value);
+            }
+        }
+
+        //public DahuInputText3 tet2 = new DahuInputText3();
+
         public DiscoverViewModel(IDataService service)
         {
-            
+            Tet = new DahuInputText3();
+            Tet.OnAction = ActionMethod;
+            Tet.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            OnAction = ActionMethod;
+            OnActionString = "test";
             dataService = service;
-            Project project = new Project
-            {
-                AccountId = 1,
-                BannerPicture = "bp",
-                Description = "description",
-                Name = "Nom",
-                ProfilePicture = "pp",
-                Uuid = "efz"
-            };
+
             ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
-            Projects = new ObservableCollection<Project>(projectManager.Charge(null).Cast<Project>().ToList());
+            Projects = new ObservableCollection<DahuUWP.Models.Project>(projectManager.Charge(null).Cast<DahuUWP.Models.Project>().ToList());
             //Projects.Add(project);
             //Projects.Add(project);
             //List<Project> Projects2 = new List<Project>();
