@@ -1,4 +1,7 @@
-﻿using DahuUWP.Services;
+﻿using DahuUWP.Models;
+using DahuUWP.Models.ModelManager;
+using DahuUWP.Services;
+using DahuUWP.Services.ModelManager;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -22,6 +25,19 @@ namespace DahuUWP.ViewModels.Profil.Private
 
         private void AddSkill()
         {
+            SkillManager skillManager = (SkillManager)dataService.GetSkillManager();
+            UserManager userManager = (UserManager)dataService.GetUserManager();
+
+            Dictionary<string, object> chargeOneSkillParams = new Dictionary<string, object>();
+            Skill skillToSave = new Skill
+            {
+                Name = SkillName,
+                Description = SkillDescription
+            };
+            skillManager.Create(skillToSave);
+            chargeOneSkillParams.Add("name", skillToSave.Name);
+            Skill skillSaved = (Skill)skillManager.ChargeOneSkill(chargeOneSkillParams);
+            userManager.AddSkillToUser(skillSaved.Uuid, AppStaticInfo.Account.Uuid);
         }
 
         private string _skillName;

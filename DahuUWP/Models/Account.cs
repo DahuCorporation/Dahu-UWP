@@ -117,7 +117,7 @@ namespace DahuUWP.Models
                         {
                             { "_token", AppStaticInfo.Account.Token }
                         };
-                        User user = userManager.Charge(userDicoCharge);
+                        User user = userManager.Charge(AppStaticInfo.Account.Uuid, userDicoCharge);
                         if (user == null)
                             return false;
                         AppGeneral.UserInterfaceStatusDico["Connection success."].Display(user.FirstName);

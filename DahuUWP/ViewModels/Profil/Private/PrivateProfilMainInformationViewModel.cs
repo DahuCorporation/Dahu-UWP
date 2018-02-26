@@ -92,7 +92,7 @@ namespace DahuUWP.ViewModels.Profil.Private
             {
                 { "_token", AppStaticInfo.Account.Token }
             };
-            User user = userManager.Charge(userDicoCharge);
+            User user = userManager.Charge(AppStaticInfo.Account.Uuid, userDicoCharge);
             UserFirstName = user.FirstName;
             UserName = user.LastName;
             UserMailAdress = user.Mail;

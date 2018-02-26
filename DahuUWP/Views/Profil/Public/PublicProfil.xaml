@@ -59,11 +59,18 @@
                     <StackPanel>
                         <Titles:TitleBlock x:Name="TitleBlock_Projects" x:Uid="TitleBlock_Projects" />
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="0" Padding="0,15">
-                            <StackPanel Orientation="Horizontal">
-                                <container:MediumProjectContainer ProjectName="Project Name" Description="Description" Margin="18,0,0,0"/>
-                                <container:MediumProjectContainer ProjectName="Project Name" Description="Description" Margin="18,0,0,0"/>
-                                <container:MediumProjectContainer ProjectName="Project Name" Description="Description" Margin="18,0,0,0"/>
-                            </StackPanel>
+                            <ItemsControl Name="ProjectCarousel" ItemsSource="{Binding UserProjects}" >
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <container:MediumProjectContainer ProjectName="{Binding Name}" Description="{Binding Description}" Margin="18,0,0,0"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </ScrollViewer>
                     </StackPanel>
                 </Grid>

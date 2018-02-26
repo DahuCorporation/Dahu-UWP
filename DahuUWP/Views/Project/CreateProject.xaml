@@ -6,7 +6,10 @@
     xmlns:inputs="using:DahuUWP.Views.Components.Inputs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    mc:Ignorable="d"
+    DataContext="{Binding CreateProjectVM, Source={StaticResource Locator}}">
 
     <Grid Background="#FFEFEFEF" Padding="40">
         <StackPanel Width="600" HorizontalAlignment="Center">
@@ -16,16 +19,23 @@
                                        InputPlaceholder="Project name"
                                        Margin="0,20,0,0"
                                        InputScope="EmailSmtpAddress"
-                                       TextValue=""/>
+                                       TextValue="{Binding ProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <inputs:DahuInputText1 x:Name="DahuInput1_ProjectDescription"
                                        x:Uid="DahuInput1_ProjectDescription"
                                        InputPlaceholder="Project descritpion"
                                        Margin="0,0,0,0"
                                        InputScope="EmailSmtpAddress"
-                                       TextValue=""/>
-            <inputs:DahuButton3 x:Name="DahuButton3_CreateProject"
+                                       TextValue="{Binding ProjectDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Grid>
+                <Interactivity:Interaction.Behaviors>
+                    <Core:EventTriggerBehavior EventName="Tapped">
+                        <Core:InvokeCommandAction Command="{Binding CreateProjectCommand}"/>
+                    </Core:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+                <inputs:DahuButton3 x:Name="DahuButton3_CreateProject"
                                             x:Uid="DahuButton3_CreateProject"
                                             Style="{StaticResource SaveButton}"/>
+            </Grid>
         </StackPanel>
 
     </Grid>

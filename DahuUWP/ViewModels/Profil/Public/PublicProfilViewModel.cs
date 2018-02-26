@@ -6,6 +6,7 @@ using DahuUWP.Views.Profil.Private;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -16,6 +17,8 @@ namespace DahuUWP.ViewModels.Profil.Public
 {
     public class PublicProfilViewModel : DahuViewModelBase
     {
+        public ObservableCollection<DahuUWP.Models.Project> UserProjects { get; set; }
+
         public ICommand ProfilSettingsLinkCommand { get; set; }
 
         public ICommand OnPageLoadedCommand { get; private set; }
@@ -30,13 +33,17 @@ namespace DahuUWP.ViewModels.Profil.Public
         private async void OnPageLoaded()
         {
             UserManager userManager = (UserManager)dataService.GetUserManager();
+
             Dictionary<string, object> userDicoCharge = new Dictionary<string, object>
             {
                 { "_token", AppStaticInfo.Account.Token }
             };
-            User user = userManager.Charge(userDicoCharge);
+            User user = userManager.Charge(AppStaticInfo.Account.Uuid, userDicoCharge);
             UserFullName = user.FirstName + " " + user.LastName;
             UserBiography = user.Biography;
+            List<Models.Project> projectList = userManager.ChargeProjects(AppStaticInfo.Account.Uuid, null);
+            if (projectList != null)
+                UserProjects = new ObservableCollection<Models.Project>(projectList);
         }
 
         private string _userFullName;

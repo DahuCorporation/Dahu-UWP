@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.Net.Http;
+using DahuUWP.DahuTech;
+using DahuUWP.Models;
 
 namespace DahuUWP.Services.ModelManager
 {
@@ -15,9 +19,62 @@ namespace DahuUWP.Services.ModelManager
             throw new NotImplementedException();
         }
 
+        public object ChargeOneSkill(Dictionary<string, object> routeParams)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "skill?";
+                requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                HttpResponseMessage result = apiService.Get(requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        return resp["data"].ToObject<Skill>();
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
+        }
+
         public bool Create(object obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "skill";
+
+                JObject jObject = Serialize(obj);
+                jObject.Remove("uuid");
+                string jsonObject = jObject.ToString(Formatting.None);
+                HttpResponseMessage result = apiService.Post(jsonObject, requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["A skill is added to the list."].Display();
+                        return true;
+                    case 400:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                    default:
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
         }
 
         public bool Delete(int objId)
@@ -37,7 +94,8 @@ namespace DahuUWP.Services.ModelManager
 
         public JObject Serialize(object serializeObject)
         {
-            throw new NotImplementedException();
+            JObject jSkill = (JObject)JToken.FromObject(serializeObject);
+            return jSkill;
         }
     }
 

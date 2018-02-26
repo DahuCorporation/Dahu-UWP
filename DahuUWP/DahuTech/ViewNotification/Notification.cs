@@ -36,8 +36,10 @@ namespace DahuUWP.DahuTech.ViewNotification
         /// </summary>
         public void Display(params object[] args)
         {
+            string saveValue = Value;
             Value = String.Format(Value, args);
             ViewModelLocator.HomePageViewModel.Notification = this;
+            Value = saveValue;
         }
 
         /// <summary>

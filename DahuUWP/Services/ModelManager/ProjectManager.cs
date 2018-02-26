@@ -46,9 +46,42 @@ namespace DahuUWP.Models.ModelManager
             }
         }
 
-        public bool Create(object obj)
+        public bool Create(object project)
         {
-            throw new NotImplementedException();
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "projects";
+
+                JObject jObject = new JObject
+                {
+                    { "account_uuid", AppStaticInfo.Account.Uuid },
+                    { "name", ((Project)project).Name },
+                    { "description", ((Project)project).Description }
+                }; 
+                string jsonObject = jObject.ToString(Formatting.None);
+                HttpResponseMessage result = apiService.Post(jsonObject, requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["Project created successfully."].Display(((Project)project).Name);
+                        return true;
+                    case 400:
+                        //TODO : différencier les erreurs, si c'est une erreur de projet deja existant ou si le uuid est incorect...
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                    default:
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
         }
 
         public bool Delete(int objId)

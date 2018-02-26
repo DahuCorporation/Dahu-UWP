@@ -31,8 +31,12 @@ namespace DahuUWP.Models.ModelManager
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        User user = resp["data"].ToObject<User>();
-                        userList.Add(user);
+                        JToken jUser = resp["data"].First;
+                        for (int i = 0; jUser != null; i++)
+                        {
+                            userList.Add(jUser.ToObject<User>());
+                            jUser = jUser.Next;
+                        }
                         return userList;
                 }
                 return null;
@@ -45,14 +49,82 @@ namespace DahuUWP.Models.ModelManager
             }
         }
 
-        public User Charge(Dictionary<string, object> routeParams)
+        public List<Project> ChargeProjects(string userUuid, Dictionary<string, object> routeParams)
+        {
+            try
+            {
+                List<Project> projectList = new List<Project>();
+                APIService apiService = new APIService();
+                string requestUri = "users/" + userUuid + "/projects";
+
+                if (routeParams != null)
+                    requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                HttpResponseMessage result = apiService.Get(requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        JToken jProj = resp["data"].First;
+                        for (int i = 0; jProj != null; i++)
+                        {
+                            projectList.Add(jProj.ToObject<Project>());
+                            jProj = jProj.Next;
+                        }
+                        return projectList;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
+        }
+
+        public bool AddSkillToUser(string skillUuid, string accountUuid)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "user/skill";
+
+                JObject jObject = new JObject
+                {
+                    { "skill_uuid", skillUuid },
+                    { "account_uuid", accountUuid }
+                };
+                string jsonObject = jObject.ToString(Formatting.None);
+                HttpResponseMessage result = apiService.Post(jsonObject, requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["The skill is add to the user."].Display();
+                        return true;
+                    case 400:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
+        }
+
+        public User Charge(string addToRequestUri, Dictionary<string, object> routeParams)
         {
             try
             {
                 APIService apiService = new APIService();
                 string requestUri = "users/";
-
-                requestUri += AppStaticInfo.Account.Uuid + "?";
+                requestUri += addToRequestUri + "?";
                 // separateur ce met au début, 
                 requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
                 HttpResponseMessage result = apiService.Get(requestUri);

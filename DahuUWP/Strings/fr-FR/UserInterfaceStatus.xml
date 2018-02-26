@@ -27,5 +27,17 @@
   <!---->
   <!--Private profil-->
   <status key="Informations modified."  value="Vos informations on bien été mise à jour." varName="" type="Positive"/>
+  <status key="A skill is added to the list."  value="Une compétence a été ajoutée à la liste." varName="" type="Positive"/>
+  <status key="The skill is add to the user."  value="La compétence a bien été ajoutée à votre liste." varName="" type="Positive"/>
+  
   <!---->
+
+  <!---->
+  <!--Create project-->
+  <status key="Empty name."  value="Le champ nom du projet est vide." varName="" type="Warning"/>
+  <status key="Empty description."  value="Le champ description du projet est vide." varName="" type="Warning"/>
+  <status key="Project created successfully."  value="Le projet '{0}' a bien été créé." varName="" type="Positive"/>
+  <!---->
+
+
 </interfaceStatus>
