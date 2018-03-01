@@ -45,6 +45,34 @@ namespace DahuUWP.Views.Components.Inputs
             }
         }
 
+        public static readonly DependencyProperty IsBusyProperty =
+        DependencyProperty.Register(
+            "IsBusy", typeof(string),
+            typeof(DahuButton3), null
+        );
+
+        public bool IsBusy
+        {
+            get
+            {
+                return (bool)GetValue(IsBusyProperty);
+            }
+            set
+            {
+                SetValue(IsBusyProperty, value);
+            }
+        }
+
         public string Value { get; set; }
+
+        private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 1);
+        }
+
+        private void Grid_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 2);
+        }
     }
 }

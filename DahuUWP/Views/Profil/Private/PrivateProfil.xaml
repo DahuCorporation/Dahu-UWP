@@ -23,7 +23,7 @@
                    DisplayMode="Inline"
                    OpenPaneLength="324"
                    PaneBackground="Transparent"
-                   Margin="0,40,0,40"
+                   Margin="0,0,0,0"
                    Grid.Column="1">
             <SplitView.Pane>
                 <ScrollViewer>

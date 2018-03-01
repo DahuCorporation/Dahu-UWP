@@ -44,12 +44,19 @@
                 <Grid Style="{StaticResource WhiteContentGrid}">
                     <StackPanel>
                         <Titles:TitleBlock x:Name="TitleBlock_Skills" x:Uid="TitleBlock_Skills" />
-                        <Grid Padding="0,15">
-                            <StackPanel VerticalAlignment="Top" Padding="0,0,10,0">
-                                <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>
-                                <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>
-                                <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>
-                            </StackPanel>
+                        <Grid Padding="30,15">
+                            <ItemsControl Name="UserSkills" ItemsSource="{Binding Skills}" >
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Inputs:ContentiButton Title="{Binding Name}" ContentValue="{Binding Description}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Grid>
                     </StackPanel>
 

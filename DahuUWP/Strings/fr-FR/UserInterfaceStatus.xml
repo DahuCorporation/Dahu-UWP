@@ -28,6 +28,8 @@
   <!--Private profil-->
   <status key="Informations modified."  value="Vos informations on bien été mise à jour." varName="" type="Positive"/>
   <status key="A skill is added to the list."  value="Une compétence a été ajoutée à la liste." varName="" type="Positive"/>
+  <status key="Empty skill name."  value="Le champ nom de la compétence est vide." varName="" type="Warning"/>
+  <status key="Empty skill description."  value="Le champ description de la description est vide." varName="" type="Warning"/>
   <status key="The skill is add to the user."  value="La compétence a bien été ajoutée à votre liste." varName="" type="Positive"/>
   
   <!---->

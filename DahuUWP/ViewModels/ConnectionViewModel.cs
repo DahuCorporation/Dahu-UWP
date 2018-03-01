@@ -26,7 +26,7 @@ namespace DahuUWP.ViewModels
         //http://www.java2s.com/Tutorials/CSharp/System.Reflection/FieldInfo/C_FieldInfo_GetValue.htm
         public ConnectionViewModel(IDataService service)
         {
-            IsBusy = false;
+            IsBusy = true;
             dataService = service;
             IModelManager projectManager = (IModelManager)dataService.GetProjectManager();
             ConnectionCommand = new RelayCommand(Connection);
@@ -42,7 +42,7 @@ namespace DahuUWP.ViewModels
         private async void OnPageLoaded()
         {
             RecoveringLastUser();
-            
+            IsBusy = false;
         }
 
         private bool _isBusy;
@@ -115,6 +115,8 @@ namespace DahuUWP.ViewModels
                     mail = loginCredential.UserName,
                     password = loginCredential.Password
                 };
+                UserAccount.Mail = loginCredential.UserName;
+                AppStaticInfo.Account = UserAccount;
                 if (accounDataService.Connect(connectionInfo))
                     ConnectionSuccessful();
             }

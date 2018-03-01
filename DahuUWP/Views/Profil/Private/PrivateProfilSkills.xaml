@@ -11,7 +11,14 @@
         xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     DataContext="{Binding PrivateProfilSkillsVM, Source={StaticResource Locator}}">
-
+    
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:EventTriggerBehavior.Actions>
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedCommand}" />
+            </Core:EventTriggerBehavior.Actions>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
     <ScrollViewer>
         <StackPanel>
             <Grid  VerticalAlignment="Top" Background="#FFFFFF" Style="{StaticResource WhiteContentGrid}">
@@ -48,11 +55,18 @@
                 <StackPanel>
                     <Titles:TitleBlock x:Name="TitleBlockSkills" x:Uid="TitleBlockSkills"/>
                     <Grid Padding="30,15">
-                        <StackPanel VerticalAlignment="Top" Padding="0,0,10,0">
-                            <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>
-                            <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>
-                            <Inputs:ContentiButton Title="Artistique" ContentValue="Tous l'art est un object de culture"/>
-                        </StackPanel>
+                        <ItemsControl Name="UserSkills" ItemsSource="{Binding Skills}" >
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Inputs:ContentiButton Title="{Binding Name}" ContentValue="{Binding Description}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Grid>
                 </StackPanel>
             </Grid>

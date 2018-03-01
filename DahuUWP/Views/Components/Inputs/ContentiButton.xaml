@@ -9,16 +9,17 @@
 
     <Grid Margin="0,0,0,14">
         <StackPanel>
-            <Border Height="48" CornerRadius="24,24,24,24" BorderThickness="0,0,0,0" PointerPressed="Border_PointerPressed" PointerEntered="Border_PointerEntered" PointerExited="Border_PointerExited" >
-                <Grid Background="#5595E9">
+            <Border Height="48"  HorizontalAlignment="Left" CornerRadius="24,24,24,24" BorderThickness="0,0,0,0" PointerPressed="Border_PointerPressed" PointerEntered="Border_PointerEntered" PointerExited="Border_PointerExited" >
+                <Grid Background="#5595E9" Padding="24,0,18,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="48" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="24" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0">
                         <TextBlock Text="{Binding Path=Title, FallbackValue='Title'}" Foreground="#FFFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Margin="0,0,0,0"/>
                     </StackPanel>
-                    <TextBlock x:Name="OpenCloseIconName" Text="+" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" Margin="0,-6,0,0"/>
+                    <TextBlock x:Name="OpenCloseIconName" Text="+" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" Margin="0,-6,0,0"/>
                 </Grid>
             </Border>
             <Grid x:Name="ContentGridName" Visibility="Collapsed" Padding="24,3,24,0" >

@@ -1,6 +1,7 @@
 ﻿using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
+using DahuUWP.Services.ModelManager;
 using DahuUWP.Views;
 using DahuUWP.Views.Profil.Private;
 using GalaSoft.MvvmLight.Command;
@@ -18,10 +19,8 @@ namespace DahuUWP.ViewModels.Profil.Public
     public class PublicProfilViewModel : DahuViewModelBase
     {
         public ObservableCollection<DahuUWP.Models.Project> UserProjects { get; set; }
-
-        public ICommand ProfilSettingsLinkCommand { get; set; }
-
         public ICommand OnPageLoadedCommand { get; private set; }
+        public ICommand ProfilSettingsLinkCommand { get; set; }
 
         public PublicProfilViewModel(IDataService service)
         {
@@ -31,6 +30,12 @@ namespace DahuUWP.ViewModels.Profil.Public
         }
 
         private async void OnPageLoaded()
+        {
+            LoadUserProjects();
+            LoadUserSkills();
+        }
+
+        private void LoadUserProjects()
         {
             UserManager userManager = (UserManager)dataService.GetUserManager();
 
@@ -44,6 +49,26 @@ namespace DahuUWP.ViewModels.Profil.Public
             List<Models.Project> projectList = userManager.ChargeProjects(AppStaticInfo.Account.Uuid, null);
             if (projectList != null)
                 UserProjects = new ObservableCollection<Models.Project>(projectList);
+        }
+
+        private void LoadUserSkills()
+        {
+            SkillManager skillManager = (SkillManager)dataService.GetSkillManager();
+            Dictionary<string, object> skillChargeParams = new Dictionary<string, object>();
+            skillChargeParams.Add("mail", AppStaticInfo.Account.Mail);
+            List<object> userSkillList = skillManager.Charge(skillChargeParams);
+            if (userSkillList != null)
+                Skills = new ObservableCollection<Skill>(userSkillList.Cast<Skill>().ToList());
+        }
+
+        private ObservableCollection<Skill> _skills;
+        public ObservableCollection<Skill> Skills
+        {
+            get { return _skills; }
+            set
+            {
+                NotifyPropertyChanged(ref _skills, value);
+            }
         }
 
         private string _userFullName;

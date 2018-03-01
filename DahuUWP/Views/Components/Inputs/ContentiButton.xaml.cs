@@ -21,13 +21,28 @@ namespace DahuUWP.Views.Components.Inputs
     {
         public ContentiButton()
         {
-            DataContext = this;
             this.InitializeComponent();
+            (this.Content as FrameworkElement).DataContext = this;
         }
 
-        public string Title { get; set; }
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
 
-        public string ContentValue { get; set; }
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.Register("Title", typeof(string), typeof(ContentiButton), new PropertyMetadata(null));
+
+        public string ContentValue
+        {
+            get { return (string)GetValue(ContentValueProperty); }
+            set { SetValue(ContentValueProperty, value); }
+        }
+
+        public static readonly DependencyProperty ContentValueProperty =
+            DependencyProperty.Register("ContentValue", typeof(string), typeof(ContentiButton), new PropertyMetadata(null));
+
 
         private void Border_PointerPressed(object sender, PointerRoutedEventArgs e)
         {

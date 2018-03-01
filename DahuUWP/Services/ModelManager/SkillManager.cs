@@ -16,7 +16,42 @@ namespace DahuUWP.Services.ModelManager
     {
         public List<object> Charge(Dictionary<string, object> routeParams)
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<object> skillList = new List<object>();
+                APIService apiService = new APIService();
+                string requestUri = "user/skill?";
+                if (routeParams != null)
+                    requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                HttpResponseMessage result = apiService.Get(requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        if (resp["data"] != null)
+                        {
+                            JToken jProj = resp["data"].First;
+                            for (int i = 0; jProj != null; i++)
+                            {
+                                Skill presentSkill = new Skill();
+                                presentSkill.Name = (string)jProj["skill_name"];
+                                presentSkill.Description = (string)jProj["skill_description"];
+                                skillList.Add(presentSkill);
+                                //skillList.Add(jProj.ToObject<Skill>());
+                                jProj = jProj.Next;
+                            }
+                        }
+                        return skillList;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
         }
 
         public object ChargeOneSkill(Dictionary<string, object> routeParams)
@@ -34,6 +69,7 @@ namespace DahuUWP.Services.ModelManager
                     case 200:
                         return resp["data"].ToObject<Skill>();
                 }
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
                 return null;
             }
             catch (Exception ex)
