@@ -14,6 +14,46 @@ namespace DahuUWP.Services.ModelManager
 {
     public class SkillManager : IModelManager
     {
+        public async Task<List<object>> ChargeAsync(Dictionary<string, object> routeParams)
+        {
+            try
+            {
+                List<object> skillList = new List<object>();
+                APIService apiService = new APIService();
+                string requestUri = "user/skill?";
+                if (routeParams != null)
+                    requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                HttpResponseMessage result = await apiService.GetAsync(requestUri);
+                string responseBody = await result.Content.ReadAsStringAsync();
+                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        if (resp["data"] != null)
+                        {
+                            JToken jProj = resp["data"].First;
+                            for (int i = 0; jProj != null; i++)
+                            {
+                                Skill presentSkill = new Skill();
+                                presentSkill.Name = (string)jProj["skill_name"];
+                                presentSkill.Description = (string)jProj["skill_description"];
+                                skillList.Add(presentSkill);
+                                //skillList.Add(jProj.ToObject<Skill>());
+                                jProj = jProj.Next;
+                            }
+                        }
+                        return skillList;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
+        }
+
         public List<object> Charge(Dictionary<string, object> routeParams)
         {
             try

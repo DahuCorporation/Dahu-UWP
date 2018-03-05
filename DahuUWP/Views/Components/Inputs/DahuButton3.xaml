@@ -5,15 +5,17 @@
     xmlns:local="using:DahuUWP.Views.Components.Inputs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
   d:DesignHeight="48">
     <StackPanel>
-        <Grid Height="48" Margin="0,8,0,0"  PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited">
-            <Grid x:Name="ButtonGrid"  Height="48" Background="{Binding Path=ButtonBackground, FallbackValue='Red'}" HorizontalAlignment="Left" CornerRadius="3,3,3,3" >
+        <Grid Height="48" Margin="0,8,0,0"  PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" Tapped="Grid_Tapped" >
+            <Grid x:Name="ButtonGrid"  Height="48" Background="{Binding Path=ButtonBackground, FallbackValue='Red', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" CornerRadius="3,3,3,3" >
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                     <TextBlock Text="{Binding Path=Value, FallbackValue='Button1'}" Foreground="#ffffff" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="SemiBold" Margin="40,0,40,0" />
                 </StackPanel>
-                <ProgressBar IsIndeterminate="{Binding IsBusy, FallbackValue='False'}" Visibility="Visible" ShowPaused="False" ShowError="False" HorizontalAlignment="Stretch" Foreground="White" VerticalAlignment="Bottom" Margin="0,0,0,7" Background="Transparent"/>
+                <ProgressBar IsIndeterminate="{Binding IsBusy, FallbackValue='False', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" Visibility="Visible" ShowPaused="False" ShowError="False" HorizontalAlignment="Stretch" Foreground="White" VerticalAlignment="Bottom" Margin="0,0,0,7" Background="Transparent"/>
 
                 <!--<ProgressBar IsIndeterminate="{Binding IsBusy, FallbackValue='false'}" ShowPaused="False" ShowError="False" HorizontalAlignment="Stretch" Foreground="White" VerticalAlignment="Bottom" Margin="0,0,0,7"/>-->
             </Grid>

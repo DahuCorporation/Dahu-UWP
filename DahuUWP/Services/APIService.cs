@@ -60,6 +60,13 @@ namespace DahuUWP.Services
             return result;
         }
 
+        public async Task<HttpResponseMessage> GetAsync(string requestUri)
+        {
+
+            HttpResponseMessage result = await httpClient.GetAsync(requestUri);
+            return result;
+        }
+
 
         /// <summary>
         /// Json object
