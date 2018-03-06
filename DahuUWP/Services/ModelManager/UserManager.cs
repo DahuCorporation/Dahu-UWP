@@ -14,7 +14,7 @@ namespace DahuUWP.Models.ModelManager
 {
     public class UserManager : IModelManager
     {
-        public List<object> Charges(Dictionary<string, object> routeParams)
+        public async Task<List<object>> Charges(Dictionary<string, object> routeParams)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace DahuUWP.Models.ModelManager
                 requestUri += AppStaticInfo.Account.Uuid + "?";
                 // separateur ce met au début, 
                 requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
-                HttpResponseMessage result = apiService.Get(requestUri);
+                HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -49,7 +49,7 @@ namespace DahuUWP.Models.ModelManager
             }
         }
 
-        public List<Project> ChargeProjects(string userUuid, Dictionary<string, object> routeParams)
+        public async Task<List<Project>> ChargeProjects(string userUuid, Dictionary<string, object> routeParams)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace DahuUWP.Models.ModelManager
 
                 if (routeParams != null)
                     requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
-                HttpResponseMessage result = apiService.Get(requestUri);
+                HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -83,7 +83,7 @@ namespace DahuUWP.Models.ModelManager
             }
         }
 
-        public bool AddSkillToUser(string skillUuid, string accountUuid)
+        public async Task<bool> AddSkillToUser(string skillUuid, string accountUuid)
         {
             try
             {
@@ -96,7 +96,7 @@ namespace DahuUWP.Models.ModelManager
                     { "account_uuid", accountUuid }
                 };
                 string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = apiService.Post(jsonObject, requestUri);
+                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -118,7 +118,7 @@ namespace DahuUWP.Models.ModelManager
             }
         }
 
-        public User Charge(string addToRequestUri, Dictionary<string, object> routeParams)
+        public async Task<User> Charge(string addToRequestUri, Dictionary<string, object> routeParams)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace DahuUWP.Models.ModelManager
                 requestUri += addToRequestUri + "?";
                 // separateur ce met au début, 
                 requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
-                HttpResponseMessage result = apiService.Get(requestUri);
+                HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -147,7 +147,7 @@ namespace DahuUWP.Models.ModelManager
 
         }
 
-        public bool Create(object obj)
+        public async Task<bool> Create(object obj)
         {
             try
             {
@@ -158,7 +158,7 @@ namespace DahuUWP.Models.ModelManager
                 jObject.Add("password", ((User)obj).Account.Password);
                 jObject.Add("type", ((User)obj).Account.Type);
                 string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = apiService.Post("{\"informations\" :" + jsonObject + "}", requestUri);
+                HttpResponseMessage result = await apiService.Post("{\"informations\" :" + jsonObject + "}", requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -186,7 +186,7 @@ namespace DahuUWP.Models.ModelManager
             throw new NotImplementedException();
         }
 
-        public bool Edit(object obj)
+        public async Task<bool> Edit(object obj)
         {
               try
             {
@@ -197,7 +197,7 @@ namespace DahuUWP.Models.ModelManager
                 JObject jObject = Serialize(obj);
                 jObject.Remove("mail");
                 string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = apiService.Put(jsonObject, requestUri);
+                HttpResponseMessage result = await apiService.Put(jsonObject, requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -220,10 +220,7 @@ namespace DahuUWP.Models.ModelManager
             }
         }
 
-        List<object> IModelManager.Charge(Dictionary<string, object> routeParams)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public JObject Serialize(object userToSerialize)
         {
@@ -240,21 +237,31 @@ namespace DahuUWP.Models.ModelManager
             user.Gender = GenderUtility.StringToGender((string)jUser["gender"]);
             return user;
         }
+
+        Task<bool> IModelManager.Delete(int objId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<object>> Charge(Dictionary<string, object> routeParams)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class DesignUserManager : IModelManager
     {
-        public List<object> Charge(Dictionary<string, object> routeParams)
+        public Task<List<object>> Charge(Dictionary<string, object> routeParams)
         {
             throw new NotImplementedException();
         }
 
-        public bool Create(object obj)
+        public Task<bool> Create(object obj)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(int objId)
+        public Task<bool> Delete(int objId)
         {
             throw new NotImplementedException();
         }
@@ -264,7 +271,7 @@ namespace DahuUWP.Models.ModelManager
             throw new NotImplementedException();
         }
 
-        public bool Edit(object obj)
+        public Task<bool> Edit(object obj)
         {
             throw new NotImplementedException();
         }

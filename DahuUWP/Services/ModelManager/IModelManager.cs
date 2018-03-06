@@ -14,27 +14,27 @@ namespace DahuUWP.Models.ModelManager
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        Boolean Create(Object obj);
+        Task<Boolean> Create(Object obj);
 
         /// <summary>
         /// Put method
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        Boolean Edit(Object obj);
+        Task<Boolean> Edit(Object obj);
 
         /// <summary>
         /// Delete method
         /// </summary>
         /// <param name="objId"></param>
         /// <returns></returns>
-        Boolean Delete(int objId);
+        Task<Boolean> Delete(int objId);
 
         /// <summary>
         /// Get methode
         /// </summary>
         /// <returns></returns>
-        List<Object> Charge(Dictionary<string, object> routeParams);
+        Task<List<Object>> Charge(Dictionary<string, object> routeParams);
 
         /// <summary>
         /// Serialize a object

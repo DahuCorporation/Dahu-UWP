@@ -85,24 +85,24 @@ namespace DahuUWP.Models
         /// True if ok, false if error
         /// </summary>
         /// <returns></returns>
-        public bool Connect()
+        public async Task<bool> Connect()
         {
             object connection = new
             {
                 mail = (string)AppStaticInfo.Account.Mail,
                 password = (string)AppStaticInfo.Account.Password
             };
-            return Connect(connection);
+            return await Connect(connection);
         }
 
-        public bool Connect(object connection)
+        public async Task<bool> Connect(object connection)
         {
             try
             {
                 APIService service = new APIService();
                 //AppStaticInfo.Account = new Account();
 
-                HttpResponseMessage result = service.Post(connection, "auth");
+                HttpResponseMessage result = await service.Post(connection, "auth");
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -117,7 +117,7 @@ namespace DahuUWP.Models
                         {
                             { "_token", AppStaticInfo.Account.Token }
                         };
-                        User user = userManager.Charge(AppStaticInfo.Account.Uuid, userDicoCharge);
+                        User user = await userManager.Charge(AppStaticInfo.Account.Uuid, userDicoCharge);
                         if (user == null)
                             return false;
                         AppGeneral.UserInterfaceStatusDico["Connection success."].Display(user.FirstName);

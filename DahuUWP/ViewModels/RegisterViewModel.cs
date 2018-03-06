@@ -132,11 +132,11 @@ namespace DahuUWP.ViewModels
             return user;
         }
 
-        private void RegisterUser()
+        private async void RegisterUser()
         {
             UserManager userManager = (UserManager)dataService.GetUserManager();
 
-            if (userManager.Create(RecupUserRegistrationInformation()))
+            if (await userManager.Create(RecupUserRegistrationInformation()))
             {
                 HomePage.DahuFrame.Navigate(typeof(Connection));
             }

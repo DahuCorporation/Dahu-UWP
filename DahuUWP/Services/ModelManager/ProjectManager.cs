@@ -13,7 +13,7 @@ namespace DahuUWP.Models.ModelManager
 {
     public class ProjectManager : IModelManager
     {
-        public List<object> Charge(Dictionary<string, object> routeParams)
+        public async Task<List<object>> Charge(Dictionary<string, object> routeParams)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace DahuUWP.Models.ModelManager
                 string requestUri = "projects/";
                 if (routeParams != null)
                     requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
-                HttpResponseMessage result = apiService.Get(requestUri);
+                HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -46,7 +46,7 @@ namespace DahuUWP.Models.ModelManager
             }
         }
 
-        public bool Create(object project)
+        public async Task<bool> Create(object project)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace DahuUWP.Models.ModelManager
                     { "description", ((Project)project).Description }
                 }; 
                 string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = apiService.Post(jsonObject, requestUri);
+                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -84,9 +84,9 @@ namespace DahuUWP.Models.ModelManager
             }
         }
 
-        public bool Delete(int objId)
+        public Task<bool> Delete(int objId)
         {
-            return false;
+            throw new NotImplementedException();
         }
 
         public object DeSerialize(JObject jObject)
@@ -94,7 +94,7 @@ namespace DahuUWP.Models.ModelManager
             throw new NotImplementedException();
         }
 
-        public bool Edit(object obj)
+        public Task<bool> Edit(object obj)
         {
             throw new NotImplementedException();
         }
@@ -107,19 +107,19 @@ namespace DahuUWP.Models.ModelManager
 
     public class DesignProjectManager : IModelManager
     {
-        public List<object> Charge(Dictionary<string, object> routeParams)
-        {
-            return null;
-        }
-
-        public bool Create(object obj)
+        public Task<List<object>> Charge(Dictionary<string, object> routeParams)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(int objId)
+        public Task<bool> Create(object obj)
         {
-            return true;
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> Delete(int objId)
+        {
+            throw new NotImplementedException();
         }
 
         public object DeSerialize(JObject jObject)
@@ -127,7 +127,7 @@ namespace DahuUWP.Models.ModelManager
             throw new NotImplementedException();
         }
 
-        public bool Edit(object obj)
+        public Task<bool> Edit(object obj)
         {
             throw new NotImplementedException();
         }

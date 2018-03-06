@@ -35,7 +35,7 @@ namespace DahuUWP.ViewModels.Profil.Public
             LoadUserSkills();
         }
 
-        private void LoadUserProjects()
+        private async void LoadUserProjects()
         {
             UserManager userManager = (UserManager)dataService.GetUserManager();
 
@@ -43,20 +43,20 @@ namespace DahuUWP.ViewModels.Profil.Public
             {
                 { "_token", AppStaticInfo.Account.Token }
             };
-            User user = userManager.Charge(AppStaticInfo.Account.Uuid, userDicoCharge);
+            User user = await userManager.Charge(AppStaticInfo.Account.Uuid, userDicoCharge);
             UserFullName = user.FirstName + " " + user.LastName;
             UserBiography = user.Biography;
-            List<Models.Project> projectList = userManager.ChargeProjects(AppStaticInfo.Account.Uuid, null);
+            List<Models.Project> projectList = await userManager.ChargeProjects(AppStaticInfo.Account.Uuid, null);
             if (projectList != null)
                 UserProjects = new ObservableCollection<Models.Project>(projectList);
         }
 
-        private void LoadUserSkills()
+        private async void LoadUserSkills()
         {
             SkillManager skillManager = (SkillManager)dataService.GetSkillManager();
             Dictionary<string, object> skillChargeParams = new Dictionary<string, object>();
             skillChargeParams.Add("mail", AppStaticInfo.Account.Mail);
-            List<object> userSkillList = skillManager.Charge(skillChargeParams);
+            List<object> userSkillList = await skillManager.Charge(skillChargeParams);
             if (userSkillList != null)
                 Skills = new ObservableCollection<Skill>(userSkillList.Cast<Skill>().ToList());
         }

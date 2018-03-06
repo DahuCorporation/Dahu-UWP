@@ -84,7 +84,7 @@ namespace DahuUWP.ViewModels.Profil.Private
             return true;
         }
 
-        private void FillDataView()
+        private async void FillDataView()
         {
             UserManager userManager = (UserManager)dataService.GetUserManager();
 
@@ -92,7 +92,7 @@ namespace DahuUWP.ViewModels.Profil.Private
             {
                 { "_token", AppStaticInfo.Account.Token }
             };
-            User user = userManager.Charge(AppStaticInfo.Account.Uuid, userDicoCharge);
+            User user = await userManager.Charge(AppStaticInfo.Account.Uuid, userDicoCharge);
             UserFirstName = user.FirstName;
             UserName = user.LastName;
             UserMailAdress = user.Mail;

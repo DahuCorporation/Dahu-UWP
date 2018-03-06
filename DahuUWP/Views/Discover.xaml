@@ -14,6 +14,13 @@
     mc:Ignorable="d"
         DataContext="{Binding DiscoverVM, Source={StaticResource Locator}}">
 
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:EventTriggerBehavior.Actions>
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedCommand}" />
+            </Core:EventTriggerBehavior.Actions>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
     <Grid Background="#FFEFEFEF">
         <ScrollViewer>
             <Grid>
@@ -41,21 +48,10 @@
                         </ScrollViewer>
                     </Grid>
                     <ProgressBar IsIndeterminate="{Binding IsBusy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="Visible" ShowPaused="False" ShowError="False" HorizontalAlignment="Stretch" Foreground="Black" VerticalAlignment="Bottom" Margin="50" Background="Black"/>
-                    <Grid>
-                        <!--<Interactivity:Interaction.Behaviors>
-                            <Core:EventTriggerBehavior EventName="Tapped" >
-                                <Core:InvokeCommandAction Command="{Binding DiscoverButton}"/>
-                            </Core:EventTriggerBehavior>
-                        </Interactivity:Interaction.Behaviors>
-                        Command="{Binding DiscoverButton, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
-                        <Inputs:DahuButton3 x:Name="DahuButton3_AddSkill"
+                    <Inputs:DahuButton3 x:Name="DahuButton3_AddSkill"
                                             x:Uid="DahuButton3_AddSkill"
                                             Style="{StaticResource EditButton}"
-                                            IsBusy="{Binding IsBusy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue='False'}"
-                                            TappedCommand="{Binding AddSkillButtonTapped}"
-                                            />
-                    </Grid>
-                    <Inputs:DahuInputText3 OnAction="{Binding Tet.OnAction, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  OnActionObj="{Binding OnActionString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            ButtonBindings="{Binding AddSkillButtonBindings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock >
                         <TextBlock.Inlines>
                             <Run FontWeight="Bold" FontSize="14" Text="This is WPF TextBlock Example. " />

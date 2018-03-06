@@ -1,4 +1,5 @@
-﻿using DahuUWP.Models;
+﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using DahuUWP.Services.ModelManager;
@@ -17,50 +18,40 @@ namespace DahuUWP.ViewModels
 {
     public class DiscoverViewModel : DahuViewModelBase
     {
+        public ICommand OnPageLoadedCommand { get; private set; }
+
         public ObservableCollection<DahuUWP.Models.Project> Projects { get; set; }
 
-        public void ActionMethod(bool res)
+        public DiscoverViewModel(IDataService service)
         {
-            string toto = "zfezfe";
+            dataService = service;
+
+            OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
         }
 
-        private Action _addSkillButtonTapped;
-        public Action AddSkillButtonTapped
+        private async void OnPageLoaded()
         {
-            get { return _addSkillButtonTapped; }
-            set
-            {
-                NotifyPropertyChanged(ref _addSkillButtonTapped, value);
-            }
+            LoadProjects();
         }
 
-        private Action<bool> _onAction;
-        public Action<bool> OnAction
+        private async void LoadProjects()
         {
-            get { return _onAction; }
-            set
+            ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
+            Projects = new ObservableCollection<DahuUWP.Models.Project>((await projectManager.Charge(null)).Cast<DahuUWP.Models.Project>().ToList());
+            AddSkillButtonBindings = new DahuButtonBindings
             {
-                NotifyPropertyChanged(ref _onAction, value);
-            }
+                IsBusy = false,
+                TappedFuncListener = AddSkillTappedListener
+            };
         }
 
-        private string _onActionString;
-        public string OnActionString
+        private DahuButtonBindings _addSkillButtonBindings;
+        public DahuButtonBindings AddSkillButtonBindings
         {
-            get { return _onActionString; }
+            get { return _addSkillButtonBindings; }
             set
             {
-                NotifyPropertyChanged(ref _onActionString, value);
-            }
-        }
-
-        private bool _isBusy;
-        public bool IsBusy
-        {
-            get { return _isBusy; }
-            set
-            {
-                NotifyPropertyChanged(ref _isBusy, value);
+                NotifyPropertyChanged(ref _addSkillButtonBindings, value);
             }
         }
 
@@ -74,51 +65,24 @@ namespace DahuUWP.ViewModels
         }
 
 
-        private DahuInputText3 _tet;
-        public DahuInputText3 Tet
-        {
-            get { return _tet; }
-            set
-            {
-                NotifyPropertyChanged(ref _tet, value);
-            }
-        }
-
         private async Task<string> TimeLooser()
         {
             SkillManager skillManager = (SkillManager)dataService.GetSkillManager();
             Dictionary<string, object> skillChargeParams = new Dictionary<string, object>();
             skillChargeParams.Add("mail", AppStaticInfo.Account.Mail);
 
-            //List<Object> skills = await skillManager.ChargeAsync(skillChargeParams);
+            List<Object> skills = await skillManager.ChargeAsync(skillChargeParams);
 
-            await System.Threading.Tasks.Task.Delay(8000);
+            //await System.Threading.Tasks.Task.Delay(8000);
             return "toto";
         }
 
-        public async void ButtonFunc()
+        public async void AddSkillTappedListener()
         {
-            IsBusy = true;
+            AddSkillButtonBindings.IsBusy = true;
             string ttat = await TimeLooser();
-            IsBusy = false;
+            AddSkillButtonBindings.IsBusy = false;
             string titi = "ezf";
-        }
-
-            //public DahuInputText3 tet2 = new DahuInputText3();
-
-            public DiscoverViewModel(IDataService service)
-        {
-            Tet = new DahuInputText3();
-            Tet.OnAction = ActionMethod;
-            Tet.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            OnAction = ActionMethod;
-            OnActionString = "test";
-            dataService = service;
-
-            ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
-            Projects = new ObservableCollection<DahuUWP.Models.Project>(projectManager.Charge(null).Cast<DahuUWP.Models.Project>().ToList());
-            AddSkillButtonTapped = ButtonFunc;
-
         }
     }
 }

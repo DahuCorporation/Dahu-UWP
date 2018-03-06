@@ -101,7 +101,7 @@ namespace DahuUWP.ViewModels
         /// <summary>
         /// Connect the user how wanted to keep connection after closing app
         /// </summary>
-        private void RecoveringLastUser()
+        private async void RecoveringLastUser()
         {
             var loginCredential = GetCredentialFromLocker();
 
@@ -117,7 +117,7 @@ namespace DahuUWP.ViewModels
                 };
                 UserAccount.Mail = loginCredential.UserName;
                 AppStaticInfo.Account = UserAccount;
-                if (accounDataService.Connect(connectionInfo))
+                if (await accounDataService.Connect(connectionInfo))
                     ConnectionSuccessful();
             }
             //Stay on connection page
@@ -151,7 +151,7 @@ namespace DahuUWP.ViewModels
             return true;
         }
 
-        private void Connection()
+        private async void Connection()
         {
             if (!ConnectionFieldsVerif())
                 return;
@@ -159,7 +159,7 @@ namespace DahuUWP.ViewModels
             AccountDataService accounDataService = new AccountDataService();
 
             AppStaticInfo.Account = UserAccount;
-            if (accounDataService.Connect())
+            if (await accounDataService.Connect())
             {
                 // TODO garder la connexion après fermeture est activé par default il faudra le changer
                 // TODO mettre le fait de resté connecté dans accountDataService et pareil pour vérifier si l'user était déjà connecté

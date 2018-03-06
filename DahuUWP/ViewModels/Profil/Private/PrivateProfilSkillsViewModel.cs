@@ -1,4 +1,5 @@
 ﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.Inputs;
 using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
@@ -25,6 +26,11 @@ namespace DahuUWP.ViewModels.Profil.Private
             dataService = service;
             AddSkillCommand = new RelayCommand(AddSkill);
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
+            AddSkillButtonBindings = new DahuButtonBindings
+            {
+                IsBusy = false,
+                TappedFuncListener = AddSkill
+            };
         }
 
         private async void OnPageLoaded()
@@ -32,18 +38,20 @@ namespace DahuUWP.ViewModels.Profil.Private
             LoadUserSkills();
         }
 
-        private void LoadUserSkills()
+        private async void LoadUserSkills()
         {
             SkillManager skillManager = (SkillManager)dataService.GetSkillManager();
             Dictionary<string, object> skillChargeParams = new Dictionary<string, object>();
             skillChargeParams.Add("mail", AppStaticInfo.Account.Mail);
-            Skills = new ObservableCollection<Skill>(skillManager.Charge(skillChargeParams).Cast<Skill>().ToList());
+            Skills = new ObservableCollection<Skill>((await skillManager.Charge(skillChargeParams)).Cast<Skill>().ToList());
         }
 
-        private void AddSkill()
+        private async void AddSkill()
         {
+            
             if (!VerifAddSkillFields())
                 return;
+            AddSkillButtonBindings.IsBusy = true;
             SkillManager skillManager = (SkillManager)dataService.GetSkillManager();
             UserManager userManager = (UserManager)dataService.GetUserManager();
 
@@ -52,16 +60,18 @@ namespace DahuUWP.ViewModels.Profil.Private
                 Name = SkillName,
                 Description = SkillDescription
             };
-            if (skillManager.Create(skillToSave))
+            if (await skillManager.Create(skillToSave))
             {
                 Dictionary<string, object> chargeOneSkillParams = new Dictionary<string, object>
                 {
                     { "name", skillToSave.Name }
                 };
-                Skill skillSaved = (Skill)skillManager.ChargeOneSkill(chargeOneSkillParams);
-                userManager.AddSkillToUser(skillSaved.Uuid, AppStaticInfo.Account.Uuid);
+                Skill skillSaved;
+                if ((skillSaved = (Skill)(await skillManager.ChargeOneSkill(chargeOneSkillParams))) != null)
+                    await userManager.AddSkillToUser(skillSaved.Uuid, AppStaticInfo.Account.Uuid);
                 LoadUserSkills();
             }
+            AddSkillButtonBindings.IsBusy = false;
         }
 
         private bool VerifAddSkillFields()
@@ -77,6 +87,16 @@ namespace DahuUWP.ViewModels.Profil.Private
                 return false;
             }
             return true;
+        }
+
+        private DahuButtonBindings _addSkillButtonBindings;
+        public DahuButtonBindings AddSkillButtonBindings
+        {
+            get { return _addSkillButtonBindings; }
+            set
+            {
+                NotifyPropertyChanged(ref _addSkillButtonBindings, value);
+            }
         }
 
         private ObservableCollection<Skill> _skills;

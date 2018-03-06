@@ -23,7 +23,7 @@ namespace DahuUWP.Services.ModelManager
                 string requestUri = "user/skill?";
                 if (routeParams != null)
                     requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
-                HttpResponseMessage result = await apiService.GetAsync(requestUri);
+                HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = await result.Content.ReadAsStringAsync();
                 var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -54,7 +54,7 @@ namespace DahuUWP.Services.ModelManager
             }
         }
 
-        public List<object> Charge(Dictionary<string, object> routeParams)
+        public async Task<List<object>> Charge(Dictionary<string, object> routeParams)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace DahuUWP.Services.ModelManager
                 string requestUri = "user/skill?";
                 if (routeParams != null)
                     requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
-                HttpResponseMessage result = apiService.Get(requestUri);
+                HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -94,14 +94,14 @@ namespace DahuUWP.Services.ModelManager
             }
         }
 
-        public object ChargeOneSkill(Dictionary<string, object> routeParams)
+        public async Task<object> ChargeOneSkill(Dictionary<string, object> routeParams)
         {
             try
             {
                 APIService apiService = new APIService();
                 string requestUri = "skill?";
                 requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
-                HttpResponseMessage result = apiService.Get(requestUri);
+                HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -120,7 +120,7 @@ namespace DahuUWP.Services.ModelManager
             }
         }
 
-        public bool Create(object obj)
+        public async Task<bool> Create(object obj)
         {
             try
             {
@@ -130,7 +130,7 @@ namespace DahuUWP.Services.ModelManager
                 JObject jObject = Serialize(obj);
                 jObject.Remove("uuid");
                 string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = apiService.Post(jsonObject, requestUri);
+                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -153,12 +153,12 @@ namespace DahuUWP.Services.ModelManager
             }
         }
 
-        public bool Delete(int objId)
+        public async Task<bool> Delete(int objId)
         {
             throw new NotImplementedException();
         }
 
-        public bool Edit(object obj)
+        public async Task<bool> Edit(object obj)
         {
             throw new NotImplementedException();
         }
@@ -177,17 +177,17 @@ namespace DahuUWP.Services.ModelManager
 
     public class DesignSkillManager : IModelManager
     {
-        public List<object> Charge(Dictionary<string, object> routeParams)
+        public Task<List<object>> Charge(Dictionary<string, object> routeParams)
         {
             throw new NotImplementedException();
         }
 
-        public bool Create(object obj)
+        public Task<bool> Create(object obj)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(int objId)
+        public Task<bool> Delete(int objId)
         {
             throw new NotImplementedException();
         }
@@ -197,7 +197,7 @@ namespace DahuUWP.Services.ModelManager
             throw new NotImplementedException();
         }
 
-        public bool Edit(object obj)
+        public Task<bool> Edit(object obj)
         {
             throw new NotImplementedException();
         }

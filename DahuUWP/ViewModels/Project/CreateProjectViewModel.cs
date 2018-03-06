@@ -1,4 +1,5 @@
 ﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.Inputs;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using GalaSoft.MvvmLight.Command;
@@ -20,6 +21,16 @@ namespace DahuUWP.ViewModels.Project
         {
             dataService = service;
             CreateProjectCommand = new RelayCommand(CreateProject);
+            InitPageButtons();
+        }
+
+        private void InitPageButtons()
+        {
+            CreateProjectButtonBindings = new DahuButtonBindings
+            {
+                IsBusy = false,
+                TappedFuncListener = CreateProject
+            };
         }
 
         private string _projectName;
@@ -42,6 +53,16 @@ namespace DahuUWP.ViewModels.Project
             }
         }
 
+        private DahuButtonBindings _createProjectButtonBindings;
+        public DahuButtonBindings CreateProjectButtonBindings
+        {
+            get { return _createProjectButtonBindings; }
+            set
+            {
+                NotifyPropertyChanged(ref _createProjectButtonBindings, value);
+            }
+        }
+
         private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
         {
             if (object.Equals(variable, valeur)) return false;
@@ -51,8 +72,9 @@ namespace DahuUWP.ViewModels.Project
             return true;
         }
 
-        private void CreateProject()
+        private async void CreateProject()
         {
+            CreateProjectButtonBindings.IsBusy = true;
             DahuUWP.Models.Project project = new DahuUWP.Models.Project();
             ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
 
@@ -64,6 +86,7 @@ namespace DahuUWP.ViewModels.Project
                 AppGeneral.UserInterfaceStatusDico["Empty description."].Display();
             else
                 projectManager.Create(project);
+            CreateProjectButtonBindings.IsBusy = false;
         }
     }
 }

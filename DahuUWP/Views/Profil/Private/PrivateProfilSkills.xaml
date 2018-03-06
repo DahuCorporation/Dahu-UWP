@@ -37,16 +37,10 @@
                                                InputPlaceholder="Skill description"
                                                TextValue="{Binding SkillDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                InputHeader="Skill description"/>
-                            <Grid>
-                                <Interactivity:Interaction.Behaviors>
-                                    <Core:EventTriggerBehavior EventName="Tapped">
-                                        <Core:InvokeCommandAction Command="{Binding AddSkillCommand}"/>
-                                    </Core:EventTriggerBehavior>
-                                </Interactivity:Interaction.Behaviors>
-                                <Inputs:DahuButton3 x:Name="DahuButton3_AddSkill"
-                                            x:Uid="DahuButton3_AddSkill"
-                                            Style="{StaticResource EditButton}"/>
-                            </Grid>
+                            <Inputs:DahuButton3 x:Name="DahuButton3_AddSkill"
+                                                x:Uid="DahuButton3_AddSkill"
+                                                Style="{StaticResource EditButton}"
+                                                ButtonBindings="{Binding AddSkillButtonBindings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
                 </StackPanel>

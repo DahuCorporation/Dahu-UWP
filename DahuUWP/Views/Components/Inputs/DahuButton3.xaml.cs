@@ -1,4 +1,6 @@
-﻿using DahuUWP.Utils.Converter;
+﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Utils.Converter;
+using Microsoft.Toolkit.Uwp.UI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,10 +24,29 @@ namespace DahuUWP.Views.Components.Inputs
 {
     public sealed partial class DahuButton3 : UserControl
     {
+        private DependencyPropertyWatcher<string> watcher;
+        private string ButtonBackgroundSave;
+
         public DahuButton3()
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
+            watcher = new DependencyPropertyWatcher<string>(this.ProgressBarIsBusy, "IsIndeterminate");
+            watcher.PropertyChanged += ProgressBarIsBusyChanged;
+        }
+
+        private void ProgressBarIsBusyChanged(object sender, EventArgs e)
+        {
+            //TODO : Mettre en place quand tu sauras comment catcher le changement d'une propriété bindé
+            if (ButtonBindings.IsBusy)
+            {
+                ButtonBackgroundSave = ButtonBackground;
+                ButtonBackground = "#929292";
+            }
+            else
+            {
+                ButtonBackground = ButtonBackgroundSave;
+            }
         }
 
         /// <summary>
@@ -62,6 +83,20 @@ namespace DahuUWP.Views.Components.Inputs
 
         public static readonly DependencyProperty TappedCommandProperty = DependencyProperty.Register("TappedCommand", typeof(Action), typeof(DahuButton3), null);
 
+        public DahuButtonBindings ButtonBindings
+        {
+            get
+            {
+                return (DahuButtonBindings)GetValue(ButtonBindingsProperty);
+            }
+            set
+            {
+                SetValue(ButtonBindingsProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty ButtonBindingsProperty = DependencyProperty.Register("ButtonBindings", typeof(DahuButtonBindings), typeof(DahuButton3), null);
+
         public bool IsBusy
         {
             get
@@ -70,16 +105,6 @@ namespace DahuUWP.Views.Components.Inputs
             }
             set
             {
-                //Mettre en place quand tu sauras comment catcher le changement d'une propriété bindé
-                //if (value)
-                //{
-                //    ButtonBackgroundSave = ButtonBackground;
-                //    ButtonBackground = "#929292";
-                //}
-                //else
-                //{
-                //    ButtonBackground = ButtonBackgroundSave;
-                //}
                 SetValue(IsBusyProperty, value);
             }
         }
@@ -104,7 +129,7 @@ namespace DahuUWP.Views.Components.Inputs
 
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 1);
+            Window.Current.CoreWindow.PointerCursor = (!ButtonBindings.IsBusy) ? new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 1) : new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.UniversalNo, 3);
         }
 
         private void Grid_PointerExited(object sender, PointerRoutedEventArgs e)
@@ -114,9 +139,10 @@ namespace DahuUWP.Views.Components.Inputs
 
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (!IsBusy)
+            if (!ButtonBindings.IsBusy)
             {
-                TappedCommand();
+                //TappedCommand();
+                ButtonBindings.TappedFuncListener();
             }
         }
     }
