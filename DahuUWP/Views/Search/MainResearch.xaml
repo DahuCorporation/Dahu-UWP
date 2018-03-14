@@ -3,30 +3,44 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DahuUWP.Views.Search"
-    xmlns:inputs="using:DahuUWP.Views.Components.Inputs"
+    xmlns:decoration="using:DahuUWP.Views.Components.Decoration"
     xmlns:container="using:DahuUWP.Views.Components.Container"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    mc:Ignorable="d"
+    DataContext="{Binding MainResearchVM, Source={StaticResource Locator}}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="8*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1">
-            <TextBlock Text="Resultat:" FontSize="30"/>
-            <TextBlock Text="Projets:" FontSize="30"/>
-            <StackPanel Orientation="Horizontal">
-                <container:MediumProjectContainer/>
-                <container:MediumProjectContainer/>
-                <container:MediumProjectContainer/>
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:EventTriggerBehavior.Actions>
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedCommand}" />
+            </Core:EventTriggerBehavior.Actions>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
+    <ScrollViewer>
+        <Grid Style="{StaticResource BodyGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1">
+                <TextBlock x:Uid="TextBlock_Result" Text="Resultat:" FontSize="30"/>
+                <decoration:Banner x:Name="Banner_Projects" x:Uid="Banner_Projects" Value="Projects" Icon="project_w"/>
+                <GridView HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" Margin="0,0,0,10" ItemsSource="{Binding ProjectResults}">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <container:MediumProjectContainer ProjectName="{Binding Name}" Description="{Binding Description}"/>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+                <decoration:Banner x:Name="Banner_Users" x:Uid="Banner_Users" Value="Users" Icon="users_w"/>
+                <container:UserInfoBox Height="200"/>
+                <container:UserInfoBox Height="200"/>
+                <container:UserInfoBox Height="200"/>
             </StackPanel>
-            <TextBlock Text="Utilisateurs:" FontSize="30"/>
-            <container:UserInfoBox Height="200"/>
-            <container:UserInfoBox Height="200"/>
-            <container:UserInfoBox Height="200"/>
-        </StackPanel>
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </Page>

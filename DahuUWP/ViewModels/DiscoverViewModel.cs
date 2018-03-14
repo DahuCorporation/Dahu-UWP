@@ -20,8 +20,6 @@ namespace DahuUWP.ViewModels
     {
         public ICommand OnPageLoadedCommand { get; private set; }
 
-        public ObservableCollection<DahuUWP.Models.Project> Projects { get; set; }
-
         public DiscoverViewModel(IDataService service)
         {
             dataService = service;
@@ -52,6 +50,16 @@ namespace DahuUWP.ViewModels
             set
             {
                 NotifyPropertyChanged(ref _addSkillButtonBindings, value);
+            }
+        }
+
+        private ObservableCollection<DahuUWP.Models.Project> _projects;
+        public ObservableCollection<DahuUWP.Models.Project> Projects
+        {
+            get { return _projects; }
+            set
+            {
+                NotifyPropertyChanged(ref _projects, value);
             }
         }
 

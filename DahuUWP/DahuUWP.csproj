@@ -133,6 +133,7 @@
     <Compile Include="ViewModels\Project\Managing\EditProjectPrincipalInformationViewModel.cs" />
     <Compile Include="ViewModels\Project\Managing\ManageProjectViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\Search\MainResearchViewModel.cs" />
     <Compile Include="Views\Components\Container\MediumProjectContainer .xaml.cs">
       <DependentUpon>MediumProjectContainer .xaml</DependentUpon>
     </Compile>
@@ -147,6 +148,9 @@
     </Compile>
     <Compile Include="Views\Components\DahuSpecMenu.xaml.cs">
       <DependentUpon>DahuSpecMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Decoration\Banner.xaml.cs">
+      <DependentUpon>Banner.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Inputs\ContentiButton.xaml.cs">
       <DependentUpon>ContentiButton.xaml</DependentUpon>
@@ -328,9 +332,9 @@
     <Content Include="Assets\Dahu-Icon\planet-earth.png" />
     <Content Include="Assets\Dahu-Icon\play-button.png" />
     <Content Include="Assets\Dahu-Icon\power-button.png" />
-    <Content Include="Assets\Dahu-Icon\presentation.png" />
-    <Content Include="Assets\Dahu-Icon\presentation_white.png" />
     <Content Include="Assets\Dahu-Icon\printer.png" />
+    <Content Include="Assets\Dahu-Icon\project.png" />
+    <Content Include="Assets\Dahu-Icon\project_w.png" />
     <Content Include="Assets\Dahu-Icon\reload.png" />
     <Content Include="Assets\Dahu-Icon\return.png" />
     <Content Include="Assets\Dahu-Icon\rss.png" />
@@ -356,6 +360,7 @@
     <Content Include="Assets\Dahu-Icon\user-3.png" />
     <Content Include="Assets\Dahu-Icon\user.png" />
     <Content Include="Assets\Dahu-Icon\users.png" />
+    <Content Include="Assets\Dahu-Icon\users_w.png" />
     <Content Include="Assets\Dahu-Icon\video-camera.png" />
     <Content Include="Assets\Dahu-Icon\wifi.png" />
     <Content Include="Assets\Dahu-Icon\zoom-in.png" />
@@ -405,6 +410,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\DahuSpecMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Decoration\Banner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Views.Search;
+using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,7 +24,33 @@ namespace DahuUWP.Views.Components
     {
         public DahuSpecMenu()
         {
+            DataContext = this;
             this.InitializeComponent();
+            ResearchButtonBindings = new DahuButtonBindings
+            {
+                IsBusy = false,
+                TappedFuncListener = Research
+            };
         }
+
+        public async void Research()
+        {
+            ResearchButtonBindings.IsBusy = true;
+            HomePage.DahuFrame.Navigate(typeof(MainResearch));
+            ResearchButtonBindings.IsBusy = false;
+        }
+
+        public DahuButtonBindings ResearchButtonBindings
+        {
+            get { return (DahuButtonBindings)GetValue(ResearchButtonBindingsProperty); }
+            set
+            {
+                SetValue(ResearchButtonBindingsProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty ResearchButtonBindingsProperty =
+            DependencyProperty.Register("ResearchButtonBindings", typeof(DahuButtonBindings), typeof(DahuSpecMenu), new PropertyMetadata(null));
+        
     }
 }

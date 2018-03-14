@@ -6,6 +6,7 @@ using DahuUWP.ViewModels.Profil.Private;
 using DahuUWP.ViewModels.Profil.Public;
 using DahuUWP.ViewModels.Project;
 using DahuUWP.ViewModels.Project.Managing;
+using DahuUWP.ViewModels.Search;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -52,6 +53,10 @@ namespace DahuUWP
             SimpleIoc.Default.Register<EditProjectParametersViewModel>();
             SimpleIoc.Default.Register<ManageProjectViewModel>();
             SimpleIoc.Default.Register<CreateProjectViewModel>();
+
+            //Search
+            SimpleIoc.Default.Register<MainResearchViewModel>();
+            
         }
 
         public HomePageViewModel HomePageVM
@@ -89,29 +94,32 @@ namespace DahuUWP
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<PublicProfilViewModel>(); return (PublicProfilViewModel)CurrentViewModel; }
         }
 
+        //Project
         public EditProjectMembersViewModel EditProjectMembersVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<EditProjectMembersViewModel>(); return (EditProjectMembersViewModel)CurrentViewModel; }
         }
-
         public EditProjectPrincipalInformationViewModel EditProjectPrincipalInformationVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<EditProjectPrincipalInformationViewModel>(); return (EditProjectPrincipalInformationViewModel)CurrentViewModel; }
         }
-
         public EditProjectParametersViewModel EditProjectParametersVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<EditProjectParametersViewModel>(); return (EditProjectParametersViewModel)CurrentViewModel; }
         }
-
         public ManageProjectViewModel ManageProjectVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<ManageProjectViewModel>(); return (ManageProjectViewModel)CurrentViewModel; }
         }
-
         public CreateProjectViewModel CreateProjectVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<CreateProjectViewModel>(); return (CreateProjectViewModel)CurrentViewModel; }
+        }
+
+        //Search
+        public MainResearchViewModel MainResearchVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<MainResearchViewModel>(); return (MainResearchViewModel)CurrentViewModel; }
         }
     }
 }

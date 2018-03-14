@@ -11,6 +11,13 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     DataContext="{Binding PrivateProfilMainInformationVM, Source={StaticResource Locator}}">
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:EventTriggerBehavior.Actions>
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedCommand}" />
+            </Core:EventTriggerBehavior.Actions>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
     <ScrollViewer>
         <Grid  VerticalAlignment="Top" Background="#FFFFFF" Style="{StaticResource WhiteContentGrid}">
             <StackPanel>
@@ -36,16 +43,10 @@
                                                InputPlaceholder="Biography"
                                                TextValue="{Binding UserBiography, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                InputHeader="Biography"/>
-                        <Grid>
-                            <Interactivity:Interaction.Behaviors>
-                                <Core:EventTriggerBehavior EventName="Tapped">
-                                    <Core:InvokeCommandAction Command="{Binding SaveMainInformationCommand}"/>
-                                </Core:EventTriggerBehavior>
-                            </Interactivity:Interaction.Behaviors>
-                            <Inputs:DahuButton3 x:Name="DahuButton3_SaveMainInformation"
+                        <Inputs:DahuButton3 x:Name="DahuButton3_SaveMainInformation"
                                             x:Uid="DahuButton3_SaveMainInformation"
-                                            Style="{StaticResource EditButton}"/>
-                        </Grid>
+                                            Style="{StaticResource EditButton}"
+                                            ButtonBindings="{Binding UpdateProfilMainInformation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" VerticalAlignment="Top" Padding="10,0,0,0">
                         <Inputs:DahuInputText3 x:Name="UserFirstName"

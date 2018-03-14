@@ -1,4 +1,5 @@
-﻿using DahuUWP.Models;
+﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using GalaSoft.MvvmLight;
@@ -15,14 +16,22 @@ namespace DahuUWP.ViewModels.Profil.Private
 {
     public class PrivateProfilMainInformationViewModel : DahuViewModelBase
     {
-
-        public ICommand SaveMainInformationCommand { get; set; }
+        public ICommand OnPageLoadedCommand { get; private set; }
 
         public PrivateProfilMainInformationViewModel(IDataService service)
         {
             dataService = service;
-            SaveMainInformationCommand = new RelayCommand(SaveMainInformation);
+            OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
             FillDataView();
+        }
+
+        private async void OnPageLoaded()
+        {
+            UpdateProfilMainInformation = new DahuButtonBindings
+            {
+                IsBusy = false,
+                TappedFuncListener = UpdateMainInformation
+            };
         }
 
         private string _userName;
@@ -84,6 +93,16 @@ namespace DahuUWP.ViewModels.Profil.Private
             return true;
         }
 
+        private DahuButtonBindings _updateProfilMainInformation;
+        public DahuButtonBindings UpdateProfilMainInformation
+        {
+            get { return _updateProfilMainInformation; }
+            set
+            {
+                NotifyPropertyChanged(ref _updateProfilMainInformation, value);
+            }
+        }
+
         private async void FillDataView()
         {
             UserManager userManager = (UserManager)dataService.GetUserManager();
@@ -119,10 +138,12 @@ namespace DahuUWP.ViewModels.Profil.Private
             return user;
         }
 
-        private void SaveMainInformation()
+        private async void UpdateMainInformation()
         {
+            UpdateProfilMainInformation.IsBusy = true;
             UserManager userManager = (UserManager)dataService.GetUserManager();
-            userManager.Edit(RecupUserMainInformation());
+            await userManager.Edit(RecupUserMainInformation());
+            UpdateProfilMainInformation.IsBusy = false;
         }
     }
 }
