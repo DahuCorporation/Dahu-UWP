@@ -6,10 +6,8 @@
         xmlns:inputs="using:DahuUWP.Views.Components.Inputs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
-
+    mc:Ignorable="d">
+    <!--MinWidth="300" MaxWidth="480"-->
     <Grid Width="480" Height="460" Background="#FFFFFF">
         <StackPanel>
             <Grid Height="180" >

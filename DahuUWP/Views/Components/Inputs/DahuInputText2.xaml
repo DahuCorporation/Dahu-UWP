@@ -14,6 +14,7 @@
                      Background="#FEFEFE" 
                      BorderThickness="0,0,0,0"
                      Padding="12"
+                     Text="{Binding Path=TextValue, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
                      InputScope="{Binding Path=InputScope, FallbackValue='Default'}"
                      IsTextPredictionEnabled="False" IsSpellCheckEnabled="False" FontSize="16">
             </TextBox>

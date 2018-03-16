@@ -30,9 +30,19 @@ namespace DahuUWP.DahuTech
     public static class AppGeneral
     {
 
+        /// <summary>
+        /// Don't forget to add a PreviousNavigatePageParam in the view model. This is needed if the user go back to a page where there was a param but this param has changed
+        /// 
+        /// MVVM Technique:
+        /// https://marcominerva.wordpress.com/2013/05/07/calling-viewmodel-methods-in-response-to-page-navigation-events-using-mvvm-light-in-winrt/
+        /// </summary>
+        public static object NavigatePageParam { get; set; }
+
+        public static Type NavigateTo { get; set; }
+
         public static Dictionary<string, DahuNotification> UserInterfaceStatusDico { get; set; }
 
-        //TODO detecter le language pour pouvoir charger le bon xml celon la langue
+        //TODO : detecter le language pour pouvoir charger le bon xml selon la langue
         // XML tuto: http://www.c-sharpcorner.com/article/read-xml-file-in-windows-10-universal-app/
         static private void InitUserInterfaceStatusDico()
         {

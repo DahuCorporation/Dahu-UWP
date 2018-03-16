@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DahuUWP.Views.Search"
     xmlns:decoration="using:DahuUWP.Views.Components.Decoration"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:container="using:DahuUWP.Views.Components.Container"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -11,7 +12,22 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     DataContext="{Binding MainResearchVM, Source={StaticResource Locator}}">
-
+    <!--
+    TODO: adapater les projets à la page, faire en sorte que le composant project s'adapte à plusieur taille-->
+    <!--<controls:AdaptiveGridView Name="AdaptiveGridViewControl"
+                                   OneRowModeEnabled="False"
+                                              HorizontalContentAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                   DesiredWidth="480"
+                                           ItemHeight="480"
+                                   SelectionMode="Single"
+                                   IsItemClickEnabled="False"
+                                   ItemTemplate="{StaticResource PhotosTemplate}" ItemsSource="{Binding ProjectResults}"/>
+    <Page.Resources>
+        <DataTemplate x:Key="PhotosTemplate">
+            <container:MediumProjectContainer ProjectName="{Binding Name}" Margin="0" Description="{Binding Description}" Height="300" Width="200" />
+        </DataTemplate>
+    </Page.Resources>-->
     <Interactivity:Interaction.Behaviors>
         <Core:EventTriggerBehavior EventName="Loaded">
             <Core:EventTriggerBehavior.Actions>
@@ -27,19 +43,56 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1">
+
                 <TextBlock x:Uid="TextBlock_Result" Text="Resultat:" FontSize="30"/>
-                <decoration:Banner x:Name="Banner_Projects" x:Uid="Banner_Projects" Value="Projects" Icon="project_w"/>
-                <GridView HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" Margin="0,0,0,10" ItemsSource="{Binding ProjectResults}">
+                <decoration:Banner x:Name="Banner_Projects" x:Uid="Banner_Projects" Value="Projects" Icon="project_w" Margin="0,0,0,5"/>
+
+                <!-- [GridView] Project results-->
+                <GridView x:Name="ProjectResultsGridView"
+                          HorizontalAlignment="Center"
+                          HorizontalContentAlignment="Stretch"
+                          Margin="0,0,0,10"
+                          ItemsSource="{Binding ProjectResults}"
+                          BorderThickness="0"
+                          Padding="0">
                     <GridView.ItemTemplate>
                         <DataTemplate>
                             <container:MediumProjectContainer ProjectName="{Binding Name}" Description="{Binding Description}"/>
                         </DataTemplate>
                     </GridView.ItemTemplate>
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Margin" Value="10 "/>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
                 </GridView>
-                <decoration:Banner x:Name="Banner_Users" x:Uid="Banner_Users" Value="Users" Icon="users_w"/>
-                <container:UserInfoBox Height="200"/>
-                <container:UserInfoBox Height="200"/>
-                <container:UserInfoBox Height="200"/>
+                
+                
+                <decoration:Banner x:Name="Banner_Users" x:Uid="Banner_Users" Value="Users" Icon="users_w" Margin="0,0,0,5"/>
+
+                <!-- [ScrollViewer] User results-->
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="0">
+                    <ItemsControl Name="ProjectCarousel" ItemsSource="{Binding UserResults}" >
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <container:UserInfoBox UserFullName="{Binding FullName}" UserBiography="{Binding Biography}" Margin="0,10,0,0" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
             </StackPanel>
         </Grid>
     </ScrollViewer>

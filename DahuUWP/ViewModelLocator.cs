@@ -1,6 +1,8 @@
-﻿using DahuUWP.Models;
+﻿using CommonServiceLocator;
+using DahuUWP.Models;
 using DahuUWP.Services;
 using DahuUWP.ViewModels;
+using DahuUWP.ViewModels.Component;
 using DahuUWP.ViewModels.Profil;
 using DahuUWP.ViewModels.Profil.Private;
 using DahuUWP.ViewModels.Profil.Public;
@@ -9,7 +11,6 @@ using DahuUWP.ViewModels.Project.Managing;
 using DahuUWP.ViewModels.Search;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,7 +57,9 @@ namespace DahuUWP
 
             //Search
             SimpleIoc.Default.Register<MainResearchViewModel>();
-            
+
+            SimpleIoc.Default.Register<DahuSpecMenuViewModel>();
+
         }
 
         public HomePageViewModel HomePageVM
@@ -120,6 +123,11 @@ namespace DahuUWP
         public MainResearchViewModel MainResearchVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<MainResearchViewModel>(); return (MainResearchViewModel)CurrentViewModel; }
+        }
+
+        public DahuSpecMenuViewModel DahuSpecMenuVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<DahuSpecMenuViewModel>(); return (DahuSpecMenuViewModel)CurrentViewModel; }
         }
     }
 }

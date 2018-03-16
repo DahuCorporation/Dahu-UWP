@@ -26,5 +26,6 @@ namespace DahuUWP.Views.Search
         {
             this.InitializeComponent();
         }
+
     }
 }

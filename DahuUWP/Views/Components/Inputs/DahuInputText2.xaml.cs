@@ -21,14 +21,44 @@ namespace DahuUWP.Views.Components.Inputs
     {
         public DahuInputText2()
         {
-            DataContext = this;
             this.InitializeComponent();
+            (this.Content as FrameworkElement).DataContext = this;
         }
 
-        public int InputWidth { get; set; }
+        public string InputWidth
+        {
+            get { return (string)GetValue(InputWidthProperty); }
+            set { SetValue(InputWidthProperty, value); }
+        }
 
-        public string InputPlaceholder { get; set; }
+        public static readonly DependencyProperty InputWidthProperty =
+        DependencyProperty.Register("InputWidth", typeof(string), typeof(DahuInputText2), new PropertyMetadata(null));
 
-        public string InputScope { get; set; }
+        public string InputPlaceholder
+        {
+            get { return (string)GetValue(InputPlaceholderProperty); }
+            set { SetValue(InputPlaceholderProperty, value); }
+        }
+
+        public static readonly DependencyProperty InputPlaceholderProperty =
+        DependencyProperty.Register("InputPlaceholder", typeof(string), typeof(DahuInputText2), new PropertyMetadata(null));
+
+        public string InputScope
+        {
+            get { return (string)GetValue(InputScopeProperty); }
+            set { SetValue(InputScopeProperty, value); }
+        }
+
+        public static readonly DependencyProperty InputScopeProperty =
+        DependencyProperty.Register("InputScope", typeof(string), typeof(DahuInputText2), new PropertyMetadata(null));
+
+        public string TextValue
+        {
+            get { return (string)GetValue(TextValueProperty); }
+            set { SetValue(TextValueProperty, value); }
+        }
+
+        public static readonly DependencyProperty TextValueProperty =
+                DependencyProperty.Register("TextValue", typeof(string), typeof(DahuInputText2), new PropertyMetadata(null));
     }
 }

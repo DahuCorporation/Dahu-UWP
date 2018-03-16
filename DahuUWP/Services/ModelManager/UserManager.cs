@@ -20,18 +20,19 @@ namespace DahuUWP.Models.ModelManager
             {
                 List<object> userList = new List<object>();
                 APIService apiService = new APIService();
-                string requestUri = "users/";
+                string requestUri = "users/?_token=" + AppStaticInfo.Account.Token;
 
-                requestUri += AppStaticInfo.Account.Uuid + "?";
+                //requestUri += AppStaticInfo.Account.Uuid + "?";
                 // separateur ce met au début, 
-                requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                if (routeParams != null)
+                    requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
                 HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        JToken jUser = resp["data"].First;
+                        JToken jUser = resp["data"]["users"].First;
                         for (int i = 0; jUser != null; i++)
                         {
                             userList.Add(jUser.ToObject<User>());
