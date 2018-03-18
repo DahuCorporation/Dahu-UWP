@@ -69,6 +69,7 @@ namespace DahuUWP.Models.ModelManager
                         AppGeneral.UserInterfaceStatusDico["Project created successfully."].Display(((Project)project).Name);
                         return true;
                     case 400:
+                        // todo : Attention la description a une taille minimum
                         //TODO : différencier les erreurs, si c'est une erreur de projet deja existant ou si le uuid est incorect...
                         AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
                         return false;

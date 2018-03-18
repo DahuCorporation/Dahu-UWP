@@ -192,8 +192,9 @@ namespace DahuUWP.Models.ModelManager
               try
             {
                 APIService apiService = new APIService();
-                string requestUri = "users";
-                requestUri += "?_token=" + AppStaticInfo.Account.Token;
+                string requestUri = "users/";
+                //http://fncs.eu/api/forward/users/b7f8953c-d0d0-5150-b54b-e1ca5ea4afba?_token=$2y$10$ZrxgWOi1BMkNOlWWk01L0e7GpS2lLDWzhaXIqNG05ilMZYpxlkU36
+                requestUri += AppStaticInfo.Account.Uuid + "?_token=" + AppStaticInfo.Account.Token;
 
                 JObject jObject = Serialize(obj);
                 jObject.Remove("mail");
