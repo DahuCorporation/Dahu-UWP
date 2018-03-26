@@ -132,6 +132,12 @@
   <data name="CreateProjectTitle.Text" xml:space="preserve">
     <value>Creation de projet</value>
   </data>
+  <data name="DahuAllInBtnProjectResult.Value" xml:space="preserve">
+    <value>La recherche n'a abouti à aucun résultat</value>
+  </data>
+  <data name="DahuAllInBtnUserResult.Value" xml:space="preserve">
+    <value>La recherche n'a abouti à aucun résultat</value>
+  </data>
   <data name="DahuButton3_AddMember.Value" xml:space="preserve">
     <value>Envoyer l'invitaion</value>
   </data>

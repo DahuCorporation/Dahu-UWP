@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DahuUWP.Views.Components"
     xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
+    xmlns:menu="using:DahuUWP.Views.Components.Menu"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,21 +18,16 @@
             </Core:EventTriggerBehavior.Actions>
         </Core:EventTriggerBehavior>
     </Interactivity:Interaction.Behaviors>
-    <Grid Height="330">
+    <Grid Height="auto">
         <Grid.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/Background/DahuSpecMenuBG.jpg" Stretch="None"/>
         </Grid.Background>
-        <Rectangle Height="400" Fill="Black" Opacity="0.6"></Rectangle>
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
-                <TextBlock x:Name="DiscoverLink" x:Uid="DiscoverLinkDahuSpecMenu" Text="Discover" Foreground="White" Style="{StaticResource DahuSpecMenuLink}"/>
-                <TextBlock x:Name="ProjectLink" x:Uid="ProjectLinkDahuSpecMenu" Text="My project" Foreground="White"  Style="{StaticResource DahuSpecMenuLink}"/>
-                <TextBlock x:Name="CreateProjectLink" x:Uid="CreateProjectLinkDahuSpecMenu" Text="Create project" Foreground="White"  Style="{StaticResource DahuSpecMenuLink}"/>
-            </StackPanel>
-            <TextBlock x:Name="TitleFindProject" x:Uid="TitleFindProject" Text="Find a project" Style="{StaticResource DahuH2}" HorizontalAlignment="Center" Margin="20,40,20,10"/>
+        <Rectangle Height="Auto" Fill="Black" Opacity="0.6"></Rectangle>
+        <StackPanel Orientation="Vertical" Margin="30,30,30,45">
+            <menu:TopBarMenu HorizontalAlignment="Center"/>
+            <TextBlock x:Name="TitleFindProject" x:Uid="TitleFindProject" Text="Find a project" Style="{StaticResource DahuH2}" HorizontalAlignment="Center" Margin="20,20,20,10"/>
             <TextBlock x:Name="TitleInnovationIsHere" x:Uid="TitleInnovationIsHere" Text="L'inovation commence ici, trouver un projet et faites en partie" Style="{StaticResource DahuTextWhite}" HorizontalAlignment="Center" FontWeight="SemiBold" Margin="0,0,0,18"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="ezf"/>
                 <Inputs:DahuInputText2 x:Name="DahuInputText2_ResearchValue" InputWidth="300" InputPlaceholder="Votre recherche" Margin="0,0,12,0" TextValue="{Binding ResearchValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Inputs:DahuButton3 x:Name="DahuButton3_Research"  x:Uid="DahuButton3_Search" Value="Research" ButtonBackground="#FFD0691C" ButtonBindings="{Binding ResearchButtonBindings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 

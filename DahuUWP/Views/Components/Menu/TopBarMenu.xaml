@@ -1,0 +1,36 @@
+﻿<UserControl
+    x:Class="DahuUWP.Views.Components.Menu.TopBarMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DahuUWP.Views.Components.Menu"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="104"
+    d:DesignWidth="900">
+
+    <Grid>
+        <ItemsControl Name="ProjectCarousel" ItemsSource="{Binding NodesMenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="24,0" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tapped="NodeMenuTapped" Style="{StaticResource DahuSpecMenuLink}"  />
+                            <Rectangle x:Name="HoverRectangle" Height="2" Width="Auto" HorizontalAlignment="Stretch" Fill="White" Margin="-3,2" Opacity="0">
+                            </Rectangle>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

@@ -101,6 +101,8 @@
     </Compile>
     <Compile Include="DahuTech\Inputs\DahuButtonBindings.cs" />
     <Compile Include="DahuTech\Inputs\DahuButtonOptions.cs" />
+    <Compile Include="DahuTech\Menu\Menu.cs" />
+    <Compile Include="DahuTech\Menu\NodeMenu.cs" />
     <Compile Include="DahuTech\ViewNotification\Notification.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AppStaticInfo.cs" />
@@ -160,6 +162,9 @@
     <Compile Include="Views\Components\Inputs\ContentiButton.xaml.cs">
       <DependentUpon>ContentiButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Components\Inputs\DahuAllInBtn.xaml.cs">
+      <DependentUpon>DahuAllInBtn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Components\Inputs\DahuButton1.xaml.cs">
       <DependentUpon>DahuButton1.xaml</DependentUpon>
     </Compile>
@@ -189,6 +194,9 @@
     </Compile>
     <Compile Include="Views\Components\Inputs\StarRating.xaml.cs">
       <DependentUpon>StarRating.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Menu\TopBarMenu.xaml.cs">
+      <DependentUpon>TopBarMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Popups\Dialog.xaml.cs">
       <DependentUpon>Dialog.xaml</DependentUpon>
@@ -426,6 +434,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Components\Inputs\DahuAllInBtn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Components\Inputs\DahuButton1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -463,6 +475,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\Inputs\StarRating.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Menu\TopBarMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

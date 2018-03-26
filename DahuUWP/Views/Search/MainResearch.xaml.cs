@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DahuUWP.ViewModels.Search;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,11 @@ namespace DahuUWP.Views.Search
         public MainResearch()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ((MainResearchViewModel)DataContext).NavigationParam = e.Parameter;
         }
 
     }

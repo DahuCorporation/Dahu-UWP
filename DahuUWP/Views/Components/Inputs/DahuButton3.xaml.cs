@@ -129,17 +129,20 @@ namespace DahuUWP.Views.Components.Inputs
 
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            Window.Current.CoreWindow.PointerCursor = (!ButtonBindings.IsBusy) ? new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 1) : new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.UniversalNo, 3);
+            if (ButtonBindings != null)
+                Window.Current.CoreWindow.PointerCursor = (!ButtonBindings.IsBusy) ? new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 1) : new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.UniversalNo, 3);
         }
 
         private void Grid_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 2);
+            if (ButtonBindings != null)
+                Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 2);
         }
 
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (!ButtonBindings.IsBusy)
+            if (ButtonBindings != null
+                && !ButtonBindings.IsBusy)
             {
                 //TappedCommand();
                 ButtonBindings.TappedFuncListener();

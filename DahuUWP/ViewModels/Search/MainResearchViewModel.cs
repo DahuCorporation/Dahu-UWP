@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 
 namespace DahuUWP.ViewModels.Search
@@ -31,21 +32,22 @@ namespace DahuUWP.ViewModels.Search
         {
             ProjectResults = null;
             UserResults = null;
-            string researchValue = (string)AppGeneral.NavigatePageParam;
-            if (AppGeneral.NavigateTo == typeof(MainResearch)
-            && !string.IsNullOrWhiteSpace(researchValue))
+            string researchValue = (string)NavigationParam;
+            if (!string.IsNullOrWhiteSpace(researchValue))
             {
                 // [Project] search
                 ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
                 List<DahuUWP.Models.Project> projects = (await projectManager.Charge(null)).Cast<DahuUWP.Models.Project>().ToList();
                 List<DahuUWP.Models.Project> projectResult = FindProjectsMatching(projects, researchValue);
                 ProjectResults = new ObservableCollection<DahuUWP.Models.Project>(projectResult);
+                DahuAllInBtnProjectResultVisibility = (projectResult.Count() > 0) ? Visibility.Collapsed : Visibility.Visible;
 
                 // [User] search
                 UserManager userManager = (UserManager)dataService.GetUserManager();
                 List<User> users = (await userManager.Charges(null)).Cast<User>().ToList();
                 List<object> userResult = FindUsersMatching(users, researchValue);
                 UserResults = new ObservableCollection<object>(userResult);
+                DahuAllInBtnUserResultVisibility = (userResult.Count() > 0) ? Visibility.Collapsed : Visibility.Visible;
             }
         }
 
@@ -99,6 +101,26 @@ namespace DahuUWP.ViewModels.Search
             set
             {
                 NotifyPropertyChanged(ref _userResults, value);
+            }
+        }
+
+        private Visibility _DahuAllInBtnProjectResultVisibility;
+        public Visibility DahuAllInBtnProjectResultVisibility
+        {
+            get { return _DahuAllInBtnProjectResultVisibility; }
+            set
+            {
+                NotifyPropertyChanged(ref _DahuAllInBtnProjectResultVisibility, value);
+            }
+        }
+
+        private Visibility _DahuAllInBtnUserResultVisibility;
+        public Visibility DahuAllInBtnUserResultVisibility
+        {
+            get { return _DahuAllInBtnUserResultVisibility; }
+            set
+            {
+                NotifyPropertyChanged(ref _DahuAllInBtnUserResultVisibility, value);
             }
         }
 

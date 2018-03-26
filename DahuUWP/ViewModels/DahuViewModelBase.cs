@@ -14,6 +14,7 @@ namespace DahuUWP.ViewModels
 {
     public abstract class DahuViewModelBase : ViewModelBase
     {
+        public object NavigationParam { get; set; }
         public IDataService dataService;
 
         private DahuNotification _notification;

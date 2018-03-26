@@ -5,6 +5,7 @@
     xmlns:local="using:DahuUWP.Views"
     xmlns:Components="using:DahuUWP.Views.Components"
     xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
+    xmlns:menu="using:DahuUWP.Views.Components.Menu"
     xmlns:popups="using:DahuUWP.Views.Components.Popups"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -28,6 +29,7 @@
 
 
                     <Components:DahuSpecMenu x:Name="DahuSpecMenu"/>
+                    <menu:TopBarMenu/>
                     <Grid Margin="0,18,0,0">
                         <Grid.ColumnDefinitions>
                         </Grid.ColumnDefinitions>
@@ -47,7 +49,7 @@
                             </ItemsControl>
                         </ScrollViewer>
                     </Grid>
-                    <ProgressBar IsIndeterminate="{Binding IsBusy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="Visible" ShowPaused="False" ShowError="False" HorizontalAlignment="Stretch" Foreground="Black" VerticalAlignment="Bottom" Margin="50" Background="Black"/>
+                    <!--<ProgressBar IsIndeterminate="{Binding IsBusy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="Visible" ShowPaused="False" ShowError="False" HorizontalAlignment="Stretch" Foreground="Black" VerticalAlignment="Bottom" Margin="50" Background="Black"/>-->
                     <Inputs:DahuButton3 x:Name="DahuButton3_AddSkill"
                                             x:Uid="DahuButton3_AddSkill"
                                             Style="{StaticResource EditButton}"

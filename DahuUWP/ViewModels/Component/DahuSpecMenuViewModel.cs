@@ -1,4 +1,5 @@
-﻿using DahuUWP.DahuTech;
+﻿using CommonServiceLocator;
+using DahuUWP.DahuTech;
 using DahuUWP.DahuTech.Inputs;
 using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
@@ -44,9 +45,7 @@ namespace DahuUWP.ViewModels.Component
         public async void Research()
         {
             ResearchButtonBindings.IsBusy = true;
-            AppGeneral.NavigatePageParam = ResearchValue;
-            AppGeneral.NavigateTo = typeof(MainResearch);
-            HomePage.DahuFrame.Navigate(typeof(MainResearch));
+            HomePage.DahuFrame.Navigate(typeof(MainResearch), ResearchValue);
             ResearchButtonBindings.IsBusy = false;
         }
 
