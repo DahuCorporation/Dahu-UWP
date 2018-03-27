@@ -64,7 +64,7 @@ namespace DahuUWP
 
         public HomePageViewModel HomePageVM
         {
-            get { CurrentViewModel = ServiceLocator.Current.GetInstance<HomePageViewModel>(); return (HomePageViewModel)CurrentViewModel; }
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<HomePageViewModel>(); HomePageViewModel = ServiceLocator.Current.GetInstance<HomePageViewModel>();  return (HomePageViewModel)CurrentViewModel; }
         }
 
         public ConnectionViewModel ConnectionVM

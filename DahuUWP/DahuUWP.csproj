@@ -101,8 +101,10 @@
     </Compile>
     <Compile Include="DahuTech\Inputs\DahuButtonBindings.cs" />
     <Compile Include="DahuTech\Inputs\DahuButtonOptions.cs" />
+    <Compile Include="DahuTech\Menu\DahuSpecMenuOptions.cs" />
     <Compile Include="DahuTech\Menu\Menu.cs" />
     <Compile Include="DahuTech\Menu\NodeMenu.cs" />
+    <Compile Include="DahuTech\Menu\TopBarNodeMenu.cs" />
     <Compile Include="DahuTech\ViewNotification\Notification.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AppStaticInfo.cs" />

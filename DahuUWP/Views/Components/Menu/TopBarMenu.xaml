@@ -22,10 +22,10 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="24,0" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited">
+                    <Grid Padding="24,0" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" Tapped="TopBarNodeMenuTapped">
                         <StackPanel>
-                            <TextBlock Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tapped="NodeMenuTapped" Style="{StaticResource DahuSpecMenuLink}"  />
-                            <Rectangle x:Name="HoverRectangle" Height="2" Width="Auto" HorizontalAlignment="Stretch" Fill="White" Margin="-3,2" Opacity="0">
+                            <TextBlock Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DahuSpecMenuLink}"  />
+                            <Rectangle x:Name="HoverRectangle" Height="2" Width="Auto" HorizontalAlignment="Stretch" Fill="White" Margin="-3,2" Opacity="{Binding HoverRectangleOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             </Rectangle>
                         </StackPanel>
                     </Grid>

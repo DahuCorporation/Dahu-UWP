@@ -3,6 +3,7 @@ using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using DahuUWP.Services.ModelManager;
+using DahuUWP.Views;
 using DahuUWP.Views.Components.Inputs;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -29,6 +30,7 @@ namespace DahuUWP.ViewModels
 
         private async void OnPageLoaded()
         {
+            ((HomePageViewModel)ViewModelLocator.HomePageViewModel).SwitchOrActiveCurrentTopBarNodeMenu(typeof(Discover));
             LoadProjects();
         }
 

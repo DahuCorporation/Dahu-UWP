@@ -6,8 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:inputs="using:DahuUWP.Views.Components.Inputs"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    mc:Ignorable="d"
+    DataContext="{Binding ManageProjectVM, Source={StaticResource Locator}}">
 
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:EventTriggerBehavior.Actions>
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedCommand}" />
+            </Core:EventTriggerBehavior.Actions>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
     <ScrollViewer>
         <Grid Style="{StaticResource BodyGrid}">
             <Grid.ColumnDefinitions>

@@ -26,10 +26,6 @@
         <ScrollViewer>
             <Grid>
                 <StackPanel>
-
-
-                    <Components:DahuSpecMenu x:Name="DahuSpecMenu"/>
-                    <menu:TopBarMenu/>
                     <Grid Margin="0,18,0,0">
                         <Grid.ColumnDefinitions>
                         </Grid.ColumnDefinitions>

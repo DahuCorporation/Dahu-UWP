@@ -5,6 +5,7 @@
     xmlns:local="using:DahuUWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Components="using:DahuUWP.Views.Components"
     xmlns:Component="using:DahuUWP.Views.Component"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:Popups="using:DahuUWP.Views.Components.Popups"
@@ -35,13 +36,15 @@
                                 OptionsItemTemplate="{StaticResource DefaultTemplate}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="48" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-
-                <!--<TextBlock Text="{Binding Path=Prenom}"/>-->
-                <!--Connected="{Binding Connected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
-                <Component:TopBar x:Name="TopBar" Grid.Row="0"  DataContext="{Binding HomePageVM, Source={StaticResource Locator}}"/>
+                
+                    <StackPanel Grid.Row="0">
+                    <Component:TopBar x:Name="TopBar" Grid.Row="0"  DataContext="{Binding HomePageVM, Source={StaticResource Locator}}" Height="48"/>
+                    <Components:DahuSpecMenu x:Name="DahuSpecMenu"  NodesTopBarMenu="{Binding NodesTopBarMenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+               
                 <Frame x:Name="DahuBurgerFrame" Navigated="DahuBurgerFrame_Navigated" Grid.Row="1" Background="#EFEFEF">
                 </Frame>
             </Grid>

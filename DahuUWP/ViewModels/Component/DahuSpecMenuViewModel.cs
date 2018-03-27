@@ -1,6 +1,7 @@
 ﻿using CommonServiceLocator;
 using DahuUWP.DahuTech;
 using DahuUWP.DahuTech.Inputs;
+using DahuUWP.DahuTech.Menu;
 using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
@@ -10,6 +11,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -40,6 +42,7 @@ namespace DahuUWP.ViewModels.Component
 
         private async void OnPageLoaded()
         {
+            ((HomePageViewModel)ViewModelLocator.HomePageViewModel).SwitchOrActiveCurrentTopBarNodeMenu(typeof(Discover));
         }
 
         public async void Research()
@@ -49,6 +52,15 @@ namespace DahuUWP.ViewModels.Component
             ResearchButtonBindings.IsBusy = false;
         }
 
+        private ObservableCollection<TopBarNodeMenu> _nodesTopBarMenu;
+        public ObservableCollection<TopBarNodeMenu> NodesTopBarMenu
+        {
+            get { return _nodesTopBarMenu; }
+            set
+            {
+                NotifyPropertyChanged(ref _nodesTopBarMenu, value);
+            }
+        }
 
         private DahuButtonBindings _researchButtonBindings;
         public DahuButtonBindings ResearchButtonBindings

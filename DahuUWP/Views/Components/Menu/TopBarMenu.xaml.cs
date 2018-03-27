@@ -1,4 +1,5 @@
-﻿using DahuUWP.DahuTech.Menu;
+﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.Menu;
 using DahuUWP.Views.Project;
 using DahuUWP.Views.Project.Managing;
 using Microsoft.Toolkit.Uwp.UI.Animations;
@@ -30,40 +31,51 @@ namespace DahuUWP.Views.Components.Menu
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
-            List<NodeMenu> listNodes = new List<NodeMenu>
-            {
-                new NodeMenu{ Title = "Découvrir", PageLink = typeof(Discover)},
-                new NodeMenu{ Title = "Mes projets", PageLink = typeof(ManageProject)},
-                new NodeMenu{ Title = "Creer un projet", PageLink = typeof(CreateProject)}
-            };
-            //var titi = new
-            //{
-            //    zefezf ="ef"
-            //};
-            //List<object> listNodes = new List<object>()
-            //{
-            //    new { Title = "Découvrir", PageLink = typeof(Discover), VisibleRectangle = Visibility.Collapsed, Index = 0},
-            //    new { Title = "Mes projets", PageLink = typeof(ManageProject), VisibleRectangle = Visibility.Collapsed, Index = 1},
-            //    new { Title = "Creer un projet", PageLink = typeof(CreateProject), VisibleRectangle = Visibility.Collapsed, Index = 2}
-            //};
-            NodesMenu = new ObservableCollection<NodeMenu>(listNodes);
+            //ActiveLink = typeof(Discover);
+            //List<TopBarNodeMenu> listNodes = CreateListNodes();
+            //NodesMenu = new ObservableCollection<TopBarNodeMenu>(listNodes);
         }
-        
-        public ObservableCollection<NodeMenu> NodesMenu
+
+        //private List<TopBarNodeMenu> CreateListNodes()
+        //{
+        //    List<TopBarNodeMenu> listNodes = new List<TopBarNodeMenu>
+        //    {
+        //        new TopBarNodeMenu{ Title = "Découvrir", PageLink = typeof(Discover)},
+        //        new TopBarNodeMenu{ Title = "Mes projets", PageLink = typeof(ManageProject)},
+        //        new TopBarNodeMenu{ Title = "Creer un projet", PageLink = typeof(CreateProject)}
+        //    };
+        //    if (ActiveLink != null)
+        //    {
+        //        foreach (TopBarNodeMenu topBarNodeMenu in listNodes)
+        //            topBarNodeMenu.HoverRectangleOpacity = (topBarNodeMenu.PageLink == ActiveLink) ? 100 : 0;
+        //    }
+        //    return listNodes;
+        //}
+
+        //public Type ActiveLink
+        //{
+        //    get { return (Type)GetValue(ActiveLinkProperty); }
+        //    set { SetValue(ActiveLinkProperty, value); }
+        //}
+
+        public static readonly DependencyProperty ActiveLinkProperty =
+           DependencyProperty.Register("ActiveLink", typeof(Type), typeof(TopBarMenu), new PropertyMetadata(null));
+
+        public ObservableCollection<TopBarNodeMenu> NodesMenu
         {
-            get { return (ObservableCollection<NodeMenu>)GetValue(NodesMenuProperty); }
+            get { return (ObservableCollection<TopBarNodeMenu>)GetValue(NodesMenuProperty); }
             set { SetValue(NodesMenuProperty, value); }
         }
 
 
         public static readonly DependencyProperty NodesMenuProperty =
-           DependencyProperty.Register("NodesMenu", typeof(ObservableCollection<NodeMenu>), typeof(TopBarMenu), new PropertyMetadata(null));
+           DependencyProperty.Register("NodesMenu", typeof(ObservableCollection<TopBarNodeMenu>), typeof(TopBarMenu), new PropertyMetadata(null));
 
-        private void NodeMenuTapped(object sender, TappedRoutedEventArgs e)
+        private void TopBarNodeMenuTapped(object sender, TappedRoutedEventArgs e)
         {
             FrameworkElement element = (FrameworkElement)sender;
-            NodeMenu nodeMenu = (NodeMenu)element.DataContext;
-            HomePage.DahuFrame.Navigate(nodeMenu.PageLink);
+            TopBarNodeMenu topBarNodeMenu = (TopBarNodeMenu)element.DataContext;
+            HomePage.DahuFrame.Navigate(topBarNodeMenu.PageLink);
         }
 
         private async void FadeHoverRectangle(object sender, bool hover)
@@ -78,15 +90,21 @@ namespace DahuUWP.Views.Components.Menu
 
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            //FrameworkElement element = (FrameworkElement)sender;
-            //TopBarNodeMenu nodeMenu = (TopBarNodeMenu)element.DataContext;
-            FadeHoverRectangle(sender, true);
+            FrameworkElement element = (FrameworkElement)sender;
+            TopBarNodeMenu topBarNodeMenu = (TopBarNodeMenu)element.DataContext;
+
+            if (!topBarNodeMenu.IsActive)
+                FadeHoverRectangle(sender, true);
             Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 1);
         }
 
         private void Grid_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            FadeHoverRectangle(sender, false);
+            FrameworkElement element = (FrameworkElement)sender;
+            TopBarNodeMenu topBarNodeMenu = (TopBarNodeMenu)element.DataContext;
+
+            if (!topBarNodeMenu.IsActive)
+                FadeHoverRectangle(sender, false);
             Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 2);
         }
     }

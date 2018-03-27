@@ -2,6 +2,7 @@
 using DahuUWP.DahuTech.Inputs;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
+using DahuUWP.Views.Project;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace DahuUWP.ViewModels.Project
 {
     public class CreateProjectViewModel : DahuViewModelBase
     {
+        public ICommand OnPageLoadedCommand { get; private set; }
+
         public ICommand CreateProjectCommand { get; set; }
 
         public CreateProjectViewModel(IDataService service)
@@ -22,6 +25,13 @@ namespace DahuUWP.ViewModels.Project
             dataService = service;
             CreateProjectCommand = new RelayCommand(CreateProject);
             InitPageButtons();
+            OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
+        }
+
+
+        private async void OnPageLoaded()
+        {
+            ((HomePageViewModel)ViewModelLocator.HomePageViewModel).SwitchOrActiveCurrentTopBarNodeMenu(typeof(CreateProject));
         }
 
         private void InitPageButtons()

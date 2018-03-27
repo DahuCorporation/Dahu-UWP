@@ -1,4 +1,5 @@
-﻿using DahuUWP.DahuTech.ViewNotification;
+﻿using DahuUWP.DahuTech.Menu;
+using DahuUWP.DahuTech.ViewNotification;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +31,14 @@ namespace DahuUWP.DahuTech
     public static class AppGeneral
     {
         public static Dictionary<string, DahuNotification> UserInterfaceStatusDico { get; set; }
+
+        /// <summary>
+        /// Pour activer la static
+        /// </summary>
+        public static void ActiveIt()
+        {
+
+        }
 
         //TODO : detecter le language pour pouvoir charger le bon xml selon la langue
         // XML tuto: http://www.c-sharpcorner.com/article/read-xml-file-in-windows-10-universal-app/

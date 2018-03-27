@@ -1,10 +1,16 @@
-﻿using DahuUWP.Models;
+﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.Menu;
+using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
+using DahuUWP.Views;
 using DahuUWP.Views.Component;
+using DahuUWP.Views.Project;
+using DahuUWP.Views.Project.Managing;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -36,6 +42,36 @@ namespace DahuUWP.ViewModels
                 NotifyPropertyChanged(ref _modulConnected, value);
             }
         }
+
+        private DahuSpecMenuOptions _dahuSpecMenuOptions;
+        public DahuSpecMenuOptions DahuSpecMenuOptions
+        {
+            get { return _dahuSpecMenuOptions; }
+            set
+            {
+                NotifyPropertyChanged(ref _dahuSpecMenuOptions, value);
+            }
+        }
+
+        private ObservableCollection<TopBarNodeMenu>  _nodesTopBarMenu;
+        public ObservableCollection<TopBarNodeMenu> NodesTopBarMenu
+        {
+            get { return _nodesTopBarMenu; }
+            set
+            {
+                NotifyPropertyChanged(ref _nodesTopBarMenu, value);
+            }
+        }
+
+        public void SwitchOrActiveCurrentTopBarNodeMenu(Type pageLink)
+        {
+            foreach (TopBarNodeMenu node in NodesTopBarMenu)
+            {
+                node.HoverRectangleOpacity = (node.PageLink == pageLink) ? 100 : 0;
+                node.IsActive = (node.PageLink == pageLink) ? true : false;
+            }
+        }
+
         //private Visibility _topBarConnected;
         //public Visibility TopBarConnected
         //{
@@ -68,9 +104,24 @@ namespace DahuUWP.ViewModels
             }
         }
 
+        private void InitNodesTopBarMenu()
+        {
+            List<TopBarNodeMenu> listNodes = new List<TopBarNodeMenu>
+            {
+                new TopBarNodeMenu{ Title = "Découvrir", PageLink = typeof(Discover)},
+                new TopBarNodeMenu{ Title = "Mes projets", PageLink = typeof(ManageProject)},
+                new TopBarNodeMenu{ Title = "Creer un projet", PageLink = typeof(CreateProject)}
+            };
+            NodesTopBarMenu = new ObservableCollection<TopBarNodeMenu>(listNodes);
+        }
+
         public HomePageViewModel(IDataService service)
         {
             ViewModelLocator.HomePageViewModel = this;
+            InitNodesTopBarMenu();
+
+            //Init the static class
+            AppGeneral.ActiveIt();
             Connected(false);
         }
     }
