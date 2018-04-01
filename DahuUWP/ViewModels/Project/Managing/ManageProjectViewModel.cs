@@ -23,7 +23,7 @@ namespace DahuUWP.ViewModels.Project.Managing
 
         private async void OnPageLoaded()
         {
-            ((HomePageViewModel)ViewModelLocator.HomePageViewModel).SwitchOrActiveCurrentTopBarNodeMenu(typeof(ManageProject));
+            
         }
     }
 }

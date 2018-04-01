@@ -18,7 +18,6 @@ namespace DahuUWP.ViewModels.Profil.Public
 {
     public class PublicProfilViewModel : DahuViewModelBase
     {
-        public ObservableCollection<DahuUWP.Models.Project> UserProjects { get; set; }
         public ICommand OnPageLoadedCommand { get; private set; }
         public ICommand ProfilSettingsLinkCommand { get; set; }
 
@@ -68,6 +67,16 @@ namespace DahuUWP.ViewModels.Profil.Public
             set
             {
                 NotifyPropertyChanged(ref _skills, value);
+            }
+        }
+
+        private ObservableCollection<DahuUWP.Models.Project> _userProjects;
+        public ObservableCollection<DahuUWP.Models.Project> UserProjects
+        {
+            get { return _userProjects; }
+            set
+            {
+                NotifyPropertyChanged(ref _userProjects, value);
             }
         }
 

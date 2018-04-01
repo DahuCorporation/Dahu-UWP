@@ -53,7 +53,8 @@ namespace DahuUWP
             SimpleIoc.Default.Register<EditProjectPrincipalInformationViewModel>();
             SimpleIoc.Default.Register<EditProjectParametersViewModel>();
             SimpleIoc.Default.Register<ManageProjectViewModel>();
-            SimpleIoc.Default.Register<CreateProjectViewModel>();
+            SimpleIoc.Default.Register<CreateProjectViewModel>(); 
+            SimpleIoc.Default.Register<MyProjectsViewModel>();
 
             //Search
             SimpleIoc.Default.Register<MainResearchViewModel>();
@@ -117,6 +118,10 @@ namespace DahuUWP
         public CreateProjectViewModel CreateProjectVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<CreateProjectViewModel>(); return (CreateProjectViewModel)CurrentViewModel; }
+        }
+        public MyProjectsViewModel MyProjectsVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<MyProjectsViewModel>(); return (MyProjectsViewModel)CurrentViewModel; }
         }
 
         //Search

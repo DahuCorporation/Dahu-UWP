@@ -31,7 +31,7 @@ namespace DahuUWP.ViewModels.Project
 
         private async void OnPageLoaded()
         {
-            ((HomePageViewModel)ViewModelLocator.HomePageViewModel).SwitchOrActiveCurrentTopBarNodeMenu(typeof(CreateProject));
+            ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.SwitchOrActiveCurrentTopBarNodeMenu(typeof(CreateProject));
         }
 
         private void InitPageButtons()

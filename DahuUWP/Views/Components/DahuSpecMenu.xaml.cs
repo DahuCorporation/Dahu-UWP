@@ -67,5 +67,13 @@ namespace DahuUWP.Views.Components
         public static readonly DependencyProperty ResearchValuesProperty =
            DependencyProperty.Register("ResearchValue", typeof(string), typeof(DahuSpecMenu), new PropertyMetadata(null));
 
+        public Visibility ReasearchVisibility
+        {
+            get { return (Visibility)GetValue(ReasearchVisibilityProperty); }
+            set { SetValue(ReasearchVisibilityProperty, value); }
+        }
+        public static readonly DependencyProperty ReasearchVisibilityProperty =
+           DependencyProperty.Register("ReasearchVisibility", typeof(Visibility), typeof(DahuSpecMenu), new PropertyMetadata(null));
+
     }
 }

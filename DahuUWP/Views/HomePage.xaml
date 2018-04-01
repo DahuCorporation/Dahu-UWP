@@ -42,7 +42,7 @@
                 
                     <StackPanel Grid.Row="0">
                     <Component:TopBar x:Name="TopBar" Grid.Row="0"  DataContext="{Binding HomePageVM, Source={StaticResource Locator}}" Height="48"/>
-                    <Components:DahuSpecMenu x:Name="DahuSpecMenu"  NodesTopBarMenu="{Binding NodesTopBarMenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Components:DahuSpecMenu x:Name="DahuSpecMenu"  NodesTopBarMenu="{Binding DahuSpecMenuOptions.NodesTopBarMenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ReasearchVisibility="{Binding DahuSpecMenuOptions.ReasearchVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                
                 <Frame x:Name="DahuBurgerFrame" Navigated="DahuBurgerFrame_Navigated" Grid.Row="1" Background="#EFEFEF">

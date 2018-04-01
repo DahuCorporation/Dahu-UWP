@@ -42,7 +42,7 @@ namespace DahuUWP.ViewModels.Component
 
         private async void OnPageLoaded()
         {
-            ((HomePageViewModel)ViewModelLocator.HomePageViewModel).SwitchOrActiveCurrentTopBarNodeMenu(typeof(Discover));
+            ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.SwitchOrActiveCurrentTopBarNodeMenu(typeof(Discover));
         }
 
         public async void Research()

@@ -141,6 +141,7 @@
     <Compile Include="ViewModels\Project\Managing\EditProjectParametersViewModel.cs" />
     <Compile Include="ViewModels\Project\Managing\EditProjectPrincipalInformationViewModel.cs" />
     <Compile Include="ViewModels\Project\Managing\ManageProjectViewModel.cs" />
+    <Compile Include="ViewModels\Project\MyProjectsViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Search\MainResearchViewModel.cs" />
     <Compile Include="Views\Components\Container\MediumProjectContainer .xaml.cs">
@@ -250,6 +251,9 @@
     </Compile>
     <Compile Include="Views\Project\Managing\ManageProject.xaml.cs">
       <DependentUpon>ManageProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\MyProjects.xaml.cs">
+      <DependentUpon>MyProjects.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
@@ -549,6 +553,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Project\Managing\ManageProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\MyProjects.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

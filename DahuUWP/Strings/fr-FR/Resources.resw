@@ -249,6 +249,9 @@
   <data name="TextBlock_EditProject.Text" xml:space="preserve">
     <value>Gestion projet</value>
   </data>
+  <data name="TextBlock_MyProjects.Text" xml:space="preserve">
+    <value>Mes projets</value>
+  </data>
   <data name="TextBlock_Profil.Text" xml:space="preserve">
     <value>Profil</value>
   </data>

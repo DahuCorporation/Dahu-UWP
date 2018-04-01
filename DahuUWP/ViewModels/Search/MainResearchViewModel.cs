@@ -28,7 +28,7 @@ namespace DahuUWP.ViewModels.Search
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
         }
 
-        private async void OnPageLoaded()
+        private async void SearchResult()
         {
             ProjectResults = null;
             UserResults = null;
@@ -49,6 +49,12 @@ namespace DahuUWP.ViewModels.Search
                 UserResults = new ObservableCollection<object>(userResult);
                 DahuAllInBtnUserResultVisibility = (userResult.Count() > 0) ? Visibility.Collapsed : Visibility.Visible;
             }
+        }
+
+        private async void OnPageLoaded()
+        {
+            ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.ReasearchVisibility = Visibility.Visible;
+            SearchResult();
         }
 
         // TODO: guys !! do this in the API directly

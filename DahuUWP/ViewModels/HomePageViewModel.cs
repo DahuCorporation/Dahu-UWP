@@ -53,24 +53,9 @@ namespace DahuUWP.ViewModels
             }
         }
 
-        private ObservableCollection<TopBarNodeMenu>  _nodesTopBarMenu;
-        public ObservableCollection<TopBarNodeMenu> NodesTopBarMenu
-        {
-            get { return _nodesTopBarMenu; }
-            set
-            {
-                NotifyPropertyChanged(ref _nodesTopBarMenu, value);
-            }
-        }
 
-        public void SwitchOrActiveCurrentTopBarNodeMenu(Type pageLink)
-        {
-            foreach (TopBarNodeMenu node in NodesTopBarMenu)
-            {
-                node.HoverRectangleOpacity = (node.PageLink == pageLink) ? 100 : 0;
-                node.IsActive = (node.PageLink == pageLink) ? true : false;
-            }
-        }
+
+
 
         //private Visibility _topBarConnected;
         //public Visibility TopBarConnected
@@ -104,22 +89,21 @@ namespace DahuUWP.ViewModels
             }
         }
 
-        private void InitNodesTopBarMenu()
+        private void InitDahuSpecMenuOptions()
         {
             List<TopBarNodeMenu> listNodes = new List<TopBarNodeMenu>
             {
                 new TopBarNodeMenu{ Title = "Découvrir", PageLink = typeof(Discover)},
-                new TopBarNodeMenu{ Title = "Mes projets", PageLink = typeof(ManageProject)},
+                new TopBarNodeMenu{ Title = "Mes projets", PageLink = typeof(MyProjects)},
                 new TopBarNodeMenu{ Title = "Creer un projet", PageLink = typeof(CreateProject)}
             };
-            NodesTopBarMenu = new ObservableCollection<TopBarNodeMenu>(listNodes);
+            DahuSpecMenuOptions = new DahuSpecMenuOptions(listNodes);
         }
 
         public HomePageViewModel(IDataService service)
         {
             ViewModelLocator.HomePageViewModel = this;
-            InitNodesTopBarMenu();
-
+            InitDahuSpecMenuOptions();
             //Init the static class
             AppGeneral.ActiveIt();
             Connected(false);

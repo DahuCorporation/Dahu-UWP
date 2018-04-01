@@ -15,6 +15,7 @@
     <Interactivity:Interaction.Behaviors>
         <Core:EventTriggerBehavior EventName="Loaded">
             <Core:EventTriggerBehavior.Actions>
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedBaseCommand}" />
                 <Core:InvokeCommandAction Command="{Binding OnPageLoadedCommand}" />
             </Core:EventTriggerBehavior.Actions>
         </Core:EventTriggerBehavior>
