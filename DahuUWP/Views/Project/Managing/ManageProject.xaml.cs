@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DahuUWP.ViewModels.Project.Managing;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,11 @@ namespace DahuUWP.Views.Project.Managing
         private void GraylouButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             HomePage.DahuFrame.Navigate(typeof(EditProject));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ((ManageProjectViewModel)DataContext).NavigationParam = e.Parameter;
         }
     }
 }

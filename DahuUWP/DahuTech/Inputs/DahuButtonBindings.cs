@@ -11,6 +11,8 @@ namespace DahuUWP.DahuTech.Inputs
 {
     public class DahuButtonBindings : ObservableObject
     {
+        public string Name { get; set; }
+
         private bool _isBusy;
         public bool IsBusy
         {
@@ -33,8 +35,22 @@ namespace DahuUWP.DahuTech.Inputs
         //    RaisePropertyChanged(nomPropriete);
         //    return true;
         //}
-        
 
+
+        /// <summary>
+        /// Take one of the two var : TappedFuncListener or RedirectedLink
+        /// </summary>
         public Action TappedFuncListener { get; set; }
+
+        /// <summary>
+        /// Take one of the two var : TappedFuncListener or RedirectedLink
+        /// You can also combine with paramater
+        /// </summary>
+        public Type RedirectedLink { get; set; }
+
+        /// <summary>
+        /// This var is going with RedirectedLink
+        /// </summary>
+        public object Parameter { get; set; }
     }
 }

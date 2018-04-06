@@ -1,4 +1,5 @@
 ﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.DahuTech.Project;
 using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
@@ -25,7 +26,7 @@ namespace DahuUWP.ViewModels
         public DiscoverViewModel(IDataService service)
         {
             dataService = service;
-
+            
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
         }
 
@@ -38,32 +39,54 @@ namespace DahuUWP.ViewModels
 
         private async void LoadProjects()
         {
+            InitKnowMoreProjectButtonBindings();
+            // J'ai fais ça car au départ je faisais ça:
+            //<container:MediumProjectContainer ButtonBindings="{Binding ElementName=projectsItemsControl, Path=DataContext.KnowMoreProjectButtonBindings, UpdateSourceTrigger=PropertyChanged}"
+            // Mais ça ne fonctionné pas le binding était en retard par rapport à l'objet en lui même pas possible de set l'uuid
             ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
-            Projects = new ObservableCollection<DahuUWP.Models.Project>((await projectManager.Charge(null)).Cast<DahuUWP.Models.Project>().ToList());
-            AddSkillButtonBindings = new DahuButtonBindings
+            List< DahuUWP.Models.Project> projects = (await projectManager.Charge(null)).Cast<DahuUWP.Models.Project>().ToList();
+            List<MediumProjectContainer> mediumProjectContainerList = new List<MediumProjectContainer>();
+            foreach (DahuUWP.Models.Project project in projects)
+            {
+                KnowMoreProjectButtonBindings.Parameter = project.Uuid;
+                MediumProjectContainer mediumProjectContainer = new MediumProjectContainer
+                {
+                    Project = project,
+                    ButtonBindings = KnowMoreProjectButtonBindings
+                };
+                mediumProjectContainerList.Add(mediumProjectContainer);
+            }
+            MediumProjectContainerList = new ObservableCollection<MediumProjectContainer>(mediumProjectContainerList);
+
+        }
+
+        private void InitKnowMoreProjectButtonBindings()
+        {
+            KnowMoreProjectButtonBindings = new DahuButtonBindings()
             {
                 IsBusy = false,
-                TappedFuncListener = AddSkillTappedListener
+                Name = "En savoir plus",
+                RedirectedLink = typeof(Discover)
             };
         }
 
-        private DahuButtonBindings _addSkillButtonBindings;
-        public DahuButtonBindings AddSkillButtonBindings
+        private DahuButtonBindings _knowMoreProjectButtonBindings;
+        public DahuButtonBindings KnowMoreProjectButtonBindings
         {
-            get { return _addSkillButtonBindings; }
+            get { return _knowMoreProjectButtonBindings; }
             set
             {
-                NotifyPropertyChanged(ref _addSkillButtonBindings, value);
+                NotifyPropertyChanged(ref _knowMoreProjectButtonBindings, value);
             }
         }
 
-        private ObservableCollection<DahuUWP.Models.Project> _projects;
-        public ObservableCollection<DahuUWP.Models.Project> Projects
+        private ObservableCollection<MediumProjectContainer> _mediumProjectContainerList;
+        public ObservableCollection<MediumProjectContainer> MediumProjectContainerList
         {
-            get { return _projects; }
+            get { return _mediumProjectContainerList; }
             set
             {
-                NotifyPropertyChanged(ref _projects, value);
+                NotifyPropertyChanged(ref _mediumProjectContainerList, value);
             }
         }
 
@@ -87,14 +110,6 @@ namespace DahuUWP.ViewModels
 
             //await System.Threading.Tasks.Task.Delay(8000);
             return "toto";
-        }
-
-        public async void AddSkillTappedListener()
-        {
-            AddSkillButtonBindings.IsBusy = true;
-            string ttat = await TimeLooser();
-            AddSkillButtonBindings.IsBusy = false;
-            string titi = "ezf";
         }
     }
 }

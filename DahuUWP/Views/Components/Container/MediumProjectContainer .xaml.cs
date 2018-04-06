@@ -1,8 +1,11 @@
-﻿using System;
+﻿using DahuUWP.DahuTech.Inputs;
+using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,22 +28,26 @@ namespace DahuUWP.Views.Components.Container
             (this.Content as FrameworkElement).DataContext = this;
         }
 
-        public string ProjectName
+        public DahuUWP.Models.Project Project
         {
-            get { return (string)GetValue(ProjectNameProperty); }
-            set { SetValue(ProjectNameProperty, value); }
+            get { return (DahuUWP.Models.Project)GetValue(ProjectProperty); }
+            set { SetValue(ProjectProperty, value); }
         }
+        public static readonly DependencyProperty ProjectProperty =
+            DependencyProperty.Register("Project", typeof(DahuUWP.Models.Project), typeof(MediumProjectContainer), new PropertyMetadata(null));
 
-        public static readonly DependencyProperty ProjectNameProperty =
-            DependencyProperty.Register("ProjectName", typeof(string), typeof(MediumProjectContainer), new PropertyMetadata(null));
-
-        public string Description
+        public DahuButtonBindings ButtonBindings
         {
-            get { return (string)GetValue(DescriptionProperty); }
-            set { SetValue(DescriptionProperty, value); }
+            get
+            {
+                return (DahuButtonBindings)GetValue(ButtonBindingsProperty);
+            }
+            set
+            {
+                SetValue(ButtonBindingsProperty, value);
+            }
         }
-
-        public static readonly DependencyProperty DescriptionProperty =
-            DependencyProperty.Register("Description", typeof(string), typeof(MediumProjectContainer), new PropertyMetadata(null));
+        public static readonly DependencyProperty ButtonBindingsProperty =
+            DependencyProperty.Register("ButtonBindings", typeof(DahuButtonBindings), typeof(MediumProjectContainer), null);
     }
 }

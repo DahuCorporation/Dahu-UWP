@@ -10,12 +10,60 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Xaml;
 
 namespace DahuUWP.ViewModels
 {
     public class RegisterViewModel : DahuViewModelBase
     {
         public ICommand RegisterUserCommand { get; set; }
+        public ICommand OnPageLoadedCommand { get; private set; }
+
+        public RegisterViewModel(IDataService service)
+        {
+            dataService = service;
+            RegisterUserCommand = new RelayCommand(RegisterUser);
+            OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
+        }
+
+        private async void OnPageLoaded()
+        {
+            ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.DahuSpecMenuVisibility = Visibility.Collapsed;
+        }
+
+        private object RecupUserRegistrationInformation()
+        {
+            User user = new User
+            {
+                FirstName = UserFirstName,
+                LastName = UserName,
+                Mail = UserMailAdress,
+                Biography = "test",
+                Address = "test",
+                Birthdate = UserBirthdate,
+                City = "test",
+                Country = "test",
+                Gender = Utils.Enum.Gender.Sir,
+                Phone = "0633936156",
+                PostalCode = "03320",
+                Account = new Account
+                {
+                    Type = "user",
+                    Password = UserPassword
+                }
+            };
+            return user;
+        }
+
+        private async void RegisterUser()
+        {
+            UserManager userManager = (UserManager)dataService.GetUserManager();
+
+            if (await userManager.Create(RecupUserRegistrationInformation()))
+            {
+                HomePage.DahuFrame.Navigate(typeof(Connection));
+            }
+        }
 
         private string _userName;
         public string UserName
@@ -84,62 +132,6 @@ namespace DahuUWP.ViewModels
             variable = valeur;
             RaisePropertyChanged(nomPropriete);
             return true;
-        }
-
-        public RegisterViewModel(IDataService service)
-        {
-            dataService = service;
-            RegisterUserCommand = new RelayCommand(RegisterUser);
-        }
-
-        private object RecupUserRegistrationInformation()
-        {
-            //var user = new
-            //{
-            //    first_name = UserFirstName,
-            //    last_name = UserName,
-            //    mail = UserMailAdress,
-            //    biography = "test",
-            //    address = "zef",
-            //    birthdate = UserBirthdate,
-            //    city = "test",
-            //    country = "test",
-            //    gender = Utils.Enum.Gender.Sir,
-            //    phone = "0633936156",
-            //    postal_code = "03320",
-            //    password = UserPassword,
-            //    type = "user"
-            //};
-            User user = new User
-            {
-                FirstName = UserFirstName,
-                LastName = UserName,
-                Mail = UserMailAdress,
-                Biography = "test",
-                Address = "test",
-                Birthdate = UserBirthdate,
-                City = "test",
-                Country = "test",
-                Gender = Utils.Enum.Gender.Sir,
-                Phone = "0633936156",
-                PostalCode = "03320",
-                Account = new Account
-                {
-                    Type = "user",
-                    Password = UserPassword
-                }
-                };
-            return user;
-        }
-
-        private async void RegisterUser()
-        {
-            UserManager userManager = (UserManager)dataService.GetUserManager();
-
-            if (await userManager.Create(RecupUserRegistrationInformation()))
-            {
-                HomePage.DahuFrame.Navigate(typeof(Connection));
-            }
         }
     }
 }

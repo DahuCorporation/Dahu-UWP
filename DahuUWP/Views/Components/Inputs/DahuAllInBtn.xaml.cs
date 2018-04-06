@@ -78,6 +78,32 @@ namespace DahuUWP.Views.Components.Inputs
         }
         public static readonly DependencyProperty ValueFontWeightProperty = DependencyProperty.Register("ValueFontWeight", typeof(string), typeof(DahuAllInBtn), null);
 
+        public int ValueFontSize
+        {
+            get
+            {
+                return (int)GetValue(ValueFontSizeProperty);
+            }
+            set
+            {
+                SetValue(ValueFontSizeProperty, value);
+            }
+        }
+        public static readonly DependencyProperty ValueFontSizeProperty = DependencyProperty.Register("ValueFontSize", typeof(int), typeof(DahuAllInBtn), null);
+
+        public int ButtonRadius
+        {
+            get
+            {
+                return (int)GetValue(ButtonRadiusProperty);
+            }
+            set
+            {
+                SetValue(ButtonRadiusProperty, value);
+            }
+        }
+        public static readonly DependencyProperty ButtonRadiusProperty = DependencyProperty.Register("ButtonRadius", typeof(int), typeof(DahuAllInBtn), null);
+
         public DahuButtonBindings ButtonBindings
         {
             get
@@ -109,7 +135,12 @@ namespace DahuUWP.Views.Components.Inputs
                 && !ButtonBindings.IsBusy)
             {
                 //TappedCommand();
-                ButtonBindings.TappedFuncListener();
+                if (ButtonBindings.TappedFuncListener != null)
+                    ButtonBindings.TappedFuncListener();
+                else
+                {
+                    HomePage.DahuFrame.Navigate(ButtonBindings.RedirectedLink, ButtonBindings.Parameter);
+                }
             }
         }
     }

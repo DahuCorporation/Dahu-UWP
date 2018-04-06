@@ -12,6 +12,16 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "uuid")]
         public string Uuid { get; set; }
 
+        /// <summary>
+        /// C'est trop chiant de devoir faire ça, le back je vous le dis c'est chiant !
+        /// Autant mettre project_uuid tout le temps, même quand on récup tout les projets de dahu parce que soit je fait ça, soit je fais deux class project
+        /// </summary>
+        [JsonProperty(PropertyName = "project_uuid")]
+        private string ProjectUuid { set { Uuid = value; } }
+
+        [JsonProperty(PropertyName = "owner_uuid")]
+        public string OwnerUuid { get; set; }
+
         [JsonProperty(PropertyName = "account_id")]
         public int AccountId { get; set; }
 

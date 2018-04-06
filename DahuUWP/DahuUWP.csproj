@@ -105,9 +105,11 @@
     <Compile Include="DahuTech\Menu\Menu.cs" />
     <Compile Include="DahuTech\Menu\NodeMenu.cs" />
     <Compile Include="DahuTech\Menu\TopBarNodeMenu.cs" />
+    <Compile Include="DahuTech\Project\MediumProjectContainer.cs" />
     <Compile Include="DahuTech\ViewNotification\Notification.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AppStaticInfo.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Services\ModelManager\IModelManager.cs" />
@@ -161,6 +163,9 @@
     </Compile>
     <Compile Include="Views\Components\Decoration\Banner.xaml.cs">
       <DependentUpon>Banner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Forum\MessageComponent.xaml.cs">
+      <DependentUpon>MessageComponent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Inputs\ContentiButton.xaml.cs">
       <DependentUpon>ContentiButton.xaml</DependentUpon>
@@ -433,6 +438,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\Decoration\Banner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Forum\MessageComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

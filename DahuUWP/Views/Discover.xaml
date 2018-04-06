@@ -32,7 +32,7 @@
                         </Grid.ColumnDefinitions>
 
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="0">
-                            <ItemsControl Name="ProjectCarousel" ItemsSource="{Binding Projects}" >
+                            <ItemsControl Name="projectsItemsControl" ItemsSource="{Binding MediumProjectContainerList}" >
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Horizontal"/>
@@ -40,17 +40,17 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <container:MediumProjectContainer ProjectName="{Binding Name}" Description="{Binding Description}" Margin="18,0,0,0"/>
+
+                                        <StackPanel>
+                                            <container:MediumProjectContainer ButtonBindings="{Binding ButtonBindings}"
+                                                                          Project="{Binding Project}"
+                                                                          Margin="18,0,0,0"/>
+                                        </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </ScrollViewer>
                     </Grid>
-                    <!--<ProgressBar IsIndeterminate="{Binding IsBusy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="Visible" ShowPaused="False" ShowError="False" HorizontalAlignment="Stretch" Foreground="Black" VerticalAlignment="Bottom" Margin="50" Background="Black"/>-->
-                    <Inputs:DahuButton3 x:Name="DahuButton3_AddSkill"
-                                            x:Uid="DahuButton3_AddSkill"
-                                            Style="{StaticResource EditButton}"
-                                            ButtonBindings="{Binding AddSkillButtonBindings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock >
                         <TextBlock.Inlines>
                             <Run FontWeight="Bold" FontSize="14" Text="This is WPF TextBlock Example. " />

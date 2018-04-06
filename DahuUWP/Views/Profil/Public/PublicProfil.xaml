@@ -75,7 +75,7 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <container:MediumProjectContainer ProjectName="{Binding Name}" Description="{Binding Description}" Margin="18,0,0,0"/>
+                                        <container:MediumProjectContainer Project="{Binding}" Margin="18,0,0,0"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

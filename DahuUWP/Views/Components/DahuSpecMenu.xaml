@@ -11,7 +11,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <!--DataContext="{Binding DahuSpecMenuVM, Source={StaticResource Locator}}"-->
-    <Grid Height="auto">
+    <Grid Height="auto" Visibility="{Binding DahuSpecMenuVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         <Grid.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/Background/DahuSpecMenuBG.jpg" Stretch="None"/>
         </Grid.Background>

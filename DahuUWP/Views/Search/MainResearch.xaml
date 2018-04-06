@@ -45,7 +45,7 @@
                           animations:ReorderGridAnimation.Duration="300">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <container:MediumProjectContainer ProjectName="{Binding Name}" Description="{Binding Description}"/>
+                            <container:MediumProjectContainer Project="{Binding}"/>
                         </DataTemplate>
                     </GridView.ItemTemplate>
                     <GridView.ItemContainerStyle>

@@ -7,18 +7,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="48">
-<!--To finish, this component is made to be editable in all sence, size, radius, color...-->
+<!--To finish, this component is made to be editable in all sence, radius, color...-->
     
     <StackPanel>
         <Grid Height="48"  PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" Tapped="Grid_Tapped" >
-            <Grid x:Name="ButtonGrid"  Height="48" Background="{Binding Path=ButtonBackground, FallbackValue='Red', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" CornerRadius="3,3,3,3" >
+            <Grid x:Name="ButtonGrid"  Height="48"
+                  Background="{Binding Path=ButtonBackground, FallbackValue='Red', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
+                  HorizontalAlignment="Left"
+                  CornerRadius="{Binding Path=ButtonRadius, FallbackValue='5', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" >
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                     <TextBlock Text="{Binding Path=Value, FallbackValue='Button1'}"
                                Foreground="{Binding Path=ValueForeground, FallbackValue='#ffffff', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                FontWeight="{Binding Path=ValueFontWeight, FallbackValue='SemiBold', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
-                               Margin="40,0,40,0" />
+                               Margin="40,0,40,0" 
+                               FontSize="{Binding Path=ValueFontSize, FallbackValue='11', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Grid>
         </Grid>

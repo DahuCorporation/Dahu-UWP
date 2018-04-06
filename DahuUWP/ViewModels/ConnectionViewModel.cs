@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace DahuUWP.ViewModels
@@ -41,6 +42,7 @@ namespace DahuUWP.ViewModels
 
         private async void OnPageLoaded()
         {
+            ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.DahuSpecMenuVisibility = Visibility.Collapsed;
             RecoveringLastUser();
             IsBusy = false;
         }

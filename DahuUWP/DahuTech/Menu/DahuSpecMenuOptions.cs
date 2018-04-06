@@ -17,14 +17,14 @@ namespace DahuUWP.DahuTech.Menu
         public DahuSpecMenuOptions(List<TopBarNodeMenu> listNodes)
         {
             ReasearchVisibility = Visibility.Collapsed;
-            MenuVisibility = Visibility.Collapsed;
+            DahuSpecMenuVisibility = Visibility.Visible;
             NodesTopBarMenu = new ObservableCollection<TopBarNodeMenu>(listNodes);
         }
 
         public void SwitchOrActiveCurrentTopBarNodeMenu(Type pageLink)
         {
             ReasearchVisibility = Visibility.Collapsed;
-            MenuVisibility = Visibility.Collapsed;
+            DahuSpecMenuVisibility = Visibility.Visible;
             foreach (TopBarNodeMenu node in NodesTopBarMenu)
             {
                 node.HoverRectangleOpacity = (node.PageLink == pageLink) ? 100 : 0;
@@ -53,19 +53,19 @@ namespace DahuUWP.DahuTech.Menu
             }
         }
 
-        private Visibility _menuVisibility;
-        public Visibility MenuVisibility
+        private Visibility _dahuSpecMenuVisibility;
+        public Visibility DahuSpecMenuVisibility
         {
             get
             {
-                return _menuVisibility;
+                return _dahuSpecMenuVisibility;
             }
 
             set
             {
-                _menuVisibility = value;
+                _dahuSpecMenuVisibility = value;
 
-                this.NotifyPropertyChanged("MenuVisibility");
+                this.NotifyPropertyChanged("DahuSpecMenuVisibility");
             }
         }
 

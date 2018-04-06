@@ -1,7 +1,9 @@
-﻿using DahuUWP.Models;
+﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using DahuUWP.Views.Project;
+using DahuUWP.Views.Project.Managing;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -21,13 +23,14 @@ namespace DahuUWP.ViewModels.Project
         public MyProjectsViewModel(IDataService service)
         {
             dataService = service;
-
+            InitManageProjectButtonBindings();
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
         }
 
         private async void OnPageLoaded()
         {
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.SwitchOrActiveCurrentTopBarNodeMenu(typeof(MyProjects));
+            UserProjects = null;
             LoadUserProjects();
         }
 
@@ -42,6 +45,26 @@ namespace DahuUWP.ViewModels.Project
             List<Models.Project> projectList = await userManager.ChargeProjects(AppStaticInfo.Account.Uuid, null);
             if (projectList != null)
                 UserProjects = new ObservableCollection<Models.Project>(projectList);
+        }
+
+        private void InitManageProjectButtonBindings()
+        {
+            ManageProjectButtonBindings = new DahuButtonBindings()
+            {
+                IsBusy = false,
+                Name = "Gérer",
+                RedirectedLink = typeof(ManageProject)
+            };
+        }
+
+        private DahuButtonBindings _manageProjectButtonBindings;
+        public DahuButtonBindings ManageProjectButtonBindings
+        {
+            get { return _manageProjectButtonBindings; }
+            set
+            {
+                NotifyPropertyChanged(ref _manageProjectButtonBindings, value);
+            }
         }
 
         private ObservableCollection<DahuUWP.Models.Project> _userProjects;
