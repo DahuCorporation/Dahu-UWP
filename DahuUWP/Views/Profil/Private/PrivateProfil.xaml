@@ -36,6 +36,7 @@
                                                       x:Uid="DahuSpecSplitMenu_PrincipalInformation"
                                                       Value="Principal information"
                                                       Active="True" 
+                                                      
                                                       Margin="0,0,0,10"
                                                       Tapped="DahuSpecSplitMenu_PrincipalInformation_Tapped"
                                                       />

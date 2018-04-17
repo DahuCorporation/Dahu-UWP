@@ -52,6 +52,19 @@ namespace DahuUWP.Views.Components.Inputs
         }
         public static readonly DependencyProperty ButtonBackgroundProperty = DependencyProperty.Register("ButtonBackground", typeof(string), typeof(DahuAllInBtn), null);
 
+        public string ButtonWidth
+        {
+            get
+            {
+                return (string)GetValue(ButtonWidthProperty);
+            }
+            set
+            {
+                SetValue(ButtonWidthProperty, value);
+            }
+        }
+        public static readonly DependencyProperty ButtonWidthProperty = DependencyProperty.Register("ButtonWidth", typeof(string), typeof(DahuAllInBtn), null);
+
         public string ValueForeground
         {
             get
@@ -102,7 +115,13 @@ namespace DahuUWP.Views.Components.Inputs
                 SetValue(ButtonRadiusProperty, value);
             }
         }
-        public static readonly DependencyProperty ButtonRadiusProperty = DependencyProperty.Register("ButtonRadius", typeof(int), typeof(DahuAllInBtn), null);
+        public static readonly DependencyProperty ButtonRadiusProperty = DependencyProperty.Register("ButtonRadius", typeof(int), typeof(DahuAllInBtn), new PropertyMetadata(null, new PropertyChangedCallback(OnButtonRadiusChanged)));
+
+        private static void OnButtonRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            DahuAllInBtn menuButton = d as DahuAllInBtn;
+            menuButton.ButtonGrid.CornerRadius = new CornerRadius((int)e.NewValue);
+        }
 
         public DahuButtonBindings ButtonBindings
         {

@@ -6,6 +6,8 @@ using DahuUWP.Services;
 using DahuUWP.Services.ModelManager;
 using DahuUWP.Views;
 using DahuUWP.Views.Components.Inputs;
+using DahuUWP.Views.Project.Forum;
+using DahuUWP.Views.Project.Managing;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -28,10 +30,12 @@ namespace DahuUWP.ViewModels
             dataService = service;
             
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
+            
         }
 
         private async void OnPageLoaded()
         {
+            HomePage.DahuFrame.Navigate(typeof(ManageProject));
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.SwitchOrActiveCurrentTopBarNodeMenu(typeof(Discover));
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.ReasearchVisibility = Visibility.Visible;
             LoadProjects();
@@ -88,15 +92,6 @@ namespace DahuUWP.ViewModels
             {
                 NotifyPropertyChanged(ref _mediumProjectContainerList, value);
             }
-        }
-
-        private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
-        {
-            if (object.Equals(variable, valeur)) return false;
-
-            variable = valeur;
-            RaisePropertyChanged(nomPropriete);
-            return true;
         }
 
 

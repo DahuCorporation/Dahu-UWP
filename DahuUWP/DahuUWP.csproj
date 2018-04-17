@@ -99,19 +99,23 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DahuTech\General\Link.cs" />
     <Compile Include="DahuTech\Inputs\DahuButtonBindings.cs" />
     <Compile Include="DahuTech\Inputs\DahuButtonOptions.cs" />
     <Compile Include="DahuTech\Menu\DahuSpecMenuOptions.cs" />
     <Compile Include="DahuTech\Menu\Menu.cs" />
+    <Compile Include="DahuTech\Menu\MenuWithSearchAndButtonsContainer.cs" />
     <Compile Include="DahuTech\Menu\NodeMenu.cs" />
     <Compile Include="DahuTech\Menu\TopBarNodeMenu.cs" />
+    <Compile Include="DahuTech\Project\Forum\TopicMessageContainer.cs" />
     <Compile Include="DahuTech\Project\MediumProjectContainer.cs" />
     <Compile Include="DahuTech\ViewNotification\Notification.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AppStaticInfo.cs" />
-    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\Topic.cs" />
+    <Compile Include="Models\TopicMessage.cs" />
     <Compile Include="Services\ModelManager\IModelManager.cs" />
     <Compile Include="Services\ModelManager\ProjectManager.cs" />
     <Compile Include="Services\ModelManager\SkillManager.cs" />
@@ -139,6 +143,7 @@
     <Compile Include="ViewModels\Profil\Private\PrivateProfilSkillsViewModel.cs" />
     <Compile Include="ViewModels\Profil\Public\PublicProfilViewModel.cs" />
     <Compile Include="ViewModels\Project\CreateProjectViewModel.cs" />
+    <Compile Include="ViewModels\Project\Forum\ForumViewModel.cs" />
     <Compile Include="ViewModels\Project\Managing\EditProjectMembersViewModel.cs" />
     <Compile Include="ViewModels\Project\Managing\EditProjectParametersViewModel.cs" />
     <Compile Include="ViewModels\Project\Managing\EditProjectPrincipalInformationViewModel.cs" />
@@ -148,6 +153,9 @@
     <Compile Include="ViewModels\Search\MainResearchViewModel.cs" />
     <Compile Include="Views\Components\Container\MediumProjectContainer .xaml.cs">
       <DependentUpon>MediumProjectContainer .xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Container\MenuWithSearchAndButtons.xaml.cs">
+      <DependentUpon>MenuWithSearchAndButtons.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Container\UserInfoBox.xaml.cs">
       <DependentUpon>UserInfoBox.xaml</DependentUpon>
@@ -164,8 +172,8 @@
     <Compile Include="Views\Components\Decoration\Banner.xaml.cs">
       <DependentUpon>Banner.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Components\Forum\MessageComponent.xaml.cs">
-      <DependentUpon>MessageComponent.xaml</DependentUpon>
+    <Compile Include="Views\Components\Forum\TopicMessageContainer.xaml.cs">
+      <DependentUpon>TopicMessageContainer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Inputs\ContentiButton.xaml.cs">
       <DependentUpon>ContentiButton.xaml</DependentUpon>
@@ -202,6 +210,9 @@
     </Compile>
     <Compile Include="Views\Components\Inputs\StarRating.xaml.cs">
       <DependentUpon>StarRating.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Menu\FullHorizontalMenu.xaml.cs">
+      <DependentUpon>FullHorizontalMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Menu\TopBarMenu.xaml.cs">
       <DependentUpon>TopBarMenu.xaml</DependentUpon>
@@ -242,6 +253,9 @@
     <Compile Include="Views\Project\CreateProject.xaml.cs">
       <DependentUpon>CreateProject.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Project\Forum\Forum.xaml.cs">
+      <DependentUpon>Forum.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Project\Managing\EditProject.xaml.cs">
       <DependentUpon>EditProject.xaml</DependentUpon>
     </Compile>
@@ -271,6 +285,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Dahu1.0.pfx" />
     <None Include="DahuUWP_TemporaryKey.pfx" />
     <PRIResource Include="Strings\fr-FR\Resources.resw">
       <SubType>Designer</SubType>
@@ -421,6 +436,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Components\Container\MenuWithSearchAndButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Components\Container\UserInfoBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -441,7 +460,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Components\Forum\MessageComponent.xaml">
+    <Page Include="Views\Components\Forum\TopicMessageContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -490,6 +509,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\Inputs\StarRating.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Menu\FullHorizontalMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -542,6 +565,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Project\CreateProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\Forum\Forum.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -601,6 +628,15 @@
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Dahu1.0.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

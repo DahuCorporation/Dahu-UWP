@@ -14,7 +14,8 @@
             <Grid x:Name="ButtonGrid"  Height="48"
                   Background="{Binding Path=ButtonBackground, FallbackValue='Red', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
                   HorizontalAlignment="Left"
-                  CornerRadius="{Binding Path=ButtonRadius, FallbackValue='5', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" >
+                  Width="{Binding Path=ButtonWidth, FallbackValue='Auto', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
+                  CornerRadius="0" >
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                     <TextBlock Text="{Binding Path=Value, FallbackValue='Button1'}"
                                Foreground="{Binding Path=ValueForeground, FallbackValue='#ffffff', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"

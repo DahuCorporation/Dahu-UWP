@@ -1,9 +1,12 @@
-﻿using System;
+﻿using DahuUWP.ViewModels;
+using DahuUWP.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace DahuUWP.DahuTech.Menu
 {
@@ -27,6 +30,21 @@ namespace DahuUWP.DahuTech.Menu
             }
         }
 
+        /// <summary>
+        /// Cette fonction gère les liens du bouton, soit il redirige vers une autre page
+        /// ou appel une fonction
+        /// </summary>
+        public void LinkIt()
+        {
+            if (PageLink != null)
+            {
+                HomePage.DahuFrame.Navigate(PageLink);
+            } else if (FuncListener != null)
+            {
+                FuncListener.Invoke(Parameter);
+            }
+        }
+
         private Type _pageLink;
         public Type PageLink {
             get
@@ -39,6 +57,71 @@ namespace DahuUWP.DahuTech.Menu
                 _pageLink = value;
 
                 this.NotifyPropertyChanged("PageLink");
+            }
+        }
+
+        private Action<object> _funcListener;
+        public Action<object> FuncListener
+        {
+            get
+            {
+                return _funcListener;
+            }
+
+            set
+            {
+                _funcListener = value;
+
+                this.NotifyPropertyChanged("FuncListener");
+            }
+        }
+
+        private object _parameter;
+        public object Parameter
+        {
+            get
+            {
+                return _parameter;
+            }
+
+            set
+            {
+                _parameter = value;
+
+                this.NotifyPropertyChanged("Parameter");
+            }
+        }
+
+        private Theme _nodeTheme;
+        public Theme NodeTheme
+        {
+            get
+            {
+                return _nodeTheme;
+            }
+
+            set
+            {
+                _nodeTheme = value;
+
+                this.NotifyPropertyChanged("NodeTheme");
+            }
+        }
+
+        private bool _active;
+        public bool Active
+        {
+
+            get
+            {
+                return _active;
+            }
+
+            set
+            {
+                _active = value;
+
+                this.NotifyPropertyChanged("Active");
             }
         }
 

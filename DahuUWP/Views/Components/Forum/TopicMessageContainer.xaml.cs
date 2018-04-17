@@ -1,5 +1,4 @@
-﻿using DahuUWP.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,21 +17,25 @@ using Windows.UI.Xaml.Navigation;
 
 namespace DahuUWP.Views.Components.Forum
 {
-    public sealed partial class MessageContainer : UserControl
+    public sealed partial class TopicMessageContainer : UserControl
     {
-        public MessageContainer()
+        public TopicMessageContainer()
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
         }
 
-        public DahuUWP.DahuTech.Project.Forum.MessageContainer Message
+        public string TheTopicMessageContainer
         {
-            get { return (DahuUWP.DahuTech.Project.Forum.MessageContainer)GetValue(MessageProperty); }
-            set { SetValue(MessageProperty, value); }
+            get
+            {
+                return (string)GetValue(TheTopicMessageContainerProperty);
+            }
+            set
+            {
+                SetValue(TheTopicMessageContainerProperty, value);
+            }
         }
-
-        public static readonly DependencyProperty MessageProperty =
-            DependencyProperty.Register("Message", typeof(DahuUWP.DahuTech.Project.Forum.MessageContainer), typeof(MessageContainer), new PropertyMetadata(null));
+        public static readonly DependencyProperty TheTopicMessageContainerProperty = DependencyProperty.Register("TheTopicMessageContainer", typeof(DahuUWP.DahuTech.Project.Forum.TopicMessageContainer), typeof(TopicMessageContainer), null);
     }
 }

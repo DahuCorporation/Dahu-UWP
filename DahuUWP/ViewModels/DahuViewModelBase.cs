@@ -31,7 +31,7 @@ namespace DahuUWP.ViewModels
             }
         }
 
-        private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
+        protected bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
         {
             if (object.Equals(variable, valeur)) return false;
 

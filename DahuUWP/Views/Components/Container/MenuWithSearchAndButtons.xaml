@@ -1,0 +1,91 @@
+﻿<UserControl
+    x:Class="DahuUWP.Views.Components.Container.MenuWithSearchAndButtons"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DahuUWP.Views.Components.Container"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:DahuSpecSplitMenu="using:DahuUWP.Views.Components.DahuSpecialSplitMenu"
+    xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
+    d:DesignHeight="600"
+    d:DesignWidth="296">
+
+    <Grid>
+        <Grid Height="600" Width="Auto" Background="#515151" CornerRadius="5,0,0,5" HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="48"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBlock Text="{Binding Menu.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DahuH45Bold}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel >
+                    <ItemsControl Name="MenuNodes" ItemsSource="{Binding Menu.Nodes}" >
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <DahuSpecSplitMenu:MenuButton x:Name="MenuNode"
+                                                                  Tag="{Binding}"
+                                                                  ButtonTheme="{Binding NodeTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                  Active="{Binding Active}"
+                                                                  ValueHorizontalAlignement="Left"
+                                                                Value="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                              Margin="0,0,0,0" Tapped="MenuNode_Tapped"/>
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+            <StackPanel Grid.Row="2">
+                <ItemsControl Name="MenuButtons" ItemsSource="{Binding Menu.Buttons}" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Inputs:DahuAllInBtn ButtonBackground="#474747" ValueForeground="#FFFFFF" Value="{Binding Title}" ValueFontSize="18" ButtonRadius="0" ButtonWidth="296"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            <Grid Grid.Row="3" VerticalAlignment="Bottom" Height="50">
+                <Inputs:DahuAllInBtn ButtonBackground="#3D3D3D"
+                                     ValueForeground="#FFFFFF"
+                                     Value="Rechercher un topic"
+                                     ValueFontSize="18"
+                                     ButtonRadius="0"
+                                     ButtonWidth="296"/>
+            </Grid>
+        </Grid>
+        <!--<StackPanel>
+            <ItemsControl Name="UserResults" ItemsSource="{Binding Menu.Nodes}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title}"/>
+                        --><!--<DahuSpecSplitMenu:MenuButton x:Name="DahuSpecSplitMenu"
+                                                      
+                                                      Margin="0,0,0,10"/>--><!--
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>-->
+    </Grid>
+</UserControl>

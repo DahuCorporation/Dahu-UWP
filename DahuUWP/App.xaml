@@ -25,6 +25,10 @@
                 <Setter Property="Padding" Value="30,15" />
             </Style>
 
+            <Style x:Key="SelectableTextBlock" TargetType="TextBlock">
+                <Setter Property="IsTextSelectionEnabled" Value="True" />
+                <Setter Property="SelectionHighlightColor" Value="#D0691C" />
+            </Style>
             <Style x:Key="PageTitleStyle" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#3D3D3D" />
                 <Setter Property="FontSize" Value="40" />
@@ -69,10 +73,29 @@
                 <Setter Property="FontSize" Value="24" />
                 <Setter Property="FontWeight" Value="SemiBold"/>
             </Style>
+            <Style x:Key="DahuH45Bold" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style x:Key="DahuH45" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+            <Style x:Key="DahuH45Dark" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#3D3D3D" />
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
             <Style x:Key="DahuH5" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#FFFFFF" />
                 <Setter Property="FontSize" Value="20" />
                 <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+            <Style x:Key="DahuTextWhiteBig" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="FontSize" Value="19" />
             </Style>
             <Style x:Key="DahuTextWhite" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#FFFFFF" />

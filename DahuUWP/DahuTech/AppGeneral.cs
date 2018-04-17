@@ -26,7 +26,12 @@ namespace DahuUWP.DahuTech
         public static Languages English { get { return new Languages("en-US"); } }
     }
 
-
+    public enum Theme
+    {
+        None,
+        Dark,
+        Clear
+    };
 
     public static class AppGeneral
     {
