@@ -1,0 +1,94 @@
+﻿<UserControl
+    x:Class="DahuUWP.Views.Project.ScrumBoard.ScrumBoardColumn"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DahuUWP.Views.Project.ScrumBoard"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="296">
+
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <!--<ListView  AllowDrop="True" CanReorderItems="True" CanDrag="True" CanDragItems="True" SelectionMode="None" Width="296">-->
+            <ListView Width="296" AllowDrop="True" SelectionMode="Extended"
+              DragOver="UnorganizedListView_OnDragOver" 
+              Drop="UnorganizedListView_OnDrop" 
+              CanDragItems="True" 
+              DragItemsStarting="UnorganizedListView_OnDragItemsStarting"
+              Grid.Column="0" Grid.Row="1" 
+                      ItemsSource="{Binding Items1}">
+                <ListViewItem>
+                    <StackPanel>
+                        <local:ScrumBoardTask/>
+                        <TextBlock Text="1"/>
+                    </StackPanel>
+
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel>
+                        <local:ScrumBoardTask/>
+                        <TextBlock Text="2"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel>
+                        <local:ScrumBoardTask/>
+                        <TextBlock Text="3"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel>
+                        <local:ScrumBoardTask/>
+                        <TextBlock Text="4"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel>
+                        <local:ScrumBoardTask/>
+                        <TextBlock Text="5"/>
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+            <ListView x:Name="LikesListView" 
+          AllowDrop="True"
+          DragOver="ListView_DragOver" 
+          Drop="ListView_Drop"  
+          Grid.Column="1" Grid.Row="1" >
+                <ListViewItem>
+                    <StackPanel>
+                        <local:ScrumBoardTask/>
+                        <TextBlock Text="1"/>
+                    </StackPanel>
+
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel>
+                        <local:ScrumBoardTask/>
+                        <TextBlock Text="2"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel>
+                        <local:ScrumBoardTask/>
+                        <TextBlock Text="3"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel>
+                        <local:ScrumBoardTask/>
+                        <TextBlock Text="4"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel>
+                        <local:ScrumBoardTask/>
+                        <TextBlock Text="5"/>
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

@@ -9,6 +9,7 @@ using DahuUWP.ViewModels.Profil.Public;
 using DahuUWP.ViewModels.Project;
 using DahuUWP.ViewModels.Project.Forum;
 using DahuUWP.ViewModels.Project.Managing;
+using DahuUWP.ViewModels.Project.ScrumBoard;
 using DahuUWP.ViewModels.Search;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -57,6 +58,7 @@ namespace DahuUWP
             SimpleIoc.Default.Register<CreateProjectViewModel>(); 
             SimpleIoc.Default.Register<MyProjectsViewModel>();
             SimpleIoc.Default.Register<ForumViewModel>();
+            SimpleIoc.Default.Register<ScrumBoardViewModel>();
 
             //Search
             SimpleIoc.Default.Register<MainResearchViewModel>();
@@ -128,6 +130,10 @@ namespace DahuUWP
         public ForumViewModel ForumVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<ForumViewModel>(); return (ForumViewModel)CurrentViewModel; }
+        }
+        public ScrumBoardViewModel ScrumBoardVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<ScrumBoardViewModel>(); return (ScrumBoardViewModel)CurrentViewModel; }
         }
 
         //Search

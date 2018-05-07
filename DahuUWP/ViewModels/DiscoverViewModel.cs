@@ -35,7 +35,6 @@ namespace DahuUWP.ViewModels
 
         private async void OnPageLoaded()
         {
-            HomePage.DahuFrame.Navigate(typeof(ManageProject));
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.SwitchOrActiveCurrentTopBarNodeMenu(typeof(Discover));
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.ReasearchVisibility = Visibility.Visible;
             LoadProjects();

@@ -85,7 +85,7 @@ namespace DahuUWP.ViewModels
         {
             List<TopBarNodeMenu> listNodes = new List<TopBarNodeMenu>
             {
-                new TopBarNodeMenu{ Title = "Découvrir", PageLink = typeof(Discover)},
+                new TopBarNodeMenu{ Title = "Découvrir", PageLink = typeof(ManageProject)}, //Discover
                 new TopBarNodeMenu{ Title = "Mes projets", PageLink = typeof(MyProjects)},
                 new TopBarNodeMenu{ Title = "Creer un projet", PageLink = typeof(CreateProject)}
             };

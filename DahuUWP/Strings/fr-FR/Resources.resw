@@ -138,6 +138,12 @@
   <data name="DahuAllInBtnUserResult.Value" xml:space="preserve">
     <value>La recherche n'a abouti à aucun résultat</value>
   </data>
+  <data name="DahuAllInBtn_Send.Value" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="DahuAllInInputTxt_SendMsgPlaceholder.InputTxtPlaceholder" xml:space="preserve">
+    <value>Ecrivez un message...</value>
+  </data>
   <data name="DahuButton3_AddMember.Value" xml:space="preserve">
     <value>Envoyer l'invitaion</value>
   </data>

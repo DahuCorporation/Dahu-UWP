@@ -104,23 +104,31 @@ namespace DahuUWP.Views.Components.Inputs
         }
         public static readonly DependencyProperty ValueFontSizeProperty = DependencyProperty.Register("ValueFontSize", typeof(int), typeof(DahuAllInBtn), null);
 
-        public int ButtonRadius
+        public string ButtonRadius
         {
             get
             {
-                return (int)GetValue(ButtonRadiusProperty);
+                return (string)GetValue(ButtonRadiusProperty);
             }
             set
             {
                 SetValue(ButtonRadiusProperty, value);
             }
         }
-        public static readonly DependencyProperty ButtonRadiusProperty = DependencyProperty.Register("ButtonRadius", typeof(int), typeof(DahuAllInBtn), new PropertyMetadata(null, new PropertyChangedCallback(OnButtonRadiusChanged)));
-
+        public static readonly DependencyProperty ButtonRadiusProperty = DependencyProperty.Register("ButtonRadius", typeof(string), typeof(DahuAllInBtn), new PropertyMetadata(null, new PropertyChangedCallback(OnButtonRadiusChanged)));
         private static void OnButtonRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            DahuAllInBtn menuButton = d as DahuAllInBtn;
-            menuButton.ButtonGrid.CornerRadius = new CornerRadius((int)e.NewValue);
+            DahuAllInBtn dahuAllInBtn = d as DahuAllInBtn;
+            string[] radius = ((string)e.NewValue).Split(',');
+            switch (radius.Length)
+            {
+                case 1:
+                    dahuAllInBtn.ButtonGrid.CornerRadius = new CornerRadius(Convert.ToDouble(radius[0]));
+                    break;
+                case 4:
+                    dahuAllInBtn.ButtonGrid.CornerRadius = new CornerRadius(Convert.ToDouble(radius[0]), Convert.ToDouble(radius[1]), Convert.ToDouble(radius[2]), Convert.ToDouble(radius[3]));
+                    break;
+            }
         }
 
         public DahuButtonBindings ButtonBindings

@@ -32,7 +32,7 @@ namespace DahuUWP.ViewModels.Project.Managing
                 Active = true,
                 Title = "Scrum board",
                 FuncListener = FullHorizontalMenuNodeClicked,
-                Parameter = typeof(Views.Project.Forum.Forum)
+                Parameter = typeof(Views.Project.ScrumBoard.ScrumBoard)
             };
             FullHorizontalMenu.Nodes.Add(nodeMenu);
 
@@ -71,7 +71,7 @@ namespace DahuUWP.ViewModels.Project.Managing
 
         private async void OnPageLoaded()
         {
-            CurrentProjManagingPage = typeof(Views.Project.Forum.Forum);
+            CurrentProjManagingPage = typeof(Views.Project.ScrumBoard.ScrumBoard);
         }
 
         private Type _currentProjManagingPage;

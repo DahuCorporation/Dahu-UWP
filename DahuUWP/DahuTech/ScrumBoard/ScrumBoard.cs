@@ -6,31 +6,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DahuUWP.DahuTech.Menu
+namespace DahuUWP.DahuTech.ScrumBoard
 {
-    public class Menu : INotifyPropertyChanged
+    class ScrumBoard : INotifyPropertyChanged
     {
-        private string _name;
-        public string Name
+
+        private ObservableCollection<ScrumBoardColumn> _columns;
+        public ObservableCollection<ScrumBoardColumn> Columns
         {
             get
             {
-                return _name;
+                return _columns;
             }
 
             set
             {
-                _name = value;
-
-                this.NotifyPropertyChanged("Name");
+                _columns = value;
+                this.NotifyPropertyChanged("Columns");
             }
-        }
-
-        public ObservableCollection<NodeMenu> Nodes { get; set; }
-
-        public Menu()
-        {
-            Nodes = new ObservableCollection<NodeMenu>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

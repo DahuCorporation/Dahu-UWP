@@ -109,6 +109,9 @@
     <Compile Include="DahuTech\Menu\TopBarNodeMenu.cs" />
     <Compile Include="DahuTech\Project\Forum\TopicMessageContainer.cs" />
     <Compile Include="DahuTech\Project\MediumProjectContainer.cs" />
+    <Compile Include="DahuTech\ScrumBoard\ScrumBoard.cs" />
+    <Compile Include="DahuTech\ScrumBoard\ScrumBoardColumn.cs" />
+    <Compile Include="DahuTech\ScrumBoard\ScrumBoardTask.cs" />
     <Compile Include="DahuTech\ViewNotification\Notification.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AppStaticInfo.cs" />
@@ -149,6 +152,7 @@
     <Compile Include="ViewModels\Project\Managing\EditProjectPrincipalInformationViewModel.cs" />
     <Compile Include="ViewModels\Project\Managing\ManageProjectViewModel.cs" />
     <Compile Include="ViewModels\Project\MyProjectsViewModel.cs" />
+    <Compile Include="ViewModels\Project\ScrumBoard\ScrumBoardViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Search\MainResearchViewModel.cs" />
     <Compile Include="Views\Components\Container\MediumProjectContainer .xaml.cs">
@@ -180,6 +184,9 @@
     </Compile>
     <Compile Include="Views\Components\Inputs\DahuAllInBtn.xaml.cs">
       <DependentUpon>DahuAllInBtn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Inputs\DahuAllInInputTxt.xaml.cs">
+      <DependentUpon>DahuAllInInputTxt.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Inputs\DahuButton1.xaml.cs">
       <DependentUpon>DahuButton1.xaml</DependentUpon>
@@ -222,6 +229,15 @@
     </Compile>
     <Compile Include="Views\Components\Popups\Toasts.xaml.cs">
       <DependentUpon>Toasts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\ScrumBoard\ScrumBoard.xaml.cs">
+      <DependentUpon>ScrumBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\ScrumBoard\ScrumBoardColumn.xaml.cs">
+      <DependentUpon>ScrumBoardColumn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\ScrumBoard\ScrumBoardTask.xaml.cs">
+      <DependentUpon>ScrumBoardTask.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Titles\TitleBlock.xaml.cs">
       <DependentUpon>TitleBlock.xaml</DependentUpon>
@@ -472,6 +488,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Components\Inputs\DahuAllInInputTxt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Components\Inputs\DahuButton1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -525,6 +545,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\Popups\Toasts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\ScrumBoard\ScrumBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\ScrumBoard\ScrumBoardColumn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\ScrumBoard\ScrumBoardTask.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
