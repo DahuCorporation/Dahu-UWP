@@ -20,9 +20,25 @@
     </Interactivity:Interaction.Behaviors>
 
     <Grid Style="{StaticResource BodyGrid}">
-        <!--<local:ScrumBoardColumn/>-->
         <StackPanel Orientation="Horizontal">
-            <!--<ListView  AllowDrop="True" CanReorderItems="True" CanDrag="True" CanDragItems="True" SelectionMode="None" Width="296">-->
+            <ItemsControl Name="projectsItemsControl" ItemsSource="{Binding Columns}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+
+                        <StackPanel>
+                            <local:ScrumBoardColumn Column="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+        <!--<StackPanel Orientation="Horizontal">
+            --><!--<ListView  AllowDrop="True" CanReorderItems="True" CanDrag="True" CanDragItems="True" SelectionMode="None" Width="296">--><!--
             <ListView Width="296" AllowDrop="True" SelectionMode="Extended"
               DragOver="UnorganizedListView_OnDragOver" 
               Drop="UnorganizedListView_OnDrop" 
@@ -47,6 +63,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
 </Page>

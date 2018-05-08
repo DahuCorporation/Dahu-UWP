@@ -61,17 +61,30 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
                     Title = "Item 2.3"
                 }
             };
-            Items1 = new ObservableCollection<ScrumBoardTask>(items1);
-            Items2 = new ObservableCollection<ScrumBoardTask>(items2);
+            Columns = new ObservableCollection<ScrumBoardColumn>();
+            ScrumBoardColumn sbc = new ScrumBoardColumn()
+            {
+                Id = 0,
+                Title = "To do",
+                Tasks = new ObservableCollection<ScrumBoardTask>(items1)
+            };
+            Columns.Add(sbc);
+            ScrumBoardColumn sbc2 = new ScrumBoardColumn()
+            {
+                Id = 1,
+                Title = "In progress",
+                Tasks = new ObservableCollection<ScrumBoardTask>(items2)
+            };
+            Columns.Add(sbc2);
         }
 
-        private ObservableCollection<ScrumBoardTask> _items1;
-        public ObservableCollection<ScrumBoardTask> Items1
+        private ObservableCollection<ScrumBoardColumn> _columns;
+        public ObservableCollection<ScrumBoardColumn> Columns
         {
-            get { return _items1; }
+            get { return _columns; }
             set
             {
-                NotifyPropertyChanged(ref _items1, value);
+                NotifyPropertyChanged(ref _columns, value);
             }
         }
 

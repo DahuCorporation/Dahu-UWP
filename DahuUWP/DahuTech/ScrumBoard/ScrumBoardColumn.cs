@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace DahuUWP.DahuTech.ScrumBoard
 {
-    class ScrumBoardColumn : INotifyPropertyChanged
+    public class ScrumBoardColumn : INotifyPropertyChanged
     {
+        public int Id { get; set; }
+
         public string Title { get; set; }
 
         private ObservableCollection<ScrumBoardTask> _tasks;

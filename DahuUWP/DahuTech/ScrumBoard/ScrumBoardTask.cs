@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DahuUWP.DahuTech.ScrumBoard
 {
-    class ScrumBoardTask : INotifyPropertyChanged
+    public class ScrumBoardTask : INotifyPropertyChanged
     {
         public string Title { get; set; }
 

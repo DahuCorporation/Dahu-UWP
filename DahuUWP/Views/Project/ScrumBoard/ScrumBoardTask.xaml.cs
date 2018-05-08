@@ -22,6 +22,20 @@ namespace DahuUWP.Views.Project.ScrumBoard
         public ScrumBoardTask()
         {
             this.InitializeComponent();
+            (this.Content as FrameworkElement).DataContext = this;
         }
+
+        public DahuTech.ScrumBoard.ScrumBoardTask Task
+        {
+            get
+            {
+                return (DahuTech.ScrumBoard.ScrumBoardTask)GetValue(TaskProperty);
+            }
+            set
+            {
+                SetValue(TaskProperty, value);
+            }
+        }
+        public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(DahuTech.ScrumBoard.ScrumBoardTask), typeof(ScrumBoardTask), null);
     }
 }

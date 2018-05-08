@@ -29,53 +29,54 @@ namespace DahuUWP.Views.Project.ScrumBoard
             this.InitializeComponent();
         }
 
-        private void UnorganizedListView_OnDragItemsStarting(object sender, DragItemsStartingEventArgs e)
-        {
-            var items = string.Join(",", e.Items.Cast<DahuTech.ScrumBoard.ScrumBoardTask>().Select(i => i.Id));
-            e.Data.SetText(items);
-            e.Data.RequestedOperation = DataPackageOperation.Move;
-        }
+        //private void UnorganizedListView_OnDragItemsStarting(object sender, DragItemsStartingEventArgs e)
+        //{
+        //    var items = string.Join(",", e.Items.Cast<DahuTech.ScrumBoard.ScrumBoardTask>().Select(i => i.Id));
+        //    e.Data.SetText(items);
+        //    e.Data.RequestedOperation = DataPackageOperation.Move;
+        //}
 
-        private void UnorganizedListView_OnDragOver(object sender, DragEventArgs e)
-        {
+        //private void UnorganizedListView_OnDragOver(object sender, DragEventArgs e)
+        //{
 
-        }
+        //}
 
-        private void UnorganizedListView_OnDrop(object sender, DragEventArgs e)
-        {
+        //private void UnorganizedListView_OnDrop(object sender, DragEventArgs e)
+        //{
 
-        }
+        //}
 
-        private void ListView_DragOver(object sender, DragEventArgs e)
-        {
-            //http://www.shenchauhan.com/blog/2015/8/23/drag-and-drop-in-uwp
-            if (e.DataView.Contains(StandardDataFormats.Text))
-            {
-                e.AcceptedOperation = DataPackageOperation.Move;
-            }
-        }
+        //private void ListView_DragOver(object sender, DragEventArgs e)
+        //{
+        //    //http://www.shenchauhan.com/blog/2015/8/23/drag-and-drop-in-uwp
+        //    if (e.DataView.Contains(StandardDataFormats.Text))
+        //    {
+        //        e.AcceptedOperation = DataPackageOperation.Move;
+        //    }
+        //}
 
-        private async System.Threading.Tasks.Task ListView_DropAsync(object sender, DragEventArgs e)
-        {
-            if (e.DataView.Contains(StandardDataFormats.Text))
-            {
-                var id = await e.DataView.GetTextAsync();
-                var itemIdsToMove = id.Split(',');
+        //private async System.Threading.Tasks.Task ListView_DropAsync(object sender, DragEventArgs e)
+        //{
+        //    if (e.DataView.Contains(StandardDataFormats.Text))
+        //    {
+        //        var id = await e.DataView.GetTextAsync();
+        //        var itemIdsToMove = id.Split(',');
 
-                var destinationListView = sender as ListView;
-                var listViewItemsSource = destinationListView?.ItemsSource as ObservableCollection<DahuTech.ScrumBoard.ScrumBoardTask>;
+        //        var destinationListView = sender as ListView;
+        //        var listViewItemsSource = destinationListView?.ItemsSource as ObservableCollection<DahuTech.ScrumBoard.ScrumBoardTask>;
 
-                if (listViewItemsSource != null)
-                {
-                    foreach (var itemId in itemIdsToMove)
-                    {
-                        var itemToMove = this.MyItems.First(i => i.Id.ToString() == itemId);
+        //        if (listViewItemsSource != null)
+        //        {
+        //            //Mettre dans le fichier scrumboardcolumn dans cs pour qu'il recup bien le MyItems demandé
+        //            //foreach (var itemId in itemIdsToMove)
+        //            //{
+        //            //    var itemToMove = this.MyItems.First(i => i.Id.ToString() == itemId);
 
-                        listViewItemsSource.Add(itemToMove);
-                        this.MyItems.Remove(itemToMove);
-                    }
-                }
-            }
-        }
+        //                //listViewItemsSource.Add();
+        //            //    this.MyItems.Remove(itemToMove);
+        //            //}
+        //        }
+        //    }
+        //}
     }
 }
