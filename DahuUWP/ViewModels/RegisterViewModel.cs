@@ -1,6 +1,8 @@
-﻿using DahuUWP.Models;
+﻿using DahuUWP.DahuTech;
+using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
+using DahuUWP.Utils;
 using DahuUWP.Views;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -31,7 +33,7 @@ namespace DahuUWP.ViewModels
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.DahuSpecMenuVisibility = Visibility.Collapsed;
         }
 
-        private object RecupUserRegistrationInformation()
+        private User RecupUserRegistrationInformation()
         {
             User user = new User
             {
@@ -55,11 +57,46 @@ namespace DahuUWP.ViewModels
             return user;
         }
 
+        /// <summary>
+        /// Fields verification
+        /// </summary>
+        /// <returns></returns>
+        private bool FieldsVerif(User user)
+        {
+            if (String.IsNullOrEmpty(user.Address) || String.IsNullOrEmpty(user.Biography) ||
+                String.IsNullOrEmpty(user.Birthdate) || String.IsNullOrEmpty(user.City) ||
+                String.IsNullOrEmpty(user.Country) || String.IsNullOrEmpty(user.FirstName)
+                || String.IsNullOrEmpty(user.LastName) || String.IsNullOrEmpty(user.Phone) || String.IsNullOrEmpty(user.PostalCode))
+            {
+                AppGeneral.UserInterfaceStatusDico["Information missing."].Display();
+                return false;
+            }
+            if (String.IsNullOrEmpty(user.Mail))
+            {
+                AppGeneral.UserInterfaceStatusDico["Empty mail."].Display();
+                return false;
+            }
+            else if (!StringUtils.EmailIsValid(user.Mail))
+            {
+                AppGeneral.UserInterfaceStatusDico["Invalid mail."].Display();
+                return false;
+            }
+            if (String.IsNullOrEmpty(user.Account.Password))
+            {
+                AppGeneral.UserInterfaceStatusDico["Empty password."].Display();
+                return false;
+            }
+            
+            return true;
+        }
+
         private async void RegisterUser()
         {
             UserManager userManager = (UserManager)dataService.GetUserManager();
-
-            if (await userManager.Create(RecupUserRegistrationInformation()))
+            User user = RecupUserRegistrationInformation();
+            if (!FieldsVerif(user))
+                return;
+            if (await userManager.Create((user)))
             {
                 HomePage.DahuFrame.Navigate(typeof(Connection));
             }

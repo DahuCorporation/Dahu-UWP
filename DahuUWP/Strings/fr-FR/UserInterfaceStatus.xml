@@ -23,6 +23,7 @@
   <!--Registration-->
   <!---->
   <status key="User created but not activated."  value="Félicitation votre compte est bien crée, vous avez reçu un mail pour activer votre compte." varName="" type="Positive"/>
+  <status key="Information missing."  value="Tous les champs doivent être remplis." varName="" type="Negative"/>
   
   <!---->
   <!--Private profil-->
