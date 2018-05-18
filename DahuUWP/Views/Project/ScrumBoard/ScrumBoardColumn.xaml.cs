@@ -43,6 +43,11 @@ namespace DahuUWP.Views.Project.ScrumBoard
         }
         public static readonly DependencyProperty ColumnProperty = DependencyProperty.Register("Column", typeof(DahuTech.ScrumBoard.ScrumBoardColumn), typeof(ScrumBoardColumn), null);
 
+        /// <summary>
+        /// Decide if item can move from column and put some args to send to the drop listner
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UnorganizedListView_OnDragItemsStarting(object sender, DragItemsStartingEventArgs e)
         {
             var items = string.Join(",", e.Items.Cast<DahuTech.ScrumBoard.ScrumBoardTask>().Select(i => i.Id));
@@ -51,26 +56,42 @@ namespace DahuUWP.Views.Project.ScrumBoard
             e.Data.RequestedOperation = DataPackageOperation.Move;
         }
 
+        /// <summary>
+        /// Find from witch column the item is comming using the id of the column
+        /// </summary>
+        /// <param name="originColumnId"></param>
+        /// <returns></returns>
+        private DahuTech.ScrumBoard.ScrumBoardColumn FindOriginColumn(int originColumnId)
+        {
+            ScrumBoardViewModel scrumBoardVM = ViewModelLocator.CurrentViewModel as ScrumBoardViewModel;
+            foreach (var column in scrumBoardVM.Columns)
+            {
+                if (column.Id == originColumnId)
+                {
+                    return column;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Drop the item in the demanded column and remove the item from the old column
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void ListView_Drop(object sender, DragEventArgs e)
         {
             if (e.DataView.Contains(StandardDataFormats.Text))
             {
                 var id = await e.DataView.GetTextAsync();
-                var columnId = Int32.Parse(await e.DataView.GetDataAsync("ColumnId") as string);
-                DahuTech.ScrumBoard.ScrumBoardColumn originColumn = null;
+                var originColumn = FindOriginColumn(Int32.Parse(await e.DataView.GetDataAsync("ColumnId") as string));
+                if (originColumn == null)
+                    return;
+
                 var itemIdsToMove = id.Split(',');
                 var destinationListView = sender as ListView;
                 var listViewItemsSource = destinationListView?.ItemsSource as ObservableCollection<DahuTech.ScrumBoard.ScrumBoardTask>;
-
-                ScrumBoardViewModel scrumBoardVM = ViewModelLocator.CurrentViewModel as ScrumBoardViewModel;
-                foreach(var column in scrumBoardVM.Columns)
-                {
-                    if (column.Id == columnId)
-                    {
-                        originColumn = column;
-                        break;
-                    }
-                }
+                
                 if (listViewItemsSource != null)
                 {
                     foreach (var itemId in itemIdsToMove)
@@ -84,12 +105,23 @@ namespace DahuUWP.Views.Project.ScrumBoard
             }
         }
 
-        private void ListView_DragOver(object sender, DragEventArgs e)
+        /// <summary>
+        /// Decide if the column accept the item or not. Check if dataView is text and if it's not the same column
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void ListView_DragOver(object sender, DragEventArgs e)
         {
-                if (e.DataView.Contains(StandardDataFormats.Text))
-    {
-        e.AcceptedOperation = DataPackageOperation.Move;
-    }
+            var columnId = Int32.Parse(await e.DataView.GetDataAsync("ColumnId") as string);
+            if (e.DataView.Contains(StandardDataFormats.Text) && this.Column.Id != columnId)
+            {
+                e.AcceptedOperation = DataPackageOperation.Move;
+            }
+        }
+
+        private void ScrumBoardTask_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ScrumBoardColumnListView.SelectedItems.Clear();
         }
     }
 }

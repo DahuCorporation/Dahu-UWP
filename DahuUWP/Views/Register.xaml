@@ -40,11 +40,13 @@
                 <!--<ListBox x:Name="FontsList" Height="44" Width="500"  ItemsSource="{x:Bind fonts}" DisplayMemberPath="Source"/>-->
                 <Inputs:DahuInputText1 x:Name="UserPassword"
                                        x:Uid="UserPassword"
+                                       InputPasswordActive="True"
                                        InputWidth="500"
                                        InputPlaceholder="Birthdate"
                                        TextValue="{Binding UserPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Inputs:DahuInputText1 x:Name="UserRepeatedPassword"
                                        x:Uid="UserRepeatedPassword"
+                                       InputPasswordActive="True"
                                        InputWidth="500"
                                        InputPlaceholder="Birthdate"
                                        TextValue="{Binding UserRepeatedPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>

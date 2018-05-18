@@ -22,7 +22,7 @@
                            FontSize="18" Foreground="White" FontWeight="Bold"></TextBlock>
             </Grid>
 
-            <ListView Width="296" AllowDrop="True" SelectionMode="Extended" Height="600" BorderBrush="#515151" BorderThickness="1"
+            <ListView x:Name="ScrumBoardColumnListView" Width="296" AllowDrop="True" SelectionMode="Extended" Height="600" BorderBrush="#515151" BorderThickness="1"
           DragOver="ListView_DragOver" 
           Drop="ListView_Drop" 
           CanDragItems="True" 
@@ -32,7 +32,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <local:ScrumBoardTask Task="{Binding}"  Margin="0,9"/>
+                            <local:ScrumBoardTask Task="{Binding}"  Margin="0,9" Tapped="ScrumBoardTask_Tapped"/>
                             <!--<TextBlock Text="{Binding Title}"/>-->
                         </StackPanel>
                     </DataTemplate>

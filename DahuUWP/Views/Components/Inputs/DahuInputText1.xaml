@@ -21,7 +21,8 @@
         </Border>-->
         <!--Width="{Binding Path=InputWidth,  Mode=TwoWay, FallbackValue='300'}"-->
         <Border CornerRadius="5" Background="#FEFEFE" Height="44" BorderThickness="0,0,0,1" BorderBrush="#FFCBCBCB" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <TextBox x:Name="InputText" PlaceholderText="{Binding Path=InputPlaceholder, FallbackValue='Value'}"
+            <Grid>
+                <TextBox x:Name="InputText" PlaceholderText="{Binding Path=InputPlaceholder, FallbackValue='Value'}"
                          Background="#FEFEFE"
                          BorderThickness="0,0,0,0"
                          Padding="11"
@@ -30,7 +31,16 @@
                          IsSpellCheckEnabled="False"
                      Text="{Binding Path=TextValue, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}">
 
-            </TextBox>
+                </TextBox>
+                <PasswordBox x:Name="InputPassword" PlaceholderText="{Binding Path=InputPlaceholder, FallbackValue='Value'}" Visibility="Collapsed"
+                         Background="#FEFEFE"
+                         BorderThickness="0,0,0,0"
+                         Padding="11"
+                         InputScope="{Binding Path=InputScope, FallbackValue='Default'}"
+                     Password="{Binding Path=TextValue, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}">
+
+                </PasswordBox>
+            </Grid>
         </Border>
         <!--<StackPanel>
             <TextBox x:Name="MyTextBox" Text="{Binding Path=CellValue, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>

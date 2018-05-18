@@ -33,7 +33,6 @@
             ValueFontWeight="Normal"
             ButtonBackground="#2F2F2F"
             ValueForeground="#FFFFFF"
-            ButtonRadius="5"
             VerticalAlignment="Bottom" Margin="0,24" HorizontalAlignment="Center" />
     </Grid>
 </UserControl>

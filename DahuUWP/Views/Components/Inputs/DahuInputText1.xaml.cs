@@ -96,5 +96,33 @@ namespace DahuUWP.Views.Components.Inputs
         public static readonly DependencyProperty IsReadOnlyProperty =
             DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(DahuInputText1), new PropertyMetadata(null));
 
+        /// <summary>
+        /// Tell if the input is a password type or not
+        /// </summary>
+        public bool InputPasswordActive
+        {
+            get
+            {
+                return (bool)GetValue(InputPasswordActiveProperty);
+            }
+            set
+            {
+                SetValue(InputPasswordActiveProperty, value);
+            }
+        }
+        public static readonly DependencyProperty InputPasswordActiveProperty = DependencyProperty.Register("InputPasswordActive", typeof(bool), typeof(DahuInputText1), new PropertyMetadata(null, new PropertyChangedCallback(OnInputPasswordActiveChanged)));
+        private static void OnInputPasswordActiveChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            DahuInputText1 dahuInputText1 = d as DahuInputText1;
+            if ((bool)e.NewValue)
+            {
+                dahuInputText1.InputText.Visibility = Visibility.Collapsed;
+                dahuInputText1.InputPassword.Visibility = Visibility.Visible;
+            } else
+            {
+                dahuInputText1.InputText.Visibility = Visibility.Visible;
+                dahuInputText1.InputPassword.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }
