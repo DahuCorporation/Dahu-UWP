@@ -31,7 +31,10 @@ namespace DahuUWP.ViewModels
         private async void OnPageLoaded()
         {
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.DahuSpecMenuVisibility = Visibility.Collapsed;
+            UserBirthdate = DateTime.Now;
         }
+
+
 
         private User RecupUserRegistrationInformation()
         {
@@ -42,7 +45,7 @@ namespace DahuUWP.ViewModels
                 Mail = UserMailAdress,
                 Biography = "test",
                 Address = "test",
-                Birthdate = UserBirthdate,
+                Birthdate = UserBirthdate.Date,
                 City = "test",
                 Country = "test",
                 Gender = Utils.Enum.Gender.Sir,
@@ -63,8 +66,9 @@ namespace DahuUWP.ViewModels
         /// <returns></returns>
         private bool FieldsVerif(User user)
         {
+            //tester la date 
             if (String.IsNullOrEmpty(user.Address) || String.IsNullOrEmpty(user.Biography) ||
-                String.IsNullOrEmpty(user.Birthdate) || String.IsNullOrEmpty(user.City) ||
+                String.IsNullOrEmpty(user.City) ||
                 String.IsNullOrEmpty(user.Country) || String.IsNullOrEmpty(user.FirstName)
                 || String.IsNullOrEmpty(user.LastName) || String.IsNullOrEmpty(user.Phone) || String.IsNullOrEmpty(user.PostalCode))
             {
@@ -132,8 +136,8 @@ namespace DahuUWP.ViewModels
             }
         }
 
-        private string _userBirthdate;
-        public string UserBirthdate
+        private DateTimeOffset _userBirthdate;
+        public DateTimeOffset UserBirthdate
         {
             get { return _userBirthdate; }
             set
@@ -141,6 +145,15 @@ namespace DahuUWP.ViewModels
                 NotifyPropertyChanged(ref _userBirthdate, value);
             }
         }
+        //private string _userBirthdate;
+        //public string UserBirthdate
+        //{
+        //    get { return _userBirthdate; }
+        //    set
+        //    {
+        //        NotifyPropertyChanged(ref _userBirthdate, value);
+        //    }
+        //}
 
         private string _userPassword;
         public string UserPassword

@@ -29,8 +29,8 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "last_name")]
         public string LastName { get; set; }
 
-        [JsonProperty(PropertyName = "birthdate")]
-        public string Birthdate { get; set; }
+        [JsonIgnore]
+        public DateTime Birthdate { get; set; }
 
         [JsonProperty(PropertyName = "biography")]
         public string Biography { get; set; }

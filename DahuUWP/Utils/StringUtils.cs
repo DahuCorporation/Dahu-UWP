@@ -29,5 +29,10 @@ namespace DahuUWP.Utils
                 return false;
             }
         }
+
+        static public bool IsDateValid(string date)
+        {
+            return true;
+        }
     }
 }

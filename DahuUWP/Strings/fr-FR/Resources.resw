@@ -123,6 +123,9 @@
   <data name="Banner_Users.Value" xml:space="preserve">
     <value>Utilisateurs</value>
   </data>
+  <data name="CalendarDatePicker_Birthdate.CalendarPlaceholderText" xml:space="preserve">
+    <value>Choisir une date</value>
+  </data>
   <data name="ConnectionTitle.Text" xml:space="preserve">
     <value>Connexion</value>
   </data>

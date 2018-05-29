@@ -1,7 +1,9 @@
-﻿using DahuUWP.DahuTech.Inputs;
+﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.Inputs;
 using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
+using DahuUWP.Utils;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -84,6 +86,16 @@ namespace DahuUWP.ViewModels.Profil.Private
             }
         }
 
+        private DateTimeOffset _userBirthdate;
+        public DateTimeOffset UserBirthdate
+        {
+            get { return _userBirthdate; }
+            set
+            {
+                NotifyPropertyChanged(ref _userBirthdate, value);
+            }
+        }
+
         private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
         {
             if (object.Equals(variable, valeur)) return false;
@@ -105,20 +117,29 @@ namespace DahuUWP.ViewModels.Profil.Private
 
         private async void FillDataView()
         {
-            UserManager userManager = (UserManager)dataService.GetUserManager();
+            try
+            {
+                UserManager userManager = (UserManager)dataService.GetUserManager();
 
-            Dictionary<string, object> userDicoCharge = new Dictionary<string, object>
+                Dictionary<string, object> userDicoCharge = new Dictionary<string, object>
             {
                 { "_token", AppStaticInfo.Account.Token }
             };
-            User user = await userManager.Charge(AppStaticInfo.Account.Uuid, userDicoCharge);
-            UserFirstName = user.FirstName;
-            UserName = user.LastName;
-            UserMailAdress = user.Mail;
-            UserBiography = user.Biography;
-            UserAddress = user.Address;
+                User user = await userManager.Charge(AppStaticInfo.Account.Uuid, userDicoCharge);
+                UserFirstName = user.FirstName;
+                UserName = user.LastName;
+                UserMailAdress = user.Mail;
+                UserBiography = user.Biography;
+                UserAddress = user.Address;
+                UserBirthdate = user.Birthdate;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+            }
         }
-        
+
         private User RecupUserMainInformation()
         {
             User user = new User
@@ -128,7 +149,7 @@ namespace DahuUWP.ViewModels.Profil.Private
                 Mail = UserMailAdress,
                 Biography = UserBiography,
                 Address = UserAddress,
-                Birthdate = "test",
+                Birthdate = UserBirthdate.DateTime,
                 City = "test",
                 Country = "test",
                 Gender = Utils.Enum.Gender.Sir,

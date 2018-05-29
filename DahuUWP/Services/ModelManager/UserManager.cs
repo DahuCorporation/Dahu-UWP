@@ -1,5 +1,6 @@
 ﻿using DahuUWP.DahuTech;
 using DahuUWP.Services;
+using DahuUWP.Utils;
 using DahuUWP.Utils.Enum;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -226,11 +227,10 @@ namespace DahuUWP.Models.ModelManager
             }
         }
 
-
-
         public JObject Serialize(object userToSerialize)
         {
             JObject jUser = (JObject)JToken.FromObject(userToSerialize);
+            jUser["birthdate"] = DateUtils.DateTimeToString(((User)userToSerialize).Birthdate);
             jUser.Add("gender", GenderUtility.GenderToString(((User)userToSerialize).Gender));
             return jUser;
         }
@@ -241,6 +241,7 @@ namespace DahuUWP.Models.ModelManager
 
             user = jUser.ToObject<User>();
             user.Gender = GenderUtility.StringToGender((string)jUser["gender"]);
+            user.Birthdate = DateUtils.StringToDateTime((string)jUser["birthdate"]);
             return user;
         }
 

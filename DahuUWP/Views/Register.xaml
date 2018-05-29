@@ -11,6 +11,14 @@
     mc:Ignorable="d"
     DataContext="{Binding RegisterVM, Source={StaticResource Locator}}">
 
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:EventTriggerBehavior.Actions>
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedBaseCommand}" />
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedCommand}" />
+            </Core:EventTriggerBehavior.Actions>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
     <Grid Background="#FFEFEFEF" >
         <ScrollViewer>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,20">
@@ -31,11 +39,16 @@
                                        InputWidth="500"
                                        InputPlaceholder="MailAdress"
                                        TextValue="{Binding UserMailAdress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Inputs:DahuInputText1 x:Name="Birthdate"
+
+                <Inputs:DahuCalendarDatePicker x:Name="Birthdate"
+                                    x:Uid="CalendarDatePicker_Birthdate"
+                                    CalendarWidth="500" Date="{Binding UserBirthdate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <!--<Inputs:DahuInputText1 x:Name="Birthdate"
                                        x:Uid="Birthdate"
                                        InputWidth="500"
                                        InputPlaceholder="Birthdate"
-                                       TextValue="{Binding UserBirthdate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                       TextValue="{Binding UserBirthdate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
                 <!--<DatePicker Header="Select Date"/>-->
                 <!--<ListBox x:Name="FontsList" Height="44" Width="500"  ItemsSource="{x:Bind fonts}" DisplayMemberPath="Source"/>-->
                 <Inputs:DahuInputText1 x:Name="UserPassword"

@@ -131,6 +131,7 @@
     <Compile Include="DahuTech\AppGeneral.cs" />
     <Compile Include="Utils\Converter\ColorConverter.cs" />
     <Compile Include="Utils\Converter\IconConverter.cs" />
+    <Compile Include="Utils\DateUtils.cs" />
     <Compile Include="Utils\Enum\Gender.cs" />
     <Compile Include="Utils\ListUtils.cs" />
     <Compile Include="Utils\ReflectionUtils.cs" />
@@ -199,6 +200,9 @@
     </Compile>
     <Compile Include="Views\Components\Inputs\DahuButtonOption.xaml.cs">
       <DependentUpon>DahuButtonOption.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Inputs\DahuCalendarDatePicker.xaml.cs">
+      <DependentUpon>DahuCalendarDatePicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Inputs\DahuInputText1.xaml.cs">
       <DependentUpon>DahuInputText1.xaml</DependentUpon>
@@ -505,6 +509,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\Inputs\DahuButtonOption.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Inputs\DahuCalendarDatePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
