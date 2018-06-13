@@ -81,6 +81,13 @@ namespace DahuUWP.ViewModels
             }
         }
 
+        public void Disconnection()
+        {
+            // Permet de changer la top bar en tant que connecté
+            this.Connected(false);
+            HomePage.DahuFrame.Navigate(typeof(Connection));
+        }
+
         private void InitDahuSpecMenuOptions()
         {
             List<TopBarNodeMenu> listNodes = new List<TopBarNodeMenu>

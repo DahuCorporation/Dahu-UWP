@@ -1,4 +1,5 @@
 ﻿using DahuUWP.Models;
+using DahuUWP.ViewModels;
 using DahuUWP.Views.Profil.Private;
 using DahuUWP.Views.Profil.Public;
 using DahuUWP.Views.Project;
@@ -44,7 +45,13 @@ namespace DahuUWP.Views
         {
             var menuItem = e.ClickedItem as MenuItem;
             //this.Frame.Navigate(menuItem.PageType);
-            DahuBurgerFrame.Navigate(menuItem.PageType);
+            if (menuItem.PageType != null)
+            {
+                DahuBurgerFrame.Navigate(menuItem.PageType);
+            } else if (menuItem.TappedFuncListener != null)
+            {
+                menuItem.TappedFuncListener.Invoke();
+            }
             DahuBurgerMenu.IsPaneOpen = false;
         }
 
@@ -75,14 +82,18 @@ namespace DahuUWP.Views
         public Symbol Icon { get; set; }
         public string Name { get; set; }
         public Type PageType { get; set; }
+        public Action TappedFuncListener { get; set; }
 
         public static List<MenuItem> GetMainItems()
         {
-            var items = new List<MenuItem>();
-            items.Add(new MenuItem() { Icon = Symbol.Accept, Name = "Découvrir", PageType = typeof(Discover) });
-            items.Add(new MenuItem() { Icon = Symbol.Send, Name = "Mes projet", PageType = typeof(ManageProject) });
-            items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "Creer un nouveau projet", PageType = typeof(CreateProject) });
-            items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "Paramètre", PageType = typeof(PrivateProfil) });
+            var items = new List<MenuItem>
+            {
+                new MenuItem() { Icon = Symbol.Accept, Name = "Déconnexion", TappedFuncListener = ((HomePageViewModel)ViewModelLocator.HomePageViewModel).Disconnection },
+                new MenuItem() { Icon = Symbol.Accept, Name = "Découvrir", PageType = typeof(Discover) },
+                new MenuItem() { Icon = Symbol.Send, Name = "Mes projet", PageType = typeof(ManageProject) },
+                new MenuItem() { Icon = Symbol.Shop, Name = "Creer un nouveau projet", PageType = typeof(CreateProject) },
+                new MenuItem() { Icon = Symbol.Shop, Name = "Paramètre", PageType = typeof(PrivateProfil) }
+            };
             return items;
         }
 
