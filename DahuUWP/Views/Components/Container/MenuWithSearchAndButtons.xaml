@@ -56,7 +56,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Inputs:DahuAllInBtn ButtonBackground="#474747" ValueForeground="#FFFFFF" Value="{Binding Title}" ValueFontSize="18" ButtonRadius="0" ButtonWidth="296"/>
+                            <Inputs:DahuAllInBtn x:Name="MenuButton" Tag="{Binding}" ButtonBackground="#474747" ValueForeground="#FFFFFF" Value="{Binding Title}" ValueFontSize="18" ButtonRadius="0" ButtonWidth="296" Tapped="MenuButton_Tapped"  />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DahuUWP.DahuTech.Inputs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -37,5 +39,31 @@ namespace DahuUWP.Views.Project.ScrumBoard
             }
         }
         public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(DahuTech.ScrumBoard.ScrumBoardTask), typeof(ScrumBoardTask), null);
+
+        private void TaskButton_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 1);
+        }
+
+        private void TaskButton_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 2);
+        }
+
+        private async void MenuFlyoutItemRename_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var res = new ResourceLoader();
+            InputStringDialog dialog = new InputStringDialog();
+            string name = await dialog.InputStringDialogAsync("Renommer la tâche: " + Task.Title, Task.Title, res.GetString("Rename"), res.GetString("Cancel"));
+
+        }
+
+        private async void MenuFlyoutItemDelete_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var res = new ResourceLoader();
+            InputStringDialog dialog = new InputStringDialog();
+            bool name = await dialog.AskDialogAsync(res.GetString("DeleteTask"), res.GetString("DeleteTaskInfo") + Task.Title, res.GetString("Delete"), res.GetString("Cancel"));
+        }
     }
+
 }

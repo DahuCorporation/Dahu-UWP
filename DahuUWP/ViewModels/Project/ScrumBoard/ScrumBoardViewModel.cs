@@ -1,4 +1,5 @@
-﻿using DahuUWP.DahuTech.ScrumBoard;
+﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.DahuTech.ScrumBoard;
 using DahuUWP.Services;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.Resources;
 
 namespace DahuUWP.ViewModels.Project.ScrumBoard
 {
@@ -24,6 +26,9 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
 
         private async void OnPageLoaded()
         {
+            AddColumnButtonBindings = new DahuButtonBindings();
+            AddColumnButtonBindings.Name = "Ajouter une colonne";
+            AddColumnButtonBindings.TappedFuncListener = AddColumn;
             List<ScrumBoardTask> items1 = new List<ScrumBoardTask>
             {
                 new ScrumBoardTask
@@ -76,6 +81,23 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
                 Tasks = new ObservableCollection<ScrumBoardTask>(items2)
             };
             Columns.Add(sbc2);
+        }
+
+        public async void AddColumn()
+        {
+            var res = new ResourceLoader();
+            InputStringDialog dialog = new InputStringDialog();
+            string name = await dialog.InputStringDialogAsync(res.GetString("AddColumn") , res.GetString("EnterAColumnName"), res.GetString("Add"), res.GetString("Cancel"));
+        }
+
+        private DahuButtonBindings _addColumnButtonBindings;
+        public DahuButtonBindings AddColumnButtonBindings
+        {
+            get { return _addColumnButtonBindings; }
+            set
+            {
+                NotifyPropertyChanged(ref _addColumnButtonBindings, value);
+            }
         }
 
         private ObservableCollection<ScrumBoardColumn> _columns;

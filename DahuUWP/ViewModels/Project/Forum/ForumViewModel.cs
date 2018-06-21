@@ -1,4 +1,5 @@
 ﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.Inputs;
 using DahuUWP.DahuTech.Menu;
 using DahuUWP.DahuTech.Project.Forum;
 using DahuUWP.Models;
@@ -13,6 +14,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Input;
 
 namespace DahuUWP.ViewModels.Project.Forum
@@ -99,6 +101,13 @@ namespace DahuUWP.ViewModels.Project.Forum
             TopicMessages.Add(topicMessage3);
         }
 
+        public async void AddTopicNodeClicked(object parameter)
+        {
+            var res = new ResourceLoader();
+            InputStringDialog dialog = new InputStringDialog();
+            string name = await dialog.InputStringDialogAsync(res.GetString("AddATopic"), res.GetString("TopicName"), res.GetString("Add"), res.GetString("Cancel"));
+        }
+
         private void InitMenuWithSearch()
         {
             MenuWithSearch = new MenuWithSearchAndButtonsContainer();
@@ -128,7 +137,8 @@ namespace DahuUWP.ViewModels.Project.Forum
             NodeMenu nodeButton = new NodeMenu()
             {
                 Title = "+ Nouveau topic",
-                NodeTheme = Theme.Dark
+                NodeTheme = Theme.Dark,
+                FuncListener = AddTopicNodeClicked
             };
             MenuWithSearch.Nodes.Add(node);
             MenuWithSearch.Nodes.Add(node2);

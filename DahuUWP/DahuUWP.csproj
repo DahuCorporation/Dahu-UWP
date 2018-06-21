@@ -102,6 +102,7 @@
     <Compile Include="DahuTech\General\Link.cs" />
     <Compile Include="DahuTech\Inputs\DahuButtonBindings.cs" />
     <Compile Include="DahuTech\Inputs\DahuButtonOptions.cs" />
+    <Compile Include="DahuTech\Inputs\InputStringDialog.cs" />
     <Compile Include="DahuTech\Menu\DahuSpecMenuOptions.cs" />
     <Compile Include="DahuTech\Menu\Menu.cs" />
     <Compile Include="DahuTech\Menu\MenuWithSearchAndButtonsContainer.cs" />

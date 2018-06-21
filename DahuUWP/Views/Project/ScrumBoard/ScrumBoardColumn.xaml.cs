@@ -1,4 +1,6 @@
-﻿using DahuUWP.ViewModels.Project.ScrumBoard;
+﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Utils.Converter;
+using DahuUWP.ViewModels.Project.ScrumBoard;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -6,8 +8,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -48,7 +53,7 @@ namespace DahuUWP.Views.Project.ScrumBoard
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UnorganizedListView_OnDragItemsStarting(object sender, DragItemsStartingEventArgs e)
+        private async void UnorganizedListView_OnDragItemsStarting(object sender, DragItemsStartingEventArgs e)
         {
             var items = string.Join(",", e.Items.Cast<DahuTech.ScrumBoard.ScrumBoardTask>().Select(i => i.Id));
             e.Data.SetText(items);
@@ -91,7 +96,7 @@ namespace DahuUWP.Views.Project.ScrumBoard
                 var itemIdsToMove = id.Split(',');
                 var destinationListView = sender as ListView;
                 var listViewItemsSource = destinationListView?.ItemsSource as ObservableCollection<DahuTech.ScrumBoard.ScrumBoardTask>;
-                
+
                 if (listViewItemsSource != null)
                 {
                     foreach (var itemId in itemIdsToMove)
@@ -122,6 +127,47 @@ namespace DahuUWP.Views.Project.ScrumBoard
         private void ScrumBoardTask_Tapped(object sender, TappedRoutedEventArgs e)
         {
             ScrumBoardColumnListView.SelectedItems.Clear();
+        }
+
+        private async void FontIconAddTask_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var res = new ResourceLoader();
+            InputStringDialog dialog = new InputStringDialog();
+            string taskTitle = await dialog.InputStringDialogAsync(res.GetString("CreateNewTask"), res.GetString("NewTask"), res.GetString("Add"), res.GetString("Cancel"));
+            if (!String.IsNullOrWhiteSpace(taskTitle))
+            {
+                DahuUWP.DahuTech.ScrumBoard.ScrumBoardTask task = new DahuUWP.DahuTech.ScrumBoard.ScrumBoardTask()
+                {
+                    Id = Column.Tasks.Count + 1,
+                    Title = taskTitle
+                };
+                Column.Tasks.Add(task);
+            }
+        }
+
+        private void TaskButton_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 1);
+        }
+
+        private void TaskButton_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 2);
+        }
+
+        private async void MenuFlyoutItemRename_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var res = new ResourceLoader();
+            InputStringDialog dialog = new InputStringDialog();
+            string name = await dialog.InputStringDialogAsync("Renommer la colonne: " + Column.Title, Column.Title, res.GetString("Rename"), res.GetString("Cancel"));
+
+        }
+
+        private async void MenuFlyoutItemDelete_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var res = new ResourceLoader();
+            InputStringDialog dialog = new InputStringDialog();
+            bool name = await dialog.AskDialogAsync(res.GetString("DeleteTaskColumn"), res.GetString("DeleteTaskColumnInfo") + Column.Title, res.GetString("Delete"), res.GetString("Cancel"));
         }
     }
 }

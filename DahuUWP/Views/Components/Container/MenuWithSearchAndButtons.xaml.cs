@@ -1,5 +1,6 @@
 ﻿using DahuUWP.DahuTech.Menu;
 using DahuUWP.Views.Components.DahuSpecialSplitMenu;
+using DahuUWP.Views.Components.Inputs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -50,6 +51,12 @@ namespace DahuUWP.Views.Components.Container
                     nodeMenu.Active = false;
             }
             selectedNodeMenu.Active = true;
+            selectedNodeMenu.LinkIt();
+        }
+
+        private void MenuButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            NodeMenu selectedNodeMenu = (NodeMenu)(sender as DahuAllInBtn).Tag;
             selectedNodeMenu.LinkIt();
         }
     }

@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="AddATopic" xml:space="preserve">
+    <value>Ajouter un topic</value>
+  </data>
+  <data name="AddColumn" xml:space="preserve">
+    <value>Ajouter une colonne</value>
+  </data>
   <data name="Banner_Projects.Value" xml:space="preserve">
     <value>Projets</value>
   </data>
@@ -126,14 +135,23 @@
   <data name="CalendarDatePicker_Birthdate.CalendarPlaceholderText" xml:space="preserve">
     <value>Choisir une date</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
   <data name="ConnectionTitle.Text" xml:space="preserve">
     <value>Connexion</value>
+  </data>
+  <data name="CreateNewTask" xml:space="preserve">
+    <value>Creer une nouvelle tache</value>
   </data>
   <data name="CreateProjectLinkDahuSpecMenu.Text" xml:space="preserve">
     <value>Creer un projet</value>
   </data>
   <data name="CreateProjectTitle.Text" xml:space="preserve">
     <value>Creation de projet</value>
+  </data>
+  <data name="DahuAllInBtnAddColumn.Value" xml:space="preserve">
+    <value>Ajouter une colonne</value>
   </data>
   <data name="DahuAllInBtnProjectResult.Value" xml:space="preserve">
     <value>La recherche n'a abouti à aucun résultat</value>
@@ -213,8 +231,26 @@
   <data name="DahuSpecSplitMenu_Skill.Value" xml:space="preserve">
     <value>Compétences</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="DeleteTask" xml:space="preserve">
+    <value>Supprimer la tâche</value>
+  </data>
+  <data name="DeleteTaskColumn" xml:space="preserve">
+    <value>Supprimer la colonne </value>
+  </data>
+  <data name="DeleteTaskColumnInfo" xml:space="preserve">
+    <value>Cette action supprimera toutes les tâches de la colonne: </value>
+  </data>
+  <data name="DeleteTaskInfo" xml:space="preserve">
+    <value>Cette action supprimera la tâches: </value>
+  </data>
   <data name="DiscoverLinkDahuSpecMenu.Text" xml:space="preserve">
     <value>Découvrir</value>
+  </data>
+  <data name="EnterAColumnName" xml:space="preserve">
+    <value>Entrer un nom de colonne</value>
   </data>
   <data name="ExperienceTextBlock.Text" xml:space="preserve">
     <value>Expérience</value>
@@ -240,6 +276,9 @@
   <data name="MailAdress.Text" xml:space="preserve">
     <value>Adresse mail</value>
   </data>
+  <data name="NewTask" xml:space="preserve">
+    <value>Nouvelle tâche</value>
+  </data>
   <data name="ProjectLinkDahuSpecMenu.Text" xml:space="preserve">
     <value>Mes projets</value>
   </data>
@@ -251,6 +290,18 @@
   </data>
   <data name="RegisterTitle.Text" xml:space="preserve">
     <value>Inscription</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Renommer</value>
+  </data>
+  <data name="RenameTaskColumn" xml:space="preserve">
+    <value>Renommer la colonne </value>
+  </data>
+  <data name="ScrumBoardMenuFlyoutDelete.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="ScrumBoardMenuFlyoutRename.Text" xml:space="preserve">
+    <value>Renommer</value>
   </data>
   <data name="SignInButton.Value" xml:space="preserve">
     <value>Se connecter</value>
@@ -290,6 +341,9 @@
   </data>
   <data name="TitleInnovationIsHere.Text" xml:space="preserve">
     <value>L'inovation commence ici, trouver un projet et faites en partie</value>
+  </data>
+  <data name="TopicName" xml:space="preserve">
+    <value>Nom du topic</value>
   </data>
   <data name="UserFirstNameInputText3.InputHeader" xml:space="preserve">
     <value>Prénom</value>

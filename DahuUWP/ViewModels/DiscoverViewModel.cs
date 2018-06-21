@@ -4,6 +4,7 @@ using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using DahuUWP.Services.ModelManager;
+using DahuUWP.Utils.Converter;
 using DahuUWP.Views;
 using DahuUWP.Views.Components.Inputs;
 using DahuUWP.Views.Project.Forum;
@@ -17,7 +18,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace DahuUWP.ViewModels
 {
@@ -28,9 +32,9 @@ namespace DahuUWP.ViewModels
         public DiscoverViewModel(IDataService service)
         {
             dataService = service;
-            
+
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
-            
+
         }
 
         private async void OnPageLoaded()
@@ -47,7 +51,7 @@ namespace DahuUWP.ViewModels
             //<container:MediumProjectContainer ButtonBindings="{Binding ElementName=projectsItemsControl, Path=DataContext.KnowMoreProjectButtonBindings, UpdateSourceTrigger=PropertyChanged}"
             // Mais ça ne fonctionné pas le binding était en retard par rapport à l'objet en lui même pas possible de set l'uuid
             ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
-            List< DahuUWP.Models.Project> projects = (await projectManager.Charge(null)).Cast<DahuUWP.Models.Project>().ToList();
+            List<DahuUWP.Models.Project> projects = (await projectManager.Charge(null)).Cast<DahuUWP.Models.Project>().ToList();
             List<MediumProjectContainer> mediumProjectContainerList = new List<MediumProjectContainer>();
             foreach (DahuUWP.Models.Project project in projects)
             {
