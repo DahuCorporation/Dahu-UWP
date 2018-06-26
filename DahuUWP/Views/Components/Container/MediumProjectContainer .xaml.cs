@@ -48,6 +48,31 @@ namespace DahuUWP.Views.Components.Container
             }
         }
         public static readonly DependencyProperty ButtonBindingsProperty =
-            DependencyProperty.Register("ButtonBindings", typeof(DahuButtonBindings), typeof(MediumProjectContainer), null);
+            DependencyProperty.Register("ButtonBindings", typeof(DahuButtonBindings), typeof(MediumProjectContainer), new PropertyMetadata(null, new PropertyChangedCallback(OnButtonBindingsPropertyChanged)));
+        private static void OnButtonBindingsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            MediumProjectContainer mediumProj = d as MediumProjectContainer;
+            if (mediumProj.ButtonBindings.Parameter != null)
+                return;
+            DahuButtonBindings newButtonBindings = new DahuButtonBindings()
+            {
+                IsBusy = false,
+                Name = mediumProj.ButtonBindings.Name,
+                Parameter = mediumProj.Project
+            };
+            if (mediumProj.ButtonBindings.RedirectedLink != null)
+            {
+                newButtonBindings.RedirectedLink = mediumProj.ButtonBindings.RedirectedLink;
+            } else
+            {
+                newButtonBindings.TappedFuncListener = mediumProj.ButtonBindings.TappedFuncListener;
+            }
+            mediumProj.ButtonBindings = newButtonBindings;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

@@ -204,6 +204,18 @@
   <data name="DahuInput3_MemberName.InputPlaceholder" xml:space="preserve">
     <value>Nom du membre</value>
   </data>
+  <data name="DahuInput3_ProjectDescription.InputHeader" xml:space="preserve">
+    <value>Description du projet</value>
+  </data>
+  <data name="DahuInput3_ProjectDescription.InputPlaceholder" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DahuInput3_ProjectName.InputHeader" xml:space="preserve">
+    <value>Nom du projet</value>
+  </data>
+  <data name="DahuInput3_ProjectName.InputPlaceholder" xml:space="preserve">
+    <value>Nom</value>
+  </data>
   <data name="DahuInput3_UserAddress.InputHeader" xml:space="preserve">
     <value>Adresse</value>
   </data>
@@ -326,6 +338,9 @@
   </data>
   <data name="TitleBlock_AddMember.Title" xml:space="preserve">
     <value>Ajouter un membre</value>
+  </data>
+  <data name="TitleBlock_EditPrincipalInformation.Title" xml:space="preserve">
+    <value>Modifier les informations du projet</value>
   </data>
   <data name="TitleBlock_Members.Title" xml:space="preserve">
     <value>Vos membres</value>

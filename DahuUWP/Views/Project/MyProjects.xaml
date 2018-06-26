@@ -44,7 +44,8 @@
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <Container:MediumProjectContainer Project="{Binding}"
-                                                                  ButtonBindings="{Binding ElementName=ProjectResultsGridView, Path=DataContext.ManageProjectButtonBindings}"/>
+                                ButtonBindings="{Binding ElementName=ProjectResultsGridView, Path=DataContext.ManageProjectButtonBindings}"/>
+                                <!--ButtonBindings="{Binding ManageProjectButtonBindings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
                             </DataTemplate>
                         </GridView.ItemTemplate>
                         <GridView.ItemContainerStyle>

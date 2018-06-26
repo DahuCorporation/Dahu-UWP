@@ -46,6 +46,30 @@ namespace DahuUWP.Models.ModelManager
             }
         }
 
+        public async Task<Project> ChargeOneProject(string projectId)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "projects/" + projectId;
+                HttpResponseMessage result = await apiService.Get(requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        return (Project)DeSerialize((JObject)resp["data"]);
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
+        }
+
         public async Task<bool> Create(object project)
         {
             try
@@ -92,7 +116,10 @@ namespace DahuUWP.Models.ModelManager
 
         public object DeSerialize(JObject jObject)
         {
-            throw new NotImplementedException();
+            Project project = new Project();
+
+            project = jObject.ToObject<Project>();
+            return project;
         }
 
         public Task<bool> Edit(object obj)

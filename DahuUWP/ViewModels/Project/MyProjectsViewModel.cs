@@ -45,15 +45,15 @@ namespace DahuUWP.ViewModels.Project
             List<Models.Project> projectList = await userManager.ChargeProjects(AppStaticInfo.Account.Uuid, null);
             if (projectList != null)
                 UserProjects = new ObservableCollection<Models.Project>(projectList);
-            Models.Project proj = new Models.Project()
-            {
-                Name = "Last!!!",
-                Description = "Desc",
-                Uuid = "ezf"
+            //Models.Project proj = new Models.Project()
+            //{
+            //    Name = "Last!!!",
+            //    Description = "Desc",
+            //    Uuid = "ezf"
 
-            };
+            //};
 
-            UserProjects.Add(proj);
+            //UserProjects.Add(proj);
         }
 
         private void InitManageProjectButtonBindings()

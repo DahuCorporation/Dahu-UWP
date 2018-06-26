@@ -4,10 +4,49 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DahuUWP.Views.Project.Managing"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:Titles="using:DahuUWP.Views.Components.Titles"
+    xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Container="using:DahuUWP.Views.Components.Container"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContext="{Binding EditProjectPrincipalInformationVM, Source={StaticResource Locator}}">
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:EventTriggerBehavior.Actions>
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedBaseCommand}" />
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedCommand}" />
+            </Core:EventTriggerBehavior.Actions>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
+    <ScrollViewer>
+        <StackPanel>
+            <Grid VerticalAlignment="Top" Background="#FFFFFF" Style="{StaticResource WhiteContentGrid}">
+                <StackPanel>
+                    <Titles:TitleBlock x:Name="TitleBlock_EditPrincipalInformation" x:Uid="TitleBlock_EditPrincipalInformation"/>
 
-    <Grid Style="{StaticResource BodyGrid}">
-
-    </Grid>
+                    <Grid Padding="30,15">
+                        <StackPanel VerticalAlignment="Top" Padding="0,0,10,0">
+                            <Inputs:DahuInputText3 x:Name="DahuInput3_ProjectName"
+                                               x:Uid="DahuInput3_ProjectName"
+                                               InputPlaceholder="Project name"
+                                               TextValue="{Binding Project.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                               InputHeader="Project name"/>
+                            <Inputs:DahuInputText3 x:Name="DahuInput3_ProjectDescription"
+                                               x:Uid="DahuInput3_ProjectDescription"
+                                               InputPlaceholder="Description"
+                                               TextValue="{Binding Project.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                               InputHeader="Description"/>
+                            <Grid>
+                                <Inputs:DahuButton3 x:Name="DahuButton3_SaveMainInformation"
+                                            x:Uid="DahuButton3_SaveMainInformation"
+                                            Style="{StaticResource EditButton}"/>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

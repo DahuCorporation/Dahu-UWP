@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DahuUWP.ViewModels.Project.Managing;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,11 @@ namespace DahuUWP.Views.Project.Managing
         public EditProjectPrincipalInformation()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ((EditProjectPrincipalInformationViewModel)DataContext).NavigationParam = e.Parameter;
         }
     }
 }

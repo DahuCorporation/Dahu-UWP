@@ -1,5 +1,7 @@
 ﻿using DahuUWP.DahuTech.Menu;
 using DahuUWP.Services;
+using DahuUWP.ViewModels.Search;
+using DahuUWP.Views;
 using DahuUWP.Views.Project.Managing;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -17,9 +19,12 @@ namespace DahuUWP.ViewModels.Project.Managing
     {
         public ICommand OnPageLoadedCommand { get; private set; }
 
+        public ICommand EditProjectCommand { get; set; }
+
         public ManageProjectViewModel(IDataService service)
         {
             dataService = service;
+            EditProjectCommand = new RelayCommand(EditProjectRedirect);
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
             FillFullHorizontalMenu();
         }
@@ -64,6 +69,12 @@ namespace DahuUWP.ViewModels.Project.Managing
             FullHorizontalMenu.Nodes.Add(nodeMenu4);
         }
 
+        private async void EditProjectRedirect()
+        {
+            //HomePage.DahuFrame.Navigate(typeof(MainResearch), ResearchValue);
+            HomePage.DahuFrame.Navigate(typeof(EditProject), Project);
+        }
+
         private void FullHorizontalMenuNodeClicked(object parameter)
         {
             CurrentProjManagingPage = (Type)parameter;
@@ -71,6 +82,7 @@ namespace DahuUWP.ViewModels.Project.Managing
 
         private async void OnPageLoaded()
         {
+            Project = (DahuUWP.Models.Project)NavigationParam;
             CurrentProjManagingPage = typeof(Views.Project.ScrumBoard.ScrumBoard);
         }
 
@@ -85,7 +97,15 @@ namespace DahuUWP.ViewModels.Project.Managing
         }
 
 
-
+        private DahuUWP.Models.Project _project;
+        public DahuUWP.Models.Project Project
+        {
+            get { return _project; }
+            set
+            {
+                NotifyPropertyChanged(ref _project, value);
+            }
+        }
 
         private Menu _fullHorizontalMenu;
         public Menu FullHorizontalMenu

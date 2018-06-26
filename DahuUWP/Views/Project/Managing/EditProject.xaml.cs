@@ -1,4 +1,5 @@
-﻿using DahuUWP.Views.Components.DahuSpecialSplitMenu;
+﻿using DahuUWP.ViewModels.Project.Managing;
+using DahuUWP.Views.Components.DahuSpecialSplitMenu;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,11 +25,17 @@ namespace DahuUWP.Views.Project.Managing
     public sealed partial class EditProject : Page
     {
         private MenuButton activeMenuButton = new MenuButton();
+        private object ParamNavigate;
 
         public EditProject()
         {
             this.InitializeComponent();
-            ProfilSpecMenuFrame.Navigate(typeof(EditProjectPrincipalInformation));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ParamNavigate = e.Parameter;
+            ProfilSpecMenuFrame.Navigate(typeof(EditProjectPrincipalInformation), ParamNavigate);
             activeMenuButton = DahuSpecSplitMenu_EditProjectPrincipalInformation;
         }
 
@@ -44,19 +51,19 @@ namespace DahuUWP.Views.Project.Managing
 
         private void DahuSpecSplitMenu_EditProjectPrincipalInformation_tapped(object sender, TappedRoutedEventArgs e)
         {
-            ProfilSpecMenuFrame.Navigate(typeof(EditProjectPrincipalInformation));
+            ProfilSpecMenuFrame.Navigate(typeof(EditProjectPrincipalInformation), ParamNavigate);
             ActiveButton(sender);
         }
 
         private void DahuSpecSplitMenu_EditProjectMembers_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ProfilSpecMenuFrame.Navigate(typeof(EditProjectMembers));
+            ProfilSpecMenuFrame.Navigate(typeof(EditProjectMembers), ParamNavigate);
             ActiveButton(sender);
         }
 
         private void DahuSpecSplitMenu_EditProjectParameters_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ProfilSpecMenuFrame.Navigate(typeof(EditProjectParameters));
+            ProfilSpecMenuFrame.Navigate(typeof(EditProjectParameters), ParamNavigate);
             ActiveButton(sender);
         }
 

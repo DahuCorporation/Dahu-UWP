@@ -29,10 +29,10 @@ namespace DahuUWP.Views.Project.Managing
             //ProjectFrame.Navigate(typeof(Forum.Forum));
         }
 
-        private void GraylouButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            HomePage.DahuFrame.Navigate(typeof(EditProject));
-        }
+        //private void GraylouButton_Tapped(object sender, TappedRoutedEventArgs e)
+        //{
+        //    HomePage.DahuFrame.Navigate(typeof(EditProject));
+        //}
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
