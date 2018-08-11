@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DahuUWP.DahuTech.Menu;
+using DahuUWP.Views.Components.DahuSpecialSplitMenu;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -28,7 +30,6 @@ namespace DahuUWP.Views.Project.ScrumBoard
         {
             this.InitializeComponent();
         }
-
         //private void UnorganizedListView_OnDragItemsStarting(object sender, DragItemsStartingEventArgs e)
         //{
         //    var items = string.Join(",", e.Items.Cast<DahuTech.ScrumBoard.ScrumBoardTask>().Select(i => i.Id));

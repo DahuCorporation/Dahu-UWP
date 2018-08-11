@@ -42,5 +42,10 @@
   <status key="Project created successfully."  value="Le projet '{0}' a bien été créé." varName="" type="Positive"/>
   <!---->
 
+  <!---->
+  <!--Scrum Board-->
+  <status key="Scrum board name incorrect."  value="Le nom du scrum board n'est pas correct." varName="" type="Warning"/>
+  <!---->
+
 
 </interfaceStatus>

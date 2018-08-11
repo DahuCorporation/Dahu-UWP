@@ -23,7 +23,6 @@ namespace DahuUWP.ViewModels.Project
         public MyProjectsViewModel(IDataService service)
         {
             dataService = service;
-            InitManageProjectButtonBindings();
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
         }
 
@@ -36,6 +35,7 @@ namespace DahuUWP.ViewModels.Project
 
         private async void LoadUserProjects()
         {
+            InitManageProjectButtonBindings();
             UserManager userManager = (UserManager)dataService.GetUserManager();
 
             Dictionary<string, object> userDicoCharge = new Dictionary<string, object>

@@ -8,6 +8,7 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
+    xmlns:DahuSpecSplitMenu="using:DahuUWP.Views.Components.DahuSpecialSplitMenu"
     xmlns:inputs="using:DahuUWP.Views.Components.Inputs"
     DataContext="{Binding ScrumBoardVM, Source={StaticResource Locator}}">
 
@@ -22,6 +23,48 @@
 
     <Grid Style="{StaticResource BodyGrid}">
         <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
+                <inputs:DahuAllInBtn x:Uid="DahuAllInBtn_AddScrumBoard"
+                                 Value="Ajouter un scrum board"
+                                 ButtonBindings="{Binding AddColumnButtonBindings, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                 ValueFontSize="17"
+                                 ValueFontWeight="Semibold"
+                                 ValueForeground="#FFFFFFFF"
+                                 ButtonRadius="2"
+                                 ButtonBackground="#FFd0691c"/>
+
+                    <TextBlock Text="Liste des scrums boards" Style="{StaticResource DahuH45Dark}" HorizontalAlignment="Center" Margin="0,16,0,0"/>
+                <ItemsControl Name="ScrumBoardList" ItemsSource="{Binding ScrumBoardList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Grid>
+                                    <Interactivity:Interaction.Behaviors>
+                                        <Core:EventTriggerBehavior EventName="Tapped">
+                                            <Core:InvokeCommandAction Command="{Binding ElementName=ScrumBoardList, Path=DataContext.ScrumBoardNodeTappedCommand}" CommandParameter="{Binding}"/>
+                                        </Core:EventTriggerBehavior>
+                                    </Interactivity:Interaction.Behaviors>
+                                    <DahuSpecSplitMenu:MenuButton x:Name="MenuNode"
+                                                                  ButtonRadius="2"
+                                                              Tag="{Binding}"
+                                                              ButtonTheme="{Binding NodeTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                              Active="{Binding Active}"
+                                                              ValueHorizontalAlignement="Left"
+                                                              Value="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                              Margin="0,0,0,10"/>
+                                    
+                                </Grid>
+                            </StackPanel>
+
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
             <ItemsControl Name="projectsItemsControl" ItemsSource="{Binding Columns}" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -43,7 +86,9 @@
                                  ValueFontWeight="Semibold"/>
         </StackPanel>
         <!--<StackPanel Orientation="Horizontal">
-            --><!--<ListView  AllowDrop="True" CanReorderItems="True" CanDrag="True" CanDragItems="True" SelectionMode="None" Width="296">--><!--
+            -->
+        <!--<ListView  AllowDrop="True" CanReorderItems="True" CanDrag="True" CanDragItems="True" SelectionMode="None" Width="296">-->
+        <!--
             <ListView Width="296" AllowDrop="True" SelectionMode="Extended"
               DragOver="UnorganizedListView_OnDragOver" 
               Drop="UnorganizedListView_OnDrop" 

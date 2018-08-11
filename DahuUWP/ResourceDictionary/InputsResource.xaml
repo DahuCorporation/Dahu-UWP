@@ -54,5 +54,11 @@
     <Style x:Key="SaveButton" TargetType="Inputs:DahuButton3">
         <Setter Property="ButtonBackground" Value="#FFD0691C" />
     </Style>
+    <Style x:Key="ButtonTowerBG" TargetType="Inputs:DahuAllInBtn">
+        <Setter Property="ButtonRadius" Value="24" />
+        <Setter Property="ValueFontWeight" Value="Bold" />
+        <Setter Property="ValueForeground" Value="#FFFFFFFF" />
+        <Setter Property="ValueFontSize" Value="15" />
+    </Style>
 
 </ResourceDictionary>

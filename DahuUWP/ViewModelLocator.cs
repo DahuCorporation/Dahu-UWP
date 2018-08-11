@@ -59,6 +59,7 @@ namespace DahuUWP
             SimpleIoc.Default.Register<MyProjectsViewModel>();
             SimpleIoc.Default.Register<ForumViewModel>();
             SimpleIoc.Default.Register<ScrumBoardViewModel>();
+            SimpleIoc.Default.Register<ProjectViewViewModel>();
 
             //Search
             SimpleIoc.Default.Register<MainResearchViewModel>();
@@ -134,6 +135,11 @@ namespace DahuUWP
         public ScrumBoardViewModel ScrumBoardVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<ScrumBoardViewModel>(); return (ScrumBoardViewModel)CurrentViewModel; }
+        }
+
+        public ProjectViewViewModel ProjectViewVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<ProjectViewViewModel>(); return (ProjectViewViewModel)CurrentViewModel; }
         }
 
         //Search

@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page https://go.microsoft.com/fwlink/?LinkId=234236
@@ -129,6 +130,28 @@ namespace DahuUWP.Views.Components.Inputs
                     dahuAllInBtn.ButtonGrid.CornerRadius = new CornerRadius(Convert.ToDouble(radius[0]), Convert.ToDouble(radius[1]), Convert.ToDouble(radius[2]), Convert.ToDouble(radius[3]));
                     break;
             }
+        }
+
+
+        public string ButtonImageBackground
+        {
+            get
+            {
+                return (string)GetValue(ButtonImageBackgroundProperty);
+            }
+            set
+            {
+                SetValue(ButtonImageBackgroundProperty, value);
+            }
+        }
+        public static readonly DependencyProperty ButtonImageBackgroundProperty = DependencyProperty.Register("ButtonImageBackground", typeof(string), typeof(DahuAllInBtn), new PropertyMetadata(null, new PropertyChangedCallback(ButtonImageBackgroundChanged)));
+        private static void ButtonImageBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            DahuAllInBtn dahuAllInBtn = d as DahuAllInBtn;
+            //string[] radius = ((string)e.NewValue).Split(',');
+
+            //dahuAllInBtn.GridImageBackground.Background.Opacity = 0.60;
+            dahuAllInBtn.GridImageBackground.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/" + (string)e.NewValue)), Stretch = Stretch.UniformToFill, Opacity = 0.5 };
         }
 
         public DahuButtonBindings ButtonBindings

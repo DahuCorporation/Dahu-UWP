@@ -25,7 +25,10 @@ namespace DahuUWP.Views.Components.Inputs
         {
             DataContext = this;
             this.InitializeComponent();
-            
+            ButtonBackground = "#DFDFDF";
+            ValueForeground = "#080808";
+            InputHeight = 48;
+            InputRadius = "24";
         }
 
         public string Value { get; set; }
@@ -44,6 +47,72 @@ namespace DahuUWP.Views.Components.Inputs
                 ButtonIconName.Background = IconConverter.IconToImageBrush(_icon);
             }
         }
+
+        public string InputRadius
+        {
+            get
+            {
+                return (string)GetValue(InputRadiusProperty);
+            }
+            set
+            {
+                SetValue(InputRadiusProperty, value);
+            }
+        }
+        public static readonly DependencyProperty InputRadiusProperty = DependencyProperty.Register("InputRadius", typeof(string), typeof(GraylouButton), new PropertyMetadata(null, new PropertyChangedCallback(OnInputRadiusChanged)));
+
+        private static void OnInputRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            GraylouButton dahuAllInInputTxt = d as GraylouButton;
+            string[] radius = ((string)e.NewValue).Split(',');
+            switch (radius.Length)
+            {
+                case 1:
+                    dahuAllInInputTxt.GraylouBorder.CornerRadius = new CornerRadius(Convert.ToDouble(radius[0]));
+                    break;
+                case 4:
+                    dahuAllInInputTxt.GraylouBorder.CornerRadius = new CornerRadius(Convert.ToDouble(radius[0]), Convert.ToDouble(radius[1]), Convert.ToDouble(radius[2]), Convert.ToDouble(radius[3]));
+                    break;
+            }
+        }
+        public int InputHeight
+        {
+            get
+            {
+                return (int)GetValue(InputHeightProperty);
+            }
+            set
+            {
+                SetValue(InputHeightProperty, value);
+            }
+        }
+        public static readonly DependencyProperty InputHeightProperty = DependencyProperty.Register("InputHeight", typeof(int), typeof(GraylouButton), null);
+
+        public string ButtonBackground
+        {
+            get
+            {
+                return (string)GetValue(ButtonBackgroundProperty);
+            }
+            set
+            {
+                SetValue(ButtonBackgroundProperty, value);
+            }
+        }
+        public static readonly DependencyProperty ButtonBackgroundProperty = DependencyProperty.Register("ButtonBackground", typeof(string), typeof(GraylouButton), null);
+
+        public string ValueForeground
+        {
+            get
+            {
+                return (string)GetValue(ValueForegroundProperty);
+            }
+            set
+            {
+                SetValue(ValueForegroundProperty, value);
+            }
+        }
+        public static readonly DependencyProperty ValueForegroundProperty = DependencyProperty.Register("ValueForeground", typeof(string), typeof(GraylouButton), null);
 
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {

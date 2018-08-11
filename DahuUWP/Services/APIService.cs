@@ -15,6 +15,7 @@ namespace DahuUWP.Services
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
 
         private String route = "http://fncs.eu/api/forward/";
+        //private String route = "http://86.213.150.52/api/forward/";
         private HttpClient httpClient = new HttpClient();
 
         public APIService()

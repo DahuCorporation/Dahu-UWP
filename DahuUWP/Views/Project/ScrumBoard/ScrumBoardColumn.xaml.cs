@@ -35,18 +35,18 @@ namespace DahuUWP.Views.Project.ScrumBoard
             (this.Content as FrameworkElement).DataContext = this;
         }
 
-        public DahuTech.ScrumBoard.ScrumBoardColumn Column
+        public Models.ScrumBoardColumn Column
         {
             get
             {
-                return (DahuTech.ScrumBoard.ScrumBoardColumn)GetValue(ColumnProperty);
+                return (Models.ScrumBoardColumn)GetValue(ColumnProperty);
             }
             set
             {
                 SetValue(ColumnProperty, value);
             }
         }
-        public static readonly DependencyProperty ColumnProperty = DependencyProperty.Register("Column", typeof(DahuTech.ScrumBoard.ScrumBoardColumn), typeof(ScrumBoardColumn), null);
+        public static readonly DependencyProperty ColumnProperty = DependencyProperty.Register("Column", typeof(Models.ScrumBoardColumn), typeof(ScrumBoardColumn), null);
 
         /// <summary>
         /// Decide if item can move from column and put some args to send to the drop listner
@@ -55,9 +55,9 @@ namespace DahuUWP.Views.Project.ScrumBoard
         /// <param name="e"></param>
         private async void UnorganizedListView_OnDragItemsStarting(object sender, DragItemsStartingEventArgs e)
         {
-            var items = string.Join(",", e.Items.Cast<DahuTech.ScrumBoard.ScrumBoardTask>().Select(i => i.Id));
+            var items = string.Join(",", e.Items.Cast<Models.ScrumBoardTask>().Select(i => i.Uuid));
             e.Data.SetText(items);
-            e.Data.SetData("ColumnId", Column.Id.ToString());
+            e.Data.SetData("ColumnId", Column.Uuid.ToString());
             e.Data.RequestedOperation = DataPackageOperation.Move;
         }
 
@@ -66,12 +66,12 @@ namespace DahuUWP.Views.Project.ScrumBoard
         /// </summary>
         /// <param name="originColumnId"></param>
         /// <returns></returns>
-        private DahuTech.ScrumBoard.ScrumBoardColumn FindOriginColumn(int originColumnId)
+        private Models.ScrumBoardColumn FindOriginColumn(string originColumnId)
         {
             ScrumBoardViewModel scrumBoardVM = ViewModelLocator.CurrentViewModel as ScrumBoardViewModel;
             foreach (var column in scrumBoardVM.Columns)
             {
-                if (column.Id == originColumnId)
+                if (column.Uuid.Equals(originColumnId))
                 {
                     return column;
                 }
@@ -89,19 +89,19 @@ namespace DahuUWP.Views.Project.ScrumBoard
             if (e.DataView.Contains(StandardDataFormats.Text))
             {
                 var id = await e.DataView.GetTextAsync();
-                var originColumn = FindOriginColumn(Int32.Parse(await e.DataView.GetDataAsync("ColumnId") as string));
+                var originColumn = FindOriginColumn(await e.DataView.GetDataAsync("ColumnId") as string);
                 if (originColumn == null)
                     return;
 
                 var itemIdsToMove = id.Split(',');
                 var destinationListView = sender as ListView;
-                var listViewItemsSource = destinationListView?.ItemsSource as ObservableCollection<DahuTech.ScrumBoard.ScrumBoardTask>;
+                var listViewItemsSource = destinationListView?.ItemsSource as ObservableCollection<Models.ScrumBoardTask>;
 
                 if (listViewItemsSource != null)
                 {
                     foreach (var itemId in itemIdsToMove)
                     {
-                        var itemToMove = originColumn.Tasks.First(i => i.Id.ToString() == itemId);
+                        var itemToMove = originColumn.Tasks.First(i => i.Uuid == itemId);
 
                         listViewItemsSource.Add(itemToMove);
                         originColumn.Tasks.Remove(itemToMove);
@@ -117,8 +117,8 @@ namespace DahuUWP.Views.Project.ScrumBoard
         /// <param name="e"></param>
         private async void ListView_DragOver(object sender, DragEventArgs e)
         {
-            var columnId = Int32.Parse(await e.DataView.GetDataAsync("ColumnId") as string);
-            if (e.DataView.Contains(StandardDataFormats.Text) && this.Column.Id != columnId)
+            var columnId = await e.DataView.GetDataAsync("ColumnId") as string;
+            if (e.DataView.Contains(StandardDataFormats.Text) && this.Column.Uuid != columnId)
             {
                 e.AcceptedOperation = DataPackageOperation.Move;
             }
@@ -136,10 +136,10 @@ namespace DahuUWP.Views.Project.ScrumBoard
             string taskTitle = await dialog.InputStringDialogAsync(res.GetString("CreateNewTask"), res.GetString("NewTask"), res.GetString("Add"), res.GetString("Cancel"));
             if (!String.IsNullOrWhiteSpace(taskTitle))
             {
-                DahuUWP.DahuTech.ScrumBoard.ScrumBoardTask task = new DahuUWP.DahuTech.ScrumBoard.ScrumBoardTask()
+                Models.ScrumBoardTask task = new Models.ScrumBoardTask()
                 {
-                    Id = Column.Tasks.Count + 1,
-                    Title = taskTitle
+                    Uuid = Column.Tasks.Count + "1",
+                    Name = taskTitle
                 };
                 Column.Tasks.Add(task);
             }
@@ -159,7 +159,7 @@ namespace DahuUWP.Views.Project.ScrumBoard
         {
             var res = new ResourceLoader();
             InputStringDialog dialog = new InputStringDialog();
-            string name = await dialog.InputStringDialogAsync("Renommer la colonne: " + Column.Title, Column.Title, res.GetString("Rename"), res.GetString("Cancel"));
+            string name = await dialog.InputStringDialogAsync("Renommer la colonne: " + Column.Name, Column.Name, res.GetString("Rename"), res.GetString("Cancel"));
 
         }
 
@@ -167,7 +167,7 @@ namespace DahuUWP.Views.Project.ScrumBoard
         {
             var res = new ResourceLoader();
             InputStringDialog dialog = new InputStringDialog();
-            bool name = await dialog.AskDialogAsync(res.GetString("DeleteTaskColumn"), res.GetString("DeleteTaskColumnInfo") + Column.Title, res.GetString("Delete"), res.GetString("Cancel"));
+            bool name = await dialog.AskDialogAsync(res.GetString("DeleteTaskColumn"), res.GetString("DeleteTaskColumnInfo") + Column.Name, res.GetString("Delete"), res.GetString("Cancel"));
         }
     }
 }

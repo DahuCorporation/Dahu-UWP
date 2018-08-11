@@ -32,7 +32,7 @@
                         </Grid.ColumnDefinitions>
 
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="0">
-                            <ItemsControl Name="projectsItemsControl" ItemsSource="{Binding MediumProjectContainerList}" >
+                            <ItemsControl x:Name="ProjectItemsControl" ItemsSource="{Binding ProjectContainerList}" >
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Horizontal"/>
@@ -42,8 +42,9 @@
                                     <DataTemplate>
 
                                         <StackPanel>
-                                            <container:MediumProjectContainer ButtonBindings="{Binding ButtonBindings}"
-                                                                          Project="{Binding Project}"
+                                            <container:MediumProjectContainer
+                                                                          Project="{Binding}"
+                                                ButtonBindings="{Binding ElementName=ProjectItemsControl, Path=DataContext.ViewProjectButtonBindings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                                           Margin="18,0,0,0"/>
                                         </StackPanel>
                                     </DataTemplate>

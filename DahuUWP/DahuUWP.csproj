@@ -110,9 +110,9 @@
     <Compile Include="DahuTech\Menu\TopBarNodeMenu.cs" />
     <Compile Include="DahuTech\Project\Forum\TopicMessageContainer.cs" />
     <Compile Include="DahuTech\Project\MediumProjectContainer.cs" />
-    <Compile Include="DahuTech\ScrumBoard\ScrumBoard.cs" />
-    <Compile Include="DahuTech\ScrumBoard\ScrumBoardColumn.cs" />
-    <Compile Include="DahuTech\ScrumBoard\ScrumBoardTask.cs" />
+    <Compile Include="Models\ScrumBoard.cs" />
+    <Compile Include="Models\ScrumBoardColumn.cs" />
+    <Compile Include="Models\ScrumBoardTask.cs" />
     <Compile Include="DahuTech\ViewNotification\Notification.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AppStaticInfo.cs" />
@@ -122,6 +122,7 @@
     <Compile Include="Models\TopicMessage.cs" />
     <Compile Include="Services\ModelManager\IModelManager.cs" />
     <Compile Include="Services\ModelManager\ProjectManager.cs" />
+    <Compile Include="Services\ModelManager\ScrumBoardManager.cs" />
     <Compile Include="Services\ModelManager\SkillManager.cs" />
     <Compile Include="Services\ModelManager\UserManager.cs" />
     <Compile Include="Models\Project.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="ViewModels\Project\Managing\EditProjectPrincipalInformationViewModel.cs" />
     <Compile Include="ViewModels\Project\Managing\ManageProjectViewModel.cs" />
     <Compile Include="ViewModels\Project\MyProjectsViewModel.cs" />
+    <Compile Include="ViewModels\Project\ProjectViewViewModel.cs" />
     <Compile Include="ViewModels\Project\ScrumBoard\ScrumBoardViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Search\MainResearchViewModel.cs" />
@@ -214,6 +216,9 @@
     <Compile Include="Views\Components\Inputs\DahuInputText3.xaml.cs">
       <DependentUpon>DahuInputText3.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Components\Inputs\DahuProgressBar.xaml.cs">
+      <DependentUpon>DahuProgressBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Components\Inputs\GraylouButton.xaml.cs">
       <DependentUpon>GraylouButton.xaml</DependentUpon>
     </Compile>
@@ -234,6 +239,9 @@
     </Compile>
     <Compile Include="Views\Components\Popups\Toasts.xaml.cs">
       <DependentUpon>Toasts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\ProjectView.xaml.cs">
+      <DependentUpon>ProjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Project\ScrumBoard\ScrumBoard.xaml.cs">
       <DependentUpon>ScrumBoard.xaml</DependentUpon>
@@ -315,6 +323,7 @@
     <PRIResource Include="Strings\de-DE\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Background\citylow.jpg" />
     <Content Include="Assets\Background\DahuSpecMenuBG.jpg" />
     <Content Include="Assets\Dahu-Icon\alarm-clock.png" />
     <Content Include="Assets\Dahu-Icon\atomic.png" />
@@ -345,6 +354,7 @@
     <Content Include="Assets\Dahu-Icon\envelope.png" />
     <Content Include="Assets\Dahu-Icon\eraser.png" />
     <Content Include="Assets\Dahu-Icon\eye.png" />
+    <Content Include="Assets\Dahu-Icon\facebook_logo_w.png" />
     <Content Include="Assets\Dahu-Icon\fast-forward.png" />
     <Content Include="Assets\Dahu-Icon\favorites.png" />
     <Content Include="Assets\Dahu-Icon\file-1.png" />
@@ -356,6 +366,8 @@
     <Content Include="Assets\Dahu-Icon\folder-1.png" />
     <Content Include="Assets\Dahu-Icon\folder.png" />
     <Content Include="Assets\Dahu-Icon\gamepad.png" />
+    <Content Include="Assets\Dahu-Icon\github_logo_w.png" />
+    <Content Include="Assets\Dahu-Icon\google_plus_logo_w.png" />
     <Content Include="Assets\Dahu-Icon\heart.png" />
     <Content Include="Assets\Dahu-Icon\home.png" />
     <Content Include="Assets\Dahu-Icon\id-card.png" />
@@ -379,6 +391,8 @@
     <Content Include="Assets\Dahu-Icon\microphone.png" />
     <Content Include="Assets\Dahu-Icon\money.png" />
     <Content Include="Assets\Dahu-Icon\monitor.png" />
+    <Content Include="Assets\Dahu-Icon\more.png" />
+    <Content Include="Assets\Dahu-Icon\more_white.png" />
     <Content Include="Assets\Dahu-Icon\music.png" />
     <Content Include="Assets\Dahu-Icon\next.png" />
     <Content Include="Assets\Dahu-Icon\padlock-1.png" />
@@ -425,6 +439,7 @@
     <Content Include="Assets\Dahu-Icon\wifi.png" />
     <Content Include="Assets\Dahu-Icon\zoom-in.png" />
     <Content Include="Assets\Dahu-Icon\zoom-out.png" />
+    <Content Include="Assets\Tmp\cabanebois.jpg" />
     <Content Include="Assets\Tmp\profil-pic.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -529,6 +544,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Components\Inputs\DahuProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Components\Inputs\GraylouButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -554,6 +573,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\Popups\Toasts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\ProjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -666,7 +689,9 @@
       <Version>10.0.3</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DahuTech\ScrumBoard\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

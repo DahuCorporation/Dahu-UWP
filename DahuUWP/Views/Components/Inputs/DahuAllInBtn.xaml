@@ -16,15 +16,17 @@
                   HorizontalAlignment="Left"
                   Width="{Binding Path=ButtonWidth, FallbackValue='Auto', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
                   CornerRadius="0" >
-                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Path=Value, FallbackValue='Button1'}"
+                <Grid x:Name="GridImageBackground">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Path=Value, FallbackValue='Button1'}"
                                Foreground="{Binding Path=ValueForeground, FallbackValue='#ffffff', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                FontWeight="{Binding Path=ValueFontWeight, FallbackValue='SemiBold', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
                                Margin="40,0,40,0" 
                                FontSize="{Binding Path=ValueFontSize, FallbackValue='11', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
-                </StackPanel>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </Grid>
     </StackPanel>

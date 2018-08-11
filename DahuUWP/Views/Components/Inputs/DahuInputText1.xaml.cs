@@ -124,5 +124,10 @@ namespace DahuUWP.Views.Components.Inputs
                 dahuInputText1.InputPassword.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void InputText_GotFocus(object sender, RoutedEventArgs e)
+        {
+            InputText.SelectAll();
+        }
     }
 }

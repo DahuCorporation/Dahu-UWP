@@ -1,5 +1,7 @@
-﻿using DahuUWP.DahuTech.Inputs;
-using DahuUWP.DahuTech.ScrumBoard;
+﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.Inputs;
+using DahuUWP.DahuTech.Menu;
+using DahuUWP.Models;
 using DahuUWP.Services;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -17,15 +19,19 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
     {
         public ICommand OnPageLoadedCommand { get; private set; }
 
+        public ICommand ScrumBoardNodeTappedCommand { get; set; }
+
         public ScrumBoardViewModel(IDataService service)
         {
             dataService = service;
 
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
+            ScrumBoardNodeTappedCommand = new RelayCommand<object>(ScrumBoardNodeTapped);
         }
 
         private async void OnPageLoaded()
         {
+            MakeScrumBoardList();
             AddColumnButtonBindings = new DahuButtonBindings();
             AddColumnButtonBindings.Name = "Ajouter une colonne";
             AddColumnButtonBindings.TappedFuncListener = AddColumn;
@@ -33,18 +39,18 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
             {
                 new ScrumBoardTask
                 {
-                    Id = 1,
-                    Title = "Item 1.1"
+                    Uuid = "1",
+                    Name = "Item 1.1"
                 },
                 new ScrumBoardTask
                 {
-                    Id = 2,
-                    Title = "Item 1.2"
+                    Uuid = "2",
+                    Name = "Item 1.2"
                 },
                 new ScrumBoardTask
                 {
-                    Id = 3,
-                    Title = "Item 1.3"
+                    Uuid = "3",
+                    Name = "Item 1.3"
                 }
             };
 
@@ -52,35 +58,76 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
             {
                 new ScrumBoardTask
                 {
-                    Id = 1,
-                    Title = "Item 2.1"
+                    Uuid = "1",
+                    Name = "Item 2.1"
                 },
                 new ScrumBoardTask
                 {
-                    Id = 2,
-                    Title = "Item 2.2"
+                    Uuid = "2",
+                    Name = "Item 2.2"
                 },
                 new ScrumBoardTask
                 {
-                    Id = 3,
-                    Title = "Item 2.3"
+                    Uuid = "3",
+                    Name = "Item 2.3"
                 }
             };
             Columns = new ObservableCollection<ScrumBoardColumn>();
             ScrumBoardColumn sbc = new ScrumBoardColumn()
             {
-                Id = 0,
-                Title = "To do",
+                Uuid = "0",
+                Name = "To do",
                 Tasks = new ObservableCollection<ScrumBoardTask>(items1)
             };
             Columns.Add(sbc);
             ScrumBoardColumn sbc2 = new ScrumBoardColumn()
             {
-                Id = 1,
-                Title = "In progress",
+                Uuid = "0",
+                Name = "In progress",
                 Tasks = new ObservableCollection<ScrumBoardTask>(items2)
             };
             Columns.Add(sbc2);
+        }
+
+        private void ScrumBoardNodeTapped(object param)
+        {
+            NodeMenu selectedNodeMenu = param as NodeMenu;
+            foreach (NodeMenu nodeMenu in ScrumBoardList)
+            {
+                if (nodeMenu.Active && nodeMenu != selectedNodeMenu)
+                    nodeMenu.Active = false;
+            }
+            selectedNodeMenu.Active = true;
+            selectedNodeMenu.LinkIt();
+        }
+
+        private void MakeScrumBoardList()
+        {
+            ScrumBoardList = new ObservableCollection<NodeMenu>();
+            NodeMenu node3 = new NodeMenu()
+            {
+                Title = "User needs",
+                NodeTheme = Theme.Clear,
+                Active = true,
+                FuncListener = ChangeScrumBoard,
+                Parameter = "Cuu"
+            };
+            NodeMenu node4 = new NodeMenu()
+            {
+                Title = "Blobuou",
+                NodeTheme = Theme.Clear,
+                Active = false,
+                FuncListener = ChangeScrumBoard,
+                Parameter = "Looo"
+            };
+            ScrumBoardList.Add(node3);
+            ScrumBoardList.Add(node4);
+        }
+
+        private void ChangeScrumBoard(object parameter)
+        {
+            string tit = " ezf";
+            
         }
 
         public async void AddColumn()
@@ -88,6 +135,38 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
             var res = new ResourceLoader();
             InputStringDialog dialog = new InputStringDialog();
             string name = await dialog.InputStringDialogAsync(res.GetString("AddColumn") , res.GetString("EnterAColumnName"), res.GetString("Add"), res.GetString("Cancel"));
+            if (!String.IsNullOrWhiteSpace(name))
+            {
+                List<ScrumBoardTask> items2 = new List<ScrumBoardTask>
+            {
+                new ScrumBoardTask
+                {
+                    Uuid = "1",
+                    Name = "Item 2.1"
+                },
+                new ScrumBoardTask
+                {
+                    Uuid = "2",
+                    Name = "Item 2.2"
+                },
+                new ScrumBoardTask
+                {
+                    Uuid = "3",
+                    Name = "Item 2.3"
+                }
+            };
+                ScrumBoardColumn sbc2 = new ScrumBoardColumn()
+                {
+                    Uuid = "3",
+                    Name = name,
+                    Tasks = new ObservableCollection<ScrumBoardTask>(items2)
+                };
+                Columns.Add(sbc2);
+            } else
+            {
+                AppGeneral.UserInterfaceStatusDico["Scrum board name incorrect."].Display();
+            }
+
         }
 
         private DahuButtonBindings _addColumnButtonBindings;
@@ -99,6 +178,27 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
                 NotifyPropertyChanged(ref _addColumnButtonBindings, value);
             }
         }
+
+
+        public ObservableCollection<NodeMenu> _scrumBoardList;
+        public ObservableCollection<NodeMenu> ScrumBoardList
+        {
+            get { return _scrumBoardList; }
+            set
+            {
+                NotifyPropertyChanged(ref _scrumBoardList, value);
+            }
+        }
+
+        //private ObservableCollection<DahuUWP.DahuTech.ScrumBoard.ScrumBoard> _scrumBoards;
+        //public ObservableCollection<DahuUWP.DahuTech.ScrumBoard.ScrumBoard> ScrumBoards
+        //{
+        //    get { return _scrumBoards; }
+        //    set
+        //    {
+        //        NotifyPropertyChanged(ref _scrumBoards, value);
+        //    }
+        //}
 
         private ObservableCollection<ScrumBoardColumn> _columns;
         public ObservableCollection<ScrumBoardColumn> Columns

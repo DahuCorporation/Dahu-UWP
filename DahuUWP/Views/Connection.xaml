@@ -9,7 +9,6 @@
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:popups="using:DahuUWP.Views.Components.Popups"
-    
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     DataContext="{Binding ConnectionVM, Source={StaticResource Locator}}">
@@ -41,10 +40,26 @@
                     </Grid>-->
                     <!--<Inputs:MyUserControl CellValue="{Binding Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
                     <TextBlock x:Name="PageTitle" x:Uid="ConnectionTitle" Text="Connection" Style="{StaticResource PageTitleStyle}"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,16">
+                        <Inputs:GraylouButton x:Name="DahuAllInBtn_FacebookConnection" x:Uid="DahuAllInBtn_FacebookConnection" Icon="facebook_logo_w" Value="Facebook" ValueForeground="#ffffff" ButtonBackground="#1C7CD0" Margin="0,0,8,0"/>
+                        <Inputs:GraylouButton x:Name="DahuAllInBtn_GoogleConnection" x:Uid="DahuAllInBtn_GoogleConnection" Icon="google_plus_logo_w" Value="Google plus" ValueForeground="#ffffff" ButtonBackground="#E44C3D" Margin="0,0,8,0"/>
+                        <Inputs:GraylouButton x:Name="DahuAllInBtn_GithubConnection" x:Uid="DahuAllInBtn_GithubConnection" Icon="github_logo_w" Value="Github" ValueForeground="#ffffff" ButtonBackground="#273035" Margin="0,0,8,0"/>
+                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Height="1"  Grid.Column="0" Fill="#afafaf"/>
+                        <TextBlock x:Uid="TextBlock_Or_min" Text="ou" Grid.Column="1" Foreground="#afafaf" FontStyle="Italic" TextAlignment="Center" FontSize="18" Margin="0,-5,0,0"/>
+                        <Rectangle Height="1" Grid.Column="2" Fill="#afafaf"/>
+                    </Grid>
+
                     <Inputs:DahuInputText1 x:Name="DahuInput1_Mail"
                                            x:Uid="DahuInput1_Mail" InputWidth="500"
                                            InputPlaceholder="Mail"
-                                           Margin="0,20,0,0"
+                                           Margin="0,12,0,0"
                                            InputScope="EmailSmtpAddress"
                                            TextValue="{Binding UserAccount.Mail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Inputs:DahuInputText1 x:Name="DahuInput1_Password"
@@ -71,16 +86,16 @@
                         </Inputs:DahuButton3>
                     </Grid>
                 </StackPanel>
-                <popups:Dialog OnAction="{Binding DialogRecoverUser.OnAction}" Visibility="{Binding DialogRecoverUser.Visibility}"/>
+                <!--<popups:Dialog OnAction="{Binding DialogRecoverUser.OnAction}" Visibility="{Binding DialogRecoverUser.Visibility}"/>-->
             </Grid>
         </ScrollViewer>
-        <controls:Loading x:Name="LoadingControl" IsLoading="{Binding IsBusy}" Background="Black" Opacity="0.5">
+        <!--<controls:Loading x:Name="LoadingControl" IsLoading="{Binding IsBusy}" Background="Black" Opacity="0.5">
             <StackPanel Orientation="Horizontal" Padding="12">
                 <Grid Margin="0,0,8,0">
                     <ProgressRing IsActive="True" Foreground="Blue" />
                 </Grid>
                 <TextBlock Text="It's ok, we are working on it :)" Foreground="White" VerticalAlignment="Center" />
             </StackPanel>
-        </controls:Loading>
+        </controls:Loading>-->
     </Grid>
 </Page>

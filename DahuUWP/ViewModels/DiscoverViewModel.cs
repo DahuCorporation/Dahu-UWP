@@ -7,6 +7,7 @@ using DahuUWP.Services.ModelManager;
 using DahuUWP.Utils.Converter;
 using DahuUWP.Views;
 using DahuUWP.Views.Components.Inputs;
+using DahuUWP.Views.Project;
 using DahuUWP.Views.Project.Forum;
 using DahuUWP.Views.Project.Managing;
 using GalaSoft.MvvmLight.Command;
@@ -32,13 +33,13 @@ namespace DahuUWP.ViewModels
         public DiscoverViewModel(IDataService service)
         {
             dataService = service;
-
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
 
         }
 
         private async void OnPageLoaded()
         {
+            
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.SwitchOrActiveCurrentTopBarNodeMenu(typeof(Discover));
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.ReasearchVisibility = Visibility.Visible;
             LoadProjects();
@@ -46,54 +47,50 @@ namespace DahuUWP.ViewModels
 
         private async void LoadProjects()
         {
-            InitKnowMoreProjectButtonBindings();
-            // J'ai fais ça car au départ je faisais ça:
-            //<container:MediumProjectContainer ButtonBindings="{Binding ElementName=projectsItemsControl, Path=DataContext.KnowMoreProjectButtonBindings, UpdateSourceTrigger=PropertyChanged}"
-            // Mais ça ne fonctionné pas le binding était en retard par rapport à l'objet en lui même pas possible de set l'uuid
+            InitViewProjectButtonBindings();
             ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
             List<DahuUWP.Models.Project> projects = (await projectManager.Charge(null)).Cast<DahuUWP.Models.Project>().ToList();
-            List<MediumProjectContainer> mediumProjectContainerList = new List<MediumProjectContainer>();
-            foreach (DahuUWP.Models.Project project in projects)
-            {
-                KnowMoreProjectButtonBindings.Parameter = project.Uuid;
-                MediumProjectContainer mediumProjectContainer = new MediumProjectContainer
-                {
-                    Project = project,
-                    ButtonBindings = KnowMoreProjectButtonBindings
-                };
-                mediumProjectContainerList.Add(mediumProjectContainer);
-            }
-            MediumProjectContainerList = new ObservableCollection<MediumProjectContainer>(mediumProjectContainerList);
-
+            if (projects != null)
+                ProjectContainerList = new ObservableCollection<Models.Project>(projects);
         }
 
-        private void InitKnowMoreProjectButtonBindings()
+        private void InitViewProjectButtonBindings()
         {
-            KnowMoreProjectButtonBindings = new DahuButtonBindings()
+            ViewProjectButtonBindings = new DahuButtonBindings()
             {
                 IsBusy = false,
                 Name = "En savoir plus",
-                RedirectedLink = typeof(Discover)
+                RedirectedLink = typeof(ProjectView)
             };
         }
 
-        private DahuButtonBindings _knowMoreProjectButtonBindings;
-        public DahuButtonBindings KnowMoreProjectButtonBindings
+        private DahuButtonBindings _viewProjectButtonBindings;
+        public DahuButtonBindings ViewProjectButtonBindings
         {
-            get { return _knowMoreProjectButtonBindings; }
+            get { return _viewProjectButtonBindings; }
             set
             {
-                NotifyPropertyChanged(ref _knowMoreProjectButtonBindings, value);
+                NotifyPropertyChanged(ref _viewProjectButtonBindings, value);
             }
         }
 
-        private ObservableCollection<MediumProjectContainer> _mediumProjectContainerList;
-        public ObservableCollection<MediumProjectContainer> MediumProjectContainerList
+        //private DahuButtonBindings _knowMoreProjectButtonBindings;
+        //public DahuButtonBindings KnowMoreProjectButtonBindings
+        //{
+        //    get { return _knowMoreProjectButtonBindings; }
+        //    set
+        //    {
+        //        NotifyPropertyChanged(ref _knowMoreProjectButtonBindings, value);
+        //    }
+        //}
+
+        private ObservableCollection<DahuUWP.Models.Project> _projectContainerList;
+        public ObservableCollection<DahuUWP.Models.Project> ProjectContainerList
         {
-            get { return _mediumProjectContainerList; }
+            get { return _projectContainerList; }
             set
             {
-                NotifyPropertyChanged(ref _mediumProjectContainerList, value);
+                NotifyPropertyChanged(ref _projectContainerList, value);
             }
         }
 

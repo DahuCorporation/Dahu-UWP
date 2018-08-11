@@ -23,6 +23,21 @@
         <ScrollViewer>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,20">
                 <TextBlock x:Name="PageTitle" x:Uid="RegisterTitle" Text="Register" Style="{StaticResource PageTitleStyle}"/>
+                <StackPanel Orientation="Horizontal" Margin="0,16">
+                    <Inputs:GraylouButton x:Name="DahuAllInBtn_FacebookConnection" x:Uid="DahuAllInBtn_FacebookConnection" Icon="facebook_logo_w" Value="Facebook" ValueForeground="#ffffff" ButtonBackground="#1C7CD0" Margin="0,0,8,0"/>
+                    <Inputs:GraylouButton x:Name="DahuAllInBtn_GoogleConnection" x:Uid="DahuAllInBtn_GoogleConnection" Icon="google_plus_logo_w" Value="Google plus" ValueForeground="#ffffff" ButtonBackground="#E44C3D" Margin="0,0,8,0"/>
+                    <Inputs:GraylouButton x:Name="DahuAllInBtn_GithubConnection" x:Uid="DahuAllInBtn_GithubConnection" Icon="github_logo_w" Value="Github" ValueForeground="#ffffff" ButtonBackground="#273035" Margin="0,0,8,0"/>
+                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Height="1"  Grid.Column="0" Fill="#afafaf"/>
+                    <TextBlock x:Uid="TextBlock_Or_min" Text="ou" Grid.Column="1" Foreground="#afafaf" FontStyle="Italic" TextAlignment="Center" FontSize="18" Margin="0,-5,0,0"/>
+                    <Rectangle Height="1" Grid.Column="2" Fill="#afafaf"/>
+                </Grid>
                 <Inputs:DahuInputText1 x:Name="UserName"
                                        x:Uid="UserName"
                                        InputWidth="500"

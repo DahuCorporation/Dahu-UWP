@@ -75,7 +75,7 @@
                     <ColumnDefinition Width="48"/>
                     <ColumnDefinition Width="48"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="1"  Text="{Binding Column.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"
+                <TextBlock Grid.Column="1"  Text="{Binding Column.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"
                            FontSize="18" Foreground="White" FontWeight="Bold"></TextBlock>
                 <Button x:Name="FontIconAddTask"
                         Style="{StaticResource MoreMenuTasks}"

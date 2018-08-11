@@ -29,7 +29,8 @@
                          InputScope="{Binding Path=InputScope, FallbackValue='Default'}"
                          IsTextPredictionEnabled="False"
                          IsSpellCheckEnabled="False"
-                     Text="{Binding Path=TextValue, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}">
+                         
+                     Text="{Binding Path=TextValue, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" GotFocus="InputText_GotFocus">
 
                 </TextBox>
                 <PasswordBox x:Name="InputPassword" PlaceholderText="{Binding Path=InputPlaceholder, FallbackValue='Value'}" Visibility="Collapsed"

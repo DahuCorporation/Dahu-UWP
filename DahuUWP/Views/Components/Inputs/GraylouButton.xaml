@@ -7,16 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Height="48" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" HorizontalAlignment="Left" >
-        <Border CornerRadius="24,24,24,24" BorderThickness="0,0,0,0">
-            <Grid Padding="24,0,24,0" Background="#DFDFDF">
+    <Grid Height="{Binding InputHeight, FallbackValue='48'}" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" HorizontalAlignment="Left" >
+        <Border x:Name="GraylouBorder" CornerRadius="{Binding Path=InputRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue='24'}" BorderThickness="0,0,0,0">
+            <Grid Padding="24,0,24,0" Background="{Binding ButtonBackground, FallbackValue='#DFDFDF'}">
                 <StackPanel Orientation="Horizontal">
                     <Grid x:Name="ButtonIconName" Height="21" Width="21" VerticalAlignment="Center" HorizontalAlignment="Left">
                         <Grid.Background>
                             <ImageBrush ImageSource="{Binding Path=Icon}"/>
                         </Grid.Background>
                     </Grid>
-                    <TextBlock Text="{Binding Path=Value, FallbackValue='GraylouButton'}" Foreground="#080808" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="12,0,0,0"/>
+                    <TextBlock Text="{Binding Path=Value, FallbackValue='GraylouButton'}" Foreground="{Binding ValueForeground, FallbackValue='#080808'}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="12,0,0,0"/>
                 </StackPanel>
 
             </Grid>

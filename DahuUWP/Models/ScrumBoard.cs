@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -6,10 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DahuUWP.DahuTech.ScrumBoard
+namespace DahuUWP.Models
 {
-    class ScrumBoard : INotifyPropertyChanged
+    public class ScrumBoard : INotifyPropertyChanged
     {
+
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        [JsonProperty(PropertyName = "uuid")]
+        public string Uuid { get; set; }
 
         private ObservableCollection<ScrumBoardColumn> _columns;
         public ObservableCollection<ScrumBoardColumn> Columns

@@ -27,18 +27,18 @@ namespace DahuUWP.Views.Project.ScrumBoard
             (this.Content as FrameworkElement).DataContext = this;
         }
 
-        public DahuTech.ScrumBoard.ScrumBoardTask Task
+        public Models.ScrumBoardTask Task
         {
             get
             {
-                return (DahuTech.ScrumBoard.ScrumBoardTask)GetValue(TaskProperty);
+                return (Models.ScrumBoardTask)GetValue(TaskProperty);
             }
             set
             {
                 SetValue(TaskProperty, value);
             }
         }
-        public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(DahuTech.ScrumBoard.ScrumBoardTask), typeof(ScrumBoardTask), null);
+        public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(Models.ScrumBoardTask), typeof(ScrumBoardTask), null);
 
         private void TaskButton_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
@@ -54,7 +54,7 @@ namespace DahuUWP.Views.Project.ScrumBoard
         {
             var res = new ResourceLoader();
             InputStringDialog dialog = new InputStringDialog();
-            string name = await dialog.InputStringDialogAsync("Renommer la tâche: " + Task.Title, Task.Title, res.GetString("Rename"), res.GetString("Cancel"));
+            string name = await dialog.InputStringDialogAsync("Renommer la tâche: " + Task.Name, Task.Name, res.GetString("Rename"), res.GetString("Cancel"));
 
         }
 
@@ -62,7 +62,7 @@ namespace DahuUWP.Views.Project.ScrumBoard
         {
             var res = new ResourceLoader();
             InputStringDialog dialog = new InputStringDialog();
-            bool name = await dialog.AskDialogAsync(res.GetString("DeleteTask"), res.GetString("DeleteTaskInfo") + Task.Title, res.GetString("Delete"), res.GetString("Cancel"));
+            bool name = await dialog.AskDialogAsync(res.GetString("DeleteTask"), res.GetString("DeleteTaskInfo") + Task.Name, res.GetString("Delete"), res.GetString("Cancel"));
         }
     }
 

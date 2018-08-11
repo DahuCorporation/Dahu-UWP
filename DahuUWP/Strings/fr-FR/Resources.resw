@@ -153,14 +153,38 @@
   <data name="DahuAllInBtnAddColumn.Value" xml:space="preserve">
     <value>Ajouter une colonne</value>
   </data>
+  <data name="DahuAllInBtnOfferCompetence.Value" xml:space="preserve">
+    <value>Offrir vos compétences</value>
+  </data>
+  <data name="DahuAllInBtnParticiped.Value" xml:space="preserve">
+    <value>Participer</value>
+  </data>
   <data name="DahuAllInBtnProjectResult.Value" xml:space="preserve">
     <value>La recherche n'a abouti à aucun résultat</value>
   </data>
   <data name="DahuAllInBtnUserResult.Value" xml:space="preserve">
     <value>La recherche n'a abouti à aucun résultat</value>
   </data>
+  <data name="DahuAllInBtn_AddScrumBoard.Value" xml:space="preserve">
+    <value>Ajouter un scrum board</value>
+  </data>
+  <data name="DahuAllInBtn_FacebookConnection.Value" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="DahuAllInBtn_FollowProject.Value" xml:space="preserve">
+    <value>Suivre le projet</value>
+  </data>
+  <data name="DahuAllInBtn_GithubConnection.Value" xml:space="preserve">
+    <value>Github</value>
+  </data>
+  <data name="DahuAllInBtn_GoogleConnection.Value" xml:space="preserve">
+    <value>Google plus</value>
+  </data>
   <data name="DahuAllInBtn_Send.Value" xml:space="preserve">
     <value>Envoyer</value>
+  </data>
+  <data name="DahuAllInBtn_Share.Value" xml:space="preserve">
+    <value>Partager</value>
   </data>
   <data name="DahuAllInInputTxt_SendMsgPlaceholder.InputTxtPlaceholder" xml:space="preserve">
     <value>Ecrivez un message...</value>
@@ -318,11 +342,20 @@
   <data name="SignInButton.Value" xml:space="preserve">
     <value>Se connecter</value>
   </data>
+  <data name="TextBlockContributionText.Text" xml:space="preserve">
+    <value>Vos contributions vous seront automatiquement remboursées si le projet n'atteint pas son objectif</value>
+  </data>
+  <data name="TextBlockProgressBarInformations.Text" xml:space="preserve">
+    <value>informations</value>
+  </data>
   <data name="TextBlock_EditProject.Text" xml:space="preserve">
     <value>Gestion projet</value>
   </data>
   <data name="TextBlock_MyProjects.Text" xml:space="preserve">
     <value>Mes projets</value>
+  </data>
+  <data name="TextBlock_Or_min.Text" xml:space="preserve">
+    <value>ou</value>
   </data>
   <data name="TextBlock_Profil.Text" xml:space="preserve">
     <value>Profil</value>

@@ -14,6 +14,11 @@ namespace DahuUWP.DahuTech.Menu
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public NodeMenu()
+        {
+            Active = false;
+        }
+
         private string _title;
         public string Title {
 
