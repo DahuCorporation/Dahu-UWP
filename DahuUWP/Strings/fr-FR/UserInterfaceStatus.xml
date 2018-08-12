@@ -36,7 +36,7 @@
   <!---->
 
   <!---->
-  <!--Create project-->
+  <!--Project-->
   <status key="Empty name."  value="Le champ nom du projet est vide." varName="" type="Warning"/>
   <status key="Empty description."  value="Le champ description du projet est vide." varName="" type="Warning"/>
   <status key="Project created successfully."  value="Le projet '{0}' a bien été créé." varName="" type="Positive"/>
@@ -45,6 +45,10 @@
   <!---->
   <!--Scrum Board-->
   <status key="Scrum board name incorrect."  value="Le nom du scrum board n'est pas correct." varName="" type="Warning"/>
+  <status key="ScrumBoard created successfully."  value="Le scrum board '{0}' a bien été créé." varName="" type="Positive"/>
+  <status key="Column created successfully."  value="La colonne '{0}' a bien été créé." varName="" type="Positive"/>
+
+
   <!---->
 
 

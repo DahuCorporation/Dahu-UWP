@@ -31,9 +31,10 @@
                                  ValueFontWeight="Semibold"
                                  ValueForeground="#FFFFFFFF"
                                  ButtonRadius="2"
-                                 ButtonBackground="#FFd0691c"/>
+                                 ButtonBackground="#FFd0691c"
+                                     HorizontalAlignment="Center"/>
 
-                    <TextBlock Text="Liste des scrums boards" Style="{StaticResource DahuH45Dark}" HorizontalAlignment="Center" Margin="0,16,0,0"/>
+                <TextBlock x:Uid="TextBlock_ScrumBoardList" Text="Liste des scrums boards" Style="{StaticResource DahuH45Dark}" HorizontalAlignment="Center" Margin="0,16,0,8"/>
                 <ItemsControl Name="ScrumBoardList" ItemsSource="{Binding ScrumBoardList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -65,7 +66,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
-            <ItemsControl Name="projectsItemsControl" ItemsSource="{Binding Columns}" >
+            <ItemsControl Name="ScrumBoard" ItemsSource="{Binding Columns}" Margin="20,0,0,0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>

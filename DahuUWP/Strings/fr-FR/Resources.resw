@@ -360,6 +360,9 @@
   <data name="TextBlock_Profil.Text" xml:space="preserve">
     <value>Profil</value>
   </data>
+  <data name="TextBlock_ScrumBoardList.Text" xml:space="preserve">
+    <value>Liste des scrums boards</value>
+  </data>
   <data name="TitleBlockAddSkills.Title" xml:space="preserve">
     <value>Ajout d'une compétence</value>
   </data>
