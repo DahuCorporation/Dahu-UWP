@@ -28,7 +28,7 @@ namespace DahuUWP.Models.ModelManager
         /// </summary>
         /// <param name="objId"></param>
         /// <returns></returns>
-        Task<Boolean> Delete(int objId);
+        Task<Boolean> Delete(string objId);
 
         /// <summary>
         /// Get methode

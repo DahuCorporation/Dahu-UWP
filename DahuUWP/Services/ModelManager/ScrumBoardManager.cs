@@ -299,7 +299,7 @@ namespace DahuUWP.Services.ModelManager
         /// <param name="obj"></param>
         /// <param name="projectId"></param>
         /// <returns></returns>
-        public async Task<ScrumBoard> EditColumn(object obj, string columnId)
+        public async Task<ScrumBoardColumn> EditColumn(object obj, string columnId)
         {
             try
             {

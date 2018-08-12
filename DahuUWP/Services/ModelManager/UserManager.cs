@@ -187,9 +187,37 @@ namespace DahuUWP.Models.ModelManager
             }
         }
 
-        public bool Delete(int objId)
+        public bool Delete(string objId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "users/" + objId;
+
+                JObject jObject = new JObject();
+                jObject.Add("master_key", masterKey);
+                string jsonObject = jObject.ToString(Formatting.None);
+                HttpResponseMessage result = await apiService.Delete(requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["User created but not activated."].Display();
+                        return true;
+                    case 400:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                    default:
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
         }
 
         public async Task<bool> Edit(object obj)
@@ -245,7 +273,7 @@ namespace DahuUWP.Models.ModelManager
             return user;
         }
 
-        Task<bool> IModelManager.Delete(int objId)
+        Task<bool> IModelManager.Delete(string objId)
         {
             throw new NotImplementedException();
         }
@@ -268,7 +296,7 @@ namespace DahuUWP.Models.ModelManager
             throw new NotImplementedException();
         }
 
-        public Task<bool> Delete(int objId)
+        public Task<bool> Delete(string objId)
         {
             throw new NotImplementedException();
         }

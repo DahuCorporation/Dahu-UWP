@@ -12,6 +12,7 @@ namespace DahuUWP.Services
 {
     class APIService
     {
+        protected string masterKey = "eb34NVlQRzoRB8iiNG2D304Hqhu60cnS-u8679Nd31Y6QV7eI4y0S3bZCxwOVHRVl-bAz9y630s6kQ9e4WZ57eF6KRkk7nJ33c";
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
 
         private String route = "http://fncs.eu/api/forward/";
@@ -97,14 +98,22 @@ namespace DahuUWP.Services
             return result;
         }
 
-        public async Task<Boolean> Delete()
+        public async Task<Boolean> Delete(string requestUri)
         {
+            var content = "{\"master_key\":" + masterKey + "}";
+            var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            //HttpResponseMessage result = await httpClient.DeleteAsync(requestUri, byteContent);
+            ////result.EnsureSuccessStatusCode();
+            //return result;
             return true;
         }
 
         public async Task<Boolean> Update()
         {
-            return true;
+            string content = "{\"data\":" + JsonConvert.SerializeObject(obj) + "}";
+            return await CommonPost(content, requestUri);
         }
     }
 }

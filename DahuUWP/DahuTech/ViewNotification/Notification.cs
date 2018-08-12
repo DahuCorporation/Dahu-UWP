@@ -27,7 +27,8 @@ namespace DahuUWP.DahuTech.ViewNotification
         /// </summary>
         public void Display()
         {
-            ViewModelLocator.HomePageViewModel.Notification = this;
+            if (ViewModelLocator.HomePageViewModel != null)
+                ViewModelLocator.HomePageViewModel.Notification = this;
         }
 
         /// <summary>
@@ -38,7 +39,8 @@ namespace DahuUWP.DahuTech.ViewNotification
         {
             string saveValue = Value;
             Value = String.Format(Value, args);
-            ViewModelLocator.HomePageViewModel.Notification = this;
+            if (ViewModelLocator.HomePageViewModel != null)
+                ViewModelLocator.HomePageViewModel.Notification = this;
             Value = saveValue;
         }
 
@@ -47,7 +49,8 @@ namespace DahuUWP.DahuTech.ViewNotification
         /// </summary>
         public void DisplayCurrentView()
         {
-            ViewModelLocator.CurrentViewModel.Notification = this;
+            if (ViewModelLocator.CurrentViewModel != null)
+                ViewModelLocator.CurrentViewModel.Notification = this;
         }
 
         public void DisplayToast()
