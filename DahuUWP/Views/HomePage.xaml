@@ -36,8 +36,8 @@
                                 OptionsItemTemplate="{StaticResource DefaultTemplate}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 
                     <StackPanel Grid.Row="0">

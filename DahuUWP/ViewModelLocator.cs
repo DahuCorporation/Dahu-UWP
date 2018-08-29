@@ -7,6 +7,7 @@ using DahuUWP.ViewModels.Profil;
 using DahuUWP.ViewModels.Profil.Private;
 using DahuUWP.ViewModels.Profil.Public;
 using DahuUWP.ViewModels.Project;
+using DahuUWP.ViewModels.Project.Contribute;
 using DahuUWP.ViewModels.Project.Forum;
 using DahuUWP.ViewModels.Project.Managing;
 using DahuUWP.ViewModels.Project.ScrumBoard;
@@ -60,6 +61,11 @@ namespace DahuUWP
             SimpleIoc.Default.Register<ForumViewModel>();
             SimpleIoc.Default.Register<ScrumBoardViewModel>();
             SimpleIoc.Default.Register<ProjectViewViewModel>();
+            SimpleIoc.Default.Register<ContributeViewModel>();
+            SimpleIoc.Default.Register<ContributeAdressCounterpartyViewModel>();
+            SimpleIoc.Default.Register<ContributeSuccessPaymentViewModel>();
+            SimpleIoc.Default.Register<ContributeWithMoneyViewModel>();
+
 
             //Search
             SimpleIoc.Default.Register<MainResearchViewModel>();
@@ -140,6 +146,26 @@ namespace DahuUWP
         public ProjectViewViewModel ProjectViewVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<ProjectViewViewModel>(); return (ProjectViewViewModel)CurrentViewModel; }
+        }
+
+        public ContributeViewModel ContributeVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<ContributeViewModel>(); return (ContributeViewModel)CurrentViewModel; }
+        }
+
+        public ContributeAdressCounterpartyViewModel ContributeAdressCounterpartyVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<ContributeAdressCounterpartyViewModel>(); return (ContributeAdressCounterpartyViewModel)CurrentViewModel; }
+        }
+
+        public ContributeSuccessPaymentViewModel ContributeSuccessPaymentVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<ContributeSuccessPaymentViewModel>(); return (ContributeSuccessPaymentViewModel)CurrentViewModel; }
+        }
+
+        public ContributeWithMoneyViewModel ContributeWithMoneyVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<ContributeWithMoneyViewModel>(); return (ContributeWithMoneyViewModel)CurrentViewModel; }
         }
 
         //Search

@@ -99,6 +99,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DahuTech\Container\Step.cs" />
+    <Compile Include="DahuTech\Container\Stepper.cs" />
+    <Compile Include="DahuTech\Container\StepProgressBarElem.cs" />
+    <Compile Include="DahuTech\Container\StepView.cs" />
     <Compile Include="DahuTech\General\Link.cs" />
     <Compile Include="DahuTech\Inputs\DahuButtonBindings.cs" />
     <Compile Include="DahuTech\Inputs\DahuButtonOptions.cs" />
@@ -110,8 +114,10 @@
     <Compile Include="DahuTech\Menu\TopBarNodeMenu.cs" />
     <Compile Include="DahuTech\Project\Forum\TopicMessageContainer.cs" />
     <Compile Include="DahuTech\Project\MediumProjectContainer.cs" />
+    <Compile Include="DahuTech\Selector\FlatSelectorElem.cs" />
     <Compile Include="Models\ScrumBoard.cs" />
     <Compile Include="Models\ScrumBoardColumn.cs" />
+    <Compile Include="Models\ScrumBoardLabel.cs" />
     <Compile Include="Models\ScrumBoardTask.cs" />
     <Compile Include="DahuTech\ViewNotification\Notification.cs" />
     <Compile Include="Models\Account.cs" />
@@ -120,6 +126,7 @@
     <Compile Include="Models\Test.cs" />
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Models\TopicMessage.cs" />
+    <Compile Include="Services\ModelManager\ForumManager.cs" />
     <Compile Include="Services\ModelManager\IModelManager.cs" />
     <Compile Include="Services\ModelManager\ProjectManager.cs" />
     <Compile Include="Services\ModelManager\ScrumBoardManager.cs" />
@@ -148,6 +155,10 @@
     <Compile Include="ViewModels\Profil\Private\PrivateProfilMainInformationViewModel.cs" />
     <Compile Include="ViewModels\Profil\Private\PrivateProfilSkillsViewModel.cs" />
     <Compile Include="ViewModels\Profil\Public\PublicProfilViewModel.cs" />
+    <Compile Include="ViewModels\Project\Contribute\ContributeAdressCounterpartyViewModel.cs" />
+    <Compile Include="ViewModels\Project\Contribute\ContributeSuccessPaymentViewModel.cs" />
+    <Compile Include="ViewModels\Project\Contribute\ContributeViewModel.cs" />
+    <Compile Include="ViewModels\Project\Contribute\ContributeWithMoneyViewModel.cs" />
     <Compile Include="ViewModels\Project\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\Project\Forum\ForumViewModel.cs" />
     <Compile Include="ViewModels\Project\Managing\EditProjectMembersViewModel.cs" />
@@ -159,11 +170,17 @@
     <Compile Include="ViewModels\Project\ScrumBoard\ScrumBoardViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Search\MainResearchViewModel.cs" />
+    <Compile Include="Views\Components\Container\AddressBook.xaml.cs">
+      <DependentUpon>AddressBook.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Components\Container\MediumProjectContainer .xaml.cs">
       <DependentUpon>MediumProjectContainer .xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Container\MenuWithSearchAndButtons.xaml.cs">
       <DependentUpon>MenuWithSearchAndButtons.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Container\Stepper.xaml.cs">
+      <DependentUpon>Stepper.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Container\UserInfoBox.xaml.cs">
       <DependentUpon>UserInfoBox.xaml</DependentUpon>
@@ -239,6 +256,24 @@
     </Compile>
     <Compile Include="Views\Components\Popups\Toasts.xaml.cs">
       <DependentUpon>Toasts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Selector\FlatSelector.xaml.cs">
+      <DependentUpon>FlatSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Selector\FlatSelectorNode.xaml.cs">
+      <DependentUpon>FlatSelectorNode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\Contribute\Contribute.xaml.cs">
+      <DependentUpon>Contribute.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\Contribute\ContributeAdressCounterparty.xaml.cs">
+      <DependentUpon>ContributeAdressCounterparty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\Contribute\ContributeSuccessPayment.xaml.cs">
+      <DependentUpon>ContributeSuccessPayment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\Contribute\ContributeWithMoney.xaml.cs">
+      <DependentUpon>ContributeWithMoney.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Project\ProjectView.xaml.cs">
       <DependentUpon>ProjectView.xaml</DependentUpon>
@@ -468,11 +503,19 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Views\Components\Container\AddressBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Components\Container\MediumProjectContainer .xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\Container\MenuWithSearchAndButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Container\Stepper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -573,6 +616,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\Popups\Toasts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Selector\FlatSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\Selector\FlatSelectorNode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\Contribute\Contribute.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\Contribute\ContributeAdressCounterparty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\Contribute\ContributeSuccessPayment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\Contribute\ContributeWithMoney.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,7 +13,9 @@ namespace DahuUnitTest
     [TestClass]
     public class ServiceTest
     {
-        public User userTest;
+        protected List<Project> userProjects;
+        Random rnd = new Random();
+        protected ScrumBoard scrumBoardTest;
 
         /*
          *
@@ -45,7 +47,7 @@ namespace DahuUnitTest
                 Country = "France",
                 FirstName = "Teste",
                 LastName = "Bili",
-                Mail = "testBili36@dahu.fr",
+                Mail = "testBili43" + rnd.Next(1, 99999) + "@dahu.fr",
                 Phone = "060000000",
                 PostalCode = "33200",
                 Account = AppStaticInfo.Account
@@ -79,22 +81,91 @@ namespace DahuUnitTest
         public async Task Method3()
         {
             ProjectManager projectManager = new ProjectManager();
+            
             Project project = new Project
             {
-                Name = "BiliProject",
+                Name = "BiliProject" + rnd.Next(1, 999999),
                 Description = "This project is a unit test project"
             };
             
             Assert.AreEqual(true, await projectManager.Create(project));
         }
 
+        /// <summary>
+        /// Get projects of user and test scrum boards
+        /// </summary>
+        /// <returns></returns>
+        [TestMethod]
+        public async Task Method4()
+        {
+            UserManager userManager = new UserManager();
+            Dictionary<string, object> userDicoCharge = new Dictionary<string, object>
+            {
+                { "_token", AppStaticInfo.Account.Token }
+            };
+            userProjects = await userManager.ChargeProjects(AppStaticInfo.Account.Uuid, null);
+            Assert.AreNotEqual(null, userProjects);
+            await ScrumBoardCreationTest();
+        }
 
-        /**
+
+        /*
          *
          * ScrumBoard tests 
          * 
-         **/
+         */
+        /// <summary>
+        /// Create a scrum board test
+        /// </summary>
+        /// <returns></returns>
+        public async Task ScrumBoardCreationTest()
+        {
+            ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
 
+            ScrumBoard scrumBoard = new ScrumBoard
+            {
+                Name = "ScrumBoard test1" + rnd.Next(1, 999999)
+            };
+            scrumBoardTest = await scrumBoardManager.CreateScrumBoard(scrumBoard, userProjects[0].Uuid);
+            Assert.AreNotEqual(null, scrumBoardTest);
+            await ChargeOneScrumBoardTest();
+        }
+
+        /// <summary>
+        /// Create a scrum board test
+        /// </summary>
+        /// <returns></returns>
+        public async Task ChargeOneScrumBoardTest()
+        {
+            ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
+
+            ScrumBoard oneScrumBoardTest = await scrumBoardManager.ChargeOneScrumBoard(scrumBoardTest.Uuid);
+            Assert.AreEqual(scrumBoardTest.Uuid, oneScrumBoardTest.Uuid);
+            await ModifyScrumBoard();
+        }
+
+        public async Task ModifyScrumBoard()
+        {
+            ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
+            ScrumBoard scrumBoard = new ScrumBoard
+            {
+                Name = "ScrumBoard test2" +  rnd.Next(1, 999999)
+            };
+            ScrumBoard oneScrumBoardTest = await scrumBoardManager.EditScrumBoard(scrumBoard, scrumBoardTest.Uuid);
+            Assert.AreEqual(scrumBoardTest.Uuid, oneScrumBoardTest.Uuid);
+            await DeleteScrumBoard();
+        }
+
+        public async Task DeleteScrumBoard()
+        {
+            ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
+            ScrumBoard scrumBoard = new ScrumBoard
+            {
+                Name = "ScrumBoard test2" + rnd.Next(1, 999999)
+            };
+            bool result = await scrumBoardManager.DeleteScrumBoard(userProjects[0].Uuid);
+            //Assert.AreEqual(scrumBoardTest.Uuid, oneScrumBoardTest.Uuid);
+        }
         //[TestMethod]
         //public async Task CreateAScrumBoardTest()
         //{

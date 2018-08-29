@@ -13,7 +13,7 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "uuid")]
+        [JsonProperty(PropertyName = "label_uuid")]
         public string Uuid { get; set; }
 
         [JsonProperty(PropertyName = "order")]
@@ -21,6 +21,9 @@ namespace DahuUWP.Models
 
         [JsonProperty(PropertyName = "board_uuid")]
         public string ScrumBoardUuid { get; set; }
+
+        [JsonProperty(PropertyName = "label_uuid")]
+        public string LabelUuid { get; set; }
 
         //public string Title { get; set; }
 

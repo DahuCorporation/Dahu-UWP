@@ -153,6 +153,9 @@
   <data name="DahuAllInBtnAddColumn.Value" xml:space="preserve">
     <value>Ajouter une colonne</value>
   </data>
+  <data name="DahuAllInBtnDeliverThere.Value" xml:space="preserve">
+    <value>Livrer à cette adresse</value>
+  </data>
   <data name="DahuAllInBtnOfferCompetence.Value" xml:space="preserve">
     <value>Offrir vos compétences</value>
   </data>
@@ -342,8 +345,23 @@
   <data name="SignInButton.Value" xml:space="preserve">
     <value>Se connecter</value>
   </data>
+  <data name="TextBlockAmountContribution.Text" xml:space="preserve">
+    <value>1 - Entrer le montant de votre contribution</value>
+  </data>
+  <data name="TextBlockContributeTo.Text" xml:space="preserve">
+    <value>Contribuer à</value>
+  </data>
   <data name="TextBlockContributionText.Text" xml:space="preserve">
     <value>Vos contributions vous seront automatiquement remboursées si le projet n'atteint pas son objectif</value>
+  </data>
+  <data name="TextBlockCounterpartContribution.Text" xml:space="preserve">
+    <value>2 - Choisir votre contrepartie</value>
+  </data>
+  <data name="TextBlockDeleteLink.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="TextBlockEditLink.Text" xml:space="preserve">
+    <value>Modifer</value>
   </data>
   <data name="TextBlockProgressBarInformations.Text" xml:space="preserve">
     <value>informations</value>

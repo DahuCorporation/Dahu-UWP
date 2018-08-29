@@ -24,7 +24,7 @@
   <!---->
   <status key="User created but not activated."  value="Félicitation votre compte est bien crée, vous avez reçu un mail pour activer votre compte." varName="" type="Positive"/>
   <status key="Information missing."  value="Tous les champs doivent être remplis." varName="" type="Negative"/>
-  
+
   <!---->
   <!--Private profil-->
   <status key="Informations modified."  value="Vos informations on bien été mise à jour." varName="" type="Positive"/>
@@ -32,7 +32,7 @@
   <status key="Empty skill name."  value="Le champ nom est vide." varName="" type="Warning"/>
   <status key="Empty skill description."  value="Le champ description est vide." varName="" type="Warning"/>
   <status key="The skill is add to the user."  value="La compétence a bien été ajoutée à votre liste." varName="" type="Positive"/>
-  
+
   <!---->
 
   <!---->
@@ -47,6 +47,24 @@
   <status key="Scrum board name incorrect."  value="Le nom du scrum board n'est pas correct." varName="" type="Warning"/>
   <status key="ScrumBoard created successfully."  value="Le scrum board '{0}' a bien été créé." varName="" type="Positive"/>
   <status key="Column created successfully."  value="La colonne '{0}' a bien été créé." varName="" type="Positive"/>
+  <status key="Task created successfully."  value="La tâche '{0}' a bien été créé." varName="" type="Positive"/>
+  <status key="Task label created successfully."  value="Le label '{0}' a bien été créé." varName="" type="Positive"/>
+  <status key="Scrum board deleted."  value="Le scrum board a bien été supprimé." varName="" type="Positive"/>
+  <status key="Scrum board column deleted."  value="La colonne a bien été supprimé." varName="" type="Positive"/>
+  <status key="Scrum board label deleted."  value="Le label a bien été supprimé." varName="" type="Positive"/>
+  <status key="Scrum board task deleted."  value="La tâche a bien été supprimé." varName="" type="Positive"/>
+
+
+  <!---->
+  <!--Topic-->
+  <status key="Topic created successfully."  value="Le topic '{0}' a bien été créé." varName="" type="Positive"/>
+  <status key="Topic message created successfully."  value="Le message '{0}' a bien été créé." varName="" type="Positive"/>
+  <status key="Topic message deleted."  value="Le message a bien été supprimé." varName="" type="Positive"/>
+
+  <!---->
+  <!--Contribution-->
+  <status key="Cant go next step because previous step not valid."  value="Il n'est pas possible de passer à l'étape suivante car l'étape précédente n'est pas valide." varName="" type="Warning"/>
+
 
 
   <!---->

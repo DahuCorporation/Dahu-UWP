@@ -3,6 +3,7 @@ using DahuUWP.ViewModels;
 using DahuUWP.Views.Profil.Private;
 using DahuUWP.Views.Profil.Public;
 using DahuUWP.Views.Project;
+using DahuUWP.Views.Project.Contribute;
 using DahuUWP.Views.Project.Managing;
 using DahuUWP.Views.Search;
 using Microsoft.Toolkit.Uwp.UI.Controls;
@@ -92,7 +93,7 @@ namespace DahuUWP.Views
                 new MenuItem() { Icon = Symbol.Accept, Name = "Découvrir", PageType = typeof(Discover) },
                 new MenuItem() { Icon = Symbol.Send, Name = "Mes projet", PageType = typeof(ManageProject) },
                 new MenuItem() { Icon = Symbol.Shop, Name = "Creer un nouveau projet", PageType = typeof(CreateProject) },
-                new MenuItem() { Icon = Symbol.Shop, Name = "Paramètre", PageType = typeof(PrivateProfil) }
+                new MenuItem() { Icon = Symbol.Shop, Name = "Paramètre", PageType = typeof(Contribute) }
             };
             return items;
         }

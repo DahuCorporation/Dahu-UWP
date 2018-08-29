@@ -109,7 +109,7 @@ namespace DahuUWP.Models.ModelManager
             }
         }
 
-        public Task<bool> Delete(int objId)
+        public Task<bool> Delete(string objId)
         {
             throw new NotImplementedException();
         }
@@ -145,7 +145,7 @@ namespace DahuUWP.Models.ModelManager
             throw new NotImplementedException();
         }
 
-        public Task<bool> Delete(int objId)
+        public Task<bool> Delete(string objId)
         {
             throw new NotImplementedException();
         }

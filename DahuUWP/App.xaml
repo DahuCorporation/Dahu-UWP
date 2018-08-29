@@ -110,9 +110,22 @@
                 <Setter Property="Foreground" Value="#3D3D3D" />
                 <Setter Property="FontSize" Value="20" />
                 <Setter Property="FontWeight" Value="SemiBold"/>
-            </Style>
+            </Style>    
             <Style x:Key="DahuTextDark" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#3D3D3D" />
+                <Setter Property="FontSize" Value="17" />
+            </Style>
+            <Style x:Key="DahuTextLink" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#007AA8" />
+                <Setter Property="FontSize" Value="17" />
+            </Style>
+            <Style x:Key="DahuTextLinkBold" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#007AA8" />
+                <Setter Property="FontSize" Value="17" />
+                <Setter Property="FontWeight" Value="Bold" />
+            </Style>
+            <Style x:Key="DahuTextLinkDark" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#505050" />
                 <Setter Property="FontSize" Value="17" />
             </Style>
             <Style x:Key="DahuLitleInfoDark" TargetType="TextBlock">

@@ -98,22 +98,25 @@ namespace DahuUWP.Services
             return result;
         }
 
-        public async Task<Boolean> Delete(string requestUri)
+        public async Task<HttpResponseMessage> Delete(string jsonObj, string requestUri)
         {
-            var content = "{\"master_key\":" + masterKey + "}";
-            var buffer = System.Text.Encoding.UTF8.GetBytes(content);
-            var byteContent = new ByteArrayContent(buffer);
-            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            //HttpResponseMessage result = await httpClient.DeleteAsync(requestUri, byteContent);
-            ////result.EnsureSuccessStatusCode();
-            //return result;
-            return true;
+            var content = "{\"data\":" + jsonObj + "}";
+
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                Content = new StringContent(content, Encoding.UTF8, "application/json"),
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri(requestUri)
+            };
+            HttpResponseMessage result = await httpClient.SendAsync(request);
+            return result;
         }
 
         public async Task<Boolean> Update()
         {
-            string content = "{\"data\":" + JsonConvert.SerializeObject(obj) + "}";
-            return await CommonPost(content, requestUri);
+            return true;
+            //string content = "{\"data\":" + JsonConvert.SerializeObject(obj) + "}";
+            //return await CommonPost(content, requestUri);
         }
     }
 }
