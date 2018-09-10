@@ -77,12 +77,15 @@ namespace DahuUWP.ViewModels.Project.Managing
 
         private void FullHorizontalMenuNodeClicked(object parameter)
         {
+            ViewModelLocator.HomePageViewModel.NavigationParam = Project;
             CurrentProjManagingPage = (Type)parameter;
         }
 
         private async void OnPageLoaded()
         {
             Project = (DahuUWP.Models.Project)NavigationParam;
+            // Project param for scrum board
+            ViewModelLocator.HomePageViewModel.NavigationParam = Project;
             CurrentProjManagingPage = typeof(Views.Project.ScrumBoard.ScrumBoard);
         }
 

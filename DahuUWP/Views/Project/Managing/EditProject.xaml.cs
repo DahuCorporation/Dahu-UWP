@@ -70,7 +70,8 @@ namespace DahuUWP.Views.Project.Managing
 
         private void GraylouButton_BackToManageProject_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            HomePage.DahuFrame.Navigate(typeof(ManageProject));
+            //ViewModelLocator.HomePageViewModel.NavigationParam = ParamNavigate;
+            HomePage.DahuFrame.Navigate(typeof(ManageProject), ParamNavigate);
         }
     }
 }

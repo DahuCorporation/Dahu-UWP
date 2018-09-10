@@ -126,6 +126,9 @@
   <data name="AddColumn" xml:space="preserve">
     <value>Ajouter une colonne</value>
   </data>
+  <data name="AddScrumBoard" xml:space="preserve">
+    <value>Ajouter un scrum board</value>
+  </data>
   <data name="Banner_Projects.Value" xml:space="preserve">
     <value>Projets</value>
   </data>
@@ -296,6 +299,9 @@
   </data>
   <data name="EnterAColumnName" xml:space="preserve">
     <value>Entrer un nom de colonne</value>
+  </data>
+  <data name="EnterAScrumBoardName" xml:space="preserve">
+    <value>Entrer un nom de scrum board</value>
   </data>
   <data name="ExperienceTextBlock.Text" xml:space="preserve">
     <value>Expérience</value>

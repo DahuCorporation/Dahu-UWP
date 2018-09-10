@@ -15,8 +15,8 @@ namespace DahuUWP.Services
         protected string masterKey = "eb34NVlQRzoRB8iiNG2D304Hqhu60cnS-u8679Nd31Y6QV7eI4y0S3bZCxwOVHRVl-bAz9y630s6kQ9e4WZ57eF6KRkk7nJ33c";
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
 
-        private String route = "http://fncs.eu/api/forward/";
-        //private String route = "http://86.213.150.52/api/forward/";
+        private String route = "http://163.5.84.222/api/forward/";
+        //private String route = "http://fncs.eu/api/forward/";
         private HttpClient httpClient = new HttpClient();
 
         public APIService()
