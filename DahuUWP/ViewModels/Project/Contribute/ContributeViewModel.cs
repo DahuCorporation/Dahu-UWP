@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace DahuUWP.ViewModels.Project.Contribute
 {
@@ -38,8 +39,14 @@ namespace DahuUWP.ViewModels.Project.Contribute
                 {
                     View = typeof(ContributeWithMoney)
                 },
-                Status = Status.Active
-        };
+                Status = Status.Active,
+                DahuButtonBindings = new DahuTech.Inputs.DahuButtonBindings()
+                {
+                    IsBusy = false,
+                    Name = "Valider",
+                    Parameter = (new ContributeWithMoney().Content as FrameworkElement).DataContext
+                }
+            };
             Step step2 = new Step()
             {
                 StepProgressBarElem = new StepProgressBarElem()
@@ -50,8 +57,14 @@ namespace DahuUWP.ViewModels.Project.Contribute
                 StepView = new StepView()
                 {
                     View = typeof(ContributeAdressCounterparty)
+                },
+                DahuButtonBindings = new DahuTech.Inputs.DahuButtonBindings()
+                {
+                    IsBusy = false,
+                    Name = "Valider",
+                    Parameter = (new ContributeAdressCounterparty().Content as FrameworkElement).DataContext
                 }
-               
+
             };
             Step step3 = new Step()
             {
@@ -63,9 +76,17 @@ namespace DahuUWP.ViewModels.Project.Contribute
                 StepView = new StepView()
                 {
                     View = typeof(ContributeSuccessPayment)
+                },
+                DahuButtonBindings = new DahuTech.Inputs.DahuButtonBindings()
+                {
+                    IsBusy = false,
+                    Name = "Valider",
+                    Parameter = (new ContributeSuccessPayment().Content as FrameworkElement).DataContext
                 }
 
+               
             };
+            
             // Utiliser tempStepper et non contributeStepper histoire que le user control ne soit pas notifier d'un changement du stepper dés qu'on ajoute un step...
             Stepper tempStepper = new Stepper();
             tempStepper.Steps = steps;

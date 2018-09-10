@@ -55,7 +55,7 @@ namespace DahuUWP.Views.Components.Container
             switch (currentStep.Status)
             {
                 case Status.Virgin:
-                    if (StepperContent.CheckLastStepIsActive(currentStep))
+                    if (StepperContent.CheckLastStepIsActiveOrPassed(currentStep))
                     {
                         StepperFrame.Navigate(currentStep.StepView.View);
                         StepperContent.MakeStepActive(currentStep);

@@ -9,7 +9,7 @@
     d:DesignHeight="100"
     d:DesignWidth="800">
 
-    <Grid Background="#FFFBFBFB" CornerRadius="7" Padding="0,16" MinHeight="100">
+    <Grid x:Name="FlatSelectorElem" Background="#FFFBFBFB" BorderThickness="0,0,0,2" CornerRadius="7" Padding="0,16" MinHeight="100" PointerEntered="FlatSelectorElem_PointerEntered" PointerExited="FlatSelectorElem_PointerExited" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="96" />
             <ColumnDefinition Width="*" />
@@ -23,13 +23,14 @@
                 BorderBrush="#707070"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
-            <Grid  Width="12"
+            <Grid  x:Name="GridRadioButton"
+                   Width="12"
                    Height="12"
                    CornerRadius="12"
                    Background="#3D3D3D"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center">
-                
+
             </Grid>
         </Border>
 

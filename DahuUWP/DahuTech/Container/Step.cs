@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DahuUWP.DahuTech.Inputs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -38,6 +39,22 @@ namespace DahuUWP.DahuTech.Container
                 _stepView = value;
 
                 this.NotifyPropertyChanged("StepView");
+            }
+        }
+
+        private DahuButtonBindings _dahuButtonBindings;
+        public DahuButtonBindings DahuButtonBindings
+        {
+            get
+            {
+                return _dahuButtonBindings;
+            }
+
+            set
+            {
+                _dahuButtonBindings = value;
+
+                this.NotifyPropertyChanged("DahuButtonBindings");
             }
         }
 

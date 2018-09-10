@@ -1,4 +1,5 @@
 ﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Views.Project.Contribute;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,6 +26,8 @@ namespace DahuUWP.Views.Components.Inputs
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
+            
+            
         }
 
         public string Value

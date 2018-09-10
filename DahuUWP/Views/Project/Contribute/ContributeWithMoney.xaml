@@ -34,9 +34,26 @@
                 </TextBlock>
                 <Grid Grid.Column="1" Height="2" Background="#BEBEBE" VerticalAlignment="Center" BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="16,-8,0,0"></Grid>
             </Grid>
-            <TextBlock x:Name="TextBlockAmountContribution" x:Uid="TextBlockAmountContribution" Text="1 - Entrer le montant de votre contribution" Style="{StaticResource DahuBiggerTextDark}" FontWeight="Normal"/>
+            <Grid Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock x:Name="TextBlockAmountContribution"  x:Uid="TextBlockAmountContribution" VerticalAlignment="Top" Text="1 - Entrer le montant de votre contribution" Style="{StaticResource DahuBiggerTextDark}" FontWeight="Normal"/>
+                    <Inputs:DahuInputText1 x:Uid="DahuInput1_MoneyContribution" InputIcon="Dahu-Icon/euro-currency.png" Width="140" HorizontalAlignment="Left"  Margin="16,8,0,0"/>
+                </StackPanel>
+                <Inputs:DahuAllInBtn Style="{StaticResource ButtonTowerBG}"
+                                     Grid.Column="1"
+                                     x:Uid="DahuAllInBtnValidate"
+                                     Value="Valider"
+                                     ButtonBackground="#FFD0691C"
+                                     ButtonImageBackground="Background/citylow.jpg"
+                                     HorizontalAlignment="Right"
+                                     VerticalAlignment="Top"/>
+            </Grid>
             <TextBlock x:Name="TextBlockCounterpartContribution" x:Uid="TextBlockCounterpartContribution" Text="2 - Choisir votre contrepartie" Style="{StaticResource DahuBiggerTextDark}" FontWeight="Normal"/>
-            <Selector:FlatSelector CounterpartList="{Binding CounterpartList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Selector:FlatSelector CounterpartList="{Binding CounterpartList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Margin="16,8,0,0" />
         </StackPanel>
     </Grid>
 </Page>

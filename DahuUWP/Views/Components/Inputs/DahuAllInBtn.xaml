@@ -23,7 +23,7 @@
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                FontWeight="{Binding Path=ValueFontWeight, FallbackValue='SemiBold', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
-                               Margin="40,0,40,0" 
+                               Margin="60,0,60,0" 
                                FontSize="{Binding Path=ValueFontSize, FallbackValue='11', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>

@@ -84,5 +84,5 @@ namespace DahuUWP.DahuTech.Selector
         }
     }
 
-    public enum Checked { False, True, Blocked };
+    public enum Checked { False, True, Blocked, Hover };
 }

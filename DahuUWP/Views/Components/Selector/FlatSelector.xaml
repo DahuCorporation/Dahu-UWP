@@ -10,12 +10,6 @@
     d:DesignWidth="400">
 
     <Grid>
-        <StackPanel>
-            <local:FlatSelectorNode/>
-            <local:FlatSelectorNode/>
-            <local:FlatSelectorNode/>
-            
-        </StackPanel>
         <ItemsControl Name="Selector" ItemsSource="{Binding CounterpartList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -26,7 +20,10 @@
                 <DataTemplate>
                     <local:FlatSelectorNode Title="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Price="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            ContentElem="{Binding ContentElem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            ContentElem="{Binding ContentElem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tapped="FlatSelectorNode_Tapped"
+                                            Checked="{Binding Checked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Margin="0,4"
+                                            />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

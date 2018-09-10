@@ -19,28 +19,37 @@ namespace DahuUWP.ViewModels.Project.Contribute
         {
             dataService = service;
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
+            ChargeCounterparts();
         }
 
         private async void OnPageLoaded()
         {
             
+
+        }
+
+        public void ChargeCounterparts()
+        {
             FlatSelectorElem counterpartElem1 = new FlatSelectorElem()
             {
                 Title = "Une place de film",
                 ContentElem = "Un grand merci pour votre participation ! Vous recevrez une place pour aller voir le film près de chez vous.",
-                Price = "10"
+                Price = "10",
+                Checked = Checked.False
             };
             FlatSelectorElem counterpartElem2 = new FlatSelectorElem()
             {
                 Title = "Sac à main",
                 ContentElem = "Un magnifique sac \"C'est Ma Cabane !\" (en exclusivité dans cette contrepartie) + un badge \"C'est Ma Cabane !\"",
-                Price = "20"
+                Price = "20",
+                Checked = Checked.True
             };
             FlatSelectorElem counterpartElem3 = new FlatSelectorElem()
             {
                 Title = "Visiter une cabane",
                 ContentElem = "Venez visiter une de nos construction et découvrez comment nous mettons en place nos cabanes. Un diner vous est offert.",
-                Price = "45"
+                Price = "45",
+                Checked = Checked.False
             };
             List<FlatSelectorElem> tempFlatSelectorElemList = new List<FlatSelectorElem>();
             tempFlatSelectorElemList.Add(counterpartElem1);

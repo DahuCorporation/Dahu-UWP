@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
@@ -79,6 +80,28 @@ namespace DahuUWP.Views.Components.Inputs
         public static readonly DependencyProperty InputScopeProperty =
             DependencyProperty.Register("InputScope", typeof(string), typeof(DahuInputText1), new PropertyMetadata(null));
 
+
+        public string InputIcon
+        {
+            get
+            {
+                return (string)GetValue(InputIconProperty);
+            }
+            set
+            {
+                SetValue(InputIconProperty, value);
+            }
+        }
+        public static readonly DependencyProperty InputIconProperty = DependencyProperty.Register("InputIcon", typeof(string), typeof(DahuInputText1), new PropertyMetadata(null, new PropertyChangedCallback(ButtonImageBackgroundChanged)));
+        private static void ButtonImageBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            DahuInputText1 currentDahuInputText1 = d as DahuInputText1;
+            //string[] radius = ((string)e.NewValue).Split(',');
+
+            //dahuAllInBtn.GridImageBackground.Background.Opacity = 0.60;
+            currentDahuInputText1.GridIconEnglobing.Visibility = Visibility.Visible;
+            currentDahuInputText1.GirdIcon.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/" + (string)e.NewValue)), Stretch = Stretch.UniformToFill, Opacity = 1 };
+        }
 
         /// <summary>
         /// IsReadOnly

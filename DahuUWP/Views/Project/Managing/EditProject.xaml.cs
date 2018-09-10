@@ -1,5 +1,6 @@
 ﻿using DahuUWP.ViewModels.Project.Managing;
 using DahuUWP.Views.Components.DahuSpecialSplitMenu;
+using DahuUWP.Views.Project.Contribute;
 using System;
 using System.Collections.Generic;
 using System.IO;

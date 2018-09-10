@@ -47,9 +47,10 @@
                                              ReasearchVisibility="{Binding DahuSpecMenuOptions.ReasearchVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                              DahuSpecMenuVisibility="{Binding DahuSpecMenuOptions.DahuSpecMenuVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
-               
-                <Frame x:Name="DahuBurgerFrame" Navigated="DahuBurgerFrame_Navigated" Grid.Row="1" Background="#EFEFEF">
+                <ScrollViewer Grid.Row="1">
+                    <Frame x:Name="DahuBurgerFrame" Navigated="DahuBurgerFrame_Navigated"  Background="#EFEFEF">
                 </Frame>
+                    </ScrollViewer>
             </Grid>
         </controls:HamburgerMenu>
         <Popups:Toasts DahuNotification="{Binding Notification, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,60,20,20" />

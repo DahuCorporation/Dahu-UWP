@@ -35,5 +35,23 @@ namespace DahuUWP.Views.Components.Selector
 
         public static readonly DependencyProperty CounterpartListProperty =
            DependencyProperty.Register("CounterpartList", typeof(ObservableCollection<FlatSelectorElem>), typeof(FlatSelector), null);
+
+
+        private void FlatSelectorNode_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            FrameworkElement element = (FrameworkElement)sender;
+            FlatSelectorElem currentFlatSelectorElem = (FlatSelectorElem)element.DataContext;
+            if (currentFlatSelectorElem.Checked != Checked.True)
+            {
+                foreach (FlatSelectorElem flatSelectorElem in CounterpartList)
+                {
+                    if (flatSelectorElem.Checked == Checked.True)
+                    {
+                        flatSelectorElem.Checked = Checked.False;
+                    }
+                }
+                currentFlatSelectorElem.Checked = Checked.True;
+            }
+        }
     }
 }

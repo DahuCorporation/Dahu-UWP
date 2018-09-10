@@ -11,11 +11,12 @@ namespace DahuUWP.DahuTech.Container
     {
         public List<Step> Steps { get; set; }
 
-        public bool CheckLastStepIsActive(Step step)
+        public bool CheckLastStepIsActiveOrPassed(Step step)
         {
             for (int i = 0; i < Steps.Count; i++)
             {
-                if (i != 0 && Steps[i].Equals(step) && Steps[i - 1].Status == Status.Active)
+                if (i != 0 && Steps[i].Equals(step) && Steps[i - 1].Status == Status.Active
+                    || i != 0 && Steps[i].Equals(step) && Steps[i - 1].Status == Status.Passed)
                 {
                     return true;
                 }
