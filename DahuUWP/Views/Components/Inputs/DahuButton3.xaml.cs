@@ -145,7 +145,7 @@ namespace DahuUWP.Views.Components.Inputs
                 && !ButtonBindings.IsBusy)
             {
                 //TappedCommand();
-                ButtonBindings.TappedFuncListener();
+                ButtonBindings.LinkIt();
             }
         }
     }

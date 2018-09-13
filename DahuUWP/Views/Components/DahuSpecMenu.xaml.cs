@@ -31,11 +31,11 @@ namespace DahuUWP.Views.Components
             ResearchButtonBindings = new DahuButtonBindings
             {
                 IsBusy = false,
-                TappedFuncListener = Research
+                FuncListener = Research
             };
         }
 
-        public async void Research()
+        public async void Research(object param)
         {
             ResearchButtonBindings.IsBusy = true;
             HomePage.DahuFrame.Navigate(typeof(MainResearch), ResearchValue);

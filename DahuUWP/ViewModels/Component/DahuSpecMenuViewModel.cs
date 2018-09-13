@@ -34,7 +34,7 @@ namespace DahuUWP.ViewModels.Component
             ResearchButtonBindings = new DahuButtonBindings
             {
                 IsBusy = false,
-                TappedFuncListener = Research
+                FuncListener = Research
             };
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
         }
@@ -45,7 +45,7 @@ namespace DahuUWP.ViewModels.Component
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.SwitchOrActiveCurrentTopBarNodeMenu(typeof(Discover));
         }
 
-        public async void Research()
+        public async void Research(object param)
         {
             ResearchButtonBindings.IsBusy = true;
             HomePage.DahuFrame.Navigate(typeof(MainResearch), ResearchValue);

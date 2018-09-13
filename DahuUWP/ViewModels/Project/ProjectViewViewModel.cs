@@ -1,4 +1,5 @@
-﻿using DahuUWP.Services;
+﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Services;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,27 @@ namespace DahuUWP.ViewModels.Project
         private async void OnPageLoaded()
         {
             Project = (DahuUWP.Models.Project)NavigationParam;
+            InitManageProjectButtonBindings();
+        }
+
+        private void InitManageProjectButtonBindings()
+        {
+            ContributeWithMoneyLink = new DahuButtonBindings()
+            {
+                IsBusy = false,
+                Name = "Gérer",
+                RedirectedLink = typeof(Views.Project.Contribute.Contribute)
+            };
+        }
+
+        private DahuButtonBindings _contributeWithMoneyLink;
+        public DahuButtonBindings ContributeWithMoneyLink
+        {
+            get { return _contributeWithMoneyLink; }
+            set
+            {
+                NotifyPropertyChanged(ref _contributeWithMoneyLink, value);
+            }
         }
 
         private DahuUWP.Models.Project _project;

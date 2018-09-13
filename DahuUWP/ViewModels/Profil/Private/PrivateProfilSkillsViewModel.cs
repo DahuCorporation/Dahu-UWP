@@ -24,12 +24,12 @@ namespace DahuUWP.ViewModels.Profil.Private
         public PrivateProfilSkillsViewModel(IDataService service)
         {
             dataService = service;
-            AddSkillCommand = new RelayCommand(AddSkill);
+            AddSkillCommand = new RelayCommand<object>(AddSkill);
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
             AddSkillButtonBindings = new DahuButtonBindings
             {
                 IsBusy = false,
-                TappedFuncListener = AddSkill
+                FuncListener = AddSkill
             };
         }
 
@@ -46,7 +46,7 @@ namespace DahuUWP.ViewModels.Profil.Private
             Skills = new ObservableCollection<Skill>((await skillManager.Charge(skillChargeParams)).Cast<Skill>().ToList());
         }
 
-        private async void AddSkill()
+        private async void AddSkill(object pararm)
         {
             
             if (!VerifAddSkillFields())

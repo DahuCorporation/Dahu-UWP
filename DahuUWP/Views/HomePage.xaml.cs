@@ -37,6 +37,7 @@ namespace DahuUWP.Views
             this.InitializeComponent();
             AppStaticInfo.Account = new Account();
             DahuFrame = DahuBurgerFrame;
+            DahuFrame.Navigate(typeof(Connection));
             DahuBurgerMenu.ItemsSource = MenuItem.GetMainItems();
             DahuBurgerMenu.OptionsItemsSource = MenuItem.GetOptionsItems();
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;

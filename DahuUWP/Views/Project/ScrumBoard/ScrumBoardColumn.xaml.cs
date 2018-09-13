@@ -69,7 +69,7 @@ namespace DahuUWP.Views.Project.ScrumBoard
         private Models.ScrumBoardColumn FindOriginColumn(string originColumnId)
         {
             ScrumBoardViewModel scrumBoardVM = ViewModelLocator.CurrentViewModel as ScrumBoardViewModel;
-            foreach (var column in scrumBoardVM.Columns)
+            foreach (var column in scrumBoardVM.ScrumBoardColumns)
             {
                 if (column.Uuid.Equals(originColumnId))
                 {

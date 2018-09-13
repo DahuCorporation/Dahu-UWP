@@ -187,13 +187,14 @@ namespace DahuUWP.Views.Components.Inputs
             if (ButtonBindings != null
                 && !ButtonBindings.IsBusy)
             {
-                //TappedCommand();
-                if (ButtonBindings.TappedFuncListener != null)
-                    ButtonBindings.TappedFuncListener();
-                else
-                {
-                    HomePage.DahuFrame.Navigate(ButtonBindings.RedirectedLink, ButtonBindings.Parameter);
-                }
+                ButtonBindings.LinkIt();
+                ////TappedCommand();
+                //if (ButtonBindings.TappedFuncListener != null)
+                //    ButtonBindings.TappedFuncListener();
+                //else
+                //{
+                //    HomePage.DahuFrame.Navigate(ButtonBindings.RedirectedLink, ButtonBindings.Parameter);
+                //}
             }
         }
     }

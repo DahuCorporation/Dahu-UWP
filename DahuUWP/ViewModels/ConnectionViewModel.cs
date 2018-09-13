@@ -43,7 +43,7 @@ namespace DahuUWP.ViewModels
         private async void OnPageLoaded()
         {
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.DahuSpecMenuVisibility = Visibility.Collapsed;
-            RecoveringLastUser();
+            //RecoveringLastUser();
             IsBusy = false;
         }
 

@@ -63,6 +63,7 @@
                     <Inputs:DahuAllInBtn Style="{StaticResource ButtonTowerBG}"
                                      x:Uid="DahuAllInBtnParticiped"
                                      Value="Participer"
+                                         ButtonBindings="{Binding ContributeWithMoneyLink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                      ButtonBackground="#FFD0691C"
                                      ButtonImageBackground="Background/citylow.jpg"
                                      HorizontalAlignment="Center"/>

@@ -32,7 +32,7 @@ namespace DahuUWP.ViewModels.Profil.Private
             UpdateProfilMainInformation = new DahuButtonBindings
             {
                 IsBusy = false,
-                TappedFuncListener = UpdateMainInformation
+                FuncListener = UpdateMainInformation
             };
         }
 
@@ -159,7 +159,7 @@ namespace DahuUWP.ViewModels.Profil.Private
             return user;
         }
 
-        private async void UpdateMainInformation()
+        private async void UpdateMainInformation(object param)
         {
             UpdateProfilMainInformation.IsBusy = true;
             UserManager userManager = (UserManager)dataService.GetUserManager();

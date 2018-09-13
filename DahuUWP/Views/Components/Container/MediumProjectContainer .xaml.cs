@@ -65,7 +65,7 @@ namespace DahuUWP.Views.Components.Container
                 newButtonBindings.RedirectedLink = mediumProj.ButtonBindings.RedirectedLink;
             } else
             {
-                newButtonBindings.TappedFuncListener = mediumProj.ButtonBindings.TappedFuncListener;
+                newButtonBindings.FuncListener = mediumProj.ButtonBindings.FuncListener;
             }
             mediumProj.ButtonBindings = newButtonBindings;
         }

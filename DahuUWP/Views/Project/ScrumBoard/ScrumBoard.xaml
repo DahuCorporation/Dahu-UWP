@@ -66,7 +66,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
-            <ItemsControl Name="ScrumBoardControl" ItemsSource="{Binding Columns}" Margin="20,0,0,0">
+            <ItemsControl Name="ScrumBoardControl" ItemsSource="{Binding ScrumBoardColumns}" Margin="20,0,0,0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>

@@ -23,7 +23,7 @@ namespace DahuUWP.ViewModels.Project
         public CreateProjectViewModel(IDataService service)
         {
             dataService = service;
-            CreateProjectCommand = new RelayCommand(CreateProject);
+            CreateProjectCommand = new RelayCommand<object>(CreateProject);
             InitPageButtons();
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
         }
@@ -39,7 +39,7 @@ namespace DahuUWP.ViewModels.Project
             CreateProjectButtonBindings = new DahuButtonBindings
             {
                 IsBusy = false,
-                TappedFuncListener = CreateProject
+                FuncListener = CreateProject
             };
         }
 
@@ -82,7 +82,7 @@ namespace DahuUWP.ViewModels.Project
             return true;
         }
 
-        private async void CreateProject()
+        private async void CreateProject(object pararm)
         {
             CreateProjectButtonBindings.IsBusy = true;
             DahuUWP.Models.Project project = new DahuUWP.Models.Project();

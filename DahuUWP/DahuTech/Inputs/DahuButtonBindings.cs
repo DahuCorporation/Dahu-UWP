@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using DahuUWP.Views;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,11 +37,24 @@ namespace DahuUWP.DahuTech.Inputs
         //    return true;
         //}
 
+        public void LinkIt()
+        {
+            if (RedirectedLink != null)
+            {
+                HomePage.DahuFrame.Navigate(RedirectedLink, Parameter);
+            }
+            else if (FuncListener != null)
+            {
+                FuncListener.Invoke(Parameter);
+            }
+        }
+
+        public Action<object> FuncListener { get; set; }
 
         /// <summary>
         /// Take one of the two var : TappedFuncListener or RedirectedLink
         /// </summary>
-        public Action TappedFuncListener { get; set; }
+        //public Action TappedFuncListener { get; set; }
 
         /// <summary>
         /// Take one of the two var : TappedFuncListener or RedirectedLink

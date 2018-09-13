@@ -46,13 +46,17 @@ namespace DahuUWP.Services.ModelManager
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        JToken jProj = resp["data"].First;
-                        for (int i = 0; jProj != null; i++)
+                        if (resp["data"].HasValues)
                         {
-                            scrumBoardList.Add(jProj.ToObject<ScrumBoard>());
-                            jProj = jProj.Next;
+                            JToken jProj = resp["data"].First;
+                            for (int i = 0; jProj != null; i++)
+                            {
+                                scrumBoardList.Add(jProj.ToObject<ScrumBoard>());
+                                jProj = jProj.Next;
+                            }
+                            return scrumBoardList;
                         }
-                        return scrumBoardList;
+                        return null;
                 }
                 return null;
             }
@@ -77,11 +81,14 @@ namespace DahuUWP.Services.ModelManager
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        JToken jProj = resp["data"].First;
-                        for (int i = 0; jProj != null; i++)
+                        if (resp["data"].HasValues)
                         {
-                            scrumBoardList.Add(jProj.ToObject<ScrumBoardColumn>());
-                            jProj = jProj.Next;
+                            JToken jProj = resp["data"].First;
+                            for (int i = 0; jProj != null; i++)
+                            {
+                                scrumBoardList.Add(jProj.ToObject<ScrumBoardColumn>());
+                                jProj = jProj.Next;
+                            }
                         }
                         return scrumBoardList;
                 }
@@ -145,15 +152,18 @@ namespace DahuUWP.Services.ModelManager
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        JToken jProj = resp["data"].First;
-                        for (int i = 0; jProj != null; i++)
+                        if (resp["data"].HasValues)
                         {
-                            taskList.Add(jProj.ToObject<ScrumBoardTask>());
-                            jProj = jProj.Next;
+                            JToken jProj = resp["data"].First;
+                            for (int i = 0; jProj != null; i++)
+                            {
+                                taskList.Add(jProj.ToObject<ScrumBoardTask>());
+                                jProj = jProj.Next;
+                            }
                         }
                         return taskList;
                 }
-                return null;
+                return taskList;
             }
             catch (Exception ex)
             {
@@ -182,15 +192,18 @@ namespace DahuUWP.Services.ModelManager
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        JToken jProj = resp["data"].First;
-                        for (int i = 0; jProj != null; i++)
+                        if (resp["data"] != null && resp["data"].HasValues)
                         {
-                            taskList.Add(jProj.ToObject<ScrumBoardTask>());
-                            jProj = jProj.Next;
+                            JToken jProj = resp["data"].First;
+                            for (int i = 0; jProj != null; i++)
+                            {
+                                taskList.Add(jProj.ToObject<ScrumBoardTask>());
+                                jProj = jProj.Next;
+                            }
                         }
                         return taskList;
                 }
-                return null;
+                return taskList;
             }
             catch (Exception ex)
             {
