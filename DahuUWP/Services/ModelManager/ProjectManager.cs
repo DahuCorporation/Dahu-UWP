@@ -90,7 +90,7 @@ namespace DahuUWP.Models.ModelManager
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        AppGeneral.UserInterfaceStatusDico["Project created successfully."].Display(((Project)project).Name);
+                        AppGeneral.UserInterfaceStatusDico["Project created successfully."].Display(((Project)project).Name, true);
                         return true;
                     case 400:
                         // todo : Attention la description a une taille minimum

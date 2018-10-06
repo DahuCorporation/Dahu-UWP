@@ -50,7 +50,7 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "phone")]
         public string Phone { get; set; }
 
-        [JsonProperty(PropertyName = "mail")]
+        [JsonProperty(PropertyName = "email")]
         public string Mail { get; set; }
     }
 }

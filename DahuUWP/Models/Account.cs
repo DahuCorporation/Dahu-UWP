@@ -22,7 +22,7 @@ namespace DahuUWP.Models
     {
         private string mail;
 
-        [JsonProperty(PropertyName = "mail")]
+        [JsonProperty(PropertyName = "username")]
         public string Mail
         {
             get { return mail; }
@@ -89,7 +89,7 @@ namespace DahuUWP.Models
         {
             object connection = new
             {
-                mail = (string)AppStaticInfo.Account.Mail,
+                username = (string)AppStaticInfo.Account.Mail,
                 password = (string)AppStaticInfo.Account.Password
             };
             return await Connect(connection);
@@ -102,7 +102,7 @@ namespace DahuUWP.Models
                 APIService service = new APIService();
                 //AppStaticInfo.Account = new Account();
 
-                HttpResponseMessage result = await service.Post(connection, "auth");
+                HttpResponseMessage result = await service.Post(connection, "login");
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -110,8 +110,8 @@ namespace DahuUWP.Models
                     //success
                     case 200:
                         UserManager userManager = new UserManager();
-                        AppStaticInfo.Account.Uuid = (string)resp["data"]["uuid"];
-                        AppStaticInfo.Account.Token = (string)resp["data"]["_token"];
+                        AppStaticInfo.Account.Uuid = (string)resp["uuid"];
+                        AppStaticInfo.Account.Token = (string)resp["access_token"];
 
                         Dictionary<string, object> userDicoCharge = new Dictionary<string, object>
                         {

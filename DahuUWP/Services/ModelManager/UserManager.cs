@@ -129,17 +129,17 @@ namespace DahuUWP.Models.ModelManager
             try
             {
                 APIService apiService = new APIService();
-                string requestUri = "users/";
-                requestUri += addToRequestUri + "?";
+                string requestUri = "users/" ;
+                requestUri += addToRequestUri;
                 // separateur ce met au début, 
-                requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                //requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
                 HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        return (User)DeSerialize((JObject)resp["data"]);
+                        return (User)DeSerialize((JObject)resp);
                         //return resp["data"].ToObject<User>();
                 }
                 return null;
@@ -164,9 +164,9 @@ namespace DahuUWP.Models.ModelManager
                 jObject.Add("password", ((User)obj).Account.Password);
                 jObject.Add("type", ((User)obj).Account.Type);
                 string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Post("{\"informations\" :" + jsonObject + "}", requestUri);
+                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                //var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
@@ -259,7 +259,7 @@ namespace DahuUWP.Models.ModelManager
         public JObject Serialize(object userToSerialize)
         {
             JObject jUser = (JObject)JToken.FromObject(userToSerialize);
-            jUser["birthdate"] = DateUtils.DateTimeToString(((User)userToSerialize).Birthdate);
+            jUser["birthdate"] = DateUtils.DateTimeToString(((User)userToSerialize).Birthdate, "dd-MM-yyyy");
             jUser.Add("gender", GenderUtility.GenderToString(((User)userToSerialize).Gender));
             return jUser;
         }
