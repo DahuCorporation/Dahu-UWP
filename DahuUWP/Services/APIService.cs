@@ -81,6 +81,13 @@ namespace DahuUWP.Services
             return result;
         }
 
+        public async Task<HttpResponseMessage> Get(string requestUri, bool authorization)
+        {
+            if (authorization)
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AppStaticInfo.Account.Token);
+            HttpResponseMessage result = await httpClient.GetAsync(requestUri);
+            return result;
+        }
 
         /// <summary>
         /// Json object
@@ -94,6 +101,7 @@ namespace DahuUWP.Services
             var buffer = System.Text.Encoding.UTF8.GetBytes(jsonObj);
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AppStaticInfo.Account.Token);
             HttpResponseMessage result = await httpClient.PutAsync(requestUri, byteContent);
             //result.EnsureSuccessStatusCode();
             return result;

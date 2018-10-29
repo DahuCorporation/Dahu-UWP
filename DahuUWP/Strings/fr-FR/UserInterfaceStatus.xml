@@ -27,8 +27,9 @@
 
   <!---->
   <!--Private profil-->
-  <status key="Informations modified."  value="Vos informations on bien été mise à jour." varName="" type="Positive"/>
+  <status key="Informations modified."  value="Les informations on bien été mise à jour." varName="" type="Positive"/>
   <status key="A skill is added to the list."  value="Une compétence a été ajoutée à la liste." varName="" type="Positive"/>
+  <status key="A skill already exists."  value="Une compétence existe déjà sous ce nom." varName="" type="Warning"/>
   <status key="Empty skill name."  value="Le champ nom est vide." varName="" type="Warning"/>
   <status key="Empty skill description."  value="Le champ description est vide." varName="" type="Warning"/>
   <status key="The skill is add to the user."  value="La compétence a bien été ajoutée à votre liste." varName="" type="Positive"/>
@@ -40,6 +41,12 @@
   <status key="Empty name."  value="Le champ nom du projet est vide." varName="" type="Warning"/>
   <status key="Empty description."  value="Le champ description du projet est vide." varName="" type="Warning"/>
   <status key="Project created successfully."  value="Le projet '{0}' a bien été créé." varName="" type="Positive"/>
+  <status key="Project update lack characters."  value="Votre nom de projet ou description est trop courte. Au moins 2 charactères pour le nom et au moins 6 pour la description." varName="" type="Warning"/>
+  <status key="You joined the project."  value="Vous avez rejoint le projet." varName="" type="Positive"/>
+  <status key="You are already in the project."  value="Vous avez déjà rejoint le projet." varName="" type="Warning"/>
+  
+
+
   <!---->
 
   <!---->

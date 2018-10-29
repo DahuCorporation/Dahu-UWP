@@ -11,7 +11,7 @@
     d:DesignWidth="320">
 
 
-    <Grid Background="White" BorderThickness="0,0,0,2" BorderBrush="#FFcbcbcb" CornerRadius="7" Padding="16">
+    <Grid Background="White" BorderThickness="0,0,0,2" BorderBrush="#FFcbcbcb" CornerRadius="7" Padding="16" Width="340">
         <StackPanel Orientation="Vertical">
             <TextBlock x:Name="TextBlockAddressUserName" Style="{StaticResource DahuBiggerTextDark}">
                 <Run Text="{Binding Path=User.LastName, FallbackValue='Lastname', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"></Run>

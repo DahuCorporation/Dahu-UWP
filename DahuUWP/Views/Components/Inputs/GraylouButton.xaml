@@ -7,18 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Height="{Binding InputHeight, FallbackValue='48'}" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" HorizontalAlignment="Left" >
+    <Grid Height="{Binding InputHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue='48'}" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" HorizontalAlignment="Left" Tapped="Grid_Tapped_1" >
         <Border x:Name="GraylouBorder" CornerRadius="{Binding Path=InputRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue='24'}" BorderThickness="0,0,0,0">
-            <Grid Padding="24,0,24,0" Background="{Binding ButtonBackground, FallbackValue='#DFDFDF'}">
+            <Grid Padding="24,0,24,0" Background="{Binding ButtonBackground, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue='#DFDFDF'}">
                 <StackPanel Orientation="Horizontal">
                     <Grid x:Name="ButtonIconName" Height="21" Width="21" VerticalAlignment="Center" HorizontalAlignment="Left">
                         <Grid.Background>
-                            <ImageBrush ImageSource="{Binding Path=Icon}"/>
+                            <ImageBrush ImageSource="{Binding Path=Icon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid.Background>
                     </Grid>
-                    <TextBlock Text="{Binding Path=Value, FallbackValue='GraylouButton'}" Foreground="{Binding ValueForeground, FallbackValue='#080808'}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="12,0,0,0"/>
+                    <TextBlock Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue='GraylouButton'}" Foreground="{Binding ValueForeground, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue='#080808'}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="12,0,0,0"/>
                 </StackPanel>
-
             </Grid>
         </Border>
     </Grid>

@@ -14,5 +14,6 @@
     <x:String x:Key="github_logo_w">ms-appx:///Assets/Dahu-Icon/github_logo_w.png</x:String>
     <x:String x:Key="google_plus_logo_w">ms-appx:///Assets/Dahu-Icon/google_plus_logo_w.png</x:String>
     <x:String x:Key="more_white">ms-appx:///Assets/Dahu-Icon/more_white.png</x:String>
+    <x:String x:Key="up-arrow">ms-appx:///Assets/Dahu-Icon/up-arrow.png</x:String>
     <!--<x:String x:Key="Incorrect mail address.">L’e-mail entré ne correspond à aucun compte.</x:String>-->
 </ResourceDictionary>

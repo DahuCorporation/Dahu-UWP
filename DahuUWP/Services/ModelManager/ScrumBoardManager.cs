@@ -37,18 +37,19 @@ namespace DahuUWP.Services.ModelManager
         {
             try
             {
+                ///projects/:project/taskboards
                 List<ScrumBoard> scrumBoardList = new List<ScrumBoard>();
                 APIService apiService = new APIService();
-                string requestUri = "task/boards/" + projectId;
-                HttpResponseMessage result = await apiService.Get(requestUri);
+                string requestUri = "projects/" + projectId + "/taskboards";
+                HttpResponseMessage result = await apiService.Get(requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        if (resp["data"].HasValues)
+                        if (resp.HasValues)
                         {
-                            JToken jProj = resp["data"].First;
+                            JToken jProj = resp.First;
                             for (int i = 0; jProj != null; i++)
                             {
                                 scrumBoardList.Add(jProj.ToObject<ScrumBoard>());
@@ -74,16 +75,16 @@ namespace DahuUWP.Services.ModelManager
             {
                 List<ScrumBoardColumn> scrumBoardList = new List<ScrumBoardColumn>();
                 APIService apiService = new APIService();
-                string requestUri = "task/columns/" + scrumBoardId;
-                HttpResponseMessage result = await apiService.Get(requestUri);
+                string requestUri = "taskboards/" + scrumBoardId + "?extended=true";
+                HttpResponseMessage result = await apiService.Get(requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        if (resp["data"].HasValues)
+                        if (resp.HasValues)
                         {
-                            JToken jProj = resp["data"].First;
+                            JToken jProj = resp["columns"].First;
                             for (int i = 0; jProj != null; i++)
                             {
                                 scrumBoardList.Add(jProj.ToObject<ScrumBoardColumn>());
@@ -92,13 +93,13 @@ namespace DahuUWP.Services.ModelManager
                         }
                         return scrumBoardList;
                 }
-                return null;
+                return scrumBoardList;
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.Fail(ex.ToString());
                 AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
-                return null;
+                return new List<ScrumBoardColumn>();
             }
         }
 
@@ -342,26 +343,25 @@ namespace DahuUWP.Services.ModelManager
                 APIService apiService = new APIService();
                 if (String.IsNullOrWhiteSpace(projectId))
                     return null;
-                string requestUri = "task/board/" + projectId;
+
+                string requestUri = "projects/" + projectId + "/taskboards";
                 JObject jObject = new JObject
                 {
-                    { "account_uuid", AppStaticInfo.Account.Uuid },
                     { "name", ((ScrumBoard)scrumBoard).Name }
                 };
-                string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri);
+                HttpResponseMessage result = await apiService.Post(jObject, requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
-                    case 201:
+                    case 200:
                         AppGeneral.UserInterfaceStatusDico["ScrumBoard created successfully."].Display(((ScrumBoard)scrumBoard).Name);
-                        ScrumBoard scrumBoardReturn = new ScrumBoard
-                        {
-                            Name = ((JObject)resp["data"])[OnCreationScrumBoardNameKey].ToString(),
-                            Uuid = ((JObject)resp["data"])[OnCreationScrumBoardUuidKey].ToString()
-                        };
-                        return scrumBoardReturn;
+                        return resp.ToObject<ScrumBoard>();
+                        //ScrumBoard scrumBoardReturn = new ScrumBoard
+                        //{
+                        //    Name = ((JObject)resp)[OnCreationScrumBoardNameKey].ToString(),
+                        //    Uuid = ((JObject)resp)[OnCreationScrumBoardUuidKey].ToString()
+                        //};
 
                         //return ((JObject)resp["data"]).ToObject<ScrumBoard>();
                     case 400:
@@ -394,21 +394,20 @@ namespace DahuUWP.Services.ModelManager
                 APIService apiService = new APIService();
                 if (String.IsNullOrWhiteSpace(scrumBoardId))
                     return null;
-                string requestUri = "task/column/" + scrumBoardId;
+                string requestUri = "taskboards/" + scrumBoardId + "/columns";
                 JObject jObject = new JObject
                 {
-                    { "account_uuid", AppStaticInfo.Account.Uuid },
                     { "name", ((ScrumBoardColumn)column).Name }
                 };
                 string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri);
+                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
-                    case 201:
+                    case 200:
                         AppGeneral.UserInterfaceStatusDico["Column created successfully."].Display(((ScrumBoardColumn)column).Name);
-                        return ((JObject)resp["data"]).ToObject<ScrumBoardColumn>();
+                        return resp.ToObject<ScrumBoardColumn>();
                     case 400:
                         // todo : Attention la description a une taille minimum
                         //TODO : différencier les erreurs, si c'est une erreur de projet deja existant ou si le uuid est incorect...
@@ -436,6 +435,7 @@ namespace DahuUWP.Services.ModelManager
         {
             try
             {
+                
                 APIService apiService = new APIService();
                 if (String.IsNullOrWhiteSpace(scrumBoardId))
                     return null;
@@ -476,18 +476,15 @@ namespace DahuUWP.Services.ModelManager
             }
         }
 
-        public async Task<ScrumBoardTask> CreateTask(object taskLabel, string columnId)
+        public async Task<ScrumBoardTask> CreateTask(ScrumBoardTask taskLabel)
         {
             try
             {
                 APIService apiService = new APIService();
-                if (String.IsNullOrWhiteSpace(columnId))
-                    return null;
-                string requestUri = "task/" + columnId;
+                string requestUri = "taskboards/" + taskLabel.ScrumBoardUuid + "/tasks";
                 JObject jObject = new JObject(taskLabel);
-                jObject.Add("account_uuid", AppStaticInfo.Account.Uuid);
                 string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri);
+                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)

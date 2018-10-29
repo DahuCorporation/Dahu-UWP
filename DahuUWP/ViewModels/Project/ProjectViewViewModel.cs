@@ -1,4 +1,5 @@
 ﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -7,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Popups;
 
 namespace DahuUWP.ViewModels.Project
 {
@@ -22,8 +25,11 @@ namespace DahuUWP.ViewModels.Project
 
         private async void OnPageLoaded()
         {
-            Project = (DahuUWP.Models.Project)NavigationParam;
+            ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
+
+            Project = await projectManager.ChargeOneProject(((DahuUWP.Models.Project)NavigationParam).Uuid);
             InitManageProjectButtonBindings();
+            InitJoinProjectButtonBindings();
         }
 
         private void InitManageProjectButtonBindings()
@@ -34,6 +40,35 @@ namespace DahuUWP.ViewModels.Project
                 Name = "Gérer",
                 RedirectedLink = typeof(Views.Project.Contribute.Contribute)
             };
+        }
+
+        private void InitJoinProjectButtonBindings()
+        {
+            JoinProjectButtonBindings = new DahuButtonBindings()
+            {
+                IsBusy = false,
+                Name = "Rejoindre le projet",
+                FuncListener = JoinProject
+            };
+        }
+        public async void JoinProject(object param)
+        {
+            ProjectManager projectManager = new ProjectManager();
+            await projectManager.JoinProject(Project.Uuid);
+            //var res = new ResourceLoader();
+            //var messageDialog = new MessageDialog("No internet connection has been found.");
+            //await messageDialog.ShowAsync();
+
+        }
+
+        private DahuButtonBindings _joinProjectButtonBindings;
+        public DahuButtonBindings JoinProjectButtonBindings
+        {
+            get { return _joinProjectButtonBindings; }
+            set
+            {
+                NotifyPropertyChanged(ref _joinProjectButtonBindings, value);
+            }
         }
 
         private DahuButtonBindings _contributeWithMoneyLink;

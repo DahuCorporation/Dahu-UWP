@@ -40,10 +40,11 @@ namespace DahuUWP.ViewModels.Profil.Private
 
         private async void LoadUserSkills()
         {
-            SkillManager skillManager = (SkillManager)dataService.GetSkillManager();
-            Dictionary<string, object> skillChargeParams = new Dictionary<string, object>();
-            skillChargeParams.Add("mail", AppStaticInfo.Account.Mail);
-            Skills = new ObservableCollection<Skill>((await skillManager.Charge(skillChargeParams)).Cast<Skill>().ToList());
+            UserManager userManager = (UserManager)dataService.GetUserManager();
+
+            User user = await userManager.Charge(AppStaticInfo.Account.Uuid);
+            if (user.Skills != null)
+                Skills = new ObservableCollection<Skill>(user.Skills);
         }
 
         private async void AddSkill(object pararm)
@@ -55,21 +56,29 @@ namespace DahuUWP.ViewModels.Profil.Private
             SkillManager skillManager = (SkillManager)dataService.GetSkillManager();
             UserManager userManager = (UserManager)dataService.GetUserManager();
 
-            Skill skillToSave = new Skill
+            List<Skill> skills = await skillManager.ChargeAllSkills();
+            Skill newUserSkillAlreadyExists = skills.FirstOrDefault(it => it.Name == SkillName);
+            if (newUserSkillAlreadyExists != null) //if exists
             {
-                Name = SkillName,
-                Description = SkillDescription
-            };
-            if (await skillManager.Create(skillToSave))
-            {
-                Dictionary<string, object> chargeOneSkillParams = new Dictionary<string, object>
-                {
-                    { "name", skillToSave.Name }
-                };
-                Skill skillSaved;
-                if ((skillSaved = (Skill)(await skillManager.ChargeOneSkill(chargeOneSkillParams))) != null)
-                    await userManager.AddSkillToUser(skillSaved.Uuid, AppStaticInfo.Account.Uuid);
+                await userManager.AddSkillToUser(newUserSkillAlreadyExists.Uuid);
                 LoadUserSkills();
+                //add skill to user list
+                // verif s'il n'est pas déjà dans la liste du user
+                // update la list en front
+            } else
+            {
+                Skill skillToSave = new Skill
+                {
+                    Name = SkillName,
+                    Description = SkillDescription
+                };
+                Skill newSkill = await skillManager.Create(skillToSave);
+                if (newSkill != null)
+                    await userManager.AddSkillToUser(newSkill.Uuid);
+                LoadUserSkills();
+                //create list dans la bdd
+                //add skill to user list
+                // update la list en front
             }
             AddSkillButtonBindings.IsBusy = false;
         }

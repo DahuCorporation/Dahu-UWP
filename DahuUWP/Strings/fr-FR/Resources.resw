@@ -181,7 +181,7 @@
     <value>Facebook</value>
   </data>
   <data name="DahuAllInBtn_FollowProject.Value" xml:space="preserve">
-    <value>Suivre le projet</value>
+    <value>Rejoindre le projet</value>
   </data>
   <data name="DahuAllInBtn_GithubConnection.Value" xml:space="preserve">
     <value>Github</value>
@@ -323,6 +323,9 @@
   </data>
   <data name="GraylouButton_ReturnManageProject.Value" xml:space="preserve">
     <value>Retour à la gestion du projet</value>
+  </data>
+  <data name="GraylouButton_UploadImage.Value" xml:space="preserve">
+    <value>Télécharger une photo</value>
   </data>
   <data name="MailAdress.Text" xml:space="preserve">
     <value>Adresse mail</value>

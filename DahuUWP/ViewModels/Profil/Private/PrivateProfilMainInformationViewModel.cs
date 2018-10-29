@@ -34,6 +34,11 @@ namespace DahuUWP.ViewModels.Profil.Private
                 IsBusy = false,
                 FuncListener = UpdateMainInformation
             };
+            UpdateProfilPictureBinding = new DahuButtonBindings
+            {
+                IsBusy = false,
+                FuncListener = UpdateProfilPicture
+            };
         }
 
         private string _userName;
@@ -115,6 +120,16 @@ namespace DahuUWP.ViewModels.Profil.Private
             }
         }
 
+        private DahuButtonBindings _updateProfilPictureBinding;
+        public DahuButtonBindings UpdateProfilPictureBinding
+        {
+            get { return _updateProfilPictureBinding; }
+            set
+            {
+                NotifyPropertyChanged(ref _updateProfilPictureBinding, value);
+            }
+        }
+
         private async void FillDataView()
         {
             try
@@ -165,6 +180,25 @@ namespace DahuUWP.ViewModels.Profil.Private
             UserManager userManager = (UserManager)dataService.GetUserManager();
             await userManager.Edit(RecupUserMainInformation());
             UpdateProfilMainInformation.IsBusy = false;
+        }
+        private async void UpdateProfilPicture(object param)
+        {
+            UpdateProfilPictureBinding.IsBusy = true;
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".jpeg");
+            picker.FileTypeFilter.Add(".png");
+
+            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
+            if (file != null)
+            {
+            }
+            else
+            {
+            }
+            UpdateProfilPictureBinding.IsBusy = false;
         }
     }
 }

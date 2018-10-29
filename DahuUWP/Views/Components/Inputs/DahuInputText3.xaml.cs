@@ -46,9 +46,9 @@ namespace DahuUWP.Views.Components.Inputs
 
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            string titi = "qfefza";
-            object tita = OnActionObj;
-            OnAction(false);
+            //string titi = "qfefza";
+            //object tita = OnActionObj;
+            //OnAction(false);
         }
 
         public string InputHeader

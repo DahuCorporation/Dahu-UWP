@@ -15,7 +15,7 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "uuid")]
+        [JsonProperty(PropertyName = "id")]
         public string Uuid { get; set; }
         
 

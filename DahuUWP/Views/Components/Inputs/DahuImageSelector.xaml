@@ -1,0 +1,27 @@
+﻿<UserControl
+    x:Class="DahuUWP.Views.Components.Inputs.DahuImageSelector"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DahuUWP.Views.Components.Inputs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <StackPanel>
+            <Grid Height="180" HorizontalAlignment="Stretch"  Background="Gray">
+                
+            </Grid>
+            <local:GraylouButton  x:Uid="GraylouButton_UploadImage"
+                              Icon="up-arrow"
+                              Value="Upload photo"
+                              InputRadius="2"
+                              ButtonBackground="#FF2F2F2F"
+                                  ValueForeground="#FFFFFFFF"
+                              Margin="0,8,0,16" Tapped="GraylouButton_Tapped"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

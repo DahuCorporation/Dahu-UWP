@@ -27,22 +27,31 @@
                     <Titles:TitleBlock x:Name="TitleBlock_EditPrincipalInformation" x:Uid="TitleBlock_EditPrincipalInformation"/>
 
                     <Grid Padding="30,15">
-                        <StackPanel VerticalAlignment="Top" Padding="0,0,10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Top" Padding="0,0,10,0" >
                             <Inputs:DahuInputText3 x:Name="DahuInput3_ProjectName"
                                                x:Uid="DahuInput3_ProjectName"
                                                InputPlaceholder="Project name"
                                                TextValue="{Binding Project.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                InputHeader="Project name"/>
+                            
+                            
+                            <Grid>
+                                <Inputs:DahuButton3 x:Name="DahuButton3_SaveMainInformation"
+                                                    x:Uid="DahuButton3_SaveMainInformation"
+                                                    Style="{StaticResource EditButton}"
+                                                    ButtonBindings="{Binding UpdateProjectMainInformation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Top" Padding="0,0,10,0" >
                             <Inputs:DahuInputText3 x:Name="DahuInput3_ProjectDescription"
                                                x:Uid="DahuInput3_ProjectDescription"
                                                InputPlaceholder="Description"
                                                TextValue="{Binding Project.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                InputHeader="Description"/>
-                            <Grid>
-                                <Inputs:DahuButton3 x:Name="DahuButton3_SaveMainInformation"
-                                            x:Uid="DahuButton3_SaveMainInformation"
-                                            Style="{StaticResource EditButton}"/>
-                            </Grid>
                         </StackPanel>
                     </Grid>
                 </StackPanel>

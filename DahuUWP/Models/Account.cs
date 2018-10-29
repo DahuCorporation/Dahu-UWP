@@ -125,6 +125,9 @@ namespace DahuUWP.Models
                     case 400:
                         AppGeneral.UserInterfaceStatusDico[(string)resp["message"]].Display();
                         return false;
+                    case 500:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
                 }
                 return false;
             }

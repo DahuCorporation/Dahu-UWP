@@ -52,5 +52,8 @@ namespace DahuUWP.Models
 
         [JsonProperty(PropertyName = "email")]
         public string Mail { get; set; }
+
+        [JsonProperty(PropertyName = "skills")]
+        public List<Skill> Skills { get; set; }
     }
 }

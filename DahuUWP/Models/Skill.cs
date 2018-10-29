@@ -9,7 +9,7 @@ namespace DahuUWP.Models
 {
     public class Skill
     {
-        [JsonProperty(PropertyName = "uuid")]
+        [JsonProperty(PropertyName = "id")]
         public string Uuid { get; set; }
 
         [JsonProperty(PropertyName = "name")]
@@ -17,5 +17,9 @@ namespace DahuUWP.Models
 
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
+
+        //pour lumen......
+        [JsonProperty(PropertyName = "skill")]
+        public Skill lumenSkill { get; set; }
     }
 }

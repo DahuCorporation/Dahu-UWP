@@ -19,16 +19,17 @@ namespace DahuUWP.Models.ModelManager
             {
                 List<object> projectList = new List<object>();
                 APIService apiService = new APIService();
-                string requestUri = "projects/";
-                if (routeParams != null)
-                    requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                /// users /:id / projects ? relation =: relation
+                string requestUri = "projects";
+                //if (routeParams != null)
+                //    requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
                 HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        JToken jProj = resp["data"].First;
+                        JToken jProj = resp.First;
                         for (int i = 0; jProj != null; i++)
                         {
                             projectList.Add(jProj.ToObject<Project>());
@@ -58,7 +59,7 @@ namespace DahuUWP.Models.ModelManager
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        return (Project)DeSerialize((JObject)resp["data"]);
+                        return (Project)DeSerialize((JObject)resp);
                 }
                 return null;
             }
@@ -79,12 +80,12 @@ namespace DahuUWP.Models.ModelManager
 
                 JObject jObject = new JObject
                 {
-                    { "account_uuid", AppStaticInfo.Account.Uuid },
+                    //{ "account_uuid", AppStaticInfo.Account.Uuid },
                     { "name", ((Project)project).Name },
                     { "description", ((Project)project).Description }
                 }; 
-                string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri);
+                //string jsonObject = jObject.ToString(Formatting.None);
+                HttpResponseMessage result = await apiService.Post(jObject, requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -98,6 +99,7 @@ namespace DahuUWP.Models.ModelManager
                         AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
                         return false;
                     default:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
                         return false;
                 }
             }
@@ -122,6 +124,71 @@ namespace DahuUWP.Models.ModelManager
             return project;
         }
 
+        public async Task<bool> JoinProject(string projectUuid)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "projects/" + projectUuid + "/members";
+
+                //string jsonObject = jObject.ToString(Formatting.None);
+                HttpResponseMessage result = await apiService.Post("", requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                //var resp = (JArray)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["You joined the project."].Display();
+                        return true;
+                    case 400:
+                        // todo : Attention la description a une taille minimum
+                        //TODO : différencier les erreurs, si c'est une erreur de projet deja existant ou si le uuid est incorect...
+                        AppGeneral.UserInterfaceStatusDico["You are already in the project."].Display();
+                        return false;
+                    default:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
+        }
+
+        public async Task<bool> EditProject(object obj, string projectUuid)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "projects/" + projectUuid;
+                JObject jObject = Serialize(obj);
+                string jsonObject = jObject.ToString(Formatting.None);
+                HttpResponseMessage result = await apiService.Put(jsonObject, requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["Informations modified."].Display();
+                        return true;
+                    case 400:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                    default:
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
+        }
+
         public Task<bool> Edit(object obj)
         {
             throw new NotImplementedException();
@@ -129,7 +196,7 @@ namespace DahuUWP.Models.ModelManager
 
         public JObject Serialize(object serializeObject)
         {
-            throw new NotImplementedException();
+            return (JObject)JToken.FromObject(serializeObject);
         }
     }
 

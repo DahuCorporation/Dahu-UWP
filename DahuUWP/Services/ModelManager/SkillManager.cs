@@ -94,20 +94,27 @@ namespace DahuUWP.Services.ModelManager
             }
         }
 
-        public async Task<object> ChargeOneSkill(Dictionary<string, object> routeParams)
+        public async Task<List<Skill>> ChargeAllSkills()
         {
             try
             {
+                List<Skill> skillList = new List<Skill>();
                 APIService apiService = new APIService();
-                string requestUri = "skill?";
-                requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
-                HttpResponseMessage result = await apiService.Get(requestUri);
+                string requestUri = "skills";
+                //requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                HttpResponseMessage result = await apiService.Get(requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                var resp = (JArray)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        return resp["data"].ToObject<Skill>();
+                        JToken jProj = resp.First;
+                        for (int i = 0; jProj != null; i++)
+                        {
+                            skillList.Add(jProj.ToObject<Skill>());
+                            jProj = jProj.Next;
+                        }
+                        return skillList;
                 }
                 AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
                 return null;
@@ -120,36 +127,65 @@ namespace DahuUWP.Services.ModelManager
             }
         }
 
-        public async Task<bool> Create(object obj)
+        public async Task<object> ChargeOneSkill(string skillId)
         {
             try
             {
                 APIService apiService = new APIService();
-                string requestUri = "skill";
+                string requestUri = "skills/" + skillId;
+                //requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                HttpResponseMessage result = await apiService.Get(requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        return resp.ToObject<Skill>();
+                }
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
+        }
+
+        public async Task<Skill> Create(object obj)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "skills";
 
                 JObject jObject = Serialize(obj);
                 jObject.Remove("uuid");
-                string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri);
+                //string jsonObject = jObject.ToString(Formatting.None);
+                HttpResponseMessage result = await apiService.Post(jObject, requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
                         AppGeneral.UserInterfaceStatusDico["A skill is added to the list."].Display();
-                        return true;
+                        return resp.ToObject<Skill>();
+                    case 422:
+                        AppGeneral.UserInterfaceStatusDico["A skill already exists."].Display();
+                        return null;
                     case 400:
                         AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
-                        return false;
+                        return null;
                     default:
-                        return false;
+                        return null;
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.Fail(ex.ToString());
                 AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
-                return false;
+                return null;
             }
         }
 
@@ -172,6 +208,11 @@ namespace DahuUWP.Services.ModelManager
         {
             JObject jSkill = (JObject)JToken.FromObject(serializeObject);
             return jSkill;
+        }
+
+        Task<bool> IModelManager.Create(object obj)
+        {
+            throw new NotImplementedException();
         }
     }
 

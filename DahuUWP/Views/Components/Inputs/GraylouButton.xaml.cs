@@ -1,4 +1,5 @@
-﻿using DahuUWP.Utils.Converter;
+﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Utils.Converter;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,15 +24,28 @@ namespace DahuUWP.Views.Components.Inputs
     {
         public GraylouButton()
         {
-            DataContext = this;
             this.InitializeComponent();
+            (this.Content as FrameworkElement).DataContext = this;
             ButtonBackground = "#DFDFDF";
             ValueForeground = "#080808";
             InputHeight = 48;
             InputRadius = "24";
         }
 
-        public string Value { get; set; }
+        public string Value
+        {
+            get
+            {
+                return (string)GetValue(ValueProperty);
+            }
+            set
+            {
+                SetValue(ValueProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(string), typeof(GraylouButton), null);
+
 
         private string _icon;
         public string Icon
@@ -47,6 +61,21 @@ namespace DahuUWP.Views.Components.Inputs
                 ButtonIconName.Background = IconConverter.IconToImageBrush(_icon);
             }
         }
+
+        public DahuButtonBindings ButtonBindings
+        {
+            get
+            {
+                return (DahuButtonBindings)GetValue(ButtonBindingsProperty);
+            }
+            set
+            {
+                SetValue(ButtonBindingsProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty ButtonBindingsProperty = DependencyProperty.Register("ButtonBindings", typeof(DahuButtonBindings), typeof(GraylouButton), null);
+
 
         public string InputRadius
         {
@@ -101,6 +130,7 @@ namespace DahuUWP.Views.Components.Inputs
         }
         public static readonly DependencyProperty ButtonBackgroundProperty = DependencyProperty.Register("ButtonBackground", typeof(string), typeof(GraylouButton), null);
 
+
         public string ValueForeground
         {
             get
@@ -122,6 +152,15 @@ namespace DahuUWP.Views.Components.Inputs
         private void Grid_PointerExited(object sender, PointerRoutedEventArgs e)
         {
             Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 2);
+        }
+
+        private void Grid_Tapped_1(object sender, TappedRoutedEventArgs e)
+        {
+            if (ButtonBindings != null
+                && !ButtonBindings.IsBusy)
+            {
+                ButtonBindings.LinkIt();
+            }
         }
     }
 }

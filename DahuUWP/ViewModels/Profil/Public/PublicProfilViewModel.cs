@@ -30,21 +30,21 @@ namespace DahuUWP.ViewModels.Profil.Public
 
         private async void OnPageLoaded()
         {
-            LoadUserProjects();
+            LoadUserInfos();
             LoadUserSkills();
         }
 
-        private async void LoadUserProjects()
+        private async void LoadUserInfos()
         {
             UserManager userManager = (UserManager)dataService.GetUserManager();
 
-            Dictionary<string, object> userDicoCharge = new Dictionary<string, object>
-            {
-                { "_token", AppStaticInfo.Account.Token }
-            };
-            User user = await userManager.Charge(AppStaticInfo.Account.Uuid, userDicoCharge);
+            User user = await userManager.Charge(AppStaticInfo.Account.Uuid);
             UserFullName = user.FirstName + " " + user.LastName;
             UserBiography = user.Biography;
+
+            if (user.Skills != null)
+                Skills = new ObservableCollection<Skill>(user.Skills);
+
             List<Models.Project> projectList = await userManager.ChargeProjects(AppStaticInfo.Account.Uuid, null);
             if (projectList != null)
                 UserProjects = new ObservableCollection<Models.Project>(projectList);
@@ -52,12 +52,19 @@ namespace DahuUWP.ViewModels.Profil.Public
 
         private async void LoadUserSkills()
         {
-            SkillManager skillManager = (SkillManager)dataService.GetSkillManager();
-            Dictionary<string, object> skillChargeParams = new Dictionary<string, object>();
-            skillChargeParams.Add("mail", AppStaticInfo.Account.Mail);
-            List<object> userSkillList = await skillManager.Charge(skillChargeParams);
-            if (userSkillList != null)
-                Skills = new ObservableCollection<Skill>(userSkillList.Cast<Skill>().ToList());
+            UserManager userManager = (UserManager)dataService.GetUserManager();
+            User user = await userManager.Charge(AppStaticInfo.Account.Uuid);
+            string tit = "zef";
+            //List<object> userSkillList = await skillManager.Charge(skillChargeParams);
+            //if (userSkillList != null)
+            //    Skills = new ObservableCollection<Skill>(userSkillList.Cast<Skill>().ToList());
+
+            //SkillManager skillManager = (SkillManager)dataService.GetSkillManager();
+            //Dictionary<string, object> skillChargeParams = new Dictionary<string, object>();
+            //skillChargeParams.Add("mail", AppStaticInfo.Account.Mail);
+            //List<object> userSkillList = await skillManager.Charge(skillChargeParams);
+            //if (userSkillList != null)
+            //    Skills = new ObservableCollection<Skill>(userSkillList.Cast<Skill>().ToList());
         }
 
         private ObservableCollection<Skill> _skills;

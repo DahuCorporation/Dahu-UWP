@@ -54,7 +54,7 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Inputs:ContentiButton Title="{Binding Name}" ContentValue="{Binding Description}"/>
+                                        <Inputs:ContentiButton Title="{Binding lumenSkill.Name}" ContentValue="{Binding lumenSkill.Description}"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

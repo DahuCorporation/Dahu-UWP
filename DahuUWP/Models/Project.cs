@@ -19,7 +19,7 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "project_uuid")]
         private string ProjectUuid { set { Uuid = value; } }
 
-        [JsonProperty(PropertyName = "owner_uuid")]
+        [JsonProperty(PropertyName = "creator_uuid")]
         public string OwnerUuid { get; set; }
 
         [JsonProperty(PropertyName = "account_id")]
@@ -36,5 +36,8 @@ namespace DahuUWP.Models
 
         [JsonProperty(PropertyName = "banner_picture")]
         public string BannerPicture { get; set; }
+
+        [JsonProperty(PropertyName = "members")]
+        public List<User> Members { get; set; }
     }
 }

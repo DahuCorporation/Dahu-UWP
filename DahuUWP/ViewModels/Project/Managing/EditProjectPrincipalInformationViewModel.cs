@@ -1,4 +1,6 @@
-﻿using DahuUWP.Models.ModelManager;
+﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -23,6 +25,42 @@ namespace DahuUWP.ViewModels.Project.Managing
         private async void OnPageLoaded()
         {
             Project = (DahuUWP.Models.Project)NavigationParam;
+            UpdateProjectMainInformation = new DahuButtonBindings
+            {
+                IsBusy = false,
+                FuncListener = UpdateMainInformation
+            };
+        }
+
+        private async void UpdateMainInformation(object param)
+        {
+            if (verifProjectUpdate())
+            {
+                UpdateProjectMainInformation.IsBusy = true;
+                ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
+                await projectManager.EditProject(Project, Project.Uuid);
+                UpdateProjectMainInformation.IsBusy = false;
+            }
+        }
+
+        private bool verifProjectUpdate()
+        {
+            if (Project.Name.Length > 1 && Project.Description.Length > 5)
+            {
+                return true;
+            }
+            AppGeneral.UserInterfaceStatusDico["Project update lack characters."].Display();
+            return false;
+        }
+
+        private DahuButtonBindings _updateProjectMainInformation;
+        public DahuButtonBindings UpdateProjectMainInformation
+        {
+            get { return _updateProjectMainInformation; }
+            set
+            {
+                NotifyPropertyChanged(ref _updateProjectMainInformation, value);
+            }
         }
 
         private DahuUWP.Models.Project _project;

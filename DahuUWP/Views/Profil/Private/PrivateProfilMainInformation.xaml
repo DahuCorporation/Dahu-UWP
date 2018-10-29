@@ -61,6 +61,7 @@
                                                InputPlaceholder="Address"
                                                TextValue="{Binding UserAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                InputHeader="Address"/>
+                        <Inputs:DahuImageSelector ButtonBindings="{Binding UpdateProfilPictureBinding, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Inputs:DahuCalendarDatePicker x:Name="Birthdate"
                                     x:Uid="CalendarDatePicker_Birthdate"
                                     CalendarWidth="500" Date="{Binding UserBirthdate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>

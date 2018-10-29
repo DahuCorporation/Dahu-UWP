@@ -21,19 +21,19 @@ namespace DahuUWP.Models.ModelManager
             {
                 List<object> userList = new List<object>();
                 APIService apiService = new APIService();
-                string requestUri = "users/?_token=" + AppStaticInfo.Account.Token;
+                string requestUri = "users";
 
                 //requestUri += AppStaticInfo.Account.Uuid + "?";
                 // separateur ce met au début, 
                 if (routeParams != null)
                     requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
-                HttpResponseMessage result = await apiService.Get(requestUri);
+                HttpResponseMessage result = await apiService.Get(requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        JToken jUser = resp["data"]["users"].First;
+                        JToken jUser = resp.First;
                         for (int i = 0; jUser != null; i++)
                         {
                             userList.Add(jUser.ToObject<User>());
@@ -57,25 +57,21 @@ namespace DahuUWP.Models.ModelManager
             {
                 List<Project> projectList = new List<Project>();
                 APIService apiService = new APIService();
-                string requestUri = "users/" + userUuid + "/projects";
-
-                if (routeParams != null)
-                    requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                /// users /:id / projects ? relation =: relation
+                string requestUri = "users/" + AppStaticInfo.Account.Uuid + "/projects";
+                //if (routeParams != null)
+                //    requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
                 HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        JToken data = resp["data"];
-                        if (data.HasValues)
+                        JToken jProj = resp.First;
+                        for (int i = 0; jProj != null; i++)
                         {
-                            JToken jProj = data.First;
-                            for (int i = 0; jProj != null; i++)
-                            {
-                                projectList.Add(jProj.ToObject<Project>());
-                                jProj = jProj.Next;
-                            }
+                            projectList.Add(jProj.ToObject<Project>());
+                            jProj = jProj.Next;
                         }
                         return projectList;
                 }
@@ -89,29 +85,23 @@ namespace DahuUWP.Models.ModelManager
             }
         }
 
-        public async Task<bool> AddSkillToUser(string skillUuid, string accountUuid)
+        public async Task<bool> AddSkillToUser(string skillUuid)
         {
             try
             {
                 APIService apiService = new APIService();
-                string requestUri = "user/skill";
+                string requestUri = "users/" + AppStaticInfo.Account.Uuid + "/skills/" + skillUuid;
 
-                JObject jObject = new JObject
-                {
-                    { "skill_uuid", skillUuid },
-                    { "account_uuid", accountUuid }
-                };
-                string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri);
+                HttpResponseMessage result = await apiService.Post(null, requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                //var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
                         AppGeneral.UserInterfaceStatusDico["The skill is add to the user."].Display();
                         return true;
                     case 400:
-                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        AppGeneral.UserInterfaceStatusDico["A skill already exists."].Display();
                         return false;
                 }
                 return false;
@@ -122,6 +112,34 @@ namespace DahuUWP.Models.ModelManager
                 AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
                 return false;
             }
+        }
+
+        public async Task<User> Charge(string userUuid)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "users/" + userUuid;
+                // separateur ce met au début, 
+                //requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                HttpResponseMessage result = await apiService.Get(requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        return (User)DeSerialize((JObject)resp);
+                        //return resp["data"].ToObject<User>();
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
+
         }
 
         public async Task<User> Charge(string addToRequestUri, Dictionary<string, object> routeParams)
@@ -226,12 +244,12 @@ namespace DahuUWP.Models.ModelManager
               try
             {
                 APIService apiService = new APIService();
-                string requestUri = "users/";
+                string requestUri = "users/" + AppStaticInfo.Account.Uuid;
                 //http://fncs.eu/api/forward/users/b7f8953c-d0d0-5150-b54b-e1ca5ea4afba?_token=$2y$10$ZrxgWOi1BMkNOlWWk01L0e7GpS2lLDWzhaXIqNG05ilMZYpxlkU36
-                requestUri += AppStaticInfo.Account.Uuid + "?_token=" + AppStaticInfo.Account.Token;
+                //requestUri += AppStaticInfo.Account.Uuid + "?_token=" + AppStaticInfo.Account.Token;
 
                 JObject jObject = Serialize(obj);
-                jObject.Remove("mail");
+                jObject.Remove("email");
                 string jsonObject = jObject.ToString(Formatting.None);
                 HttpResponseMessage result = await apiService.Put(jsonObject, requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
