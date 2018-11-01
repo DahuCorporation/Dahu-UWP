@@ -129,8 +129,13 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
 
             List<ScrumBoardColumn> scrumBoardColumns = await scrumBoardManager.ChargeAllColumnsOfScrumBoard(scrumBoard.Uuid);
             ScrumBoardColumns = new ObservableCollection<ScrumBoardColumn>(scrumBoardColumns);
-            if (scrumBoardColumns.Count == 0)
-                return;
+            if (scrumBoardColumns.Count != 0)
+            {
+                foreach (ScrumBoardColumn elem in ScrumBoardColumns)
+                {
+                    elem.ScrumBoardUuid = scrumBoard.Uuid;
+                }
+            }
             //foreach (ScrumBoardColumn elem in ScrumBoardColumns)
             //{
             //    List<ScrumBoardTask> tasks = await scrumBoardManager.ChargeAllTaskOfColumn(elem.Uuid);

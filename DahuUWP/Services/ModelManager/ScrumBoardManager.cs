@@ -25,7 +25,7 @@ namespace DahuUWP.Services.ModelManager
 
         // Label keys on creation
         protected string OnCreationLabelUuidKey = "task_label_uuid";
-        protected string OnCreationLabelNameKey = "task_label_name";
+        protected string OnCreationLabelNameKey = "name";
         protected string OnCreationLabelColorKey = "task_label_color";
 
         public Task<List<object>> Charge(Dictionary<string, object> routeParams)
@@ -103,6 +103,41 @@ namespace DahuUWP.Services.ModelManager
             }
         }
 
+
+        public async Task<List<ScrumBoardTask>> ChargeAllTaskOfScrumBoard(string scrumBoardId)
+        {
+            try
+            {
+                List<ScrumBoardTask> scrumBoardList = new List<ScrumBoardTask>();
+                APIService apiService = new APIService();
+                string requestUri = "taskboards/" + scrumBoardId + "/tasks?assigned=false";
+                HttpResponseMessage result = await apiService.Get(requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        if (resp.HasValues)
+                        {
+                            JToken jProj = resp.First;
+                            for (int i = 0; jProj != null; i++)
+                            {
+                                scrumBoardList.Add(jProj.ToObject<ScrumBoardTask>());
+                                jProj = jProj.Next;
+                            }
+                        }
+                        return scrumBoardList;
+                }
+                return scrumBoardList;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return new List<ScrumBoardTask>();
+            }
+        }
+
         public async Task<List<ScrumBoardLabel>> ChargeAllLabelOfScrumBoard( string scrumBoardId)
         {
             try
@@ -133,46 +168,7 @@ namespace DahuUWP.Services.ModelManager
                 return null;
             }
         }
-
-        /// <summary>
-        /// Get all the tasks of a scrum board
-        /// </summary>
-        /// <param name="routeParams"></param>
-        /// <param name="scrumBoardId"></param>
-        /// <returns></returns>
-        public async Task<List<ScrumBoardTask>> ChargeAllTaskOfScrumBoard( string scrumBoardId)
-        {
-            try
-            {
-                List<ScrumBoardTask> taskList = new List<ScrumBoardTask>();
-                APIService apiService = new APIService();
-                string requestUri = "tasks/board/" + scrumBoardId;
-                HttpResponseMessage result = await apiService.Get(requestUri);
-                string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
-                switch ((int)result.StatusCode)
-                {
-                    case 200:
-                        if (resp["data"].HasValues)
-                        {
-                            JToken jProj = resp["data"].First;
-                            for (int i = 0; jProj != null; i++)
-                            {
-                                taskList.Add(jProj.ToObject<ScrumBoardTask>());
-                                jProj = jProj.Next;
-                            }
-                        }
-                        return taskList;
-                }
-                return taskList;
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.Fail(ex.ToString());
-                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
-                return null;
-            }
-        }
+        
 
         /// <summary>
         /// Get all the tasks of a scrum board
@@ -482,32 +478,38 @@ namespace DahuUWP.Services.ModelManager
             {
                 APIService apiService = new APIService();
                 string requestUri = "taskboards/" + taskLabel.ScrumBoardUuid + "/tasks";
-                JObject jObject = new JObject(taskLabel);
-                string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri, true);
+                //JObject jObject = new JObject(taskLabel);
+                //string jsonObject = jObject.ToString(Formatting.None);
+                JObject jObject = new JObject
+                {
+                    { "name", taskLabel.Name },
+                    { "board_id", taskLabel.ScrumBoardUuid },
+                    { "column_id", taskLabel.ScrumBoardColumnUuid }
+                };
+                HttpResponseMessage result = await apiService.Post(jObject, requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
-                    case 201:
-                        AppGeneral.UserInterfaceStatusDico["Task created successfully."].Display(((JObject)resp["data"])[OnCreationLabelNameKey].ToString());
-                        return ((JObject)resp["data"]).ToObject<ScrumBoardTask>();
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["Task created successfully."].Display(((JObject)resp)[OnCreationLabelNameKey].ToString());
+                        return ((JObject)resp).ToObject<ScrumBoardTask>();
 
                     //return ((JObject)resp["data"]).ToObject<ScrumBoard>();
                     case 400:
                         // todo : Attention la description a une taille minimum
                         //TODO : différencier les erreurs, si c'est une erreur de projet deja existant ou si le uuid est incorect...
                         AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
-                        return null;
+                        return new ScrumBoardTask();
                     default:
-                        return null;
+                        return new ScrumBoardTask();
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.Fail(ex.ToString());
                 AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
-                return null;
+                return new ScrumBoardTask();
             }
         }
 
@@ -626,21 +628,15 @@ namespace DahuUWP.Services.ModelManager
             }
         }
 
-        public async Task<bool> DeleteTask(string taskId)
+        public async Task<bool> DeleteTask(string scrumBoardId, string scrumBoardTaskId)
         {
             try
             {
                 APIService apiService = new APIService();
-                if (String.IsNullOrWhiteSpace(taskId))
-                    return false;
-                string requestUri = "task/" + taskId;
-
-                JObject jObject = new JObject();
-                jObject.Add("account_uuid", AppStaticInfo.Account.Uuid);
-                string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Delete(jsonObject, requestUri);
+                string requestUri = "taskboards/" + scrumBoardId + "/tasks/" + scrumBoardTaskId;
+                
+                HttpResponseMessage result = await apiService.DeleteBis(requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DahuUWP.DahuTech.Inputs;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "uuid")]
+        [JsonProperty(PropertyName = "id")]
         public string Uuid { get; set; }
 
         [JsonProperty(PropertyName = "order")]
@@ -27,6 +28,8 @@ namespace DahuUWP.Models
 
         [JsonProperty(PropertyName = "label_uuid")]
         public string LabelUuid { get; set; }
+
+        public DahuButtonBindings DeleteTaskButtonBindings;
 
         //public string Title { get; set; }
 

@@ -64,7 +64,7 @@ namespace DahuUWP.Services
 
         private async Task<HttpResponseMessage> CommonPost(string content, string requestUri, bool authorization)
         {
-            var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                var buffer = System.Text.Encoding.UTF8.GetBytes(content);
             var byteContent = new ByteArrayContent(buffer);
             if (authorization)
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AppStaticInfo.Account.Token);
@@ -123,6 +123,20 @@ namespace DahuUWP.Services
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             HttpResponseMessage result = await httpClient.PutAsync(requestUri, byteContent);
             //result.EnsureSuccessStatusCode();
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> DeleteBis(string requestUri, bool authorization)
+        {
+            if (authorization)
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AppStaticInfo.Account.Token);
+            HttpRequestMessage request = new HttpRequestMessage();
+
+            request.Content = new StringContent("{}", Encoding.UTF8, "application/json");
+                request.Method = HttpMethod.Delete;
+            request.RequestUri = new UriBuilder(route + requestUri).Uri;
+
+            HttpResponseMessage result = await httpClient.SendAsync(request);
             return result;
         }
 

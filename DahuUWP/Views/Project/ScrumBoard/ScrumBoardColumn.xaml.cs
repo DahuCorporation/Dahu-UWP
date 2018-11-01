@@ -1,4 +1,5 @@
 ﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Services.ModelManager;
 using DahuUWP.Utils.Converter;
 using DahuUWP.ViewModels.Project.ScrumBoard;
 using Newtonsoft.Json;
@@ -33,7 +34,38 @@ namespace DahuUWP.Views.Project.ScrumBoard
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
+            DeleteTaskButtonBindings = new DahuButtonBindings()
+            {
+                IsBusy = false,
+                Name = "Delete task",
+                FuncListener = DeleteTask
+            };
         }
+
+        public void DeleteTask(object taskId)
+        {
+
+            Models.ScrumBoardTask task = Column.Tasks.First(x => x.Uuid == taskId.ToString());
+            if (task != null)
+            {
+                Column.Tasks.Remove(task);
+            }
+        }
+
+        public DahuButtonBindings DeleteTaskButtonBindings
+        {
+            get
+            {
+                return (DahuButtonBindings)GetValue(DeleteTaskButtonBindingsProperty);
+            }
+            set
+            {
+                SetValue(DeleteTaskButtonBindingsProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty DeleteTaskButtonBindingsProperty = DependencyProperty.Register("DeleteTaskButtonBindings", typeof(DahuButtonBindings), typeof(ScrumBoardColumn), null);
+
 
         public Models.ScrumBoardColumn Column
         {
@@ -46,7 +78,26 @@ namespace DahuUWP.Views.Project.ScrumBoard
                 SetValue(ColumnProperty, value);
             }
         }
-        public static readonly DependencyProperty ColumnProperty = DependencyProperty.Register("Column", typeof(Models.ScrumBoardColumn), typeof(ScrumBoardColumn), null);
+        public static readonly DependencyProperty ColumnProperty = DependencyProperty.Register("Column", typeof(Models.ScrumBoardColumn), typeof(ScrumBoardColumn), new PropertyMetadata(null, new PropertyChangedCallback(ButtonImageBackgroundChanged)));
+        private static async void ButtonImageBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ScrumBoardColumn scrumBoardColumn = d as ScrumBoardColumn;
+
+            ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
+            List<Models.ScrumBoardTask> scrumBoardColumns = await scrumBoardManager.ChargeAllTaskOfScrumBoard(scrumBoardColumn.Column.ScrumBoardUuid);
+
+            scrumBoardColumn.Column.Tasks = new ObservableCollection<Models.ScrumBoardTask>(scrumBoardColumns);
+            
+            foreach (Models.ScrumBoardTask elem in scrumBoardColumn.Column.Tasks)
+            {
+                elem.DeleteTaskButtonBindings = scrumBoardColumn.DeleteTaskButtonBindings;
+                elem.ScrumBoardUuid = scrumBoardColumn.Column.ScrumBoardUuid;
+            }
+            //string[] radius = ((string)e.NewValue).Split(',');
+
+            //dahuAllInBtn.GridImageBackground.Background.Opacity = 0.60;
+        }
+
 
         /// <summary>
         /// Decide if item can move from column and put some args to send to the drop listner
@@ -136,12 +187,13 @@ namespace DahuUWP.Views.Project.ScrumBoard
             string taskTitle = await dialog.InputStringDialogAsync(res.GetString("CreateNewTask"), res.GetString("NewTask"), res.GetString("Add"), res.GetString("Cancel"));
             if (!String.IsNullOrWhiteSpace(taskTitle))
             {
-                Models.ScrumBoardTask task = new Models.ScrumBoardTask()
-                {
-                    Uuid = Column.Tasks.Count + "1",
-                    Name = taskTitle
+                Models.ScrumBoardTask scrumBoardTask = new Models.ScrumBoardTask() {
+                    Name = taskTitle,
+                    ScrumBoardColumnUuid = Column.Uuid,
+                    ScrumBoardUuid = Column.ScrumBoardUuid
                 };
-                Column.Tasks.Add(task);
+                ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
+                Column.Tasks.Add(await scrumBoardManager.CreateTask(scrumBoardTask));
             }
         }
 

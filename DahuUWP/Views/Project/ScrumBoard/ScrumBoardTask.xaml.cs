@@ -1,4 +1,5 @@
 ﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Services.ModelManager;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +27,9 @@ namespace DahuUWP.Views.Project.ScrumBoard
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
         }
+
+        public static readonly DependencyProperty DeleteTaskButtonBindingsProperty = DependencyProperty.Register("DeleteTaskButtonBindings", typeof(DahuButtonBindings), typeof(ScrumBoardColumn), null);
+
 
         public Models.ScrumBoardTask Task
         {
@@ -63,6 +67,11 @@ namespace DahuUWP.Views.Project.ScrumBoard
             var res = new ResourceLoader();
             InputStringDialog dialog = new InputStringDialog();
             bool name = await dialog.AskDialogAsync(res.GetString("DeleteTask"), res.GetString("DeleteTaskInfo") + Task.Name, res.GetString("Delete"), res.GetString("Cancel"));
+            
+            ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
+            await scrumBoardManager.DeleteTask(Task.ScrumBoardUuid, Task.Uuid);
+            Task.DeleteTaskButtonBindings.Parameter = Task.Uuid;
+            Task.DeleteTaskButtonBindings.LinkIt();
         }
     }
 
