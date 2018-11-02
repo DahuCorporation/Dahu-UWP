@@ -89,13 +89,21 @@ namespace DahuUWP.Services
             return result;
         }
 
-        /// <summary>
-        /// Json object
-        /// </summary>
-        /// <param name="jsonObj"></param>
-        /// <param name="requestUri"></param>
-        /// <returns></returns>
-        public async Task<HttpResponseMessage> Put(string jsonObj, string requestUri)
+        public async Task<HttpResponseMessage> Put(string content, string requestUri, bool authorization)
+        {
+            var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+            var byteContent = new ByteArrayContent(buffer);
+            if (authorization)
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AppStaticInfo.Account.Token);
+            return await Put(content, requestUri);
+        }
+            /// <summary>
+            /// Json object
+            /// </summary>
+            /// <param name="jsonObj"></param>
+            /// <param name="requestUri"></param>
+            /// <returns></returns>
+            public async Task<HttpResponseMessage> Put(string jsonObj, string requestUri)
         {
             //var content = "{\"data\":" + jsonObj + "}";
             var buffer = System.Text.Encoding.UTF8.GetBytes(jsonObj);

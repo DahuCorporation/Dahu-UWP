@@ -1,4 +1,5 @@
 ﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.Inputs;
 using DahuUWP.Utils.Converter;
 using System;
 using System.Collections.Generic;
@@ -217,7 +218,6 @@ namespace DahuUWP.Views.Components.DahuSpecialSplitMenu
         {
             Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 2);
         }
-
 
     }
 }

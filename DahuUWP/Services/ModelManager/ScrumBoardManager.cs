@@ -807,26 +807,28 @@ namespace DahuUWP.Services.ModelManager
             }
         }
 
-        public async Task<ScrumBoardTask> EditTask(object obj, string taskId)
+        public async Task<ScrumBoardTask> EditTask(string newName, string scrumBoardUuid, string taskId)
         {
             try
             {
                 APIService apiService = new APIService();
-                if (String.IsNullOrWhiteSpace(taskId))
-                    return null;
-                string requestUri = "task/" + taskId;
+                string requestUri = "taskboards/" + scrumBoardUuid + "/tasks/" + taskId;
 
-                JObject jObject = Serialize(obj);
-                jObject.Add("account_uuid", AppStaticInfo.Account.Uuid);
-                string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Put(jsonObject, requestUri);
+                //JObject jObject = new JObject
+                //{
+                //    { "name", ((ScrumBoard)scrumBoard).Name }
+                //};
+                JObject jObject = new JObject
+                {
+                    { "name", newName }
+                };
+                HttpResponseMessage result = await apiService.Put(JsonConvert.SerializeObject(jObject), requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
                         AppGeneral.UserInterfaceStatusDico["Informations modified."].Display();
-                        return ((JObject)resp["data"]).ToObject<ScrumBoardTask>();
+                        return new ScrumBoardTask();
                     case 400:
                         AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
                         return null;

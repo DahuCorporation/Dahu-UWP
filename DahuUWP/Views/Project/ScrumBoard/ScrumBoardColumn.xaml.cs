@@ -40,6 +40,13 @@ namespace DahuUWP.Views.Project.ScrumBoard
                 Name = "Delete task",
                 FuncListener = DeleteTask
             };
+
+            RenameTaskButtonBindings = new DahuButtonBindings()
+            {
+                IsBusy = false,
+                Name = "Rename task",
+                FuncListener = RenameTask
+            };
         }
 
         public void DeleteTask(object taskId)
@@ -50,6 +57,20 @@ namespace DahuUWP.Views.Project.ScrumBoard
             {
                 Column.Tasks.Remove(task);
             }
+        }
+
+        public void RenameTask(object obj)
+        {
+            string[] words = obj.ToString().Split(';');
+            if (words.Count() == 2)
+            {
+                Models.ScrumBoardTask task = Column.Tasks.First(x => x.Uuid == words[0]);
+                if (task != null)
+                {
+                    task.Name = words[1];
+                }
+            }
+
         }
 
         public DahuButtonBindings DeleteTaskButtonBindings
@@ -65,6 +86,20 @@ namespace DahuUWP.Views.Project.ScrumBoard
         }
 
         public static readonly DependencyProperty DeleteTaskButtonBindingsProperty = DependencyProperty.Register("DeleteTaskButtonBindings", typeof(DahuButtonBindings), typeof(ScrumBoardColumn), null);
+
+        public DahuButtonBindings RenameTaskButtonBindings
+        {
+            get
+            {
+                return (DahuButtonBindings)GetValue(RenameTaskButtonBindingsProperty);
+            }
+            set
+            {
+                SetValue(RenameTaskButtonBindingsProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty RenameTaskButtonBindingsProperty = DependencyProperty.Register("RenameTaskButtonBindings", typeof(DahuButtonBindings), typeof(ScrumBoardColumn), null);
 
 
         public Models.ScrumBoardColumn Column
@@ -91,6 +126,7 @@ namespace DahuUWP.Views.Project.ScrumBoard
             foreach (Models.ScrumBoardTask elem in scrumBoardColumn.Column.Tasks)
             {
                 elem.DeleteTaskButtonBindings = scrumBoardColumn.DeleteTaskButtonBindings;
+                elem.RenameTaskButtonBindings = scrumBoardColumn.RenameTaskButtonBindings;
                 elem.ScrumBoardUuid = scrumBoardColumn.Column.ScrumBoardUuid;
             }
             //string[] radius = ((string)e.NewValue).Split(',');

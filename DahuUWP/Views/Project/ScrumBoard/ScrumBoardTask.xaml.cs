@@ -58,21 +58,31 @@ namespace DahuUWP.Views.Project.ScrumBoard
         {
             var res = new ResourceLoader();
             InputStringDialog dialog = new InputStringDialog();
-            string name = await dialog.InputStringDialogAsync("Renommer la tâche: " + Task.Name, Task.Name, res.GetString("Rename"), res.GetString("Cancel"));
+            string rename = await dialog.InputStringDialogAsync("Renommer la tâche: " + Task.Name, Task.Name, res.GetString("Rename"), res.GetString("Cancel"));
 
+            if (!String.IsNullOrEmpty(rename))
+            {
+                ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
+                await scrumBoardManager.EditTask(rename, Task.ScrumBoardUuid, Task.Uuid);
+                string param = Task.Uuid + ";" + rename;
+                Task.RenameTaskButtonBindings.Parameter = param;
+                Task.RenameTaskButtonBindings.LinkIt();
+            }
         }
 
         private async void MenuFlyoutItemDelete_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var res = new ResourceLoader();
             InputStringDialog dialog = new InputStringDialog();
-            bool name = await dialog.AskDialogAsync(res.GetString("DeleteTask"), res.GetString("DeleteTaskInfo") + Task.Name, res.GetString("Delete"), res.GetString("Cancel"));
+            bool delete = await dialog.AskDialogAsync(res.GetString("DeleteTask"), res.GetString("DeleteTaskInfo") + Task.Name, res.GetString("Delete"), res.GetString("Cancel"));
             
-            ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
-            await scrumBoardManager.DeleteTask(Task.ScrumBoardUuid, Task.Uuid);
-            Task.DeleteTaskButtonBindings.Parameter = Task.Uuid;
-            Task.DeleteTaskButtonBindings.LinkIt();
+            if (delete)
+            {
+                ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
+                await scrumBoardManager.DeleteTask(Task.ScrumBoardUuid, Task.Uuid);
+                Task.DeleteTaskButtonBindings.Parameter = Task.Uuid;
+                Task.DeleteTaskButtonBindings.LinkIt();
+            }
         }
     }
-
 }

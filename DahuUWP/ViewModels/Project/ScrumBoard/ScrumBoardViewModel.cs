@@ -31,7 +31,7 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
             ScrumBoardNodeTappedCommand = new RelayCommand<object>(ScrumBoardNodeTapped);
         }
-
+        
         private async void OnPageLoaded()
         {
             InitLists();
@@ -50,7 +50,10 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
                 Name = "Ajouter un scrum board",
                 FuncListener = AddScrumBoard
             };
-
+            DahuSpecSplitMenuButtonBindings = new DahuButtonBindings()
+            {
+                Name = "OK"
+            };
 
             //List<ScrumBoardTask> items1 = new List<ScrumBoardTask>
             //{
@@ -123,17 +126,17 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
             selectedNodeMenu.LinkIt();
         }
 
-        private async void ShowScrumBoardColumns(Models.ScrumBoard scrumBoard)
+        private async void ShowScrumBoardColumns(string scrumBoardUuid)
         {
             ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
 
-            List<ScrumBoardColumn> scrumBoardColumns = await scrumBoardManager.ChargeAllColumnsOfScrumBoard(scrumBoard.Uuid);
+            List<ScrumBoardColumn> scrumBoardColumns = await scrumBoardManager.ChargeAllColumnsOfScrumBoard(scrumBoardUuid);
             ScrumBoardColumns = new ObservableCollection<ScrumBoardColumn>(scrumBoardColumns);
             if (scrumBoardColumns.Count != 0)
             {
                 foreach (ScrumBoardColumn elem in ScrumBoardColumns)
                 {
-                    elem.ScrumBoardUuid = scrumBoard.Uuid;
+                    elem.ScrumBoardUuid = scrumBoardUuid;
                 }
             }
             //foreach (ScrumBoardColumn elem in ScrumBoardColumns)
@@ -159,14 +162,14 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
                     NodeTheme = Theme.Clear,
                     Active = false,
                     FuncListener = ChangeScrumBoard,
-                    Parameter = null
+                    Parameter = elem.Uuid
                 };
                 ScrumBoardList.Add(node);
             }
             if (ScrumBoardList.Count > 0)
             {
                 ScrumBoardList[0].Active = true;
-                ShowScrumBoardColumns(ScrumBoards[0]);
+                ShowScrumBoardColumns(ScrumBoards[0].Uuid);
             }
 
             //NodeMenu node3 = new NodeMenu()
@@ -191,8 +194,7 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
 
         private void ChangeScrumBoard(object parameter)
         {
-            string tit = " ezf";
-
+            ShowScrumBoardColumns(parameter.ToString());
         }
 
         public async void AddScrumBoard(object param)
@@ -216,7 +218,7 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
                         NodeTheme = Theme.Clear,
                         Active = false,
                         FuncListener = ChangeScrumBoard,
-                        Parameter = null
+                        Parameter = scrumBoard.Uuid
                     };
                     ScrumBoardList.Add(node);
                 }
@@ -262,6 +264,16 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
                 AppGeneral.UserInterfaceStatusDico["Scrum board name incorrect."].Display();
             }
 
+        }
+
+        private DahuButtonBindings _dahuSpecSplitMenuButtonBindings;
+        public DahuButtonBindings DahuSpecSplitMenuButtonBindings
+        {
+            get { return _dahuSpecSplitMenuButtonBindings; }
+            set
+            {
+                NotifyPropertyChanged(ref _dahuSpecSplitMenuButtonBindings, value);
+            }
         }
 
         private DahuButtonBindings _addColumnButtonBindings;

@@ -11,8 +11,22 @@ namespace DahuUWP.Models
 {
     public class ScrumBoardTask : INotifyPropertyChanged
     {
+        private string _name;
+
         [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+
+            set
+            {
+                _name = value;
+                this.NotifyPropertyChanged("Name");
+            }
+        }
 
         [JsonProperty(PropertyName = "id")]
         public string Uuid { get; set; }
@@ -28,6 +42,8 @@ namespace DahuUWP.Models
 
         [JsonProperty(PropertyName = "label_uuid")]
         public string LabelUuid { get; set; }
+
+        public DahuButtonBindings RenameTaskButtonBindings;
 
         public DahuButtonBindings DeleteTaskButtonBindings;
 
