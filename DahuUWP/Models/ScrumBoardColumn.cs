@@ -22,7 +22,7 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "order")]
         public int Order { get; set; }
 
-        [JsonProperty(PropertyName = "board_uuid")]
+        [JsonProperty(PropertyName = "board_id")]
         public string ScrumBoardUuid { get; set; }
 
         //public int Id { get; set; }

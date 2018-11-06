@@ -1,4 +1,5 @@
-﻿using DahuUWP.ViewModels;
+﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.ViewModels;
 using DahuUWP.Views;
 using System;
 using System.Collections.Generic;
@@ -127,6 +128,42 @@ namespace DahuUWP.DahuTech.Menu
                 _active = value;
 
                 this.NotifyPropertyChanged("Active");
+            }
+        }
+
+        private DahuButtonBindings _renameScrumBoardButtonBindings;
+        public DahuButtonBindings RenameScrumBoardButtonBindings
+        {
+            get { return _renameScrumBoardButtonBindings; }
+            set
+            {
+                _renameScrumBoardButtonBindings = value;
+
+                this.NotifyPropertyChanged("RenameScrumBoardButtonBindings");
+            }
+        }
+
+        private DahuButtonBindings _deleteScrumBoardButtonBindings;
+        public DahuButtonBindings DeleteScrumBoardButtonBindings
+        {
+            get { return _deleteScrumBoardButtonBindings; }
+            set
+            {
+                _deleteScrumBoardButtonBindings = value;
+
+                this.NotifyPropertyChanged("DeleteScrumBoardButtonBindings");
+            }
+        }
+
+        private DahuButtonBindings _addColumnButtonBindings;
+        public DahuButtonBindings AddColumnButtonBindings
+        {
+            get { return _addColumnButtonBindings; }
+            set
+            {
+                _addColumnButtonBindings = value;
+
+                this.NotifyPropertyChanged("AddColumnButtonBindings");
             }
         }
 

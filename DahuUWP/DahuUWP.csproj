@@ -115,6 +115,7 @@
     <Compile Include="DahuTech\Project\Forum\TopicMessageContainer.cs" />
     <Compile Include="DahuTech\Project\MediumProjectContainer.cs" />
     <Compile Include="DahuTech\Selector\FlatSelectorElem.cs" />
+    <Compile Include="Models\Chat.cs" />
     <Compile Include="Models\ScrumBoard.cs" />
     <Compile Include="Models\ScrumBoardColumn.cs" />
     <Compile Include="Models\ScrumBoardLabel.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Models\Test.cs" />
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Models\TopicMessage.cs" />
+    <Compile Include="Services\ModelManager\ChatManager.cs" />
     <Compile Include="Services\ModelManager\ForumManager.cs" />
     <Compile Include="Services\ModelManager\IModelManager.cs" />
     <Compile Include="Services\ModelManager\ProjectManager.cs" />

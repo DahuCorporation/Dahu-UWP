@@ -1,11 +1,13 @@
 ﻿using DahuUWP.DahuTech;
 using DahuUWP.DahuTech.Inputs;
+using DahuUWP.DahuTech.Menu;
 using DahuUWP.Utils.Converter;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -131,6 +133,22 @@ namespace DahuUWP.Views.Components.DahuSpecialSplitMenu
         }
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(string), typeof(MenuButton), null);
 
+        
+
+        public NodeMenu NodeMenuT
+        {
+            get
+            {
+                return (NodeMenu)GetValue(NodeMenuTProperty);
+            }
+            set
+            {
+                SetValue(NodeMenuTProperty, value);
+            }
+        }
+        public static readonly DependencyProperty NodeMenuTProperty = DependencyProperty.Register("NodeMenuT", typeof(NodeMenu), typeof(MenuButton), null);
+
+
         public Theme ButtonTheme
         {
             get
@@ -209,6 +227,29 @@ namespace DahuUWP.Views.Components.DahuSpecialSplitMenu
             menuButton.SetButtonTheme();
         }
 
+        public bool Editable
+        {
+            get
+            {
+                return (bool)GetValue(EditableProperty);
+            }
+            set
+            {
+                SetValue(EditableProperty, value);
+            }
+        }
+        public static readonly DependencyProperty EditableProperty = DependencyProperty.Register("Editable", typeof(bool), typeof(MenuButton), new PropertyMetadata(null, new PropertyChangedCallback(OnEditableChanged)));
+        private static void OnEditableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            MenuButton menuButton = d as MenuButton;
+            bool value = (bool)e.NewValue;
+            if (value == true)
+            {
+                menuButton.FontIconAddTask.Visibility = Visibility.Visible;
+                menuButton.FontIconMoreTask.Visibility = Visibility.Visible;
+            }
+        }
+
         private void ButtonGrid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 1);
@@ -219,5 +260,38 @@ namespace DahuUWP.Views.Components.DahuSpecialSplitMenu
             Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 2);
         }
 
+        private void TaskButton_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+
+        }
+
+        private void TaskButton_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+
+        }
+
+        private async void FontIconAddTask_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+            NodeMenuT.AddColumnButtonBindings.Parameter = Value;
+            NodeMenuT.AddColumnButtonBindings.LinkIt();
+        }
+
+        private async void MenuFlyoutItemRename_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+
+            NodeMenuT.RenameScrumBoardButtonBindings.Parameter = Value;
+            NodeMenuT.RenameScrumBoardButtonBindings.LinkIt();
+            
+        }
+
+        private async void MenuFlyoutItemDelete_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+            NodeMenuT.DeleteScrumBoardButtonBindings.Parameter = Value;
+            NodeMenuT.DeleteScrumBoardButtonBindings.LinkIt();
+            
+        }
     }
 }

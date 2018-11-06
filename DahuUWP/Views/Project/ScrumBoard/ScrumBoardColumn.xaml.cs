@@ -51,26 +51,30 @@ namespace DahuUWP.Views.Project.ScrumBoard
 
         public void DeleteTask(object taskId)
         {
-
-            Models.ScrumBoardTask task = Column.Tasks.First(x => x.Uuid == taskId.ToString());
-            if (task != null)
+            if (Column.Tasks.Count > 0)
             {
-                Column.Tasks.Remove(task);
+                Models.ScrumBoardTask task = Column.Tasks.FirstOrDefault(x => x.Uuid == taskId.ToString());
+                if (task != null)
+                {
+                    Column.Tasks.Remove(task);
+                }
             }
         }
 
         public void RenameTask(object obj)
         {
-            string[] words = obj.ToString().Split(';');
-            if (words.Count() == 2)
+            if (Column.Tasks.Count > 0)
             {
-                Models.ScrumBoardTask task = Column.Tasks.First(x => x.Uuid == words[0]);
-                if (task != null)
+                string[] words = obj.ToString().Split(';');
+                if (words.Count() == 2)
                 {
-                    task.Name = words[1];
+                    Models.ScrumBoardTask task = Column.Tasks.FirstOrDefault(x => x.Uuid == words[0]);
+                    if (task != null)
+                    {
+                        task.Name = words[1];
+                    }
                 }
             }
-
         }
 
         public DahuButtonBindings DeleteTaskButtonBindings
@@ -119,8 +123,15 @@ namespace DahuUWP.Views.Project.ScrumBoard
             ScrumBoardColumn scrumBoardColumn = d as ScrumBoardColumn;
 
             ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
-            List<Models.ScrumBoardTask> scrumBoardColumns = await scrumBoardManager.ChargeAllTaskOfScrumBoard(scrumBoardColumn.Column.ScrumBoardUuid);
-
+            List<Models.ScrumBoardTask> allScrumBoardColumns = await scrumBoardManager.ChargeAllTaskOfScrumBoard(scrumBoardColumn.Column.ScrumBoardUuid);
+            List<Models.ScrumBoardTask> scrumBoardColumns = new List<Models.ScrumBoardTask>();
+            foreach (Models.ScrumBoardTask elem in allScrumBoardColumns)
+            {
+                if (elem.Column != null && elem.Column.Uuid == scrumBoardColumn.Column.Uuid)
+                {
+                    scrumBoardColumns.Add(elem);
+                }
+            }
             scrumBoardColumn.Column.Tasks = new ObservableCollection<Models.ScrumBoardTask>(scrumBoardColumns);
             
             foreach (Models.ScrumBoardTask elem in scrumBoardColumn.Column.Tasks)
@@ -180,6 +191,8 @@ namespace DahuUWP.Views.Project.ScrumBoard
                 if (originColumn == null)
                     return;
 
+                
+
                 var itemIdsToMove = id.Split(',');
                 var destinationListView = sender as ListView;
                 var listViewItemsSource = destinationListView?.ItemsSource as ObservableCollection<Models.ScrumBoardTask>;
@@ -191,7 +204,11 @@ namespace DahuUWP.Views.Project.ScrumBoard
                         var itemToMove = originColumn.Tasks.First(i => i.Uuid == itemId);
 
                         listViewItemsSource.Add(itemToMove);
+                        var cl = Column.Tasks;
                         originColumn.Tasks.Remove(itemToMove);
+                        ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
+                        await scrumBoardManager.EditTask((itemToMove as Models.ScrumBoardTask).Name, Column.Uuid, Column.ScrumBoardUuid, (itemToMove as Models.ScrumBoardTask).Uuid);
+                        cl = Column.Tasks;
                     }
                 }
             }
@@ -247,15 +264,26 @@ namespace DahuUWP.Views.Project.ScrumBoard
         {
             var res = new ResourceLoader();
             InputStringDialog dialog = new InputStringDialog();
-            string name = await dialog.InputStringDialogAsync("Renommer la colonne: " + Column.Name, Column.Name, res.GetString("Rename"), res.GetString("Cancel"));
-
+            string rename = await dialog.InputStringDialogAsync("Renommer la colonne: " + Column.Name, Column.Name, res.GetString("Rename"), res.GetString("Cancel"));
+            if (!String.IsNullOrEmpty(rename))
+            {
+                ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
+                await scrumBoardManager.EditColumn(rename, Column.ScrumBoardUuid, Column.Uuid);
+                Column.Name = rename;
+            }
         }
 
         private async void MenuFlyoutItemDelete_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var res = new ResourceLoader();
             InputStringDialog dialog = new InputStringDialog();
-            bool name = await dialog.AskDialogAsync(res.GetString("DeleteTaskColumn"), res.GetString("DeleteTaskColumnInfo") + Column.Name, res.GetString("Delete"), res.GetString("Cancel"));
+            bool delete = await dialog.AskDialogAsync(res.GetString("DeleteTaskColumn"), res.GetString("DeleteTaskColumnInfo") + Column.Name, res.GetString("Delete"), res.GetString("Cancel"));
+            if (delete)
+            {
+                ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
+                await scrumBoardManager.DeleteColumn(Column.ScrumBoardUuid, Column.Uuid);
+            }
         }
+        
     }
 }

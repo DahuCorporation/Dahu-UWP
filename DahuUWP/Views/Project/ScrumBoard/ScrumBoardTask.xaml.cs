@@ -65,8 +65,11 @@ namespace DahuUWP.Views.Project.ScrumBoard
                 ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
                 await scrumBoardManager.EditTask(rename, Task.ScrumBoardUuid, Task.Uuid);
                 string param = Task.Uuid + ";" + rename;
-                Task.RenameTaskButtonBindings.Parameter = param;
-                Task.RenameTaskButtonBindings.LinkIt();
+                if (Task.RenameTaskButtonBindings != null)
+                {
+                    Task.RenameTaskButtonBindings.Parameter = param;
+                    Task.RenameTaskButtonBindings.LinkIt();
+                }
             }
         }
 
@@ -80,8 +83,11 @@ namespace DahuUWP.Views.Project.ScrumBoard
             {
                 ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
                 await scrumBoardManager.DeleteTask(Task.ScrumBoardUuid, Task.Uuid);
-                Task.DeleteTaskButtonBindings.Parameter = Task.Uuid;
-                Task.DeleteTaskButtonBindings.LinkIt();
+                if (Task.DeleteTaskButtonBindings != null)
+                {
+                    Task.DeleteTaskButtonBindings.Parameter = Task.Uuid;
+                    Task.DeleteTaskButtonBindings.LinkIt();
+                }
             }
         }
     }

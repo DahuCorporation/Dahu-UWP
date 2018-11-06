@@ -7,6 +7,7 @@ using DahuUWP.ViewModels.Profil;
 using DahuUWP.ViewModels.Profil.Private;
 using DahuUWP.ViewModels.Profil.Public;
 using DahuUWP.ViewModels.Project;
+using DahuUWP.ViewModels.Project.Chat;
 using DahuUWP.ViewModels.Project.Contribute;
 using DahuUWP.ViewModels.Project.Forum;
 using DahuUWP.ViewModels.Project.Managing;
@@ -65,6 +66,7 @@ namespace DahuUWP
             SimpleIoc.Default.Register<ContributeAdressCounterpartyViewModel>();
             SimpleIoc.Default.Register<ContributeSuccessPaymentViewModel>();
             SimpleIoc.Default.Register<ContributeWithMoneyViewModel>();
+            SimpleIoc.Default.Register<ChatViewModel>();
 
 
             //Search
@@ -166,6 +168,11 @@ namespace DahuUWP
         public ContributeWithMoneyViewModel ContributeWithMoneyVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<ContributeWithMoneyViewModel>(); return (ContributeWithMoneyViewModel)CurrentViewModel; }
+        }
+
+        public ChatViewModel ChatVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<ChatViewModel>(); return (ChatViewModel)CurrentViewModel; }
         }
 
         //Search

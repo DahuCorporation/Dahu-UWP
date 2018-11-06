@@ -383,7 +383,7 @@ namespace DahuUWP.Services.ModelManager
         /// <param name="scrumBoard"></param>
         /// <param name="projectId"></param>
         /// <returns></returns>
-        public async Task<ScrumBoardColumn> CreateAColumn(object column, string scrumBoardId)
+        public async Task<ScrumBoardColumn> CreateAColumn(string columnName, string scrumBoardId)
         {
             try
             {
@@ -393,16 +393,15 @@ namespace DahuUWP.Services.ModelManager
                 string requestUri = "taskboards/" + scrumBoardId + "/columns";
                 JObject jObject = new JObject
                 {
-                    { "name", ((ScrumBoardColumn)column).Name }
+                    { "name", columnName }
                 };
-                string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri, true);
+                HttpResponseMessage result = await apiService.Post(jObject, requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        AppGeneral.UserInterfaceStatusDico["Column created successfully."].Display(((ScrumBoardColumn)column).Name);
+                        AppGeneral.UserInterfaceStatusDico["Column created successfully."].Display(columnName);
                         return resp.ToObject<ScrumBoardColumn>();
                     case 400:
                         // todo : Attention la description a une taille minimum
@@ -528,14 +527,9 @@ namespace DahuUWP.Services.ModelManager
             try
             {
                 APIService apiService = new APIService();
-                if (String.IsNullOrWhiteSpace(scrumBoardId))
-                    return false;
-                string requestUri = "task/board/" + scrumBoardId;
+                string requestUri = "taskboards/" + scrumBoardId;
 
-                JObject jObject = new JObject();
-                jObject.Add("account_uuid", AppStaticInfo.Account.Uuid);
-                string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Delete(jsonObject, requestUri);
+                HttpResponseMessage result = await apiService.DeleteBis(requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
@@ -558,25 +552,19 @@ namespace DahuUWP.Services.ModelManager
             }
         }
 
-        public async Task<bool> DeleteColumn(string columnId)
+        public async Task<bool> DeleteColumn(string scrumBoardId, string scrumBoardTaskId)
         {
             try
             {
                 APIService apiService = new APIService();
-                if (String.IsNullOrWhiteSpace(columnId))
-                    return false;
-                string requestUri = "task/column/" + columnId;
+                string requestUri = "taskboards/" + scrumBoardId + "/columns/" + scrumBoardTaskId;
 
-                JObject jObject = new JObject();
-                jObject.Add("account_uuid", AppStaticInfo.Account.Uuid);
-                string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Delete(jsonObject, requestUri);
+                HttpResponseMessage result = await apiService.DeleteBis(requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        AppGeneral.UserInterfaceStatusDico["Scrum board column deleted."].Display();
+                        AppGeneral.UserInterfaceStatusDico["Scrum board task deleted."].Display();
                         return true;
                     case 400:
                         AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
@@ -670,52 +658,7 @@ namespace DahuUWP.Services.ModelManager
             return scrumBoard;
         }
 
-        /// <summary>
-        /// Edit a scrum board
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="scrumBoardId"></param>
-        /// <returns></returns>
-        public async Task<ScrumBoard> EditScrumBoard(object obj, string scrumBoardId)
-        {
-            try
-            {
-                APIService apiService = new APIService();
-                if (String.IsNullOrWhiteSpace(scrumBoardId))
-                    return null;
-                string requestUri = "task/board/" + scrumBoardId;
-
-                JObject jObject = Serialize(obj);
-                jObject.Add("account_uuid", AppStaticInfo.Account.Uuid);
-                string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Put(jsonObject, requestUri);
-                string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
-                switch ((int)result.StatusCode)
-                {
-                    case 200:
-                        AppGeneral.UserInterfaceStatusDico["Informations modified."].Display();
-                        ScrumBoard scrumBoardReturn = new ScrumBoard
-                        {
-                            Uuid = ((JObject)resp["data"])[OnCreationScrumBoardUuidKey].ToString(),
-                            Name = ((JObject)resp["data"])[OnCreationScrumBoardNameKey].ToString()
-                        };
-                        return scrumBoardReturn;
-                    case 400:
-                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
-                        return null;
-                    default:
-                        return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.Fail(ex.ToString());
-                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
-                return null;
-            }
-        }
-
+      
         /// <summary>
         /// Edit a column
         /// </summary>
@@ -807,6 +750,80 @@ namespace DahuUWP.Services.ModelManager
             }
         }
 
+        public async Task<ScrumBoardTask> EditColumn(string newName, string scrumBoardUuid, string columnUuid)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "taskboards/" + scrumBoardUuid + "/columns/" + columnUuid;
+
+                //JObject jObject = new JObject
+                //{
+                //    { "name", ((ScrumBoard)scrumBoard).Name }
+                //};
+                JObject jObject = new JObject
+                {
+                    { "name", newName }
+                };
+                HttpResponseMessage result = await apiService.Put(JsonConvert.SerializeObject(jObject), requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["Informations modified."].Display();
+                        return new ScrumBoardTask();
+                    case 400:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return null;
+                    default:
+                        return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
+        }
+
+        public async Task<ScrumBoard> EditBoard(string newName, string scrumBoardUuid)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "taskboards/" + scrumBoardUuid;
+
+                //JObject jObject = new JObject
+                //{
+                //    { "name", ((ScrumBoard)scrumBoard).Name }
+                //};
+                JObject jObject = new JObject
+                {
+                    { "name", newName }
+                };
+                HttpResponseMessage result = await apiService.Put(JsonConvert.SerializeObject(jObject), requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["Informations modified."].Display();
+                        return new ScrumBoard();
+                    case 400:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return null;
+                    default:
+                        return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
+        }
+
         public async Task<ScrumBoardTask> EditTask(string newName, string scrumBoardUuid, string taskId)
         {
             try
@@ -821,6 +838,44 @@ namespace DahuUWP.Services.ModelManager
                 JObject jObject = new JObject
                 {
                     { "name", newName }
+                };
+                HttpResponseMessage result = await apiService.Put(JsonConvert.SerializeObject(jObject), requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["Informations modified."].Display();
+                        return new ScrumBoardTask();
+                    case 400:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return null;
+                    default:
+                        return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
+        }
+
+        public async Task<ScrumBoardTask> EditTask(string newName, string columnUuid, string scrumBoardUuid, string taskId)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "taskboards/" + scrumBoardUuid + "/tasks/" + taskId;
+
+                //JObject jObject = new JObject
+                //{
+                //    { "name", ((ScrumBoard)scrumBoard).Name }
+                //};
+                JObject jObject = new JObject
+                {
+                    { "name", newName },
+                    { "column_id", columnUuid }
                 };
                 HttpResponseMessage result = await apiService.Put(JsonConvert.SerializeObject(jObject), requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;

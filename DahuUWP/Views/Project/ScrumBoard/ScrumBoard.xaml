@@ -22,8 +22,11 @@
     </Interactivity:Interaction.Behaviors>
 
     <Grid Style="{StaticResource BodyGrid}">
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="295px" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0">
                 <inputs:DahuAllInBtn x:Uid="DahuAllInBtn_AddScrumBoard"
                                  Value="Ajouter un scrum board"
                                  ButtonBindings="{Binding AddScrumBoardButtonBindings, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -43,30 +46,32 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel>
-                                <Grid>
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="Tapped">
-                                            <Core:InvokeCommandAction Command="{Binding ElementName=ScrumBoardList, Path=DataContext.ScrumBoardNodeTappedCommand}" CommandParameter="{Binding}"/>
-                                        </Core:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-                                    <DahuSpecSplitMenu:MenuButton x:Name="MenuNode"
+                        <StackPanel>
+                            <Grid>
+                                <Interactivity:Interaction.Behaviors>
+                                    <Core:EventTriggerBehavior EventName="Tapped">
+                                        <Core:InvokeCommandAction Command="{Binding ElementName=ScrumBoardList, Path=DataContext.ScrumBoardNodeTappedCommand}" CommandParameter="{Binding}"/>
+                                    </Core:EventTriggerBehavior>
+                                </Interactivity:Interaction.Behaviors>
+                                <DahuSpecSplitMenu:MenuButton x:Name="MenuNode"
                                                                   ButtonRadius="2"
                                                               Tag="{Binding}"
+                                                              Editable="True"
                                                               ButtonTheme="{Binding NodeTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                               Active="{Binding Active}"
                                                               ValueHorizontalAlignement="Left"
                                                               Value="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                              Margin="0,0,0,10"/>
-                                    
-                                </Grid>
-                            </StackPanel>
+                                                              Margin="0,0,0,10"
+                                                                  NodeMenuT="{Binding}"/>
 
-                        </DataTemplate>
+                            </Grid>
+                        </StackPanel>
+                    </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
-            <ItemsControl Name="ScrumBoardControl" ItemsSource="{Binding ScrumBoardColumns}" Margin="20,0,0,0">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="1" Margin="20,0,0,0" >
+            <ItemsControl Name="ScrumBoardControl" ItemsSource="{Binding ScrumBoardColumns}" Margin="0,0,0,0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>
@@ -80,12 +85,7 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <inputs:DahuAllInBtn x:Uid="DahuAllInBtnAddColumn"
-                                 Value="Add a column"
-                                 ButtonBindings="{Binding AddColumnButtonBindings, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                 ValueFontSize="17"
-                                 ValueFontWeight="Semibold"/>
-        </StackPanel>
+        </ScrollViewer>
         <!--<StackPanel Orientation="Horizontal">
             -->
         <!--<ListView  AllowDrop="True" CanReorderItems="True" CanDrag="True" CanDragItems="True" SelectionMode="None" Width="296">-->

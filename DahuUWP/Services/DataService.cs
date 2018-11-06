@@ -20,10 +20,12 @@ namespace DahuUWP.Services
         private UserManager UserManager = new UserManager();
         private ProjectManager ProjectManager = new ProjectManager();
         private SkillManager SkillManager = new SkillManager();
+        private ChatManager ChatManager = new ChatManager();
 
         public object GetUserManager() { return UserManager; }
         public object GetProjectManager() { return ProjectManager; }
         public object GetSkillManager() { return SkillManager; }
+        public object GetChatManager() { return ChatManager; }
 
     }
 

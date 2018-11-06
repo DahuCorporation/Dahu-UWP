@@ -43,6 +43,9 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "label_uuid")]
         public string LabelUuid { get; set; }
 
+        [JsonProperty(PropertyName = "column")]
+        public ScrumBoardColumn Column { get; set; }
+
         public DahuButtonBindings RenameTaskButtonBindings;
 
         public DahuButtonBindings DeleteTaskButtonBindings;
