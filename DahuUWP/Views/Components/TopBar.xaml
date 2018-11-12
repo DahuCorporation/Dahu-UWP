@@ -31,7 +31,7 @@
             <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" >
                 <Grid CornerRadius="90,90,90,90" Width="38" Height="38" Visibility="{Binding ModulConnected, FallbackValue=Collapsed}" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" Tapped="Grid_Tapped">
                     <Grid.Background>
-                        <ImageBrush ImageSource="ms-appx:///Assets/Tmp/profil-pic.jpg" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="{Binding Media.ImagePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
                     </Grid.Background>
                 </Grid>
                 <StackPanel Orientation="Horizontal" Visibility="{Binding ModulNonConnected}">

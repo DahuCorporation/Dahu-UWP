@@ -23,6 +23,10 @@ namespace DahuUWP.Models
         [JsonIgnore]
         public Gender Gender { get; set; }
 
+
+        [JsonProperty(PropertyName = "uuid")]
+        public string Uuid { get; set; }
+
         [JsonProperty(PropertyName = "first_name")]
         public string FirstName { get; set; }
 
@@ -55,5 +59,7 @@ namespace DahuUWP.Models
 
         [JsonProperty(PropertyName = "skills")]
         public List<Skill> Skills { get; set; }
+
+        public Media Media { get; set; }
     }
 }

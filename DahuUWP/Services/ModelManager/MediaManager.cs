@@ -12,51 +12,49 @@ using System.Threading.Tasks;
 
 namespace DahuUWP.Services.ModelManager
 {
-    class ChatManager : IModelManager
+    class MediaManager : IModelManager
     {
         public Task<List<object>> Charge(Dictionary<string, object> routeParams)
         {
             throw new NotImplementedException();
         }
-        public Task<bool> Create(object obj)
-        {
-            throw new NotImplementedException();
-        }
 
-        public async Task<bool> CreateMessage(string message, string projectId)
+        public async Task<bool> Create(byte[] picture, string nameForBinding)
         {
             try
             {
                 APIService apiService = new APIService();
-                if (String.IsNullOrWhiteSpace(projectId))
-                    return false;
+                string requestUri = "medias/";
 
-                string requestUri = "projects/" + projectId + "/messages";
                 JObject jObject = new JObject
                 {
-                    { "message", message }
+                    { "image", picture },
+                    { "name_for_user", nameForBinding }
                 };
+
+
+                //new ByteArrayContent(picture, 0, picture.Count()), file.DisplayName, file.Name);
+
+                //MultipartFormDataContent form = new MultipartFormDataContent();
+
+                //form.Add(new StringContent(json), "payload");
+                //form.Add(new ByteArrayContent(picture, 0, picture.Count()), "user_picture", "user_picture.jpg");
+                //string jsonObject = jObject.ToString(Formatting.None);
                 HttpResponseMessage result = await apiService.Post(jObject, requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
-                    case 202:
-                        //AppGeneral.UserInterfaceStatusDico["ScrumBoard created successfully."].Display(((ScrumBoard)scrumBoard).Name);
+                    case 200:
+                        //AppGeneral.UserInterfaceStatusDico["Project created successfully."].Display(((Project)project).Name, true);
                         return true;
-                    //ScrumBoard scrumBoardReturn = new ScrumBoard
-                    //{
-                    //    Name = ((JObject)resp)[OnCreationScrumBoardNameKey].ToString(),
-                    //    Uuid = ((JObject)resp)[OnCreationScrumBoardUuidKey].ToString()
-                    //};
-
-                    //return ((JObject)resp["data"]).ToObject<ScrumBoard>();
                     case 400:
                         // todo : Attention la description a une taille minimum
                         //TODO : différencier les erreurs, si c'est une erreur de projet deja existant ou si le uuid est incorect...
                         AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
                         return false;
                     default:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
                         return false;
                 }
             }
@@ -68,16 +66,22 @@ namespace DahuUWP.Services.ModelManager
             }
         }
 
-        public async Task<List<Chat>> ChargeMessages(string projectUuid, int offset, int limit)
+        public async Task<Media> GetSpecificMedia(string nameForBinding)
         {
-            List<Chat> chatList = new List<Chat>();
+            Media basicMedia = new Media()
+            {
+                NameBinding = "",
+                ImagePath = "https://cdn.pixabay.com/photo/2013/04/06/11/50/image-editing-101040_960_720.jpg",
+                Type = "jpg",
+                UserUuid = "",
+                Uuid = ""
+            };
             try
             {
-                
+                List<Media> mediatList = new List<Media>();
                 APIService apiService = new APIService();
-                string requestUri = "projects/" + projectUuid + "/messages?offset=" + offset + "&limit=" + limit;
-                //if (routeParams != null)
-                //    requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                string requestUri = "medias";
+                
                 HttpResponseMessage result = await apiService.Get(requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
@@ -87,19 +91,30 @@ namespace DahuUWP.Services.ModelManager
                         JToken jProj = resp.First;
                         for (int i = 0; jProj != null; i++)
                         {
-                            chatList.Add(jProj.ToObject<Chat>());
+                            mediatList.Add(jProj.ToObject<Media>());
                             jProj = jProj.Next;
                         }
-                        return chatList;
+                        foreach (Media elem in mediatList)
+                        {
+                            if (elem.NameBinding == nameForBinding)
+                                return elem;
+                        }
+                        return basicMedia;
+                        
                 }
-                return chatList;
+                return basicMedia;
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.Fail(ex.ToString());
                 AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
-                return chatList;
+                return basicMedia;
             }
+        }
+
+        public Task<bool> Create(object obj)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<bool> Delete(string objId)

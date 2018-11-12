@@ -26,5 +26,44 @@ namespace DahuUWP.Views.Project.Chat
         {
             this.InitializeComponent();
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            //ScrollerMessage.UpdateLayout();
+
+            ///*
+            //    ScrollViewer.ChangeView
+            //        Causes the ScrollViewer to load a new view into
+            //        the viewport using the specified offsets and zoom factor.
+            //*/
+
+            //// Programmatically scroll to bottom
+            //ScrollerMessage.ChangeView(
+            //    0.0f, // horizontalOffset
+            //    double.MaxValue, // verticalOffset
+            //    1.0f // zoomFactor
+            //    );
+
+        }
+
+
+
+        private void StackPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            ScrollerMessage.UpdateLayout();
+
+            /*
+                ScrollViewer.ChangeView
+                    Causes the ScrollViewer to load a new view into
+                    the viewport using the specified offsets and zoom factor.
+            */
+
+            // Programmatically scroll to bottom
+            ScrollerMessage.ChangeView(
+                0.0f, // horizontalOffset
+                double.MaxValue, // verticalOffset
+                1.0f // zoomFactor
+                );
+        }
     }
 }

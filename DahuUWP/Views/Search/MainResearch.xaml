@@ -76,7 +76,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <container:UserInfoBox UserFullName="{Binding FullName}" UserBiography="{Binding Biography}" Margin="0,10,0,0" />
+                            <container:UserInfoBox UserFullName="{Binding FullName}" UserBiography="{Binding Biography}" UserPicture="{Binding Media.ImagePath}" Margin="0,10,0,0" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

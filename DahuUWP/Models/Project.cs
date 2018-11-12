@@ -39,5 +39,7 @@ namespace DahuUWP.Models
 
         [JsonProperty(PropertyName = "members")]
         public List<User> Members { get; set; }
+
+        public Media Media { get; set; }
     }
 }

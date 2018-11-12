@@ -122,7 +122,7 @@ namespace DahuUWP.Models
                             return false;
                         AppGeneral.UserInterfaceStatusDico["Connection success."].Display(user.FirstName);
                         return true;
-                    case 400:
+                    case 401:
                         AppGeneral.UserInterfaceStatusDico[(string)resp["message"]].Display();
                         return false;
                     case 500:

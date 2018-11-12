@@ -25,6 +25,9 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "board_id")]
         public string ScrumBoardUuid { get; set; }
 
+
+
+
         //public int Id { get; set; }
 
         //public string Title { get; set; }
@@ -43,6 +46,7 @@ namespace DahuUWP.Models
                 this.NotifyPropertyChanged("Tasks");
             }
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

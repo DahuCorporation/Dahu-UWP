@@ -14,7 +14,7 @@
         <StackPanel>
             <Grid Height="180" BorderBrush="Black" >
                 <Grid.Background>
-                    <ImageBrush ImageSource="ms-appx:///Assets/Background/DahuSpecMenuBG.jpg" Stretch="UniformToFill"/>
+                    <ImageBrush ImageSource="{Binding Project.Media.ImagePath}" Stretch="UniformToFill"/>
                 </Grid.Background>
             </Grid>
             <Grid Padding="10">

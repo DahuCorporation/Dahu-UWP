@@ -71,7 +71,7 @@
                 </ItemsControl>
             </StackPanel>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="1" Margin="20,0,0,0" >
-            <ItemsControl Name="ScrumBoardControl" ItemsSource="{Binding ScrumBoardColumns}" Margin="0,0,0,0">
+            <ItemsControl Name="ScrumBoardControl" ItemsSource="{Binding ScrumBoardColumns, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>

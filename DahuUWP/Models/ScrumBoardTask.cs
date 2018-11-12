@@ -46,9 +46,35 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "column")]
         public ScrumBoardColumn Column { get; set; }
 
-        public DahuButtonBindings RenameTaskButtonBindings;
+        private DahuButtonBindings _renameTaskButtonBindings;
+        public DahuButtonBindings RenameTaskButtonBindings
+        {
+            get
+            {
+                return _renameTaskButtonBindings;
+            }
 
-        public DahuButtonBindings DeleteTaskButtonBindings;
+            set
+            {
+                _renameTaskButtonBindings = value;
+                this.NotifyPropertyChanged("RenameTaskButtonBindings");
+            }
+        }
+
+        private DahuButtonBindings _deleteTaskButtonBindings;
+        public DahuButtonBindings DeleteTaskButtonBindings
+        {
+            get
+            {
+                return _deleteTaskButtonBindings;
+            }
+
+            set
+            {
+                _deleteTaskButtonBindings = value;
+                this.NotifyPropertyChanged("DeleteTaskButtonBindings");
+            }
+        }
 
         //public string Title { get; set; }
 

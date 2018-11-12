@@ -1,4 +1,5 @@
-﻿using DahuUWP.ViewModels;
+﻿using DahuUWP.Models;
+using DahuUWP.ViewModels;
 using DahuUWP.Views.Profil.Private;
 using DahuUWP.Views.Profil.Public;
 using Microsoft.Toolkit.Uwp.UI.Controls;
@@ -31,6 +32,7 @@ namespace DahuUWP.Views.Component
             this.InitializeComponent();
             //(this.Content as FrameworkElement).DataContext = this;
         }
+
 
         //public bool Connected
         //{

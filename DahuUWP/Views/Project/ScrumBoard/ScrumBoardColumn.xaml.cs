@@ -1,4 +1,5 @@
-﻿using DahuUWP.DahuTech.Inputs;
+﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.Inputs;
 using DahuUWP.Services.ModelManager;
 using DahuUWP.Utils.Converter;
 using DahuUWP.ViewModels.Project.ScrumBoard;
@@ -34,6 +35,7 @@ namespace DahuUWP.Views.Project.ScrumBoard
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
+            
             DeleteTaskButtonBindings = new DahuButtonBindings()
             {
                 IsBusy = false,
@@ -238,15 +240,22 @@ namespace DahuUWP.Views.Project.ScrumBoard
             var res = new ResourceLoader();
             InputStringDialog dialog = new InputStringDialog();
             string taskTitle = await dialog.InputStringDialogAsync(res.GetString("CreateNewTask"), res.GetString("NewTask"), res.GetString("Add"), res.GetString("Cancel"));
-            if (!String.IsNullOrWhiteSpace(taskTitle))
+            if (!String.IsNullOrWhiteSpace(taskTitle) && Column != null)
             {
                 Models.ScrumBoardTask scrumBoardTask = new Models.ScrumBoardTask() {
                     Name = taskTitle,
                     ScrumBoardColumnUuid = Column.Uuid,
                     ScrumBoardUuid = Column.ScrumBoardUuid
+
                 };
                 ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
-                Column.Tasks.Add(await scrumBoardManager.CreateTask(scrumBoardTask));
+                scrumBoardTask = await scrumBoardManager.CreateTask(scrumBoardTask);
+                scrumBoardTask.RenameTaskButtonBindings = RenameTaskButtonBindings;
+                scrumBoardTask.DeleteTaskButtonBindings = DeleteTaskButtonBindings;
+                Column.Tasks.Add(scrumBoardTask);
+            } else
+            {
+                AppGeneral.UserInterfaceStatusDico["Binding not finished."].Display();
             }
         }
 

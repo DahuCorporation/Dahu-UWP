@@ -28,7 +28,7 @@ namespace DahuUWP.Views.Project.ScrumBoard
             (this.Content as FrameworkElement).DataContext = this;
         }
 
-        public static readonly DependencyProperty DeleteTaskButtonBindingsProperty = DependencyProperty.Register("DeleteTaskButtonBindings", typeof(DahuButtonBindings), typeof(ScrumBoardColumn), null);
+        public static readonly DependencyProperty DeleteTaskButtonBindingsProperty = DependencyProperty.Register("DeleteTaskButtonBindings", typeof(DahuButtonBindings), typeof(ScrumBoardTask), null);
 
 
         public Models.ScrumBoardTask Task
@@ -43,6 +43,9 @@ namespace DahuUWP.Views.Project.ScrumBoard
             }
         }
         public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(Models.ScrumBoardTask), typeof(ScrumBoardTask), null);
+
+
+
 
         private void TaskButton_PointerEntered(object sender, PointerRoutedEventArgs e)
         {

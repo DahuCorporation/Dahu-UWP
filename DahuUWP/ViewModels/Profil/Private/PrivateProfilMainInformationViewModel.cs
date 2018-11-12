@@ -6,9 +6,14 @@ using DahuUWP.Services;
 using DahuUWP.Utils;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -194,6 +199,18 @@ namespace DahuUWP.ViewModels.Profil.Private
             Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
             if (file != null)
             {
+                var stream = await file.OpenStreamForReadAsync();
+                var bytes = new byte[(int)stream.Length];
+                HttpClient httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AppStaticInfo.Account.Token);
+                MultipartFormDataContent form = new MultipartFormDataContent
+                {
+                    { new StringContent("Kiki"), "name_for_user" },
+                    { new ByteArrayContent(bytes, 0, bytes.Length), "image", "image.jpg" }
+                };
+                HttpResponseMessage response = await httpClient.PostAsync("http://lumen.dahu.t17.ovh/api/forward/medias", form);
+                string responseBody = response.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
             }
             else
             {

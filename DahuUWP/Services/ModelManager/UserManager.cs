@@ -1,5 +1,6 @@
 ﻿using DahuUWP.DahuTech;
 using DahuUWP.Services;
+using DahuUWP.Services.ModelManager;
 using DahuUWP.Utils;
 using DahuUWP.Utils.Enum;
 using Newtonsoft.Json;
@@ -30,13 +31,16 @@ namespace DahuUWP.Models.ModelManager
                 HttpResponseMessage result = await apiService.Get(requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
+                MediaManager mediaManager = new MediaManager();
                 switch ((int)result.StatusCode)
                 {
                     case 200:
                         JToken jUser = resp.First;
                         for (int i = 0; jUser != null; i++)
                         {
-                            userList.Add(jUser.ToObject<User>());
+                            User user = jUser.ToObject<User>();
+                            user.Media = await mediaManager.GetSpecificMedia(user.Uuid);
+                            userList.Add(user);
                             jUser = jUser.Next;
                         }
                         return userList;
@@ -64,13 +68,16 @@ namespace DahuUWP.Models.ModelManager
                 HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
+                MediaManager mediaManager = new MediaManager();
                 switch ((int)result.StatusCode)
                 {
                     case 200:
                         JToken jProj = resp.First;
                         for (int i = 0; jProj != null; i++)
                         {
-                            projectList.Add(jProj.ToObject<Project>());
+                            Project proj = jProj.ToObject<Project>();
+                            proj.Media = await mediaManager.GetSpecificMedia(proj.Uuid);
+                            projectList.Add(proj);
                             jProj = jProj.Next;
                         }
                         return projectList;
@@ -125,10 +132,14 @@ namespace DahuUWP.Models.ModelManager
                 HttpResponseMessage result = await apiService.Get(requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+
+                MediaManager mediaManager = new MediaManager();
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        return (User)DeSerialize((JObject)resp);
+                        User user = (User)DeSerialize((JObject)resp);
+                        user.Media = await mediaManager.GetSpecificMedia(user.Uuid);
+                        return user;
                         //return resp["data"].ToObject<User>();
                 }
                 return null;

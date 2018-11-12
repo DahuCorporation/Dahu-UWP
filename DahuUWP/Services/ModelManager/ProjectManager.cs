@@ -8,6 +8,7 @@ using DahuUWP.Services;
 using System.Net.Http;
 using Newtonsoft.Json;
 using DahuUWP.DahuTech;
+using DahuUWP.Services.ModelManager;
 
 namespace DahuUWP.Models.ModelManager
 {
@@ -26,13 +27,17 @@ namespace DahuUWP.Models.ModelManager
                 HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
+
+                MediaManager mediaManager = new MediaManager();
                 switch ((int)result.StatusCode)
                 {
                     case 200:
                         JToken jProj = resp.First;
                         for (int i = 0; jProj != null; i++)
                         {
-                            projectList.Add(jProj.ToObject<Project>());
+                            Project proj = jProj.ToObject<Project>();
+                            proj.Media = await mediaManager.GetSpecificMedia(proj.Uuid);
+                            projectList.Add(proj);
                             jProj = jProj.Next;
                         }
                         return projectList;
@@ -56,10 +61,14 @@ namespace DahuUWP.Models.ModelManager
                 HttpResponseMessage result = await apiService.Get(requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+
+                MediaManager mediaManager = new MediaManager();
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        return (Project)DeSerialize((JObject)resp);
+                        Project proj = (Project)DeSerialize((JObject)resp);
+                        proj.Media = await mediaManager.GetSpecificMedia(proj.Uuid);
+                        return proj;
                 }
                 return null;
             }

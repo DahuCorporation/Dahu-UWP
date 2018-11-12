@@ -12,7 +12,8 @@
     xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
     xmlns:DahuSpecSplitMenu="using:DahuUWP.Views.Components.DahuSpecialSplitMenu"
     xmlns:Container="using:DahuUWP.Views.Components.Container"
-    DataContext="{Binding ChatVM, Source={StaticResource Locator}}">
+    DataContext="{Binding ChatVM, Source={StaticResource Locator}}"
+    Loaded="Page_Loaded">
 
     <Interactivity:Interaction.Behaviors>
         <Core:EventTriggerBehavior EventName="Loaded">
@@ -44,7 +45,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Padding="24,0">
+                <ScrollViewer x:Name="ScrollerMessage" Grid.Row="0" VerticalScrollBarVisibility="Auto" Padding="24,0">
                     <StackPanel >
                         <ItemsControl Name="MenuNodes" ItemsSource="{Binding TopicMessages}" >
                             <ItemsControl.ItemsPanel>
@@ -54,7 +55,7 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel>
+                                    <StackPanel Loaded="StackPanel_Loaded">
                                         <Forum:TopicMessageContainer TheTopicMessageContainer="{Binding}" Margin="0,8,0,8 "/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -69,9 +70,9 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
                         <Rectangle Fill="#d4d4d4" Height="1"/>
-                        <Inputs:DahuAllInInputTxt Grid.Column="0" VerticalAlignment="Top" x:Name="DahuAllInInputTxt_SendMsgPlaceholder" InputTxtHeight="47"  x:Uid="DahuAllInInputTxt_SendMsgPlaceholder" InputTxtPlaceholder="Write a message..." Width="Auto" InputTxtValue="Bonjour je suis la valeur"  InputTxtBackground="White"/>
+                        <Inputs:DahuAllInInputTxt Grid.Column="0" VerticalAlignment="Top" x:Name="DahuAllInInputTxt_SendMsgPlaceholder" InputTxtHeight="47"  x:Uid="DahuAllInInputTxt_SendMsgPlaceholder" InputTxtPlaceholder="Write a message..." Width="Auto" InputTxtValue="{Binding MessageToSendValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  InputTxtBackground="White"/>
                     </StackPanel>
-                    <Inputs:DahuAllInBtn x:Name="DahuAllInBtn_Send" x:Uid="DahuAllInBtn_Send" VerticalAlignment="Top" Grid.Column="1" Value="Send" ValueFontSize="17" ValueForeground="#FFFFFF" ValueFontWeight="SemiBold" ButtonBackground="#D0691C"/>
+                    <Inputs:DahuAllInBtn x:Name="DahuAllInBtn_Send" x:Uid="DahuAllInBtn_Send" VerticalAlignment="Top" Grid.Column="1" Value="Send" ValueFontSize="17" ValueForeground="#FFFFFF" ValueFontWeight="SemiBold" ButtonBackground="#D0691C" ButtonBindings="{Binding SendMessageButtonBindings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </Grid>
         </Grid>

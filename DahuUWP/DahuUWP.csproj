@@ -116,6 +116,7 @@
     <Compile Include="DahuTech\Project\MediumProjectContainer.cs" />
     <Compile Include="DahuTech\Selector\FlatSelectorElem.cs" />
     <Compile Include="Models\Chat.cs" />
+    <Compile Include="Models\Media.cs" />
     <Compile Include="Models\ScrumBoard.cs" />
     <Compile Include="Models\ScrumBoardColumn.cs" />
     <Compile Include="Models\ScrumBoardLabel.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Services\ModelManager\ChatManager.cs" />
     <Compile Include="Services\ModelManager\ForumManager.cs" />
     <Compile Include="Services\ModelManager\IModelManager.cs" />
+    <Compile Include="Services\ModelManager\MediaManager.cs" />
     <Compile Include="Services\ModelManager\ProjectManager.cs" />
     <Compile Include="Services\ModelManager\ScrumBoardManager.cs" />
     <Compile Include="Services\ModelManager\SkillManager.cs" />
@@ -157,6 +159,7 @@
     <Compile Include="ViewModels\Profil\Private\PrivateProfilMainInformationViewModel.cs" />
     <Compile Include="ViewModels\Profil\Private\PrivateProfilSkillsViewModel.cs" />
     <Compile Include="ViewModels\Profil\Public\PublicProfilViewModel.cs" />
+    <Compile Include="ViewModels\Project\Chat\ChatViewModel.cs" />
     <Compile Include="ViewModels\Project\Contribute\ContributeAdressCounterpartyViewModel.cs" />
     <Compile Include="ViewModels\Project\Contribute\ContributeSuccessPaymentViewModel.cs" />
     <Compile Include="ViewModels\Project\Contribute\ContributeViewModel.cs" />
@@ -267,6 +270,9 @@
     </Compile>
     <Compile Include="Views\Components\Selector\FlatSelectorNode.xaml.cs">
       <DependentUpon>FlatSelectorNode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\Chat\Chat.xaml.cs">
+      <DependentUpon>Chat.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Project\Contribute\Contribute.xaml.cs">
       <DependentUpon>Contribute.xaml</DependentUpon>
@@ -638,6 +644,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Project\Chat\Chat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Project\Contribute\Contribute.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -768,6 +778,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DahuTech\Project\Chat\" />
     <Folder Include="DahuTech\ScrumBoard\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

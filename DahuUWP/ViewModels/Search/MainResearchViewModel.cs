@@ -82,7 +82,8 @@ namespace DahuUWP.ViewModels.Search
                 {
                     var userR = new {
                         FullName = user.FirstName + " " + user.LastName,
-                        Biography = user.Biography
+                        Biography = user.Biography,
+                        Media = user.Media
                     };
                     userResult.Add(userR);
                 }

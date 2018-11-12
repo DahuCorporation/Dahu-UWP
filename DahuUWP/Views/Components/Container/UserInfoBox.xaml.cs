@@ -43,5 +43,15 @@ namespace DahuUWP.Views.Components.Container
         public static readonly DependencyProperty UserBiographyProperty =
             DependencyProperty.Register("UserBiography", typeof(string), typeof(UserInfoBox), new PropertyMetadata(null));
 
+
+        public string UserPicture
+        {
+            get { return (string)GetValue(UserPictureyProperty); }
+            set { SetValue(UserPictureyProperty, value); }
+        }
+
+        public static readonly DependencyProperty UserPictureyProperty =
+            DependencyProperty.Register("UserPicture", typeof(string), typeof(UserInfoBox), new PropertyMetadata(null));
+
     }
 }

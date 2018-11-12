@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" >
             <Grid.Background>
-                <ImageBrush ImageSource="ms-appx:///Assets/Background/DahuSpecMenuBG.jpg" Stretch="None"/>
+                <ImageBrush ImageSource="{Binding UserPicture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="None"/>
             </Grid.Background>
         </Grid>
         <Grid Grid.Column="1" Padding="30,15">

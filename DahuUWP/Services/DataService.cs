@@ -21,12 +21,13 @@ namespace DahuUWP.Services
         private ProjectManager ProjectManager = new ProjectManager();
         private SkillManager SkillManager = new SkillManager();
         private ChatManager ChatManager = new ChatManager();
+        private MediaManager MediaManager = new MediaManager();
 
         public object GetUserManager() { return UserManager; }
         public object GetProjectManager() { return ProjectManager; }
         public object GetSkillManager() { return SkillManager; }
         public object GetChatManager() { return ChatManager; }
-
+        public object GetMediaManager() { return MediaManager; }
     }
 
     class DesignDataService : IDataService

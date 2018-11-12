@@ -244,19 +244,20 @@ namespace DahuUWP.Services.ModelManager
         /// </summary>
         /// <param name="scrumBoardId"></param>
         /// <returns></returns>
-        public async Task<ScrumBoardColumn> ChargeOneColumn(string columnId)
+        public async Task<ScrumBoardColumn> ChargeOneColumn(string taskboardId, string columnId)
         {
             try
             {
                 APIService apiService = new APIService();
-                string requestUri = "task/column/" + columnId;
-                HttpResponseMessage result = await apiService.Get(requestUri);
+                ///taskboards/:taskboard/columns/:id
+                string requestUri = "/taskboards/" + taskboardId + "/columns/" + columnId;
+                HttpResponseMessage result = await apiService.Get(requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        return ((JObject)resp["data"]).ToObject<ScrumBoardColumn>();
+                        return ((JObject)resp).ToObject<ScrumBoardColumn>();
                 }
                 return null;
             }
@@ -383,7 +384,7 @@ namespace DahuUWP.Services.ModelManager
         /// <param name="scrumBoard"></param>
         /// <param name="projectId"></param>
         /// <returns></returns>
-        public async Task<ScrumBoardColumn> CreateAColumn(string columnName, string scrumBoardId)
+        public async Task<ScrumBoardColumn> CreateAColumn(string columnName, string scrumBoardId, int columnOrder)
         {
             try
             {
@@ -393,7 +394,8 @@ namespace DahuUWP.Services.ModelManager
                 string requestUri = "taskboards/" + scrumBoardId + "/columns";
                 JObject jObject = new JObject
                 {
-                    { "name", columnName }
+                    { "name", columnName },
+                    { "order", columnOrder }
                 };
                 HttpResponseMessage result = await apiService.Post(jObject, requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;

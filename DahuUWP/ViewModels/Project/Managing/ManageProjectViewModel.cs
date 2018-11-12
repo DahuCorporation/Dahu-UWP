@@ -46,7 +46,7 @@ namespace DahuUWP.ViewModels.Project.Managing
                 Active = false,
                 Title = "Forum",
                 FuncListener = FullHorizontalMenuNodeClicked,
-                Parameter = typeof(Views.Project.CreateProject)
+                Parameter = typeof(Views.Project.Forum.Forum)
             };
             FullHorizontalMenu.Nodes.Add(nodeMenu2);
 
@@ -55,7 +55,7 @@ namespace DahuUWP.ViewModels.Project.Managing
                 Active = false,
                 Title = "Chat",
                 FuncListener = FullHorizontalMenuNodeClicked,
-                Parameter = typeof(Views.Project.Forum.Forum)
+                Parameter = typeof(Views.Project.Chat.Chat)
             };
             FullHorizontalMenu.Nodes.Add(nodeMenu3);
 

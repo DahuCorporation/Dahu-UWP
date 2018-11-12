@@ -40,7 +40,7 @@
                                   Value="Profil settings"/>
                 </Grid>
                 <Grid Height="32"/>
-                <container:UserInfoBox UserFullName="{Binding UserFullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" UserBiography="{Binding UserBiography, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="200"/>
+                <container:UserInfoBox UserFullName="{Binding UserFullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" UserPicture="{Binding user.Media.ImagePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  UserBiography="{Binding UserBiography, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="200"/>
                 <Grid Height="32"/>
                 <Grid Style="{StaticResource WhiteContentGrid}">
                     <StackPanel>

@@ -3,6 +3,7 @@ using DahuUWP.DahuTech.Menu;
 using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
+using DahuUWP.Services.ModelManager;
 using DahuUWP.Views;
 using DahuUWP.Views.Component;
 using DahuUWP.Views.Project;
@@ -55,6 +56,15 @@ namespace DahuUWP.ViewModels
 
 
 
+        private Media _media;
+        public Media Media
+        {
+            get { return _media; }
+            set
+            {
+                NotifyPropertyChanged(ref _media, value);
+            }
+        }
 
 
         //private Visibility _topBarConnected;
@@ -67,10 +77,12 @@ namespace DahuUWP.ViewModels
         //}
 
 
-        public void Connected(bool connected)
+        public async void Connected(bool connected)
         {
             if (connected)
             {
+                MediaManager mediaManager = new MediaManager();
+                Media = await mediaManager.GetSpecificMedia(AppStaticInfo.Account.Uuid);
                 ModulNonConnected = Visibility.Collapsed;
                 ModulConnected = Visibility.Visible;
             }

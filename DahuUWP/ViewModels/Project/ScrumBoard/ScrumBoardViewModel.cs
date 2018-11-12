@@ -149,15 +149,32 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
                     Name = name
                 };
                 scrumBoard = await scrumBoardManager.CreateScrumBoard(scrumBoard, Project.Uuid);
+                
                 if (scrumBoard != null)
                 {
+                    ScrumBoards.Add(scrumBoard);
                     NodeMenu node = new NodeMenu()
                     {
                         Title = scrumBoard.Name,
                         NodeTheme = Theme.Clear,
                         Active = false,
                         FuncListener = ChangeScrumBoard,
-                        Parameter = scrumBoard.Uuid
+                        Parameter = scrumBoard.Uuid,
+                        AddColumnButtonBindings = new DahuButtonBindings()
+                        {
+                            Name = "Ajouter une colonne",
+                            FuncListener = AddColumn
+                        },
+                        RenameScrumBoardButtonBindings = new DahuButtonBindings()
+                        {
+                            Name = "Renommer un board",
+                            FuncListener = RenameColumn
+                        },
+                        DeleteScrumBoardButtonBindings = new DahuButtonBindings()
+                        {
+                            Name = "Supprimer un board",
+                            FuncListener = DeleteColumn
+                        }
                     };
                     ScrumBoardList.Add(node);
                 }
@@ -201,11 +218,11 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
             if (!String.IsNullOrWhiteSpace(name))
             {
                 NodeMenu node = ScrumBoardList.First(x => x.Active == true);
-                if (node != null)
+                if (node != null && ScrumBoards.Count > 0)
                 {
                     ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
-                    Models.ScrumBoard board = ScrumBoards.First(x => x.Name == param.ToString());
-                    ScrumBoardColumn column = await scrumBoardManager.CreateAColumn(name, board.Uuid);
+                    Models.ScrumBoard board = ScrumBoards.FirstOrDefault(x => x.Name == param.ToString());
+                    ScrumBoardColumn column = await scrumBoardManager.CreateAColumn(name, board.Uuid, ScrumBoards.Count);
 
                     ScrumBoardColumns.Add(column);
                 }

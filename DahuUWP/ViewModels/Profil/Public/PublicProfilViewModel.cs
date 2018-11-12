@@ -53,7 +53,7 @@ namespace DahuUWP.ViewModels.Profil.Public
         private async void LoadUserSkills()
         {
             UserManager userManager = (UserManager)dataService.GetUserManager();
-            User user = await userManager.Charge(AppStaticInfo.Account.Uuid);
+            user = await userManager.Charge(AppStaticInfo.Account.Uuid);
             string tit = "zef";
             //List<object> userSkillList = await skillManager.Charge(skillChargeParams);
             //if (userSkillList != null)
@@ -94,6 +94,16 @@ namespace DahuUWP.ViewModels.Profil.Public
             set
             {
                 NotifyPropertyChanged(ref _userFullName, value);
+            }
+        }
+
+        private User _user;
+        public User user
+        {
+            get { return _user; }
+            set
+            {
+                NotifyPropertyChanged(ref _user, value);
             }
         }
 
