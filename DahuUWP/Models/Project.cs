@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,8 +39,35 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "banner_picture")]
         public string BannerPicture { get; set; }
 
+        
+        //public List<User> Members { get; set; }
+
+        private List<User> _members;
         [JsonProperty(PropertyName = "members")]
-        public List<User> Members { get; set; }
+        public List<User> Members
+        {
+            get
+            {
+                return _members;
+            }
+
+            set
+            {
+                _members = value;
+                this.NotifyPropertyChanged("Members");
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
         public Media Media { get; set; }
     }

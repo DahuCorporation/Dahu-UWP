@@ -17,11 +17,14 @@
         </Grid.ColumnDefinitions>
         <Grid CornerRadius="23" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3,3,3,3">
             <Grid.Background>
-                <ImageBrush ImageSource="ms-appx:///Assets/Tmp/profil-pic.jpg" Stretch="UniformToFill"/>
+                <ImageBrush ImageSource="https://appworksinc.com/wp-content/uploads/2013/05/Team-Member-3.jpg" Stretch="UniformToFill"/>
             </Grid.Background>
         </Grid>
-        <TextBlock Text="Charles-Antoine Attia" FontSize="15" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="12,0"/>
-        <Grid CornerRadius="23" Background="#FFD5D5D5" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8,8,8,8">
+        <TextBlock FontSize="15" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="12,0">
+             <Run Text="{Binding User.FirstName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+             <Run Text="{Binding User.LastName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        </TextBlock>
+        <Grid CornerRadius="23" Background="#FFD5D5D5" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8,8,8,8" Tapped="Grid_Tapped" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited">
             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" Foreground="#FF6a6a6a" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" />
         </Grid>
     </Grid>

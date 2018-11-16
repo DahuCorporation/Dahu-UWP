@@ -3,14 +3,24 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DahuUWP.Views.Project.Managing"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:Titles="using:DahuUWP.Views.Components.Titles"
     xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:Container="using:DahuUWP.Views.Components.Container"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:DahuSpecSplitMenu="using:DahuUWP.Views.Components.DahuSpecialSplitMenu"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContext="{Binding EditProjectMembersVM, Source={StaticResource Locator}}">
 
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:EventTriggerBehavior.Actions>
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedBaseCommand}" />
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedCommand}" />
+            </Core:EventTriggerBehavior.Actions>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
     <ScrollViewer>
         <StackPanel>
             <Grid VerticalAlignment="Top" Background="#FFFFFF" Style="{StaticResource WhiteContentGrid}">
@@ -41,13 +51,23 @@
             <Grid VerticalAlignment="Top" Background="#FFFFFF" Margin="0,16,0,0" Style="{StaticResource WhiteContentGrid}">
                 <StackPanel>
                     <Titles:TitleBlock x:Name="TitleBlock_Members" x:Uid="TitleBlock_Members"/>
-                    <Grid Padding="30,15">
+
+                    <ItemsControl x:Name="Users" ItemsSource="{Binding Project.Members, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Container:UserLabel User="{Binding}" DeleteMemberBinding="{Binding ElementName=Users, Path=DataContext.DeleteMemberButtonBindings, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <!--<Grid Padding="30,15">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Padding="0,0,10,0">
-                            <Container:UserLabel Margin="5"/>
+                            
                             <Container:UserLabel Margin="5"/>
                             <Container:UserLabel Margin="5"/>
                         </StackPanel>
-                    </Grid>
+                    </Grid>-->
                 </StackPanel>
             </Grid>
         </StackPanel>

@@ -51,6 +51,9 @@
     <Style x:Key="EditButton" TargetType="Inputs:DahuButton3">
         <Setter Property="ButtonBackground" Value="#FFD0691C" />
     </Style>
+    <Style x:Key="DeleteButton" TargetType="Inputs:DahuButton3">
+        <Setter Property="ButtonBackground" Value="#FFe0391c" />
+    </Style>
     <Style x:Key="SaveButton" TargetType="Inputs:DahuButton3">
         <Setter Property="ButtonBackground" Value="#FFD0691C" />
     </Style>

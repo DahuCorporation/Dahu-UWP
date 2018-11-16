@@ -1,4 +1,6 @@
-﻿using DahuUWP.DahuTech.Menu;
+﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.Menu;
+using DahuUWP.Models;
 using DahuUWP.Services;
 using DahuUWP.ViewModels.Search;
 using DahuUWP.Views;
@@ -72,7 +74,10 @@ namespace DahuUWP.ViewModels.Project.Managing
         private async void EditProjectRedirect()
         {
             //HomePage.DahuFrame.Navigate(typeof(MainResearch), ResearchValue);
-            HomePage.DahuFrame.Navigate(typeof(EditProject), Project);
+            if (AppStaticInfo.Account.Uuid == Project.OwnerUuid)
+                HomePage.DahuFrame.Navigate(typeof(EditProject), Project);
+            else
+                AppGeneral.UserInterfaceStatusDico["You do not have the rights."].Display();
         }
 
         private void FullHorizontalMenuNodeClicked(object parameter)

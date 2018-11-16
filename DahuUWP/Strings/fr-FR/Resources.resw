@@ -210,6 +210,9 @@
   <data name="DahuButton3_CreateProject.Value" xml:space="preserve">
     <value>Creer votre projet</value>
   </data>
+  <data name="DahuButton3_DeleteProject.Value" xml:space="preserve">
+    <value>Supprimer le projet</value>
+  </data>
   <data name="DahuButton3_SaveMainInformation.Value" xml:space="preserve">
     <value>Sauvegarder les modifications</value>
   </data>

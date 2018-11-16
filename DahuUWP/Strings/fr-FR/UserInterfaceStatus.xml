@@ -4,6 +4,7 @@
   <!--General-->
   <!---->
   <status key="An error occured." value="Une erreur est survenue." varName="_error" type="Negative"/>
+  <status key="You do not have the rights." value="Vous n'avez pas les droits." varName="_error" type="Warning"/>
   <status key="Binding not finished." value="Réiterer dans quelque secondes, la page n'a pas fini de charger." varName="_error" type="Warning"/>
   
 
@@ -41,13 +42,15 @@
 
   <!---->
   <!--Project-->
+  <status key="Cannot remove your self." value="Vous ne pouvez pas vous supprimer." varName="_error" type="Warning"/>
   <status key="Empty name."  value="Le champ nom du projet est vide." varName="" type="Warning"/>
   <status key="Empty description."  value="Le champ description du projet est vide." varName="" type="Warning"/>
   <status key="Project created successfully."  value="Le projet '{0}' a bien été créé." varName="" type="Positive"/>
   <status key="Project update lack characters."  value="Votre nom de projet ou description est trop courte. Au moins 2 charactères pour le nom et au moins 6 pour la description." varName="" type="Warning"/>
   <status key="You joined the project."  value="Vous avez rejoint le projet." varName="" type="Positive"/>
   <status key="You are already in the project."  value="Vous avez déjà rejoint le projet." varName="" type="Warning"/>
-  
+  <status key="Member deleted."  value="Le membre a été supprimé." varName="" type="Positive"/>
+  <status key="Project deleted."  value="Projet supprimé." varName="" type="Positive"/>
 
 
   <!---->
@@ -81,6 +84,9 @@
   <!--Chat-->
   <status key="Wrong message format."  value="Votre message n'est pas valide." varName="" type="Warning"/>
 
+  <!---->
+  <!--Counterpart-->
+  <status key="Counterpart created successfully."  value="Contrepartie créée." varName="" type="Positive"/>
 
   
 

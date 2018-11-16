@@ -45,12 +45,6 @@
                                                       Active="False"
                                                       Margin="0,0,0,10"
                                                       Tapped="DahuSpecSplitMenu_EditProjectMembers_Tapped"/>
-                        <DahuSpecSplitMenu:MenuButton x:Name="DahuSpecSplitMenu_EditProjectParameters"
-                                                      x:Uid="DahuSpecSplitMenu_EditProjectParameters"
-                                                      Value="Parameters"
-                                                      Active="False"
-                                                      Margin="0,0,0,10"
-                                                      Tapped="DahuSpecSplitMenu_EditProjectParameters_Tapped"/>
                     </StackPanel>
                 </ScrollViewer>
 

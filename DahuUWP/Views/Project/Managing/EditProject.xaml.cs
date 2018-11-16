@@ -62,11 +62,11 @@ namespace DahuUWP.Views.Project.Managing
             ActiveButton(sender);
         }
 
-        private void DahuSpecSplitMenu_EditProjectParameters_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            ProfilSpecMenuFrame.Navigate(typeof(EditProjectParameters), ParamNavigate);
-            ActiveButton(sender);
-        }
+        //private void DahuSpecSplitMenu_EditProjectParameters_Tapped(object sender, TappedRoutedEventArgs e)
+        //{
+        //    ProfilSpecMenuFrame.Navigate(typeof(EditProjectParameters), ParamNavigate);
+        //    ActiveButton(sender);
+        //}
 
         private void GraylouButton_BackToManageProject_Tapped(object sender, TappedRoutedEventArgs e)
         {

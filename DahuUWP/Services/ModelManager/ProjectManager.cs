@@ -125,6 +125,66 @@ namespace DahuUWP.Models.ModelManager
             throw new NotImplementedException();
         }
 
+        public async Task<bool> DeleteUser(string projectId, string userId)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                ///projects/:project_uuid/members/:user_uuid
+                string requestUri = "projects/" + projectId + "/members/" + userId;
+
+                HttpResponseMessage result = await apiService.DeleteBis(requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["Member deleted."].Display();
+                        return true;
+                    case 400:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                    default:
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteProject(string projectId)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                ///projects/:project_uuid/members/:user_uuid
+                string requestUri = "projects/" + projectId;
+
+                HttpResponseMessage result = await apiService.DeleteBis(requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["Project deleted."].Display();
+                        return true;
+                    case 400:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                    default:
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
+        }
+
         public object DeSerialize(JObject jObject)
         {
             Project project = new Project();
@@ -174,8 +234,13 @@ namespace DahuUWP.Models.ModelManager
                 APIService apiService = new APIService();
                 string requestUri = "projects/" + projectUuid;
                 JObject jObject = Serialize(obj);
+                JObject descriptionObj = new JObject()
+                {
+                    { "description", ((Project)obj).Description }
+                };
                 string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Put(jsonObject, requestUri);
+                HttpResponseMessage result = await apiService.Put(jsonObject, requestUri); // two times because if only the description changes the back send false
+                result = await apiService.Put(descriptionObj, requestUri);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)

@@ -2,6 +2,8 @@
 using DahuUWP.DahuTech.Inputs;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
+using DahuUWP.Services.ModelManager;
+using DahuUWP.Views;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -30,6 +32,12 @@ namespace DahuUWP.ViewModels.Project.Managing
                 IsBusy = false,
                 FuncListener = UpdateMainInformation
             };
+
+            DeleteProjectBinding = new DahuButtonBindings
+            {
+                IsBusy = false,
+                FuncListener = DeleteProject
+            };
         }
 
         private async void UpdateMainInformation(object param)
@@ -42,6 +50,23 @@ namespace DahuUWP.ViewModels.Project.Managing
                 UpdateProjectMainInformation.IsBusy = false;
             }
         }
+
+        private async void DeleteProject(object param)
+        {
+            //
+            if (!DeleteProjectBinding.IsBusy)
+            {
+                DeleteProjectBinding.IsBusy = true;
+                ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
+                CounterpartsManager counterpartsManager = new CounterpartsManager();
+                await counterpartsManager.Create("56", "Oui alors voilà", Project.Uuid);
+                await projectManager.DeleteProject(Project.Uuid);
+                DeleteProjectBinding.IsBusy = false;
+                HomePage.DahuFrame.Navigate(typeof(Discover));
+            }
+        }
+
+        
 
         private bool verifProjectUpdate()
         {
@@ -60,6 +85,16 @@ namespace DahuUWP.ViewModels.Project.Managing
             set
             {
                 NotifyPropertyChanged(ref _updateProjectMainInformation, value);
+            }
+        }
+
+        private DahuButtonBindings _deleteProjectBinding;
+        public DahuButtonBindings DeleteProjectBinding
+        {
+            get { return _deleteProjectBinding; }
+            set
+            {
+                NotifyPropertyChanged(ref _deleteProjectBinding, value);
             }
         }
 
