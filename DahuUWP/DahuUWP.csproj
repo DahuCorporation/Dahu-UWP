@@ -168,6 +168,7 @@
     <Compile Include="ViewModels\Project\Contribute\ContributeWithMoneyViewModel.cs" />
     <Compile Include="ViewModels\Project\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\Project\Forum\ForumViewModel.cs" />
+    <Compile Include="ViewModels\Project\Managing\EditProjectCounterpartsViewModel.cs" />
     <Compile Include="ViewModels\Project\Managing\EditProjectMembersViewModel.cs" />
     <Compile Include="ViewModels\Project\Managing\EditProjectParametersViewModel.cs" />
     <Compile Include="ViewModels\Project\Managing\EditProjectPrincipalInformationViewModel.cs" />
@@ -287,6 +288,9 @@
     </Compile>
     <Compile Include="Views\Project\Contribute\ContributeWithMoney.xaml.cs">
       <DependentUpon>ContributeWithMoney.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\Managing\EditProjectCounterparts.xaml.cs">
+      <DependentUpon>EditProjectCounterparts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Project\ProjectView.xaml.cs">
       <DependentUpon>ProjectView.xaml</DependentUpon>
@@ -663,6 +667,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Project\Contribute\ContributeWithMoney.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\Managing\EditProjectCounterparts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

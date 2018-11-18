@@ -73,5 +73,11 @@ namespace DahuUWP.Views.Project.Managing
             //ViewModelLocator.HomePageViewModel.NavigationParam = ParamNavigate;
             HomePage.DahuFrame.Navigate(typeof(ManageProject), ParamNavigate);
         }
+
+        private void DahuSpecSplitMenu_EditProjectCounterparts_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ProfilSpecMenuFrame.Navigate(typeof(EditProjectCounterparts), ParamNavigate);
+            ActiveButton(sender);
+        }
     }
 }

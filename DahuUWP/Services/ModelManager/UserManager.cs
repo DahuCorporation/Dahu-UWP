@@ -76,6 +76,10 @@ namespace DahuUWP.Models.ModelManager
                         for (int i = 0; jProj != null; i++)
                         {
                             Project proj = jProj.ToObject<Project>();
+                            if (proj.AmountGoal.Length > 2)
+                            {
+                                proj.AmountGoal = (Int32.Parse(proj.AmountGoal) / 100).ToString();
+                            }
                             proj.Media = await mediaManager.GetSpecificMedia(proj.Uuid);
                             projectList.Add(proj);
                             jProj = jProj.Next;

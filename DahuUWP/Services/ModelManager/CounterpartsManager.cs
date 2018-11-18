@@ -19,13 +19,52 @@ namespace DahuUWP.Services.ModelManager
             throw new NotImplementedException();
         }
 
+        public async Task<List<Counterpart>> ChargeCounterpartsOfProject(string projectId)
+        {
+            List<Counterpart> counterpartList = new List<Counterpart>();
+            try
+            {
+                APIService apiService = new APIService();
+                /// users /:id / projects ? relation =: relation
+                string requestUri = "projects/" + projectId + "/counterparts";
+                //if (routeParams != null)
+                //    requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                HttpResponseMessage result = await apiService.Get(requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
+
+                MediaManager mediaManager = new MediaManager();
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        JToken jCounterpart = resp.First;
+                        for (int i = 0; jCounterpart != null; i++)
+                        {
+                            Counterpart counterpart = jCounterpart.ToObject<Counterpart>();
+                            if (counterpart.Amount.Length > 2)
+                                counterpart.Amount = (Int32.Parse(counterpart.Amount) / 100).ToString();
+                            counterpartList.Add(counterpart);
+                            jCounterpart = jCounterpart.Next;
+                        }
+                        return counterpartList;
+                }
+                return counterpartList;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return counterpartList;
+            }
+        } 
+
         public async Task<Counterpart> Create(string amount, string description, string projectId )
         {
             Counterpart counterpart = new Counterpart();
             try
             {
                 APIService apiService = new APIService();
-                string requestUri = "/projects/" + projectId + "/counterparts";
+                string requestUri = "projects/" + projectId + "/counterparts";
 
                 JObject jObject = new JObject
                 {
@@ -39,7 +78,7 @@ namespace DahuUWP.Services.ModelManager
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
-                    case 200:
+                    case 201:
                         counterpart = ((JObject)resp).ToObject<Counterpart>();
                         AppGeneral.UserInterfaceStatusDico["Counterpart created successfully."].Display();
                         return counterpart;

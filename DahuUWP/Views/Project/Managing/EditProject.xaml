@@ -45,6 +45,11 @@
                                                       Active="False"
                                                       Margin="0,0,0,10"
                                                       Tapped="DahuSpecSplitMenu_EditProjectMembers_Tapped"/>
+                        <DahuSpecSplitMenu:MenuButton x:Name="DahuSpecSplitMenu_EditProjectCounterparts"
+                                                      x:Uid="DahuSpecSplitMenu_EditProjectCounterparts"
+                                                      Value="Contreparties"
+                                                      Active="False"
+                                                      Margin="0,0,0,10" Tapped="DahuSpecSplitMenu_EditProjectCounterparts_Tapped"/>
                     </StackPanel>
                 </ScrollViewer>
 

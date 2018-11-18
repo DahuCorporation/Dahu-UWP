@@ -39,7 +39,23 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "banner_picture")]
         public string BannerPicture { get; set; }
 
-        
+
+        private string _amountGoal;
+        [JsonProperty(PropertyName = "amount_goal")]
+        public string AmountGoal
+        {
+            get
+            {
+                return _amountGoal;
+            }
+
+            set
+            {
+                _amountGoal = value;
+                this.NotifyPropertyChanged("AmountGoal");
+            }
+        }
+
         //public List<User> Members { get; set; }
 
         private List<User> _members;

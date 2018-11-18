@@ -49,6 +49,7 @@
   <status key="Project update lack characters."  value="Votre nom de projet ou description est trop courte. Au moins 2 charactères pour le nom et au moins 6 pour la description." varName="" type="Warning"/>
   <status key="You joined the project."  value="Vous avez rejoint le projet." varName="" type="Positive"/>
   <status key="You are already in the project."  value="Vous avez déjà rejoint le projet." varName="" type="Warning"/>
+  <status key="Incorrect amount."  value="Prix incorrect." varName="" type="Warning"/>
   <status key="Member deleted."  value="Le membre a été supprimé." varName="" type="Positive"/>
   <status key="Project deleted."  value="Projet supprimé." varName="" type="Positive"/>
 
@@ -87,7 +88,7 @@
   <!---->
   <!--Counterpart-->
   <status key="Counterpart created successfully."  value="Contrepartie créée." varName="" type="Positive"/>
-
+  <status key="Amount or description is null."  value="Le prix ou la description est vide ou incorrect." varName="" type="Warning"/>
   
 
   <!---->

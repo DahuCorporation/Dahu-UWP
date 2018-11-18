@@ -54,6 +54,7 @@ namespace DahuUWP
 
             //Project
             SimpleIoc.Default.Register<EditProjectMembersViewModel>();
+            SimpleIoc.Default.Register<EditProjectCounterpartsViewModel>();
             SimpleIoc.Default.Register<EditProjectPrincipalInformationViewModel>();
             SimpleIoc.Default.Register<EditProjectParametersViewModel>();
             SimpleIoc.Default.Register<ManageProjectViewModel>();
@@ -115,6 +116,11 @@ namespace DahuUWP
         public EditProjectMembersViewModel EditProjectMembersVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<EditProjectMembersViewModel>(); return (EditProjectMembersViewModel)CurrentViewModel; }
+        }
+
+        public EditProjectCounterpartsViewModel EditProjectCounterpartsVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<EditProjectCounterpartsViewModel>(); return (EditProjectCounterpartsViewModel)CurrentViewModel; }
         }
         public EditProjectPrincipalInformationViewModel EditProjectPrincipalInformationVM
         {

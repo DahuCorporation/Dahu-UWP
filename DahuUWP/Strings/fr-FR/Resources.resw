@@ -198,6 +198,9 @@
   <data name="DahuAllInInputTxt_SendMsgPlaceholder.InputTxtPlaceholder" xml:space="preserve">
     <value>Ecrivez un message...</value>
   </data>
+  <data name="DahuButton3_AddCounterpart.Value" xml:space="preserve">
+    <value>Ajouter la contrepartie</value>
+  </data>
   <data name="DahuButton3_AddMember.Value" xml:space="preserve">
     <value>Envoyer l'invitaion</value>
   </data>
@@ -213,6 +216,9 @@
   <data name="DahuButton3_DeleteProject.Value" xml:space="preserve">
     <value>Supprimer le projet</value>
   </data>
+  <data name="DahuButton3_EditGlobalAmount.Value" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
   <data name="DahuButton3_SaveMainInformation.Value" xml:space="preserve">
     <value>Sauvegarder les modifications</value>
   </data>
@@ -227,6 +233,30 @@
   </data>
   <data name="DahuInput1_Password.InputPlaceholder" xml:space="preserve">
     <value>Mot de passe</value>
+  </data>
+  <data name="DahuInput3_CounterpartAmount.InputHeader" xml:space="preserve">
+    <value>Prix en euro</value>
+  </data>
+  <data name="DahuInput3_CounterpartAmount.InputPlaceholder" xml:space="preserve">
+    <value>Prix en euro</value>
+  </data>
+  <data name="DahuInput3_CounterpartDescription.InputHeader" xml:space="preserve">
+    <value>Description de la contrepartie</value>
+  </data>
+  <data name="DahuInput3_CounterpartDescription.InputPlaceholder" xml:space="preserve">
+    <value>Description de la contrepartie</value>
+  </data>
+  <data name="DahuInput3_CounterpartGlobalAmount.InputHeader" xml:space="preserve">
+    <value>Objectif total des contributions en euros</value>
+  </data>
+  <data name="DahuInput3_CounterpartGlobalAmount.InputPlaceholder" xml:space="preserve">
+    <value>Objectif total des contributions en euros</value>
+  </data>
+  <data name="DahuInput3_CounterpartName.InputHeader" xml:space="preserve">
+    <value>Contrepartie</value>
+  </data>
+  <data name="DahuInput3_CounterpartName.InputPlaceholder" xml:space="preserve">
+    <value>Contrepartie</value>
   </data>
   <data name="DahuInput3_InvitationMessage.InputHeader" xml:space="preserve">
     <value>Message de l'invitation</value>
@@ -266,6 +296,9 @@
   </data>
   <data name="DahuInput3_UserBiography.InputPlaceholder" xml:space="preserve">
     <value>Biographie</value>
+  </data>
+  <data name="DahuSpecSplitMenu_EditProjectCounterparts.Value" xml:space="preserve">
+    <value>Contreparties</value>
   </data>
   <data name="DahuSpecSplitMenu_EditProjectMembers.Value" xml:space="preserve">
     <value>Membres</value>
@@ -411,11 +444,17 @@
   <data name="TitleBlock_AddMember.Title" xml:space="preserve">
     <value>Ajouter un membre</value>
   </data>
+  <data name="TitleBlock_Counterpart.Title" xml:space="preserve">
+    <value>Contreparties</value>
+  </data>
   <data name="TitleBlock_EditPrincipalInformation.Title" xml:space="preserve">
     <value>Modifier les informations du projet</value>
   </data>
   <data name="TitleBlock_Members.Title" xml:space="preserve">
     <value>Vos membres</value>
+  </data>
+  <data name="TitleBlock_NewCounterpart.Title" xml:space="preserve">
+    <value>Nouvelle contrepartie</value>
   </data>
   <data name="TitleBlock_Projects.Title" xml:space="preserve">
     <value>Projets</value>

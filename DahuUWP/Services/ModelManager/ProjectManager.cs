@@ -36,6 +36,10 @@ namespace DahuUWP.Models.ModelManager
                         for (int i = 0; jProj != null; i++)
                         {
                             Project proj = jProj.ToObject<Project>();
+                            if (proj.AmountGoal.Length > 2)
+                            {
+                                proj.AmountGoal = (Int32.Parse(proj.AmountGoal) / 100).ToString();
+                            }
                             proj.Media = await mediaManager.GetSpecificMedia(proj.Uuid);
                             projectList.Add(proj);
                             jProj = jProj.Next;
@@ -67,6 +71,10 @@ namespace DahuUWP.Models.ModelManager
                 {
                     case 200:
                         Project proj = (Project)DeSerialize((JObject)resp);
+                        if (proj.AmountGoal.Length > 2)
+                        {
+                            proj.AmountGoal = (Int32.Parse(proj.AmountGoal) / 100).ToString();
+                        }
                         proj.Media = await mediaManager.GetSpecificMedia(proj.Uuid);
                         return proj;
                 }
@@ -119,6 +127,44 @@ namespace DahuUWP.Models.ModelManager
                 return false;
             }
         }
+
+
+        public async Task<bool> FollowUnFollowProject(string projectId, string userId)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = " follow/project/" + projectId + "/" + userId;
+
+                JObject jObject = new JObject();
+                //string jsonObject = jObject.ToString(Formatting.None);
+                HttpResponseMessage result = await apiService.Post(jObject, requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        //AppGeneral.UserInterfaceStatusDico["Project created successfully."].Display(((Project)project).Name, true);
+                        return true;
+                    case 400:
+                        // todo : Attention la description a une taille minimum
+                        //TODO : différencier les erreurs, si c'est une erreur de projet deja existant ou si le uuid est incorect...
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                    default:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
+        }
+       
+
 
         public Task<bool> Delete(string objId)
         {
@@ -236,7 +282,8 @@ namespace DahuUWP.Models.ModelManager
                 JObject jObject = Serialize(obj);
                 JObject descriptionObj = new JObject()
                 {
-                    { "description", ((Project)obj).Description }
+                    { "description", ((Project)obj).Description },
+                    { "amount_goal", ((Project)obj).AmountGoal + "00" }
                 };
                 string jsonObject = jObject.ToString(Formatting.None);
                 HttpResponseMessage result = await apiService.Put(jsonObject, requestUri); // two times because if only the description changes the back send false

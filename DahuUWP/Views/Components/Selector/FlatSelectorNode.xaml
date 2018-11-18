@@ -35,7 +35,7 @@
         </Border>
 
         <TextBlock Grid.Column="1" x:Name="TextBlockChoiceContent" Style="{StaticResource DahuTextDark}" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Justify">
-            <Run Text="{Binding Title, FallbackValue='Title', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"></Run>.
+            <Run Text="{Binding Title, FallbackValue='Title', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"></Run>
             <Run Text="{Binding ContentElem, FallbackValue='Choice to make to be a real cowboy if it is possible of corse Choice and you could the best of the people in the world', Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"></Run>
         </TextBlock>
         <TextBlock Grid.Column="2" x:Name="TextBlockPrice" Style="{StaticResource DahuBiggerTextDark}" Margin="46,0" FontWeight="Bold" VerticalAlignment="Center">

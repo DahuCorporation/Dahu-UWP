@@ -1,5 +1,6 @@
 ﻿using DahuUWP.DahuTech;
 using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using DahuUWP.Services.ModelManager;
@@ -58,8 +59,6 @@ namespace DahuUWP.ViewModels.Project.Managing
             {
                 DeleteProjectBinding.IsBusy = true;
                 ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
-                CounterpartsManager counterpartsManager = new CounterpartsManager();
-                await counterpartsManager.Create("56", "Oui alors voilà", Project.Uuid);
                 await projectManager.DeleteProject(Project.Uuid);
                 DeleteProjectBinding.IsBusy = false;
                 HomePage.DahuFrame.Navigate(typeof(Discover));
