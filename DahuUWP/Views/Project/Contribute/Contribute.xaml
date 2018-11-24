@@ -29,7 +29,7 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         
-            <Container:Stepper Grid.Column="1" StepperContent="{Binding ContributeStepper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" HorizontalAlignment="Stretch"/>
+            <!--<Container:Stepper Grid.Column="1" StepperContent="{Binding ContributeStepper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" HorizontalAlignment="Stretch"/>-->
 
     </Grid>
 </Page>

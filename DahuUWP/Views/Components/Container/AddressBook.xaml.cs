@@ -1,4 +1,5 @@
-﻿using DahuUWP.Models;
+﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,5 +38,18 @@ namespace DahuUWP.Views.Components.Container
             }
         }
         public static readonly DependencyProperty UserProperty = DependencyProperty.Register("User", typeof(string), typeof(AddressBook), null);
+
+        public DahuButtonBindings ButtonBindings
+        {
+            get
+            {
+                return (DahuButtonBindings)GetValue(ButtonBindingsProperty);
+            }
+            set
+            {
+                SetValue(ButtonBindingsProperty, value);
+            }
+        }
+        public static readonly DependencyProperty ButtonBindingsProperty = DependencyProperty.Register("ButtonBindings", typeof(DahuButtonBindings), typeof(AddressBook), null);
     }
 }

@@ -50,17 +50,24 @@
                                           Margin="0,0,8,0"
                                           InputRadius="0"
                                           InputHeight="40"
-                                            ButtonBindings="{Binding JoinProjectButtonBindings, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  />
+                                            ButtonBindings="{Binding FollowProjectButtonBindings, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  />
                     </Grid>
                     <TextBlock Text="{Binding Project.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0,10,0,0"/>
                 </StackPanel>
 
             </StackPanel>
             <StackPanel Grid.Column="2">
-                <StackPanel Margin="8" Background="White" Padding="16,32" VerticalAlignment="Top">
-                    <TextBlock Text="3314 €" Style="{StaticResource DahuBiggerTextDark}" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    <TextBlock Text="collectés sur 5000€" Style="{StaticResource DahuBiggerTextDark}" HorizontalAlignment="Center"/>
-                    <Inputs:DahuProgressBar Width="380" ProgressBarValue="66.28" Margin="16" ProgressBarForeground="#FFD0691C"/>
+                <StackPanel Margin="8" Background="White" Padding="16,32" VerticalAlignment="Top" Visibility="{Binding ContributeBlockVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBlock Style="{StaticResource DahuBiggerTextDark}" FontWeight="Bold" HorizontalAlignment="Center">
+                        <Run Text="{Binding Project.AmountActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Run Text="€"/>
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource DahuBiggerTextDark}" FontWeight="Bold" HorizontalAlignment="Center">
+                        <Run Text="collectés sur"/>
+                        <Run Text="{Binding Project.AmountGoal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Run Text="€"/>
+                    </TextBlock>
+                    <Inputs:DahuProgressBar Width="380" ProgressBarValue="{Binding ProgressBarValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="16" ProgressBarForeground="#FFD0691C"/>
                     <Inputs:DahuAllInBtn Style="{StaticResource ButtonTowerBG}"
                                      x:Uid="DahuAllInBtnParticiped"
                                      Value="Participer"
@@ -78,14 +85,17 @@
                 </StackPanel>
                 <StackPanel Margin="8" Background="White" Padding="16,32" VerticalAlignment="Top">
                     <TextBlock TextWrapping="Wrap" Style="{StaticResource DahuBiggerTextDark}" HorizontalAlignment="Center" TextAlignment="Center">
-                        <Bold>Cabane en bois</Bold> cherche encore 5 personnes pour participé à creer et développer le projet
+                        <Run Text="{Binding Project.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+                        <Run Text="cherche encore des personnes pour participer à creer et développer le projet"/>
                     </TextBlock>
-                    <Inputs:DahuProgressBar Width="380" Margin="16" ProgressBarForeground="#FF1C9FD0" ProgressBarTitle="Designer" ProgressBarNumberToReash="10/100"/>
+                    <!--<Inputs:DahuProgressBar Width="380" Margin="16" ProgressBarForeground="#FF1C9FD0" ProgressBarTitle="Designer" ProgressBarNumberToReash="10/100"/>-->
                     <Inputs:DahuAllInBtn Style="{StaticResource ButtonTowerBG}"
                                      x:Uid="DahuAllInBtnOfferCompetence"
                                      Value="Offir vos compétences"
                                      ButtonBackground="#FF1C52D0"
+                                         ButtonBindings="{Binding JoinProjectButtonBindings, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                      ButtonImageBackground="Background/citylow.jpg"
+                                         Margin="0,16,0,0"
                                      HorizontalAlignment="Center"/>
 
                 </StackPanel>

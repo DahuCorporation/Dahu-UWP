@@ -28,12 +28,13 @@ namespace DahuUWP.ViewModels.Project.Managing
             dataService = service;
             EditProjectCommand = new RelayCommand(EditProjectRedirect);
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
-            FillFullHorizontalMenu();
+            Project = (DahuUWP.Models.Project)NavigationParam;
+            
         }
 
         private void FillFullHorizontalMenu()
         {
-            FullHorizontalMenu = new Menu();
+            Menu FullHorizontalMenu = new Menu();
             NodeMenu nodeMenu = new NodeMenu()
             {
                 Active = true,
@@ -61,14 +62,18 @@ namespace DahuUWP.ViewModels.Project.Managing
             };
             FullHorizontalMenu.Nodes.Add(nodeMenu3);
 
-            NodeMenu nodeMenu4 = new NodeMenu()
+            if (AppStaticInfo.Account.Uuid == Project.OwnerUuid)
             {
-                Active = false,
-                Title = "Equipe",
-                FuncListener = FullHorizontalMenuNodeClicked,
-                Parameter = typeof(Views.Project.Forum.Forum)
-            };
-            FullHorizontalMenu.Nodes.Add(nodeMenu4);
+                NodeMenu nodeMenu4 = new NodeMenu()
+                {
+                    Active = false,
+                    Title = "Equipe",
+                    FuncListener = FullHorizontalMenuNodeClicked,
+                    Parameter = typeof(Views.Project.Team.Team)
+                };
+                FullHorizontalMenu.Nodes.Add(nodeMenu4);
+            }
+            FullHorizontalMenuYeah = FullHorizontalMenu;
         }
 
         private async void EditProjectRedirect()
@@ -89,9 +94,12 @@ namespace DahuUWP.ViewModels.Project.Managing
         private async void OnPageLoaded()
         {
             Project = (DahuUWP.Models.Project)NavigationParam;
+            
             // Project param for scrum board
             ViewModelLocator.HomePageViewModel.NavigationParam = Project;
             CurrentProjManagingPage = typeof(Views.Project.ScrumBoard.ScrumBoard);
+            FillFullHorizontalMenu();
+
         }
 
         private Type _currentProjManagingPage;
@@ -115,8 +123,8 @@ namespace DahuUWP.ViewModels.Project.Managing
             }
         }
 
-        private Menu _fullHorizontalMenu;
-        public Menu FullHorizontalMenu
+        private  Menu _fullHorizontalMenu;
+        public Menu FullHorizontalMenuYeah
         {
             get { return _fullHorizontalMenu; }
             set

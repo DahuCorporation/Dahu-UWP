@@ -36,6 +36,7 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
         {
             ScrumBoardList = null;
             ScrumBoardColumns = null;
+            ScrumBoards = new List<Models.ScrumBoard>();
             InitLists();
             Project = (DahuUWP.Models.Project)ViewModelLocator.HomePageViewModel.NavigationParam;
             if (Project == null)
@@ -152,6 +153,8 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
                 
                 if (scrumBoard != null)
                 {
+                    if (ScrumBoards == null)
+                        ScrumBoards = new List<Models.ScrumBoard>();
                     ScrumBoards.Add(scrumBoard);
                     NodeMenu node = new NodeMenu()
                     {

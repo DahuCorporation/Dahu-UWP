@@ -21,16 +21,16 @@ namespace DahuUWP.Views.Project.Contribute
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class ContributeWithMoney : Page
+    public sealed partial class ContributePayement : Page
     {
-        public ContributeWithMoney()
+        public ContributePayement()
         {
             this.InitializeComponent();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ((ContributeWithMoneyViewModel)DataContext).NavigationParam = e.Parameter;
+            ((ContributePayementViewModel)DataContext).NavigationParam = e.Parameter;
         }
     }
 }

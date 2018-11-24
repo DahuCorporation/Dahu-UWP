@@ -40,7 +40,7 @@ namespace DahuUWP.Views.Components.Container
         {
             Stepper stepper = d as Stepper;
             DahuTech.Container.Stepper newStepperContent = (DahuTech.Container.Stepper)e.NewValue;
-            stepper.StepperFrame.Navigate(newStepperContent.Steps[0].StepView.View);
+            stepper.StepperFrame.Navigate(newStepperContent.Steps[0].StepView.View, newStepperContent.Steps[0].Project);
 
             //string[] radius = ((string)e.NewValue).Split(',');
 
@@ -57,7 +57,7 @@ namespace DahuUWP.Views.Components.Container
                 case Status.Virgin:
                     if (StepperContent.CheckLastStepIsActiveOrPassed(currentStep))
                     {
-                        StepperFrame.Navigate(currentStep.StepView.View);
+                        StepperFrame.Navigate(currentStep.StepView.View, currentStep.Project);
                         StepperContent.MakeStepActive(currentStep);
                     } else
                     {

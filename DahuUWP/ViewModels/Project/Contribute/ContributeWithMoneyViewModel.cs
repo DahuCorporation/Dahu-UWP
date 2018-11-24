@@ -1,5 +1,12 @@
-﻿using DahuUWP.DahuTech.Selector;
+﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.Inputs;
+using DahuUWP.DahuTech.Selector;
+using DahuUWP.Models;
+using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
+using DahuUWP.Views;
+using DahuUWP.Views.Project;
+using DahuUWP.Views.Project.Contribute;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -19,43 +26,120 @@ namespace DahuUWP.ViewModels.Project.Contribute
         {
             dataService = service;
             OnPageLoadedCommand = new RelayCommand(OnPageLoaded);
-            ChargeCounterparts();
+            //ChargeCounterparts();
         }
 
         private async void OnPageLoaded()
         {
-            
-
+            Project = (DahuUWP.Models.Project)NavigationParam;
+            if (Project == null)
+            {
+                Project = ((FlatSelectorElem)NavigationParam).Project;
+            }
+            CounterpartList = new ObservableCollection<FlatSelectorElem>();
+            foreach (Counterpart elem in Project.Counterparts)
+            {
+                string[] words = elem.Description.Split('.');
+                if (words.Count() > 0)
+                {
+                    FlatSelectorElem flatElem = new FlatSelectorElem
+                    {
+                        Checked = Checked.False,
+                        ContentElem = elem.Description.Replace(words[0], ""),
+                        Price = elem.Amount,
+                        Title = words[0],
+                        Project = Project
+                    };
+                    CounterpartList.Add(flatElem);
+                }
+                else
+                {
+                    FlatSelectorElem flatElem = new FlatSelectorElem
+                    {
+                        Checked = Checked.Blocked,
+                        ContentElem = elem.Description,
+                        Price = elem.Amount,
+                        Title = "",
+                        Project = Project
+                    };
+                    CounterpartList.Add(flatElem);
+                }
+            }
+            BackToProjectButtonBindings = new DahuButtonBindings
+            {
+                RedirectedLink = typeof(ProjectView),
+                Parameter = Project
+            };
+            NextStepAdressButtonBindings = new DahuButtonBindings
+            {
+                FuncListener = LinkToAdress
+            };
         }
 
-        public void ChargeCounterparts()
+        private async void LinkToAdress(object param)
         {
-            FlatSelectorElem counterpartElem1 = new FlatSelectorElem()
+            ProjectManager projectManager = new ProjectManager();
+            
+            bool ok = false;
+            foreach (FlatSelectorElem elem in CounterpartList)
             {
-                Title = "Une place de film",
-                ContentElem = "Un grand merci pour votre participation ! Vous recevrez une place pour aller voir le film près de chez vous.",
-                Price = "10",
-                Checked = Checked.False
-            };
-            FlatSelectorElem counterpartElem2 = new FlatSelectorElem()
+                if (elem.Checked == Checked.True)
+                {
+                    Models.Contribute contribute = new Models.Contribute
+                    {
+                        Amount = "",
+                        FlatSelectorElem = elem,
+                        Project = Project
+                    };
+                    ok = true;
+                    HomePage.DahuFrame.Navigate(typeof(ContributeAdressCounterparty), contribute);
+                }
+            }
+            try
             {
-                Title = "Sac à main",
-                ContentElem = "Un magnifique sac \"C'est Ma Cabane !\" (en exclusivité dans cette contrepartie) + un badge \"C'est Ma Cabane !\"",
-                Price = "20",
-                Checked = Checked.True
-            };
-            FlatSelectorElem counterpartElem3 = new FlatSelectorElem()
+                if (!String.IsNullOrWhiteSpace(Amount))
+                {
+                    int a = Convert.ToInt32(Amount);
+                    if (a > 0)
+                    {
+                        Models.Contribute contribute = new Models.Contribute
+                        {
+                            Amount = Amount,
+                            FlatSelectorElem = null,
+                            Project = Project
+                        };
+                        HomePage.DahuFrame.Navigate(typeof(ContributeAdressCounterparty), contribute);
+                    }
+                        
+                    ok = true;
+                }
+            }
+            catch (Exception ex)
             {
-                Title = "Visiter une cabane",
-                ContentElem = "Venez visiter une de nos construction et découvrez comment nous mettons en place nos cabanes. Un diner vous est offert.",
-                Price = "45",
-                Checked = Checked.False
-            };
-            List<FlatSelectorElem> tempFlatSelectorElemList = new List<FlatSelectorElem>();
-            tempFlatSelectorElemList.Add(counterpartElem1);
-            tempFlatSelectorElemList.Add(counterpartElem2);
-            tempFlatSelectorElemList.Add(counterpartElem3);
-            CounterpartList = new ObservableCollection<FlatSelectorElem>(tempFlatSelectorElemList);
+                AppGeneral.UserInterfaceStatusDico["Your amount is not a number."].Display();
+            }
+            if (!ok)
+                AppGeneral.UserInterfaceStatusDico["You have not selected anything."].Display();
+        }
+
+        private DahuButtonBindings _backToProjectButtonBindings;
+        public DahuButtonBindings BackToProjectButtonBindings
+        {
+            get { return _backToProjectButtonBindings; }
+            set
+            {
+                NotifyPropertyChanged(ref _backToProjectButtonBindings, value);
+            }
+        }
+
+        private DahuButtonBindings _nextStepAdressButtonBindings;
+        public DahuButtonBindings NextStepAdressButtonBindings
+        {
+            get { return _nextStepAdressButtonBindings; }
+            set
+            {
+                NotifyPropertyChanged(ref _nextStepAdressButtonBindings, value);
+            }
         }
 
         private ObservableCollection<FlatSelectorElem> _counterpartList;
@@ -65,6 +149,26 @@ namespace DahuUWP.ViewModels.Project.Contribute
             set
             {
                 NotifyPropertyChanged(ref _counterpartList, value);
+            }
+        }
+
+        private DahuUWP.Models.Project _project;
+        public DahuUWP.Models.Project Project
+        {
+            get { return _project; }
+            set
+            {
+                NotifyPropertyChanged(ref _project, value);
+            }
+        }
+
+        private string _amount;
+        public string Amount
+        {
+            get { return _amount; }
+            set
+            {
+                NotifyPropertyChanged(ref _amount, value);
             }
         }
     }

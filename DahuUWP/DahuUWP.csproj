@@ -115,7 +115,9 @@
     <Compile Include="DahuTech\Project\Forum\TopicMessageContainer.cs" />
     <Compile Include="DahuTech\Project\MediumProjectContainer.cs" />
     <Compile Include="DahuTech\Selector\FlatSelectorElem.cs" />
+    <Compile Include="Models\CardCharge.cs" />
     <Compile Include="Models\Chat.cs" />
+    <Compile Include="Models\Contribute.cs" />
     <Compile Include="Models\Counterpart.cs" />
     <Compile Include="Models\Media.cs" />
     <Compile Include="Models\ScrumBoard.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="ViewModels\Profil\Public\PublicProfilViewModel.cs" />
     <Compile Include="ViewModels\Project\Chat\ChatViewModel.cs" />
     <Compile Include="ViewModels\Project\Contribute\ContributeAdressCounterpartyViewModel.cs" />
+    <Compile Include="ViewModels\Project\Contribute\ContributePayementViewModel.cs" />
     <Compile Include="ViewModels\Project\Contribute\ContributeSuccessPaymentViewModel.cs" />
     <Compile Include="ViewModels\Project\Contribute\ContributeViewModel.cs" />
     <Compile Include="ViewModels\Project\Contribute\ContributeWithMoneyViewModel.cs" />
@@ -176,6 +179,7 @@
     <Compile Include="ViewModels\Project\MyProjectsViewModel.cs" />
     <Compile Include="ViewModels\Project\ProjectViewViewModel.cs" />
     <Compile Include="ViewModels\Project\ScrumBoard\ScrumBoardViewModel.cs" />
+    <Compile Include="ViewModels\Project\Team\TeamViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Search\MainResearchViewModel.cs" />
     <Compile Include="Views\Components\Container\AddressBook.xaml.cs">
@@ -283,6 +287,9 @@
     <Compile Include="Views\Project\Contribute\ContributeAdressCounterparty.xaml.cs">
       <DependentUpon>ContributeAdressCounterparty.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Project\Contribute\ContributePayement.xaml.cs">
+      <DependentUpon>ContributePayement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Project\Contribute\ContributeSuccessPayment.xaml.cs">
       <DependentUpon>ContributeSuccessPayment.xaml</DependentUpon>
     </Compile>
@@ -354,6 +361,9 @@
     </Compile>
     <Compile Include="Views\Project\MyProjects.xaml.cs">
       <DependentUpon>MyProjects.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project\Team\Team.xaml.cs">
+      <DependentUpon>Team.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
@@ -662,6 +672,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Project\Contribute\ContributePayement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Project\Contribute\ContributeSuccessPayment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -755,6 +769,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Project\MyProjects.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project\Team\Team.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

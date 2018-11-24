@@ -75,6 +75,11 @@ namespace DahuUWP.Models.ModelManager
                         {
                             proj.AmountGoal = (Int32.Parse(proj.AmountGoal) / 100).ToString();
                         }
+                        if (proj.AmountActual.Length > 2)
+                        {
+                            proj.AmountActual = (Int32.Parse(proj.AmountActual) / 100).ToString();
+                        }
+                        
                         proj.Media = await mediaManager.GetSpecificMedia(proj.Uuid);
                         return proj;
                 }
@@ -109,6 +114,8 @@ namespace DahuUWP.Models.ModelManager
                 {
                     case 200:
                         AppGeneral.UserInterfaceStatusDico["Project created successfully."].Display(((Project)project).Name, true);
+                        Project proj = resp.ToObject<Project>();
+                        await ChangeState(proj, proj.Uuid, "start");
                         return true;
                     case 400:
                         // todo : Attention la description a une taille minimum
@@ -262,6 +269,78 @@ namespace DahuUWP.Models.ModelManager
                         return false;
                     default:
                         AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
+        }
+
+        public async Task<bool> ChangeUserState(string projectUuid, string memberUuid, string state)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                //http://lumen.dahu.t17.ovh/api/forward/projects/:project_uuid/members/:user_uuid
+                string requestUri = "projects/" + projectUuid + "/members/" + memberUuid;
+                JObject descriptionObj = new JObject()
+                {
+                    { "status", state }
+                };
+                HttpResponseMessage result = await apiService.Put(descriptionObj.ToString(Formatting.None), requestUri, true); // two times because if only the description changes the back send false
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["User accepted."].Display();
+                        return true;
+                    case 400:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                    default:
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
+        }
+
+        public async Task<bool> ChangeState(object obj, string projectUuid, string state)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "projects/" + projectUuid;
+                JObject jObject = Serialize(obj);
+                JObject descriptionObj = new JObject()
+                {
+                    { "description", ((Project)obj).Description },
+                    { "amount_goal", ((Project)obj).AmountGoal + "00" },
+                    { "state", state }
+                };
+                string jsonObject = descriptionObj.ToString(Formatting.None);
+                 //result = await apiService.Put(jsonObject, requestUri); // two times because if only the description changes the back send false
+                HttpResponseMessage result = await apiService.Put(jsonObject, requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["Informations modified."].Display();
+                        return true;
+                    case 400:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                    default:
                         return false;
                 }
             }

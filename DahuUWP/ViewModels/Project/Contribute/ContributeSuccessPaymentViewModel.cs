@@ -1,4 +1,5 @@
-﻿using DahuUWP.Services;
+﻿using DahuUWP.DahuTech.Selector;
+using DahuUWP.Services;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,18 @@ namespace DahuUWP.ViewModels.Project.Contribute
 
         private async void OnPageLoaded()
         {
+            if (NavigationParam is Models.Contribute)
+                Contribute = (Models.Contribute)NavigationParam;
+        }
+
+        private Models.Contribute _contribute;
+        public Models.Contribute Contribute
+        {
+            get { return _contribute; }
+            set
+            {
+                NotifyPropertyChanged(ref _contribute, value);
+            }
         }
     }
 }

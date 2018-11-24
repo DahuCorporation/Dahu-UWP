@@ -3,7 +3,9 @@ using DahuUWP.DahuTech.Inputs;
 using DahuUWP.DahuTech.Menu;
 using DahuUWP.DahuTech.Project.Forum;
 using DahuUWP.Models;
+using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
+using DahuUWP.Services.ModelManager;
 using DahuUWP.Views.Components.Forum;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -32,73 +34,116 @@ namespace DahuUWP.ViewModels.Project.Forum
 
         private async void OnPageLoaded()
         {
+            ProjectManager projectManager = new ProjectManager();
+            Project = await projectManager.ChargeOneProject(((DahuUWP.Models.Project)ViewModelLocator.HomePageViewModel.NavigationParam).Uuid);
             InitMenuWithSearch();
-            GetMessageOfTopic(" Laviere");
+            SendMessageButtonBindings = new DahuButtonBindings
+            {
+                FuncListener = SendMessageOfTopic
+            };
         }
 
-        private void MenuWithSearchNodeClicked(object parameter)
+        private async void MenuWithSearchNodeClicked(object parameter)
         {
-            GetMessageOfTopic(" Rike");
+            GetMessageOfTopic(parameter as Topic);
+        }
+            
+        private async void SendMessageOfTopic(object param)
+        {
+            if (!String.IsNullOrWhiteSpace(MessageToSend))
+            {
+                foreach (NodeMenu nodeMenu in MenuWithSearch.Nodes)
+                {
+                    if (nodeMenu.Active)
+                    {
+                        ForumManager forumManager = new ForumManager();
+                        await forumManager.CreateMessage(MessageToSend, Project.Uuid, (nodeMenu.Parameter as Topic).Uuid);
+
+                        UserManager userManager = new UserManager();
+                        User user = await userManager.Charge(AppStaticInfo.Account.Uuid);
+                        TopicMessage message = new TopicMessage()
+                        {
+                            Content = MessageToSend
+                        };
+                        DahuUWP.DahuTech.Project.Forum.TopicMessageContainer topicMessage = new DahuTech.Project.Forum.TopicMessageContainer()
+                        {
+                            Message = message,
+                            User = user
+                        };
+                        TopicMessages.Add(topicMessage);
+                    }
+                }
+                
+            }
+
+
         }
 
-        private void GetMessageOfTopic(string test)
+        private async void GetMessageOfTopic(Topic topic)
         {
             //TopicMessages.d
+            if (topic == null)
+                return;
             TopicMessages = new ObservableCollection<DahuTech.Project.Forum.TopicMessageContainer>();
-            User user1 = new User()
+            ForumManager forumManager = new ForumManager();
+            List<TopicMessage> topicList = await forumManager.ChargeAllMessageOfTopics(Project.Uuid, topic.Uuid);
+            if (topicList != null)
             {
-                FirstName = "Julie",
-                LastName = "Laracaille" + test
-            };
-            TopicMessage message1 = new TopicMessage()
-            {
-                Content = "Bonjour je suis le message n°1",
-            };
-            DahuUWP.DahuTech.Project.Forum.TopicMessageContainer topicMessage1 = new DahuTech.Project.Forum.TopicMessageContainer()
-            {
-                Message = message1,
-                User = user1
-            };
+                foreach (TopicMessage elem in topicList)
+                {
+                    UserManager userManager = new UserManager();
+                    User user = await userManager.Charge(elem.AccountUuid);
+                    TopicMessage message = new TopicMessage()
+                    {
+                        Content = elem.Content
+                    };
+                    DahuUWP.DahuTech.Project.Forum.TopicMessageContainer topicMessage = new DahuTech.Project.Forum.TopicMessageContainer()
+                    {
+                        Message = message,
+                        User = user
+                    };
+                    TopicMessages.Add(topicMessage);
+                }
+            }
+        //User user2 = new User()
+        //    {
+        //        FirstName = "Riclu",
+        //        LastName = "Moufle"
+        //    };
+        //    TopicMessage message2 = new TopicMessage()
+        //    {
+        //        Content = "Hola la bas tout va bien ?",
+        //    };
+        //    DahuUWP.DahuTech.Project.Forum.TopicMessageContainer topicMessage2 = new DahuTech.Project.Forum.TopicMessageContainer()
+        //    {
+        //        Message = message2,
+        //        User = user2
+        //    };
 
-            User user2 = new User()
-            {
-                FirstName = "Riclu",
-                LastName = "Moufle"
-            };
-            TopicMessage message2 = new TopicMessage()
-            {
-                Content = "Hola la bas tout va bien ?",
-            };
-            DahuUWP.DahuTech.Project.Forum.TopicMessageContainer topicMessage2 = new DahuTech.Project.Forum.TopicMessageContainer()
-            {
-                Message = message2,
-                User = user2
-            };
+        //    User user3 = new User()
+        //    {
+        //        FirstName = "Paul",
+        //        LastName = "Kiry"
+        //    };
+        //    TopicMessage message3 = new TopicMessage()
+        //    {
+        //        Content = "Ah ouais la forme mon gars, j'ai passé une journée de fou a essayé de tous faire fonctionné. Une vraie galère mais finalement j'ai réussi à faire tourné la machine. Ça roule très bien en ce moment.",
+        //    };
+        //    DahuUWP.DahuTech.Project.Forum.TopicMessageContainer topicMessage3 = new DahuTech.Project.Forum.TopicMessageContainer()
+        //    {
+        //        Message = message3,
+        //        User = user3
+        //    };
 
-            User user3 = new User()
-            {
-                FirstName = "Paul",
-                LastName = "Kiry"
-            };
-            TopicMessage message3 = new TopicMessage()
-            {
-                Content = "Ah ouais la forme mon gars, j'ai passé une journée de fou a essayé de tous faire fonctionné. Une vraie galère mais finalement j'ai réussi à faire tourné la machine. Ça roule très bien en ce moment.",
-            };
-            DahuUWP.DahuTech.Project.Forum.TopicMessageContainer topicMessage3 = new DahuTech.Project.Forum.TopicMessageContainer()
-            {
-                Message = message3,
-                User = user3
-            };
-
-            TopicMessages.Add(topicMessage1);
-            TopicMessages.Add(topicMessage2);
-            TopicMessages.Add(topicMessage3);
-            TopicMessages.Add(topicMessage1);
-            TopicMessages.Add(topicMessage2);
-            TopicMessages.Add(topicMessage3);
-            TopicMessages.Add(topicMessage1);
-            TopicMessages.Add(topicMessage2);
-            TopicMessages.Add(topicMessage3);
+        //    //TopicMessages.Add(topicMessage1);
+        //    TopicMessages.Add(topicMessage2);
+        //    TopicMessages.Add(topicMessage3);
+        //    //TopicMessages.Add(topicMessage1);
+        //    TopicMessages.Add(topicMessage2);
+        //    TopicMessages.Add(topicMessage3);
+        //    //TopicMessages.Add(topicMessage1);
+        //    TopicMessages.Add(topicMessage2);
+        //    TopicMessages.Add(topicMessage3);
         }
 
         public async void AddTopicNodeClicked(object parameter)
@@ -106,43 +151,61 @@ namespace DahuUWP.ViewModels.Project.Forum
             var res = new ResourceLoader();
             InputStringDialog dialog = new InputStringDialog();
             string name = await dialog.InputStringDialogAsync(res.GetString("AddATopic"), res.GetString("TopicName"), res.GetString("Add"), res.GetString("Cancel"));
+            if (!String.IsNullOrWhiteSpace(name))
+            {
+                ForumManager forumManager = new ForumManager();
+                Topic topic = await forumManager.CreateTopic(name, Project.Uuid);
+                if (topic != null)
+                {
+                    NodeMenu node = new NodeMenu()
+                    {
+                        Title = topic.Name,
+                        NodeTheme = Theme.Dark,
+                        Active = false,
+                        FuncListener = MenuWithSearchNodeClicked,
+                        Parameter = topic
+                    };
+                    MenuWithSearch.Nodes.Add(node);
+                }
+            }
         }
 
-        private void InitMenuWithSearch()
+        private async void InitMenuWithSearch()
         {
-            MenuWithSearch = new MenuWithSearchAndButtonsContainer();
-            MenuWithSearch.Name = "Topics";
-            MenuWithSearch.MenuTheme = Theme.Dark;
-            NodeMenu node = new NodeMenu()
+            MenuWithSearch = new MenuWithSearchAndButtonsContainer
             {
-                Title = "General",
-                NodeTheme = Theme.Dark,
-                Active = true,
-                FuncListener = MenuWithSearchNodeClicked
+                Name = "Topics",
+                MenuTheme = Theme.Dark
             };
-            NodeMenu node2 = new NodeMenu()
+            ForumManager forumManager = new ForumManager();
+            List<Topic> topicList = await forumManager.ChargeAllTopicsOfProject(Project.Uuid);
+            if (topicList != null)
             {
-                Title = "Design",
-                NodeTheme = Theme.Dark,
-                Active = false,
-                FuncListener = MenuWithSearchNodeClicked
-            };
-            NodeMenu node3 = new NodeMenu()
+                foreach (Topic elem in topicList)
+                {
+                    NodeMenu node = new NodeMenu()
+                    {
+                        Title = elem.Name,
+                        NodeTheme = Theme.Dark,
+                        Active = false,
+                        FuncListener = MenuWithSearchNodeClicked,
+                        Parameter = elem
+                    };
+                    MenuWithSearch.Nodes.Add(node);
+                }
+            }
+            if (MenuWithSearch.Nodes.Count > 0)
             {
-                Title = "User needs",
-                NodeTheme = Theme.Dark,
-                Active = false,
-                FuncListener = MenuWithSearchNodeClicked
-            };
+                MenuWithSearch.Nodes[0].Active = true;
+                GetMessageOfTopic(MenuWithSearch.Nodes[0].Parameter as Topic);
+            }
             NodeMenu nodeButton = new NodeMenu()
             {
                 Title = "+ Nouveau topic",
                 NodeTheme = Theme.Dark,
                 FuncListener = AddTopicNodeClicked
             };
-            MenuWithSearch.Nodes.Add(node);
-            MenuWithSearch.Nodes.Add(node2);
-            MenuWithSearch.Nodes.Add(node3);
+
             MenuWithSearch.Buttons.Add(nodeButton);
         }
 
@@ -156,6 +219,16 @@ namespace DahuUWP.ViewModels.Project.Forum
             }
         }
 
+        private DahuUWP.Models.Project _project;
+        public DahuUWP.Models.Project Project
+        {
+            get { return _project; }
+            set
+            {
+                NotifyPropertyChanged(ref _project, value);
+            }
+        }
+
         private ObservableCollection<DahuUWP.DahuTech.Project.Forum.TopicMessageContainer> _topicMessages;
         public ObservableCollection<DahuUWP.DahuTech.Project.Forum.TopicMessageContainer> TopicMessages
         {
@@ -163,6 +236,26 @@ namespace DahuUWP.ViewModels.Project.Forum
             set
             {
                 NotifyPropertyChanged(ref _topicMessages, value);
+            }
+        }
+
+        private DahuButtonBindings _sendMessageButtonBindings;
+        public DahuButtonBindings SendMessageButtonBindings
+        {
+            get { return _sendMessageButtonBindings; }
+            set
+            {
+                NotifyPropertyChanged(ref _sendMessageButtonBindings, value);
+            }
+        }
+
+        private string _messageToSend;
+        public string MessageToSend
+        {
+            get { return _messageToSend; }
+            set
+            {
+                NotifyPropertyChanged(ref _messageToSend, value);
             }
         }
 

@@ -1,5 +1,4 @@
-﻿using DahuUWP.ViewModels.Project.Contribute;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,21 +15,16 @@ using Windows.UI.Xaml.Navigation;
 
 // Pour plus d'informations sur le modèle d'élément Page vierge, consultez la page https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace DahuUWP.Views.Project.Contribute
+namespace DahuUWP.Views.Project.Team
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class ContributeWithMoney : Page
+    public sealed partial class Team : Page
     {
-        public ContributeWithMoney()
+        public Team()
         {
             this.InitializeComponent();
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            ((ContributeWithMoneyViewModel)DataContext).NavigationParam = e.Parameter;
         }
     }
 }

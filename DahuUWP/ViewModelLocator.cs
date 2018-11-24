@@ -12,6 +12,7 @@ using DahuUWP.ViewModels.Project.Contribute;
 using DahuUWP.ViewModels.Project.Forum;
 using DahuUWP.ViewModels.Project.Managing;
 using DahuUWP.ViewModels.Project.ScrumBoard;
+using DahuUWP.ViewModels.Project.Team;
 using DahuUWP.ViewModels.Search;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -65,9 +66,11 @@ namespace DahuUWP
             SimpleIoc.Default.Register<ProjectViewViewModel>();
             SimpleIoc.Default.Register<ContributeViewModel>();
             SimpleIoc.Default.Register<ContributeAdressCounterpartyViewModel>();
+            SimpleIoc.Default.Register<ContributePayementViewModel>();
             SimpleIoc.Default.Register<ContributeSuccessPaymentViewModel>();
             SimpleIoc.Default.Register<ContributeWithMoneyViewModel>();
             SimpleIoc.Default.Register<ChatViewModel>();
+            SimpleIoc.Default.Register<TeamViewModel>();
 
 
             //Search
@@ -116,6 +119,16 @@ namespace DahuUWP
         public EditProjectMembersViewModel EditProjectMembersVM
         {
             get { CurrentViewModel = ServiceLocator.Current.GetInstance<EditProjectMembersViewModel>(); return (EditProjectMembersViewModel)CurrentViewModel; }
+        }
+
+        public TeamViewModel TeamVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<TeamViewModel>(); return (TeamViewModel)CurrentViewModel; }
+        }
+
+        public ContributePayementViewModel ContributePayementVM
+        {
+            get { CurrentViewModel = ServiceLocator.Current.GetInstance<ContributePayementViewModel>(); return (ContributePayementViewModel)CurrentViewModel; }
         }
 
         public EditProjectCounterpartsViewModel EditProjectCounterpartsVM

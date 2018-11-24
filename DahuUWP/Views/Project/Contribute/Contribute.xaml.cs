@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DahuUWP.ViewModels.Project.Contribute;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,11 @@ namespace DahuUWP.Views.Project.Contribute
         public Contribute()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ((ContributeViewModel)DataContext).NavigationParam = e.Parameter;
         }
     }
 }

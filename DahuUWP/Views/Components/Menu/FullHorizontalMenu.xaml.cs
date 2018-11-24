@@ -36,6 +36,12 @@ namespace DahuUWP.Views.Components.Menu
         private void CreateMenu()
         {
             int columnNb = 0;
+            int i = 0;
+            while (i != MenuGrid.ColumnDefinitions.Count)
+            {
+                MenuGrid.ColumnDefinitions.Remove(MenuGrid.ColumnDefinitions[i]);
+            }
+            
             foreach (NodeMenu node in Menu.Nodes)
             {
                 TextBlock textBlock = new TextBlock

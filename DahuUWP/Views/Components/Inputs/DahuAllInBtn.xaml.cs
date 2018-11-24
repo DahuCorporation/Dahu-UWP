@@ -170,6 +170,19 @@ namespace DahuUWP.Views.Components.Inputs
         }
         public static readonly DependencyProperty ButtonBindingsProperty = DependencyProperty.Register("ButtonBindings", typeof(DahuButtonBindings), typeof(DahuAllInBtn), null);
 
+        public object Param
+        {
+            get
+            {
+                return (object)GetValue(ParamProperty);
+            }
+            set
+            {
+                SetValue(ParamProperty, value);
+            }
+        }
+        public static readonly DependencyProperty ParamProperty = DependencyProperty.Register("Param", typeof(object), typeof(DahuAllInBtn), null);
+
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             if (ButtonBindings != null)
@@ -187,6 +200,8 @@ namespace DahuUWP.Views.Components.Inputs
             if (ButtonBindings != null
                 && !ButtonBindings.IsBusy)
             {
+                if (ButtonBindings.Parameter == null && Param != null)
+                    ButtonBindings.Parameter = Param;
                 ButtonBindings.LinkIt();
                 ////TappedCommand();
                 //if (ButtonBindings.TappedFuncListener != null)

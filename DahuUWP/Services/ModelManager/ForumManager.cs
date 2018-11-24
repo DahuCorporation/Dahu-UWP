@@ -19,27 +19,29 @@ namespace DahuUWP.Services.ModelManager
         /// <param name="obj"></param>
         /// <param name="projectId"></param>
         /// <returns></returns>
-        public async Task<Topic> CreateTopic(object topic, string projectId)
+        public async Task<Topic> CreateTopic(string topic, string projectId)
         {
             try
             {
                 APIService apiService = new APIService();
                 if (String.IsNullOrWhiteSpace(projectId))
                     return null;
-                string requestUri = "projects/" + projectId + "forum/";
+                string requestUri = "projects/" + projectId + "/forum";
                 JObject jObject = new JObject
                 {
-                    { "name", ((Topic)topic).Name }
+                    { "name", topic }
                 };
-                string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri);
+                HttpResponseMessage result = await apiService.Post(jObject, requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
-                    case 201:
-                        AppGeneral.UserInterfaceStatusDico["Topic created successfully."].Display((JObject)resp["data"]["name"]);
-                        return ((JObject)resp["data"]).ToObject<Topic>();
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["Topic created successfully."].Display();
+                        return ((JObject)resp).ToObject<Topic>();
+                    case 422:
+                        AppGeneral.UserInterfaceStatusDico["Topic already created."].Display();
+                        return null;
                     case 400:
                         AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
                         return null;
@@ -61,26 +63,24 @@ namespace DahuUWP.Services.ModelManager
         /// <param name="obj"></param>
         /// <param name="projectId"></param>
         /// <returns></returns>
-        public async Task<bool> CreateMessage(object message, string projectId, string topicId)
+        public async Task<bool> CreateMessage(string message, string projectId, string topicId)
         {
             try
             {
                 APIService apiService = new APIService();
                 if (String.IsNullOrWhiteSpace(projectId))
                     return false;
-                string requestUri = "projects/" + projectId + "forum/" + topicId;
+                string requestUri = "projects/" + projectId + "/forum/" + topicId;
                 JObject jObject = new JObject
                 {
-                    { "content", ((TopicMessage)message).Content }
+                    { "content", message }
                 };
-                string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Post(jsonObject, requestUri);
+                HttpResponseMessage result = await apiService.Post(jObject, requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
                 var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
-                    case 201:
-                        AppGeneral.UserInterfaceStatusDico["Topic message created successfully."].Display(((TopicMessage)message).Content);
+                    case 200:
                         return true; 
                     case 400:
                         AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
@@ -108,21 +108,29 @@ namespace DahuUWP.Services.ModelManager
             {
                 List<Topic> topicList = new List<Topic>();
                 APIService apiService = new APIService();
-                string requestUri = "projects/" + projectId + "/forum/";
-                HttpResponseMessage result = await apiService.Get(requestUri);
+                string requestUri = "projects/" + projectId + "/forum";
+                HttpResponseMessage result = await apiService.Get(requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
-                switch ((int)result.StatusCode)
+                
+                if (responseBody != "[]")
                 {
-                    case 200:
-                        // Regarder si c'est pas encore le problème des 1,2,3 dans la requete de retour
-                        JToken jProj = resp["data"].First;
-                        for (int i = 0; jProj != null; i++)
-                        {
-                            topicList.Add(jProj.ToObject<Topic>());
-                            jProj = jProj.Next;
-                        }
-                        return topicList;
+                    var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                    switch ((int)result.StatusCode)
+                    {
+                        case 200:
+                            // Regarder si c'est pas encore le problème des 1,2,3 dans la requete de retour
+                            JToken jProj = resp.First;
+                            for (int i = 0; jProj != null; i++)
+                            {
+                                foreach (var child in jProj.Children())
+                                {
+                                    var topic = child.ToObject<Topic>();
+                                    topicList.Add(topic);
+                                }
+                                jProj = jProj.Next;
+                            }
+                            return topicList;
+                    }
                 }
                 return null;
             }
@@ -146,20 +154,27 @@ namespace DahuUWP.Services.ModelManager
                 List<TopicMessage> topicMessageList = new List<TopicMessage>();
                 APIService apiService = new APIService();
                 string requestUri = "projects/" + projectId + "/forum/" + topicId;
-                HttpResponseMessage result = await apiService.Get(requestUri);
+                HttpResponseMessage result = await apiService.Get(requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
-                switch ((int)result.StatusCode)
+                if (responseBody != "[]")
                 {
-                    case 200:
-                        // Regarder si c'est pas encore le problème des 1,2,3 dans la requete de retour
-                        JToken jProj = resp["data"].First;
-                        for (int i = 0; jProj != null; i++)
-                        {
-                            topicMessageList.Add(jProj.ToObject<TopicMessage>());
-                            jProj = jProj.Next;
-                        }
-                        return topicMessageList;
+                    var resp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(responseBody);
+                    switch ((int)result.StatusCode)
+                    {
+                        case 200:
+                            // Regarder si c'est pas encore le problème des 1,2,3 dans la requete de retour
+                            JToken jProj = resp.First;
+                            for (int i = 0; jProj != null; i++)
+                            {
+                                foreach (var child in jProj.Children())
+                                {
+                                    var topic = child.ToObject<TopicMessage>();
+                                    topicMessageList.Add(topic);
+                                }
+                                jProj = jProj.Next;
+                            }
+                            return topicMessageList;
+                    }
                 }
                 return null;
             }

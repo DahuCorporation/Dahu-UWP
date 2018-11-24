@@ -56,9 +56,9 @@ namespace DahuUWP.Services.ModelManager
                 AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
                 return counterpartList;
             }
-        } 
+        }
 
-        public async Task<Counterpart> Create(string amount, string description, string projectId )
+        public async Task<Counterpart> Create(string amount, string description, string projectId)
         {
             Counterpart counterpart = new Counterpart();
             try
@@ -97,6 +97,44 @@ namespace DahuUWP.Services.ModelManager
                 System.Diagnostics.Debug.Fail(ex.ToString());
                 AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
                 return counterpart;
+            }
+        }
+
+        public async Task<bool> CreateCharge(CardCharge cardCharge, string projectId)
+        {
+            Counterpart counterpart = new Counterpart();
+            try
+            {
+                cardCharge.Amount = cardCharge.Amount + "00";
+                APIService apiService = new APIService();
+                string requestUri = "projects/" + projectId + "/charges";
+
+                JObject jObject = (JObject)JToken.FromObject(cardCharge);
+                //"{\"description\": \"bla bla bla 20\",\"amount\": \"20\"}"
+                //string jsonObject = jObject.ToString(Formatting.None);
+                HttpResponseMessage result = await apiService.Post(jObject, requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        AppGeneral.UserInterfaceStatusDico["Your payment has been accepted."].Display();
+                        return true;
+                    case 400:
+                        // todo : Attention la description a une taille minimum
+                        //TODO : différencier les erreurs, si c'est une erreur de projet deja existant ou si le uuid est incorect...
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                    default:
+                        AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
             }
         }
 

@@ -69,9 +69,9 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
                         <Rectangle Fill="#d4d4d4" Height="1"/>
-                        <Inputs:DahuAllInInputTxt Grid.Column="0" VerticalAlignment="Top" x:Name="DahuAllInInputTxt_SendMsgPlaceholder" InputTxtHeight="47"  x:Uid="DahuAllInInputTxt_SendMsgPlaceholder" InputTxtPlaceholder="Write a message..." Width="Auto" InputTxtValue="Bonjour je suis la valeur"  InputTxtBackground="White"/>
+                        <Inputs:DahuAllInInputTxt Grid.Column="0" VerticalAlignment="Top" x:Name="DahuAllInInputTxt_SendMsgPlaceholder" InputTxtHeight="47"  x:Uid="DahuAllInInputTxt_SendMsgPlaceholder" InputTxtPlaceholder="Write a message..." Width="Auto" InputTxtValue="{Binding MessageToSend, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  InputTxtBackground="White"/>
                     </StackPanel>
-                    <Inputs:DahuAllInBtn x:Name="DahuAllInBtn_Send" x:Uid="DahuAllInBtn_Send" VerticalAlignment="Top" Grid.Column="1" Value="Send" ValueFontSize="17" ValueForeground="#FFFFFF" ValueFontWeight="SemiBold" ButtonBackground="#D0691C"/>
+                    <Inputs:DahuAllInBtn x:Name="DahuAllInBtn_Send" x:Uid="DahuAllInBtn_Send" VerticalAlignment="Top" Grid.Column="1" Value="Send" ValueFontSize="17" ValueForeground="#FFFFFF" ValueFontWeight="SemiBold" ButtonBackground="#D0691C" ButtonBindings="{Binding SendMessageButtonBindings, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 </Grid>
             </Grid>
         </Grid>

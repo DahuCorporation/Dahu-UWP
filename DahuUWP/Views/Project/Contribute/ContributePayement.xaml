@@ -1,0 +1,110 @@
+﻿<Page
+    x:Class="DahuUWP.Views.Project.Contribute.ContributePayement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DahuUWP.Views.Project.Contribute"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+        xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
+    xmlns:Container="using:DahuUWP.Views.Components.Container"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    DataContext="{Binding ContributePayementVM, Source={StaticResource Locator}}">
+
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:EventTriggerBehavior.Actions>
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedBaseCommand}" />
+                <Core:InvokeCommandAction Command="{Binding OnPageLoadedCommand}" />
+            </Core:EventTriggerBehavior.Actions>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
+    <Grid Style="{StaticResource BodyGrid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1">
+            <Inputs:GraylouButton x:Uid="GraylouButton_ReturnToProject"
+                                          Icon="return"
+                                          Value="Back to project"
+                                  ButtonBindings="{Binding BackToProjectButtonBindings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          Margin="0,0,0,16"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" x:Name="TextBlockPayement" Style="{StaticResource PageTitle}" Margin="0,0,0,16" VerticalAlignment="Center">
+                    <Run x:Uid="TextBlockPayement" Text="Thanks to contribute"></Run>
+                </TextBlock>
+                <Grid Grid.Column="1" Height="2" Background="#BEBEBE" VerticalAlignment="Center" BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="16,-8,0,0"></Grid>
+            </Grid>
+            <StackPanel Margin="0,0,0,16" Width="500">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Inputs:DahuInputText1 x:Name="DahuInput1_TitulaireCarteLastName"
+                                           Grid.Column="0"
+                                           x:Uid="DahuInput1_TitulaireCarteLastName" InputWidth="500"
+                                           InputPlaceholder="Titulaire carte"
+                                           Margin="0,12,0,0"
+                                           InputScope="EmailSmtpAddress"
+                                           TextValue="{Binding CardCharge.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Inputs:DahuInputText1 x:Name="DahuInput1_TitulaireCarteFirstName"
+                                           Grid.Column="2"
+                                           x:Uid="DahuInput1_TitulaireCarteFirstName" InputWidth="500"
+                                           InputPlaceholder="Titulaire carte"
+                                           Margin="0,12,0,0"
+                                           InputScope="EmailSmtpAddress"
+                                           TextValue="{Binding CardCharge.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Inputs:DahuInputText1 x:Name="DahuInput1_CardNumber"
+                                           x:Uid="DahuInput1_CardNumber" InputWidth="500"
+                                           InputPlaceholder="Numéro de la carte"
+                                           InputScope="EmailSmtpAddress"
+                                           TextValue="{Binding CardCharge.CardNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Inputs:DahuInputText1 x:Name="DahuInput1_ExpirationDateMounth"
+                                           x:Uid="DahuInput1_ExpirationDateMounth"
+                                           InputWidth="500"
+                                       Grid.Column="0"
+                                           InputPlaceholder="Mois d'expiration (ex: 05)"
+                                           TextValue="{Binding CardCharge.ExpMonth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Inputs:DahuInputText1 x:Name="DahuInput1_ExpirationDateYear"
+                                           x:Uid="DahuInput1_ExpirationDateYear"
+                                           InputWidth="500"
+                                       Grid.Column="2"
+                                           InputPlaceholder="Année d'expiration (ex: 20)"
+                                           TextValue="{Binding CardCharge.ExpYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Inputs:DahuInputText1 x:Name="DahuInput1_CVC"
+                                           x:Uid="DahuInput1_CVC"
+                                           InputWidth="500"
+                                           InputPlaceholder="CVC"
+                                           TextValue="{Binding CardCharge.Cvc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Inputs:DahuAllInBtn Style="{StaticResource ButtonTowerBG}"
+                                 Margin="0,18,0,0"
+                                 x:Uid="DahuAllInBtn_Contribute"
+                                 Value="Contribuer !"
+                                 ButtonBackground="#FFD0691C"
+                                 ButtonImageBackground="Background/citylow.jpg"
+                                 HorizontalAlignment="Center"
+                                 ButtonBindings="{Binding ContributeMoneyButtonBindings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+    <!--<StackPanel  Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,20" Width="500">
+
+        </StackPanel>-->
+</Page>

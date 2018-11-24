@@ -61,5 +61,8 @@ namespace DahuUWP.Models
         public List<Skill> Skills { get; set; }
 
         public Media Media { get; set; }
+
+        [JsonProperty(PropertyName = "status")]
+        public string Status { get; set; }
     }
 }

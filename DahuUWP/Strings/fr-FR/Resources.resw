@@ -177,11 +177,14 @@
   <data name="DahuAllInBtn_AddScrumBoard.Value" xml:space="preserve">
     <value>Ajouter un scrum board</value>
   </data>
+  <data name="DahuAllInBtn_Contribute.Value" xml:space="preserve">
+    <value>Contribuer !</value>
+  </data>
   <data name="DahuAllInBtn_FacebookConnection.Value" xml:space="preserve">
     <value>Facebook</value>
   </data>
   <data name="DahuAllInBtn_FollowProject.Value" xml:space="preserve">
-    <value>Rejoindre le projet</value>
+    <value>Suivre le projet</value>
   </data>
   <data name="DahuAllInBtn_GithubConnection.Value" xml:space="preserve">
     <value>Github</value>
@@ -225,6 +228,18 @@
   <data name="DahuButton3_Search.Value" xml:space="preserve">
     <value>Rerchercher</value>
   </data>
+  <data name="DahuInput1_CardNumber.InputPlaceholder" xml:space="preserve">
+    <value>Numéro de la carte</value>
+  </data>
+  <data name="DahuInput1_CVC.InputPlaceholder" xml:space="preserve">
+    <value>CVC</value>
+  </data>
+  <data name="DahuInput1_ExpirationDateMounth.InputPlaceholder" xml:space="preserve">
+    <value>Mois d'expiration</value>
+  </data>
+  <data name="DahuInput1_ExpirationDateYear.InputPlaceholder" xml:space="preserve">
+    <value>Année d'expiration</value>
+  </data>
   <data name="DahuInput1_Mail.InputPlaceholder" xml:space="preserve">
     <value>Adresse mail</value>
   </data>
@@ -233,6 +248,9 @@
   </data>
   <data name="DahuInput1_Password.InputPlaceholder" xml:space="preserve">
     <value>Mot de passe</value>
+  </data>
+  <data name="DahuInput1_TitulaireCarteLastName.InputPlaceholder" xml:space="preserve">
+    <value>Nom du titulaire de la carte</value>
   </data>
   <data name="DahuInput3_CounterpartAmount.InputHeader" xml:space="preserve">
     <value>Prix en euro</value>
@@ -414,6 +432,9 @@
   <data name="TextBlockEditLink.Text" xml:space="preserve">
     <value>Modifer</value>
   </data>
+  <data name="TextBlockPayement.Text" xml:space="preserve">
+    <value>Merci de contribuer</value>
+  </data>
   <data name="TextBlockProgressBarInformations.Text" xml:space="preserve">
     <value>informations</value>
   </data>
@@ -488,5 +509,17 @@
   </data>
   <data name="UserRepeatedPassword.InputPlaceholder" xml:space="preserve">
     <value>Répéter mot de passe</value>
+  </data>
+  <data name="DahuInput1_TitulaireCarteFirstName.InputPlaceholder" xml:space="preserve">
+    <value>Prénom du titulaire de la carte</value>
+  </data>
+  <data name="GraylouButton_ReturnToProject" xml:space="preserve">
+    <value>Retourner au projet</value>
+  </data>
+  <data name="DahuAllInBtn_AcceptMember.Value" xml:space="preserve">
+    <value>Accepter !</value>
+  </data>
+  <data name="TitleBlock_AcceptNewMembers.Title" xml:space="preserve">
+    <value>Utilisateurs en attentes de confirmation</value>
   </data>
 </root>

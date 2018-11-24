@@ -20,6 +20,11 @@
             </Core:EventTriggerBehavior.Actions>
         </Core:EventTriggerBehavior>
     </Interactivity:Interaction.Behaviors>
-    <Grid Background="#FFEFEFEF">
+    <Grid Style="{StaticResource BodyGrid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
     </Grid>
 </Page>

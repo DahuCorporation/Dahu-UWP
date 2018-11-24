@@ -73,6 +73,22 @@ namespace DahuUWP.DahuTech.Selector
             }
         }
 
+        private Models.Project _project;
+        public Models.Project Project
+        {
+            get
+            {
+                return _project;
+            }
+
+            set
+            {
+                _project = value;
+
+                this.NotifyPropertyChanged("Project");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void NotifyPropertyChanged(string propertyName)

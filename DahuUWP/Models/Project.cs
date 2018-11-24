@@ -38,7 +38,22 @@ namespace DahuUWP.Models
 
         [JsonProperty(PropertyName = "banner_picture")]
         public string BannerPicture { get; set; }
+        
+        private string _amountActual;
+        [JsonProperty(PropertyName = "amount_actual")]
+        public string AmountActual
+        {
+            get
+            {
+                return _amountActual;
+            }
 
+            set
+            {
+                _amountActual = value;
+                this.NotifyPropertyChanged("AmountActual");
+            }
+        }
 
         private string _amountGoal;
         [JsonProperty(PropertyName = "amount_goal")]
@@ -71,6 +86,22 @@ namespace DahuUWP.Models
             {
                 _members = value;
                 this.NotifyPropertyChanged("Members");
+            }
+        }
+
+        private List<Counterpart> _counterparts;
+        [JsonProperty(PropertyName = "counterparts")]
+        public List<Counterpart> Counterparts
+        {
+            get
+            {
+                return _counterparts;
+            }
+
+            set
+            {
+                _counterparts = value;
+                this.NotifyPropertyChanged("Counterparts");
             }
         }
 

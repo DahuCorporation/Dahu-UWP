@@ -15,7 +15,7 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "topic_uuid")]
         public string TopicUuid { get; set; }
 
-        [JsonProperty(PropertyName = "account_id")]
+        [JsonProperty(PropertyName = "creator_uuid")]
         public string AccountUuid { get; set; }
 
         [JsonProperty(PropertyName = "content")]

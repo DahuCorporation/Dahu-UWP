@@ -1,4 +1,5 @@
 ﻿using DahuUWP.DahuTech.Inputs;
+using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
 using GalaSoft.MvvmLight.Command;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 
 namespace DahuUWP.ViewModels.Project
 {
@@ -26,19 +28,41 @@ namespace DahuUWP.ViewModels.Project
         private async void OnPageLoaded()
         {
             ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
-
             Project = await projectManager.ChargeOneProject(((DahuUWP.Models.Project)NavigationParam).Uuid);
+            InitView();
             InitManageProjectButtonBindings();
             InitJoinProjectButtonBindings();
         }
 
-        private void InitManageProjectButtonBindings()
+        private async void InitView()
+        {
+            double amountGoal;
+            double amountActual;
+            
+
+            
+            if (String.IsNullOrWhiteSpace(Project.AmountGoal) || Project.AmountGoal == "0")
+                ContributeBlockVisibility = Visibility.Collapsed;
+            else
+                ContributeBlockVisibility = Visibility.Visible;
+
+            if (Double.TryParse(Project.AmountGoal, out amountGoal) && Double.TryParse(Project.AmountActual, out amountActual))
+            {
+                double perc = (double)100 / amountGoal;
+                ProgressBarValue = perc * amountActual;
+            }
+            else
+                ProgressBarValue = 0;
+        }
+
+            private void InitManageProjectButtonBindings()
         {
             ContributeWithMoneyLink = new DahuButtonBindings()
             {
                 IsBusy = false,
                 Name = "Gérer",
-                RedirectedLink = typeof(Views.Project.Contribute.Contribute)
+                RedirectedLink = typeof(Views.Project.Contribute.Contribute),
+                Parameter = Project
             };
         }
 
@@ -48,17 +72,30 @@ namespace DahuUWP.ViewModels.Project
             {
                 IsBusy = false,
                 Name = "Rejoindre le projet",
-                FuncListener = JoinProject
+                FuncListener = JoinProject,
+                Parameter = Project
             };
         }
         public async void JoinProject(object param)
         {
             ProjectManager projectManager = new ProjectManager();
             await projectManager.JoinProject(Project.Uuid);
+            //await projectManager.ChangeUserState(Project.Uuid, AppStaticInfo.Account.Uuid, "worker");
             //var res = new ResourceLoader();
             //var messageDialog = new MessageDialog("No internet connection has been found.");
             //await messageDialog.ShowAsync();
 
+        }
+
+        
+        private Visibility _contributeBlockVisibility;
+        public Visibility ContributeBlockVisibility
+        {
+            get { return _contributeBlockVisibility; }
+            set
+            {
+                NotifyPropertyChanged(ref _contributeBlockVisibility, value);
+            }
         }
 
         private DahuButtonBindings _joinProjectButtonBindings;
@@ -88,6 +125,17 @@ namespace DahuUWP.ViewModels.Project
             set
             {
                 NotifyPropertyChanged(ref _project, value);
+            }
+        }
+
+
+        private double _progressBarValue;
+        public double ProgressBarValue
+        {
+            get { return _progressBarValue; }
+            set
+            {
+                NotifyPropertyChanged(ref _progressBarValue, value);
             }
         }
     }

@@ -1,7 +1,9 @@
 ﻿using DahuUWP.DahuTech;
+using DahuUWP.DahuTech.Inputs;
 using DahuUWP.Models;
 using DahuUWP.Models.ModelManager;
 using DahuUWP.Services;
+using DahuUWP.Views.Project;
 using DahuUWP.Views.Search;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -55,6 +57,27 @@ namespace DahuUWP.ViewModels.Search
         {
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.ReasearchVisibility = Visibility.Visible;
             SearchResult();
+            InitManageProjectButtonBindings();
+        }
+
+        private void InitManageProjectButtonBindings()
+        {
+            DiscoverProjectButtonBindings = new DahuButtonBindings()
+            {
+                IsBusy = false,
+                Name = "Découvrir",
+                RedirectedLink = typeof(ProjectView)
+            };
+        }
+
+        private DahuButtonBindings _discoverProjectButtonBindings;
+        public DahuButtonBindings DiscoverProjectButtonBindings
+        {
+            get { return _discoverProjectButtonBindings; }
+            set
+            {
+                NotifyPropertyChanged(ref _discoverProjectButtonBindings, value);
+            }
         }
 
         // TODO: guys !! do this in the API directly

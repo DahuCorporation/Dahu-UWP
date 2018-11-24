@@ -94,7 +94,7 @@ namespace DahuUWP.Views
                 new MenuItem() { Icon = Symbol.Accept, Name = "Découvrir", PageType = typeof(Discover) },
                 new MenuItem() { Icon = Symbol.Send, Name = "Mes projet", PageType = typeof(ManageProject) },
                 new MenuItem() { Icon = Symbol.Shop, Name = "Creer un nouveau projet", PageType = typeof(CreateProject) },
-                new MenuItem() { Icon = Symbol.Shop, Name = "Paramètre", PageType = typeof(Contribute) }
+                new MenuItem() { Icon = Symbol.Shop, Name = "Paramètre", PageType = typeof(Project.Contribute.Contribute) }
             };
             return items;
         }

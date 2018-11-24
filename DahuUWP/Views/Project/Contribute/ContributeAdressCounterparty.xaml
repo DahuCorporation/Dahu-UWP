@@ -20,9 +20,18 @@
             </Core:EventTriggerBehavior.Actions>
         </Core:EventTriggerBehavior>
     </Interactivity:Interaction.Behaviors>
-    <Grid Background="#FFEFEFEF">
-
-        <StackPanel>
+    <Grid Style="{StaticResource BodyGrid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1">
+            <Inputs:GraylouButton x:Uid="GraylouButton_ReturnToProject"
+                                          Icon="return"
+                                  ButtonBindings="{Binding BackToProjectButtonBindings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          Value="Back to project"
+                                          Margin="0,0,0,16"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -30,11 +39,11 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" x:Name="TextBlockContributeTo" Style="{StaticResource PageTitle}" Margin="0,0,0,16" VerticalAlignment="Center">
                     <Run x:Uid="TextBlockContributeTo" Text="Contribute to"></Run>
-                    <Run Text="------"></Run>
+                    <Run Text="{Binding Contribute.Project.Name}"></Run>
                 </TextBlock>
                 <Grid Grid.Column="1" Height="2" Background="#BEBEBE" VerticalAlignment="Center" BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="16,-8,0,0"></Grid>
             </Grid>
-            <Container:AddressBook User="{Binding ContributeUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <Container:AddressBook User="{Binding ContributeUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ButtonBindings="{Binding SendToThisAdressBinding, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
     </Grid>
 </Page>

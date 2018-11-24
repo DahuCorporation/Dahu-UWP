@@ -29,7 +29,8 @@
                                  Value="Livrer à cette adresse"
                                  ButtonBackground="#FFD0691C"
                                  ButtonImageBackground="Background/citylow.jpg"
-                                 HorizontalAlignment="Center"/>
+                                 HorizontalAlignment="Center"
+                                 ButtonBindings="{Binding ButtonBindings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="8">
                 <TextBlock x:Uid="TextBlockEditLink" x:Name="TextBlockEditLink" Style="{StaticResource DahuTextLink}" Text="Modifier" FontSize="14"/>
                 <TextBlock Text="|" Margin="12,0" Foreground="#dddddd" FontSize="14" />
