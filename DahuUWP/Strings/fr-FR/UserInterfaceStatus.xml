@@ -56,6 +56,8 @@
   <status key="You have not selected anything."  value="Vous n'avez rien selectionné." varName="" type="Warning"/>
   <status key="Your payment has been accepted."  value="Votre paiement a été accepté." varName="" type="Positive"/>
   <status key="User accepted."  value="Utilisateur accepté." varName="" type="Positive"/>
+  <status key="Project followed."  value="Projet suivi." varName="" type="Positive"/>
+  <status key="Project unfollowed."  value="Vous ne suivez plus le projet." varName="" type="Positive"/>
 
   <!---->
 

@@ -522,4 +522,7 @@
   <data name="TitleBlock_AcceptNewMembers.Title" xml:space="preserve">
     <value>Utilisateurs en attentes de confirmation</value>
   </data>
+  <data name="TitleBlock_Membersf.Title" xml:space="preserve">
+    <value>Testing</value>
+  </data>
 </root>

@@ -62,8 +62,8 @@ namespace DahuUWP.ViewModels.Project.Managing
             };
             FullHorizontalMenu.Nodes.Add(nodeMenu3);
 
-            if (AppStaticInfo.Account.Uuid == Project.OwnerUuid)
-            {
+            //if (AppStaticInfo.Account.Uuid == Project.OwnerUuid)
+            //{
                 NodeMenu nodeMenu4 = new NodeMenu()
                 {
                     Active = false,
@@ -72,7 +72,7 @@ namespace DahuUWP.ViewModels.Project.Managing
                     Parameter = typeof(Views.Project.Team.Team)
                 };
                 FullHorizontalMenu.Nodes.Add(nodeMenu4);
-            }
+            //}
             FullHorizontalMenuYeah = FullHorizontalMenu;
         }
 

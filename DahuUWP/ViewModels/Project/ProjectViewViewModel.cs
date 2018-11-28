@@ -32,6 +32,7 @@ namespace DahuUWP.ViewModels.Project
             InitView();
             InitManageProjectButtonBindings();
             InitJoinProjectButtonBindings();
+            InitFollowProjectButtonBindings(); 
         }
 
         private async void InitView()
@@ -66,6 +67,16 @@ namespace DahuUWP.ViewModels.Project
             };
         }
 
+        private void InitFollowProjectButtonBindings()
+        {
+            FollowProjectButtonBindings = new DahuButtonBindings()
+            {
+                IsBusy = false,
+                FuncListener = FollowProject,
+                Parameter = Project
+            };
+        }
+
         private void InitJoinProjectButtonBindings()
         {
             JoinProjectButtonBindings = new DahuButtonBindings()
@@ -76,6 +87,14 @@ namespace DahuUWP.ViewModels.Project
                 Parameter = Project
             };
         }
+
+        public async void FollowProject(object param)
+        {
+            ProjectManager projectManager = new ProjectManager();
+            await projectManager.FollowUnFollowProject(Project.Uuid, AppStaticInfo.Account.Uuid);
+
+        }
+
         public async void JoinProject(object param)
         {
             ProjectManager projectManager = new ProjectManager();
@@ -115,6 +134,16 @@ namespace DahuUWP.ViewModels.Project
             set
             {
                 NotifyPropertyChanged(ref _contributeWithMoneyLink, value);
+            }
+        }
+
+        private DahuButtonBindings _followProjectButtonBindings;
+        public DahuButtonBindings FollowProjectButtonBindings
+        {
+            get { return _followProjectButtonBindings; }
+            set
+            {
+                NotifyPropertyChanged(ref _followProjectButtonBindings, value);
             }
         }
 

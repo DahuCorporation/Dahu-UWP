@@ -8,6 +8,7 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     xmlns:DahuSpecSplitMenu="using:DahuUWP.Views.Components.DahuSpecialSplitMenu"
     xmlns:inputs="using:DahuUWP.Views.Components.Inputs"
     DataContext="{Binding ScrumBoardVM, Source={StaticResource Locator}}">
@@ -69,6 +70,13 @@
                     </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+            <UI:AdControl ApplicationId="3f83fe91-d6be-434d-a0ae-7351c5a997f1"
+                    AdUnitId="test"
+                              Margin="0,8"
+                    HorizontalAlignment="Stretch"
+                    Height="72"
+                    VerticalAlignment="Top"
+                                  Width="Auto"/>
             </StackPanel>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="1" Margin="20,0,0,0" >
             <ItemsControl Name="ScrumBoardControl" ItemsSource="{Binding ScrumBoardColumns, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0">

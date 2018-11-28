@@ -13,6 +13,7 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:container="using:DahuUWP.Views.Components.Container"
     mc:Ignorable="d"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
         DataContext="{Binding DiscoverVM, Source={StaticResource Locator}}">
 
     <Interactivity:Interaction.Behaviors>
@@ -52,6 +53,31 @@
                             </ItemsControl>
                         </ScrollViewer>
                     </Grid>
+                    <!--<Grid Margin="0,18,0,0">
+                        <Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions>
+
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="0">
+                            <ItemsControl x:Name="ProjectFollowedItemsControl" ItemsSource="{Binding ProjectFollowedContainerList}" >
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+
+                                        <StackPanel>
+                                            <container:MediumProjectContainer
+                                                                          Project="{Binding}"
+                                                ButtonBindings="{Binding ElementName=ProjectItemsControl, Path=DataContext.ViewProjectButtonBindings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                          Margin="18,0,0,0"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
                     <TextBlock >
                         <TextBlock.Inlines>
                             <Run FontWeight="Bold" FontSize="14" Text="This is WPF TextBlock Example. " />
@@ -60,7 +86,7 @@
                     </TextBlock>
                     <TextBlock>
       Hello <Bold>my</Bold> faithful <Underline>computer</Underline>.<Italic>You rock!</Italic>
-                    </TextBlock>
+                    </TextBlock>-->
                 </StackPanel>
 
             </Grid>

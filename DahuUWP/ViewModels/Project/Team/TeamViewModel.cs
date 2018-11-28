@@ -34,12 +34,12 @@ namespace DahuUWP.ViewModels.Project.Team
             ProjectManager projectManager = new ProjectManager();
             
             Project = await projectManager.ChargeOneProject(((DahuUWP.Models.Project)ViewModelLocator.HomePageViewModel.NavigationParam).Uuid);
-            if (Project == null)
-            {
-                Project = (DahuUWP.Models.Project)NavigationParam;
-            }
-            List<User> result = Project.Members.FindAll(x => x.Status == "join");
-            UsersWaitingAcceptationList = new ObservableCollection<User>(result);
+            //if (Project == null)
+            //{
+            //    Project = (DahuUWP.Models.Project)NavigationParam;
+            //}
+            //List<User> result = Project.Members.FindAll(x => x.Status == "join");
+            //UsersWaitingAcceptationList = new ObservableCollection<User>(result);
 
         }
 

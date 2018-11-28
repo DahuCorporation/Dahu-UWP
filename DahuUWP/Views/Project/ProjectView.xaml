@@ -6,7 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+     xmlns:Container="using:DahuUWP.Views.Components.Container"
     xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     DataContext="{Binding ProjectViewVM, Source={StaticResource Locator}}">
@@ -104,13 +106,33 @@
                         <TextBlock TextWrapping="Wrap" Style="{StaticResource DahuBiggerTextDark}" >
                         <Bold>L'équipe</Bold>
                         </TextBlock>
-                        <TextBlock Text="5 participants"
+                        <TextBlock
                                    Style="{StaticResource DahuLitleInfoDark}"
                                    TextWrapping="Wrap"
                                    Margin="8,0,0,0"
-                                   VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center">
+                            <Run Text="{Binding Project.Members.Count, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Run Text=" participants"/>
+                        </TextBlock>
                     </StackPanel>
+                    <ItemsControl x:Name="UserNotAccepted" ItemsSource="{Binding Project.Members, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0,16">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Container:UserLabel User="{Binding}" Icon="&#xE77B;"   Margin="5"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
+                <UI:AdControl ApplicationId="3f83fe91-d6be-434d-a0ae-7351c5a997f1"
+                    AdUnitId="test"
+                              Margin="8"
+                    HorizontalAlignment="Stretch"
+                    Height="180"
+                    VerticalAlignment="Top"
+                                  Width="Auto"/>
+
             </StackPanel>
             
         </Grid>

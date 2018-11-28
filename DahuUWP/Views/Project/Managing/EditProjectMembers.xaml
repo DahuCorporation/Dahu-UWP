@@ -56,7 +56,29 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <Container:UserLabel User="{Binding}" DeleteMemberBinding="{Binding ElementName=Users, Path=DataContext.DeleteMemberButtonBindings, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5"/>
+                                    <Container:UserLabel User="{Binding}" Icon="&#xE711;" DeleteMemberBinding="{Binding ElementName=Users, Path=DataContext.DeleteMemberButtonBindings, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <!--<Grid Padding="30,15">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Padding="0,0,10,0">
+                            
+                            <Container:UserLabel Margin="5"/>
+                            <Container:UserLabel Margin="5"/>
+                        </StackPanel>
+                    </Grid>-->
+                </StackPanel>
+            </Grid>
+            <Grid VerticalAlignment="Top" Background="#FFFFFF" Margin="0,16,0,0" Style="{StaticResource WhiteContentGrid}">
+                <StackPanel>
+                    <Titles:TitleBlock x:Name="TitleBlock_AcceptNewMembers" x:Uid="TitleBlock_AcceptNewMembers" />
+
+                    <ItemsControl x:Name="UserNotAccepted" ItemsSource="{Binding UsersWaitingAcceptationList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Container:UserLabel User="{Binding}" Icon="&#xE8FB;"  DeleteMemberBinding="{Binding ElementName=UserNotAccepted, Path=DataContext.AcceptUserButtonBindings, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

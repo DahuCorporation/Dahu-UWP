@@ -36,6 +36,15 @@ namespace DahuUWP.Views.Components.Container
         public static readonly DependencyProperty UserFullNameProperty =
             DependencyProperty.Register("User", typeof(Models.User), typeof(UserLabel), new PropertyMetadata(null));
 
+        public string Icon
+        {
+            get { return (string)GetValue(IconProperty); }
+            set { SetValue(IconProperty, value); }
+        }
+
+        public static readonly DependencyProperty IconProperty =
+            DependencyProperty.Register("Icon", typeof(string), typeof(UserLabel), new PropertyMetadata(null));
+
         public DahuButtonBindings DeleteMemberBinding
         {
             get { return (DahuButtonBindings)GetValue(DeleteMemberBindingProperty); }

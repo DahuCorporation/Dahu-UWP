@@ -24,9 +24,19 @@
         </Core:EventTriggerBehavior>
     </Interactivity:Interaction.Behaviors>
     <Grid Style="{StaticResource BodyGrid}">
-        <StackPanel>
-            <Titles:TitleBlock x:Name="TitleBlock_AcceptNewMembers" x:Uid="TitleBlock_AcceptNewMembers" />
-            <ItemsControl x:Name="Selector" ItemsSource="{Binding UsersWaitingAcceptationList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+        <Grid VerticalAlignment="Top" Background="#FFFFFF" Margin="0,16,0,0" Style="{StaticResource WhiteContentGrid}">
+            <StackPanel>
+                <Titles:TitleBlock x:Name="TitleBlock_Members" x:Uid="TitleBlock_Members" />
+                <ItemsControl x:Name="UserNotAccepted" ItemsSource="{Binding Project.Members, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0,16">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Container:UserLabel User="{Binding}" Icon="&#xE77B;"   Margin="5"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <!--<ItemsControl x:Name="Selector" ItemsSource="{Binding Project.Members, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical"/>
@@ -54,7 +64,8 @@
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
+            </ItemsControl>-->
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

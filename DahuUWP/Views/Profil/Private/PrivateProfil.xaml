@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Inputs="using:DahuUWP.Views.Components.Inputs"
     xmlns:DahuSpecSplitMenu="using:DahuUWP.Views.Components.DahuSpecialSplitMenu"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     mc:Ignorable="d">
 
     <Grid Style="{StaticResource BodyGrid}">
@@ -52,6 +53,13 @@
                                                       Active="False"
                                                       Margin="0,0,0,10"
                                                       Tapped="DahuSpecSplitMenu_Parameters_Tapped"/>
+                        <UI:AdControl ApplicationId="3f83fe91-d6be-434d-a0ae-7351c5a997f1"
+                                AdUnitId="test"
+                                Margin="12,8"
+                                HorizontalAlignment="Stretch"
+                                Height="72"
+                                VerticalAlignment="Top"
+                                  Width="Auto"/>
                     </StackPanel>
                 </ScrollViewer>
 

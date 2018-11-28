@@ -51,7 +51,11 @@ namespace DahuUWP.ViewModels
             ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
             List<DahuUWP.Models.Project> projects = (await projectManager.Charge(null)).Cast<DahuUWP.Models.Project>().ToList();
             if (projects != null)
+            {
                 ProjectContainerList = new ObservableCollection<Models.Project>(projects);
+                //ProjectFollowedContainerList = projects.FindAll(x => x.Fp)
+            }
+                
         }
 
         private void InitViewProjectButtonBindings()
@@ -91,6 +95,16 @@ namespace DahuUWP.ViewModels
             set
             {
                 NotifyPropertyChanged(ref _projectContainerList, value);
+            }
+        }
+
+        private ObservableCollection<DahuUWP.Models.Project> _projectFollowedContainerList;
+        public ObservableCollection<DahuUWP.Models.Project> ProjectFollowedContainerList
+        {
+            get { return _projectFollowedContainerList; }
+            set
+            {
+                NotifyPropertyChanged(ref _projectFollowedContainerList, value);
             }
         }
 

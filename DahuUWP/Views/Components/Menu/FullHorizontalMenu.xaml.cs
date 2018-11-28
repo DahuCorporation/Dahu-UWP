@@ -41,7 +41,7 @@ namespace DahuUWP.Views.Components.Menu
             {
                 MenuGrid.ColumnDefinitions.Remove(MenuGrid.ColumnDefinitions[i]);
             }
-            
+
             foreach (NodeMenu node in Menu.Nodes)
             {
                 TextBlock textBlock = new TextBlock

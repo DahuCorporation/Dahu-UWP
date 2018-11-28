@@ -143,15 +143,17 @@ namespace DahuUWP.Models.ModelManager
                 APIService apiService = new APIService();
                 string requestUri = " follow/project/" + projectId + "/" + userId;
 
-                JObject jObject = new JObject();
+                //JObject jObject = new JObject();
                 //string jsonObject = jObject.ToString(Formatting.None);
-                HttpResponseMessage result = await apiService.Post(jObject, requestUri, true);
+                HttpResponseMessage result = await apiService.Post("{}", requestUri, true);
                 string responseBody = result.Content.ReadAsStringAsync().Result;
-                var resp = (JObject)JsonConvert.DeserializeObject(responseBody);
                 switch ((int)result.StatusCode)
                 {
                     case 200:
-                        //AppGeneral.UserInterfaceStatusDico["Project created successfully."].Display(((Project)project).Name, true);
+                        if (responseBody == "\"Unfollowed\"")
+                            AppGeneral.UserInterfaceStatusDico["Project unfollowed."].Display();
+                        else
+                            AppGeneral.UserInterfaceStatusDico["Project followed."].Display();
                         return true;
                     case 400:
                         // todo : Attention la description a une taille minimum

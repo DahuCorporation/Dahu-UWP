@@ -25,7 +25,7 @@
              <Run Text="{Binding User.LastName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
         </TextBlock>
         <Grid CornerRadius="23" Background="#FFD5D5D5" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8,8,8,8" Tapped="Grid_Tapped" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited">
-            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" Foreground="#FF6a6a6a" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" />
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="{Binding Icon, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, FallbackValue='&#xE711;'}" Foreground="#FF6a6a6a" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" />
         </Grid>
     </Grid>
 </UserControl>
