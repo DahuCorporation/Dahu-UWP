@@ -32,7 +32,7 @@
             <StackPanel Grid.Column="1" Background="White" Margin="8">
                 <Grid Height="320">
                     <Grid.Background>
-                        <ImageBrush ImageSource="{Binding Project.Media.ImagePath}" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="{Binding Project.BannerPicture, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Stretch="UniformToFill"/>
                     </Grid.Background>
                     <StackPanel Orientation="Horizontal" Margin="16" VerticalAlignment="Bottom">
                         <Inputs:GraylouButton x:Name="DahuAllInBtn_FacebookConnection" x:Uid="DahuAllInBtn_Share" Icon="facebook_logo_w" Value="Share" ValueForeground="#ffffff" ButtonBackground="#1C7CD0" Margin="0,0,8,0"/>

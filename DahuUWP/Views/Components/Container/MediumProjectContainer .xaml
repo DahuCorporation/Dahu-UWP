@@ -14,7 +14,7 @@
         <StackPanel>
             <Grid Height="180" BorderBrush="Black" >
                 <Grid.Background>
-                    <ImageBrush ImageSource="{Binding Project.Media.ImagePath}" Stretch="UniformToFill"/>
+                    <ImageBrush ImageSource="{Binding Project.BannerPicture}" Stretch="UniformToFill"/>
                 </Grid.Background>
             </Grid>
             <Grid Padding="10">

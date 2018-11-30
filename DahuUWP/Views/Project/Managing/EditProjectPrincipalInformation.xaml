@@ -37,6 +37,11 @@
                                                InputPlaceholder="Project name"
                                                TextValue="{Binding Project.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                InputHeader="Project name"/>
+                            <Inputs:DahuInputText3 x:Name="DahuInput3_Banner"
+                                               x:Uid="DahuInput3_BannerProject"
+                                               InputPlaceholder="Image de bannière"
+                                               TextValue="{Binding Project.BannerPicture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                               InputHeader="Project name"/>
 
 
                             <Grid>

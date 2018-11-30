@@ -90,11 +90,9 @@ namespace DahuUWP.Views
         {
             var items = new List<MenuItem>
             {
-                new MenuItem() { Icon = Symbol.Accept, Name = "Déconnexion", TappedFuncListener = ((HomePageViewModel)ViewModelLocator.HomePageViewModel).Disconnection },
-                new MenuItem() { Icon = Symbol.Accept, Name = "Découvrir", PageType = typeof(Discover) },
-                new MenuItem() { Icon = Symbol.Send, Name = "Mes projet", PageType = typeof(ManageProject) },
-                new MenuItem() { Icon = Symbol.Shop, Name = "Creer un nouveau projet", PageType = typeof(CreateProject) },
-                new MenuItem() { Icon = Symbol.Shop, Name = "Paramètre", PageType = typeof(Project.Contribute.Contribute) }
+                new MenuItem() { Icon = Symbol.Find, Name = "Découvrir", PageType = typeof(Discover) },
+                new MenuItem() { Icon = Symbol.Library, Name = "Mes projet", PageType = typeof(ManageProject) },
+                new MenuItem() { Icon = Symbol.Send, Name = "Creer un nouveau projet", PageType = typeof(CreateProject) }
             };
             return items;
         }
@@ -102,7 +100,7 @@ namespace DahuUWP.Views
         public static List<MenuItem> GetOptionsItems()
         {
             var items = new List<MenuItem>();
-            items.Add(new MenuItem() { Icon = Symbol.Setting, Name = "OptionItem1", PageType = typeof(CreateProject) });
+            items.Add(new MenuItem() { Icon = Symbol.DisconnectDrive, Name = "Déconnexion", TappedFuncListener = ((HomePageViewModel)ViewModelLocator.HomePageViewModel).Disconnection });
             return items;
         }
 

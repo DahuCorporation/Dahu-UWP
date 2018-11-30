@@ -34,7 +34,15 @@ namespace DahuUWP.Views.Components.Container
             set { SetValue(ProjectProperty, value); }
         }
         public static readonly DependencyProperty ProjectProperty =
-            DependencyProperty.Register("Project", typeof(DahuUWP.Models.Project), typeof(MediumProjectContainer), new PropertyMetadata(null));
+            DependencyProperty.Register("Project", typeof(DahuUWP.Models.Project), typeof(MediumProjectContainer), new PropertyMetadata(null, new PropertyChangedCallback(ProjectPropertyChanged)));
+
+        private static void ProjectPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            MediumProjectContainer mediumProj = d as MediumProjectContainer;
+            Models.Project proj = ((Models.Project)e.NewValue);
+            if (proj != null && String.IsNullOrWhiteSpace(proj.BannerPicture))
+                proj.BannerPicture = "https://i.ytimg.com/vi/3wvatkyji1w/maxresdefault.jpg";
+        }
 
         public DahuButtonBindings ButtonBindings
         {
@@ -47,6 +55,7 @@ namespace DahuUWP.Views.Components.Container
                 SetValue(ButtonBindingsProperty, value);
             }
         }
+
         public static readonly DependencyProperty ButtonBindingsProperty =
             DependencyProperty.Register("ButtonBindings", typeof(DahuButtonBindings), typeof(MediumProjectContainer), new PropertyMetadata(null, new PropertyChangedCallback(OnButtonBindingsPropertyChanged)));
         private static void OnButtonBindingsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

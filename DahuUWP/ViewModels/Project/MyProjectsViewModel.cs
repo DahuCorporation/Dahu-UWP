@@ -42,27 +42,8 @@ namespace DahuUWP.ViewModels.Project
             {
                 { "_token", AppStaticInfo.Account.Token }
             };
-            List<Models.Project> projectList = await userManager.ChargeProjects(AppStaticInfo.Account.Uuid, null);
-            if (projectList != null && projectList.Count > 0)
-            {
-                List<Models.Project> projectListAsWorker = new List<Models.Project>();
-                foreach (Models.Project elem in projectList)
-                {
-                    if (elem.Members.Find(x => x.Uuid == AppStaticInfo.Account.Uuid && x.Status != "join") != null)
-                        projectListAsWorker.Add(elem);
-                }
-                UserProjects = new ObservableCollection<Models.Project>(projectListAsWorker);
-            }
-                
-            //Models.Project proj = new Models.Project()
-            //{
-            //    Name = "Last!!!",
-            //    Description = "Desc",
-            //    Uuid = "ezf"
-
-            //};
-
-            //UserProjects.Add(proj);
+            UserProjects = new ObservableCollection<Models.Project>();
+            await userManager.ChargeProjectsWithObsAndStatusFilter(UserProjects, AppStaticInfo.Account.Uuid, "");
         }
 
         private void InitManageProjectButtonBindings()

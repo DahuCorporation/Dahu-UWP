@@ -58,6 +58,8 @@ namespace DahuUWP.Services.ModelManager
                             return scrumBoardList;
                         }
                         return null;
+                    default:
+                        return null;
                 }
                 return null;
             }

@@ -513,7 +513,7 @@
   <data name="DahuInput1_TitulaireCarteFirstName.InputPlaceholder" xml:space="preserve">
     <value>Prénom du titulaire de la carte</value>
   </data>
-  <data name="GraylouButton_ReturnToProject" xml:space="preserve">
+  <data name="GraylouButton_ReturnToProject.Value" xml:space="preserve">
     <value>Retourner au projet</value>
   </data>
   <data name="DahuAllInBtn_AcceptMember.Value" xml:space="preserve">
@@ -524,5 +524,11 @@
   </data>
   <data name="TitleBlock_Membersf.Title" xml:space="preserve">
     <value>Testing</value>
+  </data>
+  <data name="DahuInput3_BannerProject.InputHeader" xml:space="preserve">
+    <value>Image de bannière</value>
+  </data>
+  <data name="DahuInput3_BannerProject.InputPlaceholder" xml:space="preserve">
+    <value>Image de bannière</value>
   </data>
 </root>

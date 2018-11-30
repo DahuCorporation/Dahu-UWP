@@ -36,7 +36,7 @@ namespace DahuUWP.Models
         [JsonProperty(PropertyName = "profile_picture")]
         public string ProfilePicture { get; set; }
 
-        [JsonProperty(PropertyName = "banner_picture")]
+        [JsonProperty(PropertyName = "banner")]
         public string BannerPicture { get; set; }
         
         private string _amountActual;

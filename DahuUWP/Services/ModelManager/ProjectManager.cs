@@ -9,11 +9,89 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using DahuUWP.DahuTech;
 using DahuUWP.Services.ModelManager;
+using System.Collections.ObjectModel;
 
 namespace DahuUWP.Models.ModelManager
 {
     public class ProjectManager : IModelManager
     {
+        public async Task<bool> ChargeWithObs(ObservableCollection<Project> obsProj)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "projects";
+                HttpResponseMessage result = await apiService.Get(requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
+
+                MediaManager mediaManager = new MediaManager();
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        JToken jProj = resp.First;
+                        for (int i = 0; jProj != null; i++)
+                        {
+                            Project proj = jProj.ToObject<Project>();
+                            if (proj.AmountGoal.Length > 2)
+                            {
+                                proj.AmountGoal = (Int32.Parse(proj.AmountGoal) / 100).ToString();
+                            }
+                            proj.Media = await mediaManager.GetSpecificMedia(proj.Uuid);
+                            obsProj.Add(proj);
+                            jProj = jProj.Next;
+                        }
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
+        }
+
+        public async Task<bool> ChargeWithObsByName(ObservableCollection<Project> obsProj, string research)
+        {
+            try
+            {
+                APIService apiService = new APIService();
+                string requestUri = "projects";
+                HttpResponseMessage result = await apiService.Get(requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
+
+                MediaManager mediaManager = new MediaManager();
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        JToken jProj = resp.First;
+                        for (int i = 0; jProj != null; i++)
+                        {
+                            Project proj = jProj.ToObject<Project>();
+                            if (proj.AmountGoal.Length > 2)
+                            {
+                                proj.AmountGoal = (Int32.Parse(proj.AmountGoal) / 100).ToString();
+                            }
+                            proj.Media = await mediaManager.GetSpecificMedia(proj.Uuid);
+                            if (proj.Name.IndexOf(research, StringComparison.OrdinalIgnoreCase) >= 0)
+                                obsProj.Add(proj);
+                            jProj = jProj.Next;
+                        }
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return false;
+            }
+        }
+
         public async Task<List<object>> Charge(Dictionary<string, object> routeParams)
         {
             try
@@ -364,6 +442,7 @@ namespace DahuUWP.Models.ModelManager
                 JObject descriptionObj = new JObject()
                 {
                     { "description", ((Project)obj).Description },
+                    { "banner", ((Project)obj).BannerPicture },
                     { "amount_goal", ((Project)obj).AmountGoal + "00" }
                 };
                 string jsonObject = jObject.ToString(Formatting.None);

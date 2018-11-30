@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -44,6 +45,89 @@ namespace DahuUWP.Models.ModelManager
                             jUser = jUser.Next;
                         }
                         return userList;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
+        }
+
+        public async Task<List<object>> ChargesWithObsByName(ObservableCollection<User> obsUser, string name)
+        {
+            try
+            {
+                List<object> userList = new List<object>();
+                APIService apiService = new APIService();
+                string requestUri = "users";
+                
+                HttpResponseMessage result = await apiService.Get(requestUri, true);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
+                MediaManager mediaManager = new MediaManager();
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        JToken jUser = resp.First;
+                        for (int i = 0; jUser != null; i++)
+                        {
+                            User user = jUser.ToObject<User>();
+                            user.Media = await mediaManager.GetSpecificMedia(user.Uuid);
+                            if (user.FirstName.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0
+                                || user.LastName.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0)
+                            {
+                                obsUser.Add(user);
+                            }
+                            userList.Add(user);
+                            jUser = jUser.Next;
+                        }
+                        return userList;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.ToString());
+                AppGeneral.UserInterfaceStatusDico["An error occured."].Display();
+                return null;
+            }
+        }
+
+        public async Task<List<Project>> ChargeProjectsWithObsAndStatusFilter(ObservableCollection<Project> obsProj, string userUuid, string status)
+        {
+            try
+            {
+                List<Project> projectList = new List<Project>();
+                APIService apiService = new APIService();
+                /// users /:id / projects ? relation =: relation
+                string requestUri = "users/" + AppStaticInfo.Account.Uuid + "/projects";
+                //if (routeParams != null)
+                //    requestUri += string.Join("&", routeParams.Select(x => x.Key + "=" + x.Value).ToArray());
+                HttpResponseMessage result = await apiService.Get(requestUri);
+                string responseBody = result.Content.ReadAsStringAsync().Result;
+                var resp = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(responseBody);
+                MediaManager mediaManager = new MediaManager();
+                switch ((int)result.StatusCode)
+                {
+                    case 200:
+                        JToken jProj = resp.First;
+                        for (int i = 0; jProj != null; i++)
+                        {
+                            Project proj = jProj.ToObject<Project>();
+                            if (proj.AmountGoal.Length > 2)
+                            {
+                                proj.AmountGoal = (Int32.Parse(proj.AmountGoal) / 100).ToString();
+                            }
+                            proj.Media = await mediaManager.GetSpecificMedia(proj.Uuid);
+                            if (proj.Members.Find(x => x.Uuid == AppStaticInfo.Account.Uuid && x.Status != "join") != null)
+                                obsProj.Add(proj);
+                            projectList.Add(proj);
+                            jProj = jProj.Next;
+                        }
+                        return projectList;
                 }
                 return null;
             }

@@ -29,6 +29,8 @@ namespace DahuUWP.ViewModels.Project
         {
             ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
             Project = await projectManager.ChargeOneProject(((DahuUWP.Models.Project)NavigationParam).Uuid);
+            if (Project != null && String.IsNullOrWhiteSpace(Project.BannerPicture))
+                Project.BannerPicture = "https://i.ytimg.com/vi/3wvatkyji1w/maxresdefault.jpg";
             InitView();
             InitManageProjectButtonBindings();
             InitJoinProjectButtonBindings();

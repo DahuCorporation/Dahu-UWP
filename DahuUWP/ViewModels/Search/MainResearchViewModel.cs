@@ -39,13 +39,13 @@ namespace DahuUWP.ViewModels.Search
             {
                 // [Project] search
                 ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
-                List<DahuUWP.Models.Project> projects = (await projectManager.Charge(null)).Cast<DahuUWP.Models.Project>().ToList();
-                List<DahuUWP.Models.Project> projectResult = FindProjectsMatching(projects, researchValue);
-                ProjectResults = new ObservableCollection<DahuUWP.Models.Project>(projectResult);
-                DahuAllInBtnProjectResultVisibility = (projectResult.Count() > 0) ? Visibility.Collapsed : Visibility.Visible;
+                ProjectResults = new ObservableCollection<DahuUWP.Models.Project>();
+                await projectManager.ChargeWithObsByName(ProjectResults, researchValue);
+                DahuAllInBtnProjectResultVisibility = (ProjectResults.Count() > 0) ? Visibility.Collapsed : Visibility.Visible;
 
                 // [User] search
                 UserManager userManager = (UserManager)dataService.GetUserManager();
+                //userManager.ChargesWithObsByName
                 List<User> users = (await userManager.Charges(null)).Cast<User>().ToList();
                 List<object> userResult = FindUsersMatching(users, researchValue);
                 UserResults = new ObservableCollection<object>(userResult);

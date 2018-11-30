@@ -93,7 +93,7 @@ namespace DahuUWP.ViewModels.Project.ScrumBoard
         }
 
         private async void ShowScrumBoardList()
-        {
+        {   
             ScrumBoardManager scrumBoardManager = new ScrumBoardManager();
             ScrumBoards = await scrumBoardManager.ChargeAllScrumBoardOfProject(Project.Uuid);
             if (ScrumBoards == null)

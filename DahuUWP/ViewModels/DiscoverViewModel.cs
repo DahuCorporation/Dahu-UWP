@@ -39,23 +39,17 @@ namespace DahuUWP.ViewModels
 
         private async void OnPageLoaded()
         {
-            
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.SwitchOrActiveCurrentTopBarNodeMenu(typeof(Discover));
             ((HomePageViewModel)ViewModelLocator.HomePageViewModel).DahuSpecMenuOptions.ReasearchVisibility = Visibility.Visible;
-            LoadProjects();
+            await LoadProjects();
         }
 
-        private async void LoadProjects()
+        private async Task<bool> LoadProjects()
         {
             InitViewProjectButtonBindings();
             ProjectManager projectManager = (ProjectManager)dataService.GetProjectManager();
-            List<DahuUWP.Models.Project> projects = (await projectManager.Charge(null)).Cast<DahuUWP.Models.Project>().ToList();
-            if (projects != null)
-            {
-                ProjectContainerList = new ObservableCollection<Models.Project>(projects);
-                //ProjectFollowedContainerList = projects.FindAll(x => x.Fp)
-            }
-                
+            ProjectContainerList = new ObservableCollection<Models.Project>();
+            return await projectManager.ChargeWithObs(ProjectContainerList);
         }
 
         private void InitViewProjectButtonBindings()
